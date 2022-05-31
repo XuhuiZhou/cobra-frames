@@ -7,7 +7,7 @@ Main file for generating CSFB with GPT-3 is `populateSBFwithGPT3.v2.py`
 
 
 Input data files: 
-- `dynaHate.trn.r60.gpt3socCont.csv : 60 randomly sampled examples from DynaHate
+- `dynaHate.trn.r60.gpt3socCont.csv` : 60 randomly sampled examples from DynaHate
 - `implHate.noSap.r60.gpt3socCont.csv` : 60 randomly sampled examples from Implicit Hate Corpus (by Caleb Ziems et al 2022) -- excluding SBIC portions
 - `mAgr.r60.gpt3socCont.csv` : 60 randomly sampled examples from a data dump of microaggressions.com
 - `sbic.trn.r60.gpt3socCont.csv` : 60 randomly sampled examples from SBIC
