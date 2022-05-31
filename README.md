@@ -2,6 +2,7 @@
 
 Main file for generating CSFB with GPT-3 is `populateSBFwithGPT3.v2.py`
 - requires updating/filling in the [examples spreadsheet](https://docs.google.com/spreadsheets/d/1y3WwnVPdgM_hP2lZVE9L3IVy9Tpq5QNMWPVsVGMxX6g/edit#gid=1334320915), download it as `examples.v2.csv`
+- might have to update the column names and/or the variables [populateSBFwithGPT3.v2.py#L13](populateSBFwithGPT3.v2.py#L13) and formatting [populateSBFwithGPT3.v2.py#L23](populateSBFwithGPT3.v2.py#L23) variables in the code 
 - then run the command with the default parameters with each of the files below as the `--input_file` 
 
 
