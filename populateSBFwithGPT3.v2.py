@@ -1,25 +1,29 @@
 import numpy as np
 import pandas as pd
-from IPython import embed
-import pandas as pd
 import json, time
 import argparse
-from tqdm import tqdm
 import openai
+
+from IPython import embed
+from tqdm import tqdm
+
 # openai.api_key = "sk-5sqlr5GGEcAf33RBvOnDFnzp547YNQPJHUNpSOYK" # UW key
 # openai.api_key = "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" # Mosaic key
 openai.api_key = "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" # CMU key
 
 variables = [
   # 'conversationContext',
-  'statement', 'speakerIdentity', 'listenerIdentity',
+  'statement', 'speakerIdentity', 'listenerIdentity', 'speechContext',
   # 'speakerListenerRelationship',
-  'speechContext', 'intent', 
-  'offensiveness', 'targetGroup', 'implication',
+  'intent', 
+  'targetGroup', 
   'relevantPowerDynamics',
-  'targetGroupReaction',
-  'targetGroupEffect'
+  'implication',
+  'targetGroupEmotionalReaction',
+  'targetGroupCognitiveReaction',
+  'offensiveness',
 ]
+
 formatting = {
   'speakerIdentity': "[Speaker identity/characteristics] {}[/]",
   'listenerIdentity': "[Listener identity/characteristics] {}[/]",
@@ -32,9 +36,10 @@ formatting = {
   'offensiveness': '[Offensiveness] {}[/]',
   'targetGroup': '[Targeted/referenced minority group] {}[/]',
   'implication': '[Implied meaning/stereotype] {}[/]',
-  'targetGroupReaction': '[Targeted minority group reaction] {}[/]'}
-  'targetGroupEffect': '[Effect on targeted minority group] {}[/]'}
-  
+  'targetGroupEmotionalReaction': '[Targeted minority group emotional reaction] {}[/]',
+  'targetGroupCognitiveReaction': '[Targeted minority group cognitive reaction] {}[/]',
+}
+
 revFormat = {v.replace(" {}[/]",""): k for k,v in formatting.items()}
 # formatting = {
 #   'speakerIdentity': "Speaker identity/characteristics: {}",
@@ -50,7 +55,7 @@ revFormat = {v.replace(" {}[/]",""): k for k,v in formatting.items()}
 #   'implication': 'Implied meaning/stereotype: {}',
 #   'targetGroupReaction': 'Targeted minority group reaction: {}'}
 
-instructions = "Given a statement or a conversational snippet, explain the identities and power differentials of the speaker/listener, the intent behind the statement, why it might be offensive, and which minority group it targets."
+instructions = "Given a statement or a conversational snippet, explain the identities and power differentials of the speaker/listener, the intent behind the statement, why it might be offensive, and which minority group it targets. \n\n"
 
 def parseGPT3output(t):
   fields = [f.strip() for f in t.split("[/]") if f]
@@ -109,12 +114,11 @@ def formatPosts(p,preamble="",**kwargs):
        for v in variables if v+"_col" in kwargs and kwargs[v+"_col"] in p and p[kwargs[v+"_col"]] != ""]
   out = preamble+p["examples"]+"\n\n"+"\n".join(f)+"\n"
   out+= formatting[variables[variables.index("statement")+1]].split("{}")[0].strip()
-
   return out
 
 
 def main(args):
-  exampleFile = "promptExamples.v2.csv"
+  exampleFile = "./data/promptExamples.v2.csv"
   examples = pd.read_csv(exampleFile)
 
   posts = pd.read_csv(args.input_file)
@@ -125,7 +129,6 @@ def main(args):
   posts["examples"] = posts[args.statement_col].apply(addExamplesToPost,examples=examples,n=args.n_examples)  
   fPosts = posts.apply(formatPosts,**args.__dict__,preamble=instructions,axis=1)
   tqdm.pandas(ascii=True)
-
           
   out = fPosts.progress_apply(getGPT3prob)
   cols = [c for c in variables if c in out.columns]
@@ -142,10 +145,8 @@ def main(args):
     del posts["socialContextGPT3logprob"]
   except:
     pass
-  
   posts.to_csv(args.output_file,index=False)
   
-
 if __name__ =="__main__":
   p = argparse.ArgumentParser()
   p.add_argument("--input_file")
