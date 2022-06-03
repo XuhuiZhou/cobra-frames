@@ -8,8 +8,8 @@ from IPython import embed
 from tqdm import tqdm
 
 # openai.api_key = "sk-5sqlr5GGEcAf33RBvOnDFnzp547YNQPJHUNpSOYK" # UW key
-# openai.api_key = "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" # Mosaic key
-openai.api_key = "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" # CMU key
+openai.api_key = "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" # Mosaic key
+# openai.api_key = "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" # CMU key
 
 variables = [
   # 'conversationContext',
@@ -73,7 +73,7 @@ def getGPT3prob(x,variant="text-davinci-001",attempt=0):
       # n=3,
       # best_of=5,
       # top_p=0.5,
-      max_tokens=160,
+      max_tokens=225,
       logprobs=1,
     )
   except openai.error.APIError as e:

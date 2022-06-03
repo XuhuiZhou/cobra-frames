@@ -71,18 +71,71 @@ window.onload = function() {
         <div class="row">
           <div class="col-12 mb-4">
             <p style="font-size: 1.05rem; text-align: left">
-              <todo> fill this out</todo>
-            </p>
+              You will read a message taken from somewhere on the internet, the machine-generated potential listener and speaker identity and the situation where the message happened. And then, you will rate some explanations of the message. Please answer all questions from an American cultural perspective; try to think about what other people in today's society would think about these. Note: we will assume that MTurk workers only have good intentions when annotating these posts.
+           </p>
           </div>
         </div>
         <div class="row">
           <div class="col-8">
             <h5>Detailed instructions</h5>
-            <todo> provide definitions of the dimensions</todo>
             
             <p style="margin-bottom: .5rem;">
-              <em class="toyou"><span class="numbering">1)</span></em>
+              <em class="toyou"><span class="numbering">1)</span> 
+                Read the message carefully. 
+                When you interpret the message, make sure you take into account the speaker and listener's
+                identities as well as the situation.
+              </em>
             </p>
+
+            <p style="margin-bottom: .5rem;">
+              <em class="toyou"><span class="numbering">2)</span> Rate the following explanations of the message. 
+                If you think the provided explanation is somewhat unlikely or unlikely, please suggest a better 
+                explanation using the text box beside the radio buttons. <xuhui>(Xuhui: would this push people rate things likely?)</xuhui> 
+                The following table provides you with the questions
+                you should consider when rating or writing the explanation for each category.
+                <br>
+                <table id="examples-table">
+                  <tr>
+                    <td class="cb-teal">Speaker intent</td>
+                    <td class="cb-teal">What do you think the speaker was trying to say? What was their intent with this statement?</td>
+                  </tr>
+                  <tr>
+                    <td class="cb-purple">Targeted Group</td>
+                    <td class="cb-purple">Who is referenced or targeted by the statement? It could be demographic groups and/or the listener themselves.</td>
+                  </tr>
+                  <tr>
+                    <td class="cb-gold">Power dynamic</td>
+                    <td class="cb-gold">Which power difference/marginalization/oppression does the statement happen on?
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="cb-orange">Implication</td>
+                    <td class="cb-orange">What is the biased or harmful or stereotypical implication that the statement carries (perhaps unintentionally)?
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="cb-green">Targeted group emotional reaction</td>
+                    <td class="cb-green">What are some of the immediate emotional reactions that someone from the targeted group would have to this statement/biased implication?
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="cb-brown">Targeted group cognitive reaction</td>
+                    <td class="cb-brown">Longer-term, what likely lessons will someone from the targeted group draw? How will they change their thinking or behavior?
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="cb-pink">Type of offensiveness&nbsp;</td>
+                    <td class="cb-pink">Overall, using only a few words, how would you describe the offensiveness of the statement? This statement is an example of a ____.
+                    </td>
+                  </tr>
+                </table>
+                <br>
+                <b>Note</b>: Think about cognitive reactions as the likely lessons someone will draw or the likely subsequent actions someone will take. 
+                It's more long-term harm, whereas emotional reactions are more about immediate emotional reactions and feelings, which is more immediate harm.
+              </em>
+            </p>
+            <br>
+
             <p style="margin-bottom: .5rem;">
               <em><span class="numbering">3)</span>Indicate your gender, age, race, political leaning, and whether you identify as a minority (this will remain confidential).</em><br>
               Your own personal background and experiences influence what you think of as disrespectful or offensive.
@@ -130,6 +183,7 @@ window.onload = function() {
           <label class="form-check-label">
             <input class="form-check-input" type="checkbox" id="consent" name="consent" onclick="toggleConsent(this.checked)">
             By ticking this box, you are agreeing to be part of this data collection study. Be sure that questions you have about the study have been answered and that you understand what you are being asked to do. You may contact us if you think of a question later. You are free to release/quit the HIT at any time, and refusing to be in the experiment or stopping participation will involve no penalty or loss of benefits to which you are otherwise entitled. To save a copy of the consent form and instructions, you can save/print this webpage (or find the instructions <a href="https://homes.cs.washington.edu/~msap/debug/neural-detox/psychOffensivenessLargeScale.html">here</a>).
+            <xuhui>(Xuhui: the link needs to be updated) </xuhui>
           </label>
         </div>
         <br>
@@ -148,16 +202,16 @@ window.onload = function() {
           <em>Situation</em>: <span id="speechContextInput">${speechContext}</span>
         </div>
         <div class="col-3">
-          <em>Speaker identity</em>: <span id="speakerInput">${speaker}</span>
+          <em>Speaker identity</em>: <span id="speakerInput">${speakerIdentity}</span>
         </div>
         
         <div class="col-6 imessage">
           <p class="from-them">
-            ${post}
+            ${statement}
           </p>
         </div>
         <div class="col-3">
-          <em>Listener identity</em>: <span id="listenerInput">${listener}</span>
+          <em>Listener identity</em>: <span id="listenerInput">${listenerIdentity}</span>
         </div>
         <div class="col-12">
           <label style="text-align: right; float: right; margin: 1em 0;">
@@ -176,7 +230,7 @@ window.onload = function() {
         <table id="inputTable">
           <tr>
             <td class="cb-teal">Speaker intent</td>
-            <td class="cb-teal">${speakerIntent}</td>
+            <td class="cb-teal">${intent}</td>
             <td>
               <label><input class="likelihood" type="radio" for="intentRating" name="intentRating" value=3 required> Very likely</label><br>
               <label><input class="likelihood" type="radio" for="intentRating" name="intentRating" value=2> Somewhat likely</label><br>
@@ -187,7 +241,7 @@ window.onload = function() {
           </tr>
           <tr>
             <td class="cb-purple">Targeted Group</td>
-            <td class="cb-purple">${targetedGroup}&nbsp;</td>
+            <td class="cb-purple">${targetGroup}&nbsp;</td>
             <td>
               <label><input class="likelihood" type="radio" for="targetGroupRating" name="targetGroupRating" value=3 required> Very likely</label><br>
               <label><input class="likelihood" type="radio" for="targetGroupRating" name="targetGroupRating" value=2> Somewhat likely</label><br>
@@ -195,6 +249,18 @@ window.onload = function() {
               <label><input class="likelihood" type="radio" for="targetGroupRating" name="targetGroupRating" value=0> Very unlikely</label></td>
             <td>Suggest a better targeted group:<br>
             <input type="text" placeholder="..." name="targetGroupSuggestion"></td>
+          </tr>
+          <tr>
+            <td class="cb-gold">Power dynamic</td>
+            <td class="cb-gold">${relevantPowerDynamics}</td>
+            <td>
+              <label><input class="likelihood" type="radio" for="powerDiffRating" name="powerDiffRating" value=3 required> Very likely</label><br>
+              <label><input class="likelihood" type="radio" for="powerDiffRating" name="powerDiffRating" value=2> Somewhat likely</label><br>
+              <label><input class="likelihood" type="radio" for="powerDiffRating" name="powerDiffRating" value=1> Somewhat unlikely</label><br>
+              <label><input class="likelihood" type="radio" for="powerDiffRating" name="powerDiffRating" value=0> Very unlikely</label>
+            </td>
+            <td>Suggest a better relevant power difference:<br>
+            <input type="text" name="powerDiffSuggestion" placeholder="power difference between..."></td>
           </tr>
           <tr>
             <td class="cb-orange">Implication</td>
@@ -208,17 +274,29 @@ window.onload = function() {
             <td>Suggest a better implication or stereotype:<br>
             <input type="text" name="implicationSuggestion" placeholder="message implies that ..."></td>
           </tr>
-          <tr>
-            <td class="cb-gold">Power dynamic</td>
-            <td class="cb-gold">${relevantPowerDynamic}</td>
+         <tr>
+            <td class="cb-green">Targeted group emotional reaction</td>
+            <td class="cb-green">${targetGroupEmotionalReaction}</td>
             <td>
-              <label><input class="likelihood" type="radio" for="powerDiffRating" name="powerDiffRating" value=3 required> Very likely</label><br>
-              <label><input class="likelihood" type="radio" for="powerDiffRating" name="powerDiffRating" value=2> Somewhat likely</label><br>
-              <label><input class="likelihood" type="radio" for="powerDiffRating" name="powerDiffRating" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="powerDiffRating" name="powerDiffRating" value=0> Very unlikely</label>
+              <label><input class="likelihood" type="radio" for="targetGroupReactionRating" name="targetGroupReactionRating" value=3 required> Very likely</label><br>
+              <label><input class="likelihood" type="radio" for="targetGroupReactionRating" name="targetGroupReactionRating" value=2> Somewhat likely</label><br>
+              <label><input class="likelihood" type="radio" for="targetGroupReactionRating" name="targetGroupReactionRating" value=1> Somewhat unlikely</label><br>
+              <label><input class="likelihood" type="radio" for="targetGroupReactionRating" name="targetGroupReactionRating" value=0> Very unlikely</label>
             </td>
-            <td>Suggest a better relevant power difference:<br>
-            <input type="text" name="powerDiffSuggestion" placeholder="power difference between..."></td>
+            <td>Suggest a better reaction:<br>
+            <input type="text" name="targetGroupReactionSuggestion" placeholder="targeted group would likely feel..."></td>
+          </tr>
+          <tr>
+            <td class="cb-brown">Targeted group cognitive reaction</td>
+            <td class="cb-brown">${targetGroupCognitiveReaction}</td>
+            <td>
+              <label><input class="likelihood" type="radio" for="targetGroupEffectRating" name="targetGroupEffectRating" value=3 required> Very likely</label><br>
+              <label><input class="likelihood" type="radio" for="targetGroupEffectRating" name="targetGroupEffectRating" value=2> Somewhat likely</label><br>
+              <label><input class="likelihood" type="radio" for="targetGroupEffectRating" name="targetGroupEffectRating" value=1> Somewhat unlikely</label><br>
+              <label><input class="likelihood" type="radio" for="targetGroupEffectRating" name="targetGroupEffectRating" value=0> Very unlikely</label>
+            </td>
+            <td>Suggest a better reaction:<br>
+            <input type="text" name="targetGroupEffectSuggestion" placeholder="the effect on the targeted group will be..."></td>
           </tr>
           <tr>
             <td class="cb-pink">Type of offensiveness&nbsp;</td>
@@ -232,30 +310,7 @@ window.onload = function() {
             <td>Suggest a better offensiveness:<br>
             <input type="text" name="offensivenessSuggestion" placeholder="..."></td>
           </tr>
-          <tr>
-            <td class="cb-green">Targeted group reaction</td>
-            <td class="cb-green">${targetGroupReaction}</td>
-            <td>
-              <label><input class="likelihood" type="radio" for="targetGroupReactionRating" name="targetGroupReactionRating" value=3 required> Very likely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupReactionRating" name="targetGroupReactionRating" value=2> Somewhat likely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupReactionRating" name="targetGroupReactionRating" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupReactionRating" name="targetGroupReactionRating" value=0> Very unlikely</label>
-            </td>
-            <td>Suggest a better reaction:<br>
-            <input type="text" name="targetGroupReactionSuggestion" placeholder="targeted group would likely feel..."></td>
-          </tr>
-          <tr>
-            <td class="cb-brown">Targeted group effect</td>
-            <td class="cb-brown">${targetGroupEffect}</td>
-            <td>
-              <label><input class="likelihood" type="radio" for="targetGroupEffectRating" name="targetGroupEffectRating" value=3 required> Very likely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupEffectRating" name="targetGroupEffectRating" value=2> Somewhat likely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupEffectRating" name="targetGroupEffectRating" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupEffectRating" name="targetGroupEffectRating" value=0> Very unlikely</label>
-            </td>
-            <td>Suggest a better reaction:<br>
-            <input type="text" name="targetGroupEffectSuggestion" placeholder="the effect on the targeted group will be..."></td>
-          </tr>
+ 
         </table>
         
         <div class="col-12 mt-5" id="demogQuestions" style="display: inline-block;">
@@ -663,10 +718,17 @@ window.onload = function() {
 <style type="text/css">
 
 #examples-table {
-  border-style: none solid solid solid;
+  border-style: solid solid solid solid;
   border-width: 1px;
   border-color: #dee2e6;
   border-radius: 5px;
+  padding: 2px;
+}
+#examples-table td {
+  border: #dee2e6;
+  border-style: solid;
+  border-width: 1px;
+  padding: 2px;
 }
 
 #inputTable {
@@ -871,6 +933,11 @@ todo {
   font-weight: bold;
   color: #e60000;
   background-color: black;
+}
+
+xuhui {
+  color: #66a61e;
+  font-style: italic;
 }
 
 .possibleAnswer {
