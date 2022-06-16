@@ -1,3 +1,5 @@
+from email.policy import default
+from turtle import st
 import numpy as np
 import pandas as pd
 import json, time
@@ -8,8 +10,14 @@ from IPython import embed
 from tqdm import tqdm
 
 # openai.api_key = "sk-5sqlr5GGEcAf33RBvOnDFnzp547YNQPJHUNpSOYK" # UW key
-openai.api_key = "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" # Mosaic key
+# openai.api_key = "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" # Mosaic key
 # openai.api_key = "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" # CMU key
+openai.api_key = "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"
+
+tox_condition_dict = {
+  "sbic.trn.r60.gpt3socCont.csv":['hasBiasedImplication', 1],
+  "mAgr.r60.gpt3socCont.csv": None,
+}
 
 variables = [
   # 'conversationContext',
@@ -118,12 +126,17 @@ def formatPosts(p,preamble="",**kwargs):
 
 
 def main(args):
-  exampleFile = "./data/promptExamples.v2.csv"
-  examples = pd.read_csv(exampleFile)
+  examples = pd.read_csv(args.example_file)
 
   posts = pd.read_csv(args.input_file)
   if args.debug:
     posts = posts.sample(args.debug)
+  
+  # Select desired toxic class statements; need to be further refined!
+  if args.tox_class=='toxic':
+    condition = tox_condition_dict[(args.input_file).split('/')[-1]]
+    if condition:
+      posts = posts[posts[condition[0]]==condition[1]]
 
   posts = posts.rename(columns={"actual_quote": "post","text": "post"})
   posts["examples"] = posts[args.statement_col].apply(addExamplesToPost,examples=examples,n=args.n_examples)  
@@ -150,11 +163,13 @@ def main(args):
 if __name__ =="__main__":
   p = argparse.ArgumentParser()
   p.add_argument("--input_file")
+  p.add_argument("--example_file", default="./data/promptExamples.v2.csv", type=str)
   p.add_argument("--statement_col",default="post")
   p.add_argument("--conversationContext_col",default="conversationContext")
   p.add_argument("--n_examples",default=7,type=int)
   p.add_argument("--debug",type=int,default=0)
   p.add_argument("--output_file")
+  p.add_argument("--tox_class", default="toxic", type=str)
   args = p.parse_args()
   main(args)
 

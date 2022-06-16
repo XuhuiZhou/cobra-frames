@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+</head>
+<body>
 <script>
 //
 // This method Gets URL Parameters (GUP)
@@ -93,39 +99,40 @@ window.onload = function() {
                 explanation using the text box beside the radio buttons. <xuhui>(Xuhui: would this push people to rate things more likely?)</xuhui> 
                 The following table provides you with the questions
                 you should consider when rating or writing the explanation for each category.
-                <br>
+                <div class="col-12 mt-2 mb-2">
+                </div>
                 <table id="examples-table">
                   <tr>
                     <td class="cb-teal">Speaker intent</td>
-                    <td class="cb-teal">What do you think the speaker was trying to say? What was their intent with this statement?</td>
+                    <td class="cb-gray">What do you think the speaker was trying to say? What was their intent with this statement?</td>
                   </tr>
                   <tr>
-                    <td class="cb-purple">Targeted Group</td>
-                    <td class="cb-purple">Who is referenced or targeted by the statement? It could be demographic groups and/or the listener themselves.</td>
+                    <td class="cb-purple">Target (group)</td>
+                    <td class="cb-gray">Who is referenced or targeted by the statement? It could be demographic groups and/or the listener themselves.</td>
                   </tr>
                   <tr>
                     <td class="cb-gold">Power dynamic</td>
-                    <td class="cb-gold">Which power difference/marginalization/oppression does the statement happen on?
+                    <td class="cb-gray">Which power difference/marginalization/oppression does the statement happen on?
                     </td>
                   </tr>
                   <tr>
                     <td class="cb-orange">Implication</td>
-                    <td class="cb-orange">What is the biased or harmful or stereotypical implication that the statement carries (perhaps unintentionally)?
+                    <td class="cb-gray">What is the biased or harmful or stereotypical implication that the statement carries (perhaps unintentionally)?
                     </td>
                   </tr>
                   <tr>
-                    <td class="cb-green">Targeted group emotional reaction</td>
-                    <td class="cb-green">What are some of the immediate emotional reactions that someone from the targeted group would have to this statement/biased implication?
+                    <td class="cb-green">Target emotional reaction</td>
+                    <td class="cb-gray">What are some of the immediate emotional reactions that someone from the target group would have to this statement/biased implication?
                     </td>
                   </tr>
                   <tr>
-                    <td class="cb-brown">Targeted group cognitive reaction</td>
-                    <td class="cb-brown">Longer-term, what likely lessons will someone from the targeted group draw? How will they change their thinking or behavior?
+                    <td class="cb-brown">Target cognitive reaction</td>
+                    <td class="cb-gray">Longer-term, what likely lessons will someone from the target group draw? How will they change their thinking or behavior?
                     </td>
                   </tr>
                   <tr>
                     <td class="cb-pink">Type of offensiveness&nbsp;</td>
-                    <td class="cb-pink">Overall, using only a few words, how would you describe the offensiveness of the statement? This statement is an example of a ____.
+                    <td class="cb-gray">Overall, using only a few words, how would you describe the offensiveness of the statement? This statement is an example of a ____.
                     </td>
                   </tr>
                 </table>
@@ -172,8 +179,310 @@ window.onload = function() {
             </p>
           </div>
         </div>
+
+        <div class="row justify-content-center" style="margin-top: 20px;">
+          <div class="col-11" id="table-container">
+            <h5>Examples <small><a href=".extra-exs" class="collapsed" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample" onclick="expExamples();">
+              [-] less examples
+            </a></small></h5>
+            <div class="d-flex flex-column" style="margin-top: 20px; margin-bottom: 20px; border-radius: 3px; box-shadow: 1.5px 1.5px 3px 3px rgba(0, 0, 1, 0.2);">
+              <div class="row justify-content-center" style="background-color: ghostwhite; border: 1px solid darkgrey; border-radius: 3px; width: 70%; margin-left: auto; margin-right: auto; margin-top: 20px;">
+                <div class="col-12 text-center" style="margin: 1em 0;">
+                  <em style="font-size: 18; color: #006cd8;  font-weight: bold;">Situation</em>: <span id="speechContextInput">political speech or rant</span>
+                </div>
+                <div class="col-3">
+                  <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Speaker identity</em>: <span id="speakerInput">white American person</span>
+                </div>
+                
+                <div class="col-6 imessage">
+                  <p class="from-them">
+                    Mexico isn't sending its best, it's sending rapists and murderers
+                  </p>
+                </div>
+                <div class="col-3">
+                  <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Listener identity</em>: <span id="listenerInput">general audience of US voters</span>
+                </div>
+              </div>
+              <div class="mt-3" id="table-container"></div> 
+              <div class="table-responsive", style="margin-left: 20px; margin-right: 20px; width: 96%">
+              <table class="table table-hover" id="examples-table">
+                <thead class="thead-light">
+                  <th scope="col" style="width: 10%;">Relation</th>
+                  <th scope="col" style="width: 40%;">Inference</th>
+                  <th scope="col" style="width: 10%;">Answer</th>
+                  <th scope="col" style="width: 40%;">Suggest a better alternative</th>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="cb-teal">Speaker intent</td>
+                    <td>The speaker is trying to stress the importance of education in Mexico, especially in preventing people becoming rapists and murderers</td>
+                    <td>very/somewhat unlikely</td>
+                    <td>The speaker is trying to express distrusts against immigrants from Mexico, calling them all rapists and murderers</td>
+                  </tr>
+                  <tr>
+                    <td class="cb-purple">Target (group)</td>
+                    <td>general Mexicans</td>
+                    <td>very/somewhat unlikely</td>
+                    <td>Mexican immigrants</td>
+                  </tr>
+                  <tr>
+                    <td class="cb-gold">Power dynamic</td>
+                    <td>ethnicity and citizenship power differential between speaker and targeted group</td>
+                    <td>very/somewhat likely</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td class="cb-orange">Implication</td>
+                    <td>implies that Mexico does not send good people outside</td>
+                    <td>very/somewhat unlikely</td>
+                    <td>implies that all Mexican immigrants are rapists and murderers, and that immigration is generally bad</td>
+                  </tr>
+                  <tr>
+                    <td class="cb-green">Target emotional reaction</td>
+                    <td>Mexicans could feel ashamed that the they don't provide enough ethical education for their children</td>
+                    <td>very/somewhat unlikely</td>
+                    <td>Mexican immigrants could feel angry that the entire country of Mexico is being framed as criminal, afraid that people will believe that stereotype</td>
+                  </tr>
+                  <tr>
+                    <td class="cb-brown">Target cognitive reaction</td>
+                    <td>Mexican would try to be more well-behaved and make efforts in improving their education in reducing future criminals</td>
+                    <td>very/somewhat unlikely</td>
+                    <td>Mexican immigrants could likely be more feared, and will feel less welcome in the country they are in</td>
+                  </tr>
+                  <tr>
+                    <td class="cb-pink">Type of offensiveness</td>
+                    <td>offensive generalization</td>
+                    <td>very/somewhat likely</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+
+              </div>
+            </div>
+            <div class="collapse show extra-exs">
+              <div class="d-flex flex-column" style="margin-top: 20px; margin-bottom: 20px; border-radius: 3px; box-shadow: 1.5px 1.5px 3px 3px rgba(0, 0, 1, 0.2);">
+                <div class="row justify-content-center" style="background-color: ghostwhite; border: 1px solid darkgrey; border-radius: 3px; width: 70%; margin-left: auto; margin-right: auto; margin-top: 20px;">
+                  <div class="col-12 text-center" style="margin: 1em 0;">
+                    <em style="font-size: 18; color: #006cd8;  font-weight: bold;">Situation</em>: <span id="speechContextInput">initial interaction in a workplace setting between customer and employee or bosss</span>
+                  </div>
+                  <div class="col-3">
+                    <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Speaker identity</em>: <span id="speakerInput">man</span>
+                  </div>
+                  
+                  <div class="col-6 imessage">
+                    <p class="from-them">
+                      Excuse me miss, are any of your bosses here?
+                    </p>
+                  </div>
+                  <div class="col-3">
+                    <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Listener identity</em>: <span id="listenerInput">woman</span>
+                  </div>
+                </div>
+                <div class="mt-3" id="table-container"></div> 
+                <div class="table-responsive", style="margin-left: 20px; margin-right: 20px; width: 96%">
+                <table class="table table-hover" id="examples-table">
+                  <thead class="thead-light">
+                    <th scope="col" style="width: 10%;">Relation</th>
+                    <th scope="col" style="width: 40%;">Inference</th>
+                    <th scope="col" style="width: 10%;">Answer</th>
+                    <th scope="col" style="width: 40%;">Suggest a better alternative</th>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="cb-teal">Speaker intent</td>
+                      <td>The speaker is trying to find someone in a position of authority</td>
+                      <td>very/somewhat likely</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td class="cb-purple">Target (group)</td>
+                      <td>man</td>
+                      <td>very/somewhat unlikely</td>
+                      <td>listener, women</td>
+                    </tr>
+                    <tr>
+                      <td class="cb-gold">Power dynamic</td>
+                      <td>work place power differential between speaker and listener</td>
+                      <td>very/somewhat unlikely</td>
+                      <td>gender power differential between speaker and listener</td>
+                    </tr>
+                    <tr>
+                      <td class="cb-orange">Implication</td>
+                      <td>implies that the woman in the office is not the boss</td>
+                      <td>very/somewhat unlikely</td>
+                      <td>It implies that women are not capable of being in a position of authority, and that a man is needed to speak to someone in charge</td>
+                    </tr>
+                    <tr>
+                      <td class="cb-green">Target emotional reaction</td>
+                      <td>listener and women could feel sorry for not being about to answer the speaker's question</td>
+                      <td>very/somewhat unlikely</td>
+                      <td>listener and women could feel angry, feel condescended to, angry that they didn't think a woman was boss</td>
+                    </tr>
+                    <tr>
+                      <td class="cb-brown">Target cognitive reaction</td>
+                      <td>might lead women bosses to change their behavior to appear more boss-like, might become more confrontational</td>
+                      <td>very/somewhat likely</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td class="cb-pink">Type of offensiveness</td>
+                      <td>offensive generalization</td>
+                      <td>very/somewhat unlikely</td>
+                      <td>microaggression</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                </div>
+              </div>
+            </div>
+            <a href=".extra-exs" class="collapsed" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample" onclick="expExamples();">
+              [-] less examples
+            </a>
+          </div>
+            
+        </div>   
         
+        <!-- <div class="row justify-content-center" style="margin-top: 20px;">
+          <div class="col-11" id="table-container">
+            <h5>Examples <small><a href=".extra-rows" class="collapsed" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample" onclick="expExamples();">
+              [-] less examples
+            </a></small></h5>
+            <div class="table-responsive">
+            <table class="table table-hover" id="examples-table">
+              <thead class="thead-light">
+                <th scope="col">Statement</th>
+                <th scope="col">Situation</th>
+                <th scope="col">Speaker Identity</th>
+                <th scope="col">Listener Identity</th>
+                <th scope="col" style="width: 10%;">Relation</th>
+                <th scope="col" style="width: 20%;">Good Inference ✔ </th>
+                <th scope="col" style="width: 20%;">Bad Inference ❌</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Mexico isn't sending its best, it's sending rapists and murderers</td>
+                  <td>political speech or rant</td>
+                  <td>white American person</td>
+                  <td>general audience of US voters</td>
+                  <td>implication</td>
+                  <td>implies that all Mexican immigrants are rapists and murderers, and that immigration is generally bad</td>
+                  <td>implies that Mexico does not send good people outside</td>
+                </tr>
+                <tr>
+                  <td>Mexico isn't sending its best, it's sending rapists and murderers</td>
+                  <td>political speech or rant</td>
+                  <td>white American person</td>
+                  <td>general audience of US voters</td>
+                  <td>offensiveness</td>
+                  <td>offensive generalization</td>
+                  <td>quoting of something biased</td>
+                </tr>
+                <tr>
+                  <td>Mexico isn't sending its best, it's sending rapists and murderers</td>
+                  <td>political speech or rant</td>
+                  <td>white American person</td>
+                  <td>general audience of US voters</td>
+                  <td>Targeted group cognitive reaction</td>
+                  <td>Mexican immigrants could likely be more feared, and will feel less welcome in the country they are in</td>
+                  <td>Mexican would try to be more well-behaved</td>
+                </tr>
+                <tr>
+                  <td>Don't get too extreme, okay? We don't want you all to be prostitutes... Or transgender.</td>
+                  <td>conversation between friends</td>
+                  <td>person who is not transgender</td>
+                  <td>person who is transgender</td>
+                  <td>intent</td>
+                  <td>The speaker is trying to convey a stereotype about a certain group of people</td>
+                  <td>The speaker is trying to advise their friends</td>
+                </tr>
+               <tr>
+                  <td>Dark jokes are like a kid with cancer They never get old</td>
+                  <td>stand-up comedy set</td>
+                  <td>comedian</td>
+                  <td>general audience</td>
+                  <td>targeted group emotional reaction</td>
+                  <td>people with cancer could feel offended that their experiences are being used for humor; people with cancer <b>might</b> find the joke funny</td>
+                  <td>people with cancer <b>will</b> find the joke funny</td>
+                </tr>
+                <tr>
+                  <td>Your history teacher has to do what the zionist butt heads want them to do .</td>
+                  <td>conversation between friends</td>
+                  <td>man</td>
+                  <td>man</td>
+                  <td>targeted group</td>
+                  <td>Jews</td>
+                  <td>butt heads</td>
+                </tr>
+                <tr class="collapse show extra-rows">
+                  <td>Excuse me miss, are any of your bosses here?</td>
+                  <td>initial interaction in a workplace setting between customer and employee or bosss</td>
+                  <td>man</td>
+                  <td>woman</td>
+                  <td>power dynamic</td>
+                  <td>gender power differential between speaker and listener</td>
+                  <td>gender power dynamic</td>
+                </tr>
+                <tr class="collapse show extra-rows">
+                  <td>Excuse me miss, are any of your bosses here?</td>
+                  <td>initial interaction in a workplace setting between customer and employee or bosss</td>
+                  <td>man</td>
+                  <td>woman</td>
+                  <td>targeted group emotional reaction</td>
+                  <td>listener and women could feel angry, feel condescended to, angry that they didn't think a woman was boss</td>
+                  <td>listener may feel bad about not being able to answer the question</td>
+                </tr>
+                <tr class="collapse show extra-rows">
+                  <td>Excuse me miss, are any of your bosses here?</td>
+                  <td>initial interaction in a workplace setting between customer and employee or bosss</td>
+                  <td>man</td>
+                  <td>woman</td>
+                  <td>targeted group</td>
+                  <td>Listener,women</td>
+                  <td>men</td>
+                </tr>
+
+                <tr class="collapse show extra-rows">
+                  <td>We shouldn't lower our standards just to hire more women</td>
+                  <td>workplace hiring conversation</td>
+                  <td>man</td>
+                  <td>other coworkers</td>
+                  <td>targeted group cognitive reaction</td>
+                  <td>will feel less welcome and be less likely to want to work there, will want to avoid those kinds of jobs with men like the speaker</td>
+                  <td>will feel the standards are not high enough.</td>
+                </tr>
+                <tr class="collapse show extra-rows">
+                  <td>Why did jews do so well in class ? they went to concentration camps</td>
+                  <td>casual conversation between friends</td>
+                  <td>white person</td>
+                  <td>white person</td>
+                  <td>intent</td>
+                  <td>The speaker is trying to tell joke that might be offensive to jews</td>
+                  <td>The speaker is trying to convey a stereotype about a certain group of people</td>
+                </tr>
+                <tr class="collapse show extra-rows">
+                  <td>well today turned out to be a real fucking shitshow</td>
+                  <td>conversation between friends</td>
+                  <td>white person</td>
+                  <td>white person</td>
+                  <td>implication</td>
+                  <td>the speaker implies that today was a bad day for them</td>
+                  <td>the speaker is communicating that today was a bad day for people of color, and that it was not good for them </td>
+                </tr>
+
+              </tbody>
+            </table>
+            </div>
+            <a href=".extra-rows" class="collapsed" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample" onclick="expExamples();">
+              [-] less examples
+            </a>
+          </div>
+            
+        </div>    -->
+  
       </div>
+
     </div>
     <div class="row" id="consent" style="margin: 30px 0;">
       <div class="col-12">
@@ -199,10 +508,10 @@ window.onload = function() {
     <div id="actualTask" style="display: none;">
       <div class="row justify-content-center" style="background-color: ghostwhite; border: 1px solid darkgrey; border-radius: 3px; width: 70%; margin-left: auto; margin-right: auto;">
         <div class="col-12 text-center" style="margin: 1em 0;">
-          <em>Situation</em>: <span id="speechContextInput">${speechContext}</span>
+          <em style="font-size: 18; color: #006cd8;  font-weight: bold;">Situation</em>: <span id="speechContextInput">${speechContext}</span>
         </div>
         <div class="col-3">
-          <em>Speaker identity</em>: <span id="speakerInput">${speakerIdentity}</span>
+          <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Speaker identity</em>: <span id="speakerInput">${speakerIdentity}</span>
         </div>
         
         <div class="col-6 imessage">
@@ -211,7 +520,7 @@ window.onload = function() {
           </p>
         </div>
         <div class="col-3">
-          <em>Listener identity</em>: <span id="listenerInput">${listenerIdentity}</span>
+          <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Listener identity</em>: <span id="listenerInput">${listenerIdentity}</span>
         </div>
         <div class="col-12">
           <label style="text-align: right; float: right; margin: 1em 0;">
@@ -227,10 +536,10 @@ window.onload = function() {
         <div class="col-12 mt-5 mb-2">
           <h4 style="font-style: italic;">1. Rate the explanations about the message.</h4>
         </div>
-        <table id="inputTable">
+        <table class="table table-striped" id="inputTable">
           <tr>
-            <td class="cb-teal">Speaker intent</td>
-            <td class="cb-teal">${intent}</td>
+            <td class="cb-teal" style="width: 15%;">Speaker intent</td>
+            <td class="cb-gray" style="width: 30%;">${intent}</td>
             <td>
               <label><input class="likelihood" type="radio" for="intentRating" name="intentRating" value=3 required> Very likely</label><br>
               <label><input class="likelihood" type="radio" for="intentRating" name="intentRating" value=2> Somewhat likely</label><br>
@@ -240,31 +549,33 @@ window.onload = function() {
             <input type="text" placeholder="speaker was trying to..." name="intentSuggestion"></td>
           </tr>
           <tr>
-            <td class="cb-purple">Targeted Group</td>
-            <td class="cb-purple">${targetGroup}&nbsp;</td>
+            <td class="cb-purple">Target (group)</td>
+            <td class="cb-gray">${targetGroup}&nbsp;</td>
             <td>
               <label><input class="likelihood" type="radio" for="targetGroupRating" name="targetGroupRating" value=3 required> Very likely</label><br>
               <label><input class="likelihood" type="radio" for="targetGroupRating" name="targetGroupRating" value=2> Somewhat likely</label><br>
               <label><input class="likelihood" type="radio" for="targetGroupRating" name="targetGroupRating" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupRating" name="targetGroupRating" value=0> Very unlikely</label></td>
+              <label><input class="likelihood" type="radio" for="targetGroupRating" name="targetGroupRating" value=0> Very unlikely</label><br>
+              <label><input class="likelihood" type="radio" for="targetGroupRating" name="targetGroupRating" value=-1> None</label></td>
             <td>Suggest a better targeted group:<br>
             <input type="text" placeholder="..." name="targetGroupSuggestion"></td>
           </tr>
           <tr>
             <td class="cb-gold">Power dynamic</td>
-            <td class="cb-gold">${relevantPowerDynamics}</td>
+            <td class="cb-gray">${relevantPowerDynamics}</td>
             <td>
               <label><input class="likelihood" type="radio" for="powerDiffRating" name="powerDiffRating" value=3 required> Very likely</label><br>
               <label><input class="likelihood" type="radio" for="powerDiffRating" name="powerDiffRating" value=2> Somewhat likely</label><br>
               <label><input class="likelihood" type="radio" for="powerDiffRating" name="powerDiffRating" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="powerDiffRating" name="powerDiffRating" value=0> Very unlikely</label>
+              <label><input class="likelihood" type="radio" for="powerDiffRating" name="powerDiffRating" value=0> Very unlikely</label><br>
+              <label><input class="likelihood" type="radio" for="powerDiffRating" name="powerDiffRating" value=-1> None</label><br>
             </td>
             <td>Suggest a better relevant power difference:<br>
             <input type="text" name="powerDiffSuggestion" placeholder="power difference between..."></td>
           </tr>
           <tr>
             <td class="cb-orange">Implication</td>
-            <td class="cb-orange">${implication}&nbsp;</td>
+            <td class="cb-gray">${implication}&nbsp;</td>
             <td>
               <label><input class="likelihood" type="radio" for="implicationRating" name="implicationRating" value=3 required> Very likely</label><br>
               <label><input class="likelihood" type="radio" for="implicationRating" name="implicationRating" value=2> Somewhat likely</label><br>
@@ -275,32 +586,34 @@ window.onload = function() {
             <input type="text" name="implicationSuggestion" placeholder="message implies that ..."></td>
           </tr>
          <tr>
-            <td class="cb-green">Targeted group emotional reaction</td>
-            <td class="cb-green">${targetGroupEmotionalReaction}</td>
+            <td class="cb-green">Target emotional reaction</td>
+            <td class="cb-gray">${targetGroupEmotionalReaction}</td>
             <td>
-              <label><input class="likelihood" type="radio" for="targetGroupReactionRating" name="targetGroupReactionRating" value=3 required> Very likely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupReactionRating" name="targetGroupReactionRating" value=2> Somewhat likely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupReactionRating" name="targetGroupReactionRating" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupReactionRating" name="targetGroupReactionRating" value=0> Very unlikely</label>
+              <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating" name="targetGroupEmoReactRating" value=3 required> Very likely</label><br>
+              <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating" name="targetGroupEmoReactRating" value=2> Somewhat likely</label><br>
+              <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating" name="targetGroupEmoReactRating" value=1> Somewhat unlikely</label><br>
+              <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating" name="targetGroupEmoReactRating" value=0> Very unlikely</label><br>
+              <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating" name="targetGroupEmoReactRating" value=-1> None</label><br>
             </td>
             <td>Suggest a better reaction:<br>
-            <input type="text" name="targetGroupReactionSuggestion" placeholder="targeted group would likely feel..."></td>
+            <input type="text" name="targetGroupReactionSuggestion" placeholder="target would likely feel..."></td>
           </tr>
           <tr>
-            <td class="cb-brown">Targeted group cognitive reaction</td>
-            <td class="cb-brown">${targetGroupCognitiveReaction}</td>
+            <td class="cb-brown">Target cognitive reaction</td>
+            <td class="cb-gray">${targetGroupCognitiveReaction}</td>
             <td>
-              <label><input class="likelihood" type="radio" for="targetGroupEffectRating" name="targetGroupEffectRating" value=3 required> Very likely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupEffectRating" name="targetGroupEffectRating" value=2> Somewhat likely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupEffectRating" name="targetGroupEffectRating" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupEffectRating" name="targetGroupEffectRating" value=0> Very unlikely</label>
+              <label><input class="likelihood" type="radio" for="targetGroupCogReactRating" name="targetGroupCogReactRating" value=3 required> Very likely</label><br>
+              <label><input class="likelihood" type="radio" for="targetGroupCogReactRating" name="targetGroupCogReactRating" value=2> Somewhat likely</label><br>
+              <label><input class="likelihood" type="radio" for="targetGroupCogReactRating" name="targetGroupCogReactRating" value=1> Somewhat unlikely</label><br>
+              <label><input class="likelihood" type="radio" for="targetGroupCogReactRating" name="targetGroupCogReactRating" value=0> Very unlikely</label><br>
+              <label><input class="likelihood" type="radio" for="targetGroupCogReactRating" name="targetGroupCogReactRating" value=-1> None</label>
             </td>
             <td>Suggest a better reaction:<br>
-            <input type="text" name="targetGroupEffectSuggestion" placeholder="the effect on the targeted group will be..."></td>
+            <input type="text" name="targetGroupEffectSuggestion" placeholder="the effect on the target will be..."></td>
           </tr>
           <tr>
             <td class="cb-pink">Type of offensiveness&nbsp;</td>
-            <td class="cb-pink">${offensiveness}</td>
+            <td class="cb-gray">${offensiveness}</td>
             <td>
               <label><input class="likelihood" type="radio" for="offensivenessRating" name="offensivenessRating" value=3 required> Very likely</label><br>
               <label><input class="likelihood" type="radio" for="offensivenessRating" name="offensivenessRating" value=2> Somewhat likely</label><br>
@@ -472,6 +785,7 @@ window.onload = function() {
     </div>
   </fieldset>
 </section>
+
 <script>
   var targ, btngroup, event, selectedText, aspectDiv, workerInfo;
   var attentionChecks = ["first","second", "third", "fourth", "fifth"];
@@ -703,10 +1017,22 @@ window.onload = function() {
     }
   }
   var rows;
-  function expExamples(){
+  function expRows(){
     rows = $("tr.extra-rows");
     $("a:contains('examples')").each(function(ix,link){
       if (rows.hasClass("show"))
+        link.innerText = "[+] more examples";
+      else 
+        link.innerText = "[-] less examples";
+      console.log(link);
+    })
+  }
+
+  var divs;
+  function expExamples(){
+    divs = $("div.extra-exs");
+    $("a:contains('examples')").each(function(ix,link){
+      if (divs.hasClass("show"))
         link.innerText = "[+] more examples";
       else 
         link.innerText = "[-] less examples";
@@ -887,25 +1213,36 @@ fieldset {
   }
   
 .cb-teal {
-  color: #1b9e77
+  color: #1b9e77;
+  font-weight: bold;
+
 }
 .cb-orange {
-  color: #d95f02
+  color: #d95f02;
+  font-weight: bold;
 }
 .cb-purple {
-  color: #7570b3
+  color: #7570b3;
+  font-weight: bold;
 }
 .cb-pink {
-  color: #e7298a
+  color: #e7298a;
+  font-weight: bold;
 }
 .cb-green {
-  color: #66a61e
+  color: #66a61e;
+  font-weight: bold;
 }
 .cb-gold {
-  color: #e6ab02 
+  color: #e6ab02;
+  font-weight: bold; 
 }
 .cb-brown{
-  color: #a6761d
+  color: #a6761d;
+  font-weight: bold;
+}
+.cb-gray{
+  color: #3f3f3f;
 }
 .cb-bg-teal {
   background-color: #1b9e77
@@ -943,7 +1280,12 @@ xuhui {
 .possibleAnswer {
   margin-left: 2em;
 }
-
+.badTd {
+  background: #FF8C8C;
+}
+.goodTd{
+  background: #14C38E;
+}
 
 /*********************************/
 .imessage {
@@ -1062,3 +1404,5 @@ p[class^="from-"].emoji::before {
 
 
 </style>
+</body>
+</html>
