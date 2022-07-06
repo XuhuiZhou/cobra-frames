@@ -3,7 +3,9 @@ import re
 import simpledorff
 import pandas as pd
 import numpy as np
-from collections import Counter
+from collections import Counter, defaultdict
+from datetime import datetime
+from agreement import computeAlpha
 #from disagree import metrics
 
 def count_scale(df):
@@ -12,6 +14,7 @@ def count_scale(df):
     for i in values:
         scale[int(i>3)]+=1
     return scale
+
 
 def fleiss_kappa(M):
     """Computes Fleiss' kappa for group of annotators.
@@ -35,6 +38,7 @@ def fleiss_kappa(M):
     Pbar = np.sum(P) / N  # add all observed agreement chances per item and divide by amount of items
 
     return round((Pbar - PbarE) / (1 - PbarE), 4)
+
 
 def calculate_agreement_fleiss(file_name):
     df = pd.read_csv(file_name)
@@ -83,9 +87,9 @@ def output_quality_ratio(df, col, bar):
     for i in col:
         frames[i] = [f'{100*sum_[i]/total:.2f}%']
     df = pd.DataFrame.from_dict(frames)
-    df = df.rename(index={0:"quality"})
+    df = df.rename(index={0:"approval rate"})
     return df
- 
+
 
 def calculate_agreement_pairwise(df, col):
     frames = {}
@@ -148,6 +152,54 @@ def pretty(df):
     df = df.rename(columns={i:j for i,j in zip(keys, new_keys)})
     return df
 
+def analyze_perHitTime(df, unix=True):
+    if unix:
+        df['WorkTimeInSeconds'] = (df['Answer.clickedSubmitTime']-df['Answer.clickedConsentTime'])/1000 
+        line = (df['WorkTimeInSeconds']/60).describe()
+        line_ignoreMax = df.sort_values('WorkTimeInSeconds').groupby('WorkerId').apply(lambda x : x[:-1])
+        line_ignoreMax = (line_ignoreMax['WorkTimeInSeconds']/60).describe()
+    else:
+        line = (df['WorkTimeInSeconds']/60).describe()
+        line_ignoreMax = df.sort_values('WorkTimeInSeconds').groupby('WorkerId').apply(lambda x : x[:-1])
+        line_ignoreMax = (line_ignoreMax['WorkTimeInSeconds']/60).describe() 
+    items = ['mean', 'std', 'min', '25%', '50%', '75%', 'max']
+    time_dict = defaultdict(list)
+    for i in items:
+        time_dict[i].append(line[i])
+        time_dict[i].append(line_ignoreMax[i])
+    df_time = pd.DataFrame.from_dict(time_dict)
+    #df_time = df_time.rename('')
+    return df_time
+
+def calculate_agreement(df, col):
+    """
+    Utilize external function to calculate the agreement.
+    This process defaults to binary rating currently.
+    """
+    frames = {}
+    for i in col:
+        new_df = df[['HITId', 'WorkerId', i]]
+        new_df = new_df.rename(columns={i: "Rating"})
+        scores = computeAlpha(new_df, "Rating", groupCol="HITId")
+        #k.to_csv(f'pairwise_matrix_{i}.csv')
+        #print(k)
+        frames[i] = [
+            f"{scores['ppa']*100:.2f}%", 
+            f"{scores['rnd_ppa']*100:.2f}%",
+            f"{scores['alpha']:.4f}", 
+            ]
+    df = pd.DataFrame.from_dict(frames)
+    df = df.rename(index={0:"pairwise agreement", 
+            1: "random agreement", 
+            2: "Krippendorf's alpha"
+            })
+    return df
+
+def normalize_df(df):
+    df = (df-df.min())/(df.max()-df.min())
+    return df 
+
+
 def main():
     """
     Script for analyzing Mturk produced data
@@ -155,7 +207,13 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--input_file")
     parser.add_argument("--output_folder")
-    parser.add_argument("--bar", default=1, type=int)
+    parser.add_argument("--bar", default=1, type=int, 
+        help="Approve when there are more annotators than the bar")
+    parser.add_argument("--use_internal", action='store_true', 
+        help="Avoid using external agreement computing methods")
+    parser.add_argument("--binary", action='store_true', 
+        help="make the value of ratings to binary when calculating the agreement")
+
     args = parser.parse_args()
     df = pd.read_csv(args.input_file)
     df = df.rename(columns={
@@ -182,15 +240,32 @@ def main():
         'Answer.targetGroupEmoReactSuggestion',
         'Answer.targetGroupCogReactSuggestion',
     ]
+    time_analysis = analyze_perHitTime(df[[
+        'WorkerId', 'WorkTimeInSeconds', 
+        'Answer.clickedConsentTime', 
+        'Answer.clickedSubmitTime']])
+
+    #print(time_analysis)
     df_stats = stats_of_interest(df[relevant_col])
     df_stats_2 = stats_of_interest(df[relevant_col2], has_text=True)
-    df[relevant_col] = (df[relevant_col]>1).astype(int)
+
+    if args.binary:  
+        df[relevant_col] = (df[relevant_col]>1).astype(int)
+    else:
+        # Replace None value (-1) with the average value (1.5)
+        df = df.replace(-1, 1.5)
+        df[relevant_col] = normalize_df(df[relevant_col])
+
+    # The current quality calculation process only supports binary rating.
     df_quality = output_quality_ratio(df, relevant_col, args.bar)
-    df_pairwise_agr = calculate_agreement_pairwise(df, relevant_col) 
+    if args.use_internal:
+        df_agreement = calculate_agreement_pairwise(df, relevant_col)
+    else:
+        df_agreement = calculate_agreement(df, relevant_col)
 
     #df_krip = calculate_agreement_krip(df, relevant_col)
     df_final = pd.concat([
-        df_quality, df_pairwise_agr
+        df_quality, df_agreement
     ], join="outer") 
 
     #make the format of the table better    

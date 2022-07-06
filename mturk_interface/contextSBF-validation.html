@@ -77,7 +77,7 @@ window.onload = function() {
         <div class="row">
           <div class="col-12 mb-4">
             <p style="font-size: 1.05rem; text-align: left">
-              You will read a message taken from somewhere on the internet, the machine-generated potential listener and speaker identity and the situation where the message happened. And then, you will rate some explanations of the message. Please answer all questions from an American cultural perspective; try to think about what other people in today's society would think about these. Note: we will assume that MTurk workers only have good intentions when annotating these posts.
+              You will read a message taken from somewhere on the internet, the potential listener and speaker identity and the situation where the message happened. And then, you will rate some explanations of the message. Please answer all questions from an American cultural perspective; try to think about what other people in today's society would think about these. Note: we will assume that MTurk workers only have good intentions when annotating these posts.
            </p>
            <div class="alert alert-info" role="alert">
             This is an early pilot version of the task. We would love to hear your feedback on how to make it easier to understand!
@@ -798,12 +798,13 @@ window.onload = function() {
     e.value = value == "" ? "_other_" : value;
   });
 
+  /* Make the textbox (suggestion) required for the value in a certain range */
   $(".likelihood").on("click",function(e){ 
     event = e; 
     var dim = e.target.name.replace("Rating","")
     var val = parseInt($("input[name='"+dim+"Rating']:checked").prop("value"));
     console.log(dim,val);
-    if (val < 2) 
+    if (val < 2 && val > -1) 
       $("input[name='"+dim+"Suggestion']").prop("required","true");
     else 
       $("input[name='"+dim+"Suggestion']").prop("required","");

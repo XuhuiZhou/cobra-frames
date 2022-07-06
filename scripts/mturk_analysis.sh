@@ -8,4 +8,5 @@ OUTPUT='./data/mturk'
 python tools/mturk_analysis.py \
     --input_file $INPUT \
     --output_folder $OUTPUT \
-    --bar 2 
+    --bar 1 \
+#    --binary
