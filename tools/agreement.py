@@ -26,6 +26,8 @@ def computePairwiseAgreement(df,valCol,groupCol="HITId",minN=2,distF=distNumeric
   ppas = {}
   n = 0
   for s, votes in g:
+    # Filter None values (in our case, it is zero)
+    votes = [i for i in votes if i is not np.nan]
     if len(votes) >= minN:
       pa = np.mean([1-distF(*v) for v in combinations(votes,r=2)])
       ppas[s] = pa

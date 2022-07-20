@@ -152,6 +152,15 @@ def pretty(df):
     df = df.rename(columns={i:j for i,j in zip(keys, new_keys)})
     return df
 
+def select_workers(df, col):
+    """Select workers that at least have raise one unlikely ratings.
+    """
+    workers = []
+    for i in col:
+        workers += df[df[i]<2]['WorkerId'].tolist()
+    workers = set(workers)
+    return workers
+
 def analyze_perHitTime(df, unix=True):
     if unix:
         df['WorkTimeInSeconds'] = (df['Answer.clickedSubmitTime']-df['Answer.clickedConsentTime'])/1000 
@@ -195,6 +204,7 @@ def calculate_agreement(df, col):
             })
     return df
 
+
 def normalize_df(df):
     df = (df-df.min())/(df.max()-df.min())
     return df 
@@ -216,6 +226,7 @@ def main():
 
     args = parser.parse_args()
     df = pd.read_csv(args.input_file)
+    df = df[df['source_tag']=='sbic']
     df = df.rename(columns={
         "Answer.targetGroupEffectSuggestion": "Answer.targetGroupCogReactSuggestion", 
         "Answer.targetGroupReactionSuggestion": "Answer.targetGroupEmoReactSuggestion"
@@ -240,20 +251,24 @@ def main():
         'Answer.targetGroupEmoReactSuggestion',
         'Answer.targetGroupCogReactSuggestion',
     ]
+    #df = df[df['WorkerId'].isin(select_workers(df, relevant_col))]
+    #breakpoint()
     time_analysis = analyze_perHitTime(df[[
         'WorkerId', 'WorkTimeInSeconds', 
         'Answer.clickedConsentTime', 
         'Answer.clickedSubmitTime']])
-
-    #print(time_analysis)
+    
+    print(time_analysis)
     df_stats = stats_of_interest(df[relevant_col])
     df_stats_2 = stats_of_interest(df[relevant_col2], has_text=True)
 
-    if args.binary:  
+    # Assign special NaN value
+    if args.binary:
+        df[relevant_col] = df[relevant_col].replace(-1, np.nan)
         df[relevant_col] = (df[relevant_col]>1).astype(int)
     else:
-        # Replace None value (-1) with the average value (1.5)
-        df = df.replace(-1, 1.5)
+        #df[relevant_col] = df[relevant_col].replace(-1, np.nan)
+        df[relevant_col] = df[relevant_col].replace(-1, 1.5) 
         df[relevant_col] = normalize_df(df[relevant_col])
 
     # The current quality calculation process only supports binary rating.
@@ -276,9 +291,7 @@ def main():
     df_stats.to_csv(args.output_folder+'/'+'stats.csv')
     df_stats_2.to_csv(args.output_folder+'/'+'stats_2.csv')
     df_final.to_csv(args.output_folder+'/'+'quality.csv')
-
     #calculate_agreement_krip(df, relevant_col)
-    
 
 
 if __name__ == '__main__':
