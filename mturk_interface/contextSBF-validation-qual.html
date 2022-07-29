@@ -77,29 +77,29 @@ window.onload = function() {
         <div class="row">
           <div class="col-12 mb-4">
             <p style="font-size: 1.05rem; text-align: left">
-              You will read a message taken from somewhere on the internet, the potential listener and speaker identity and the situation where the message happened. And then, you will rate some explanations of the message. Please answer all questions from an American cultural perspective; try to think about what other people in today's society would think about these. Note: we will assume that MTurk workers only have good intentions when annotating these posts.
+              You will read a message taken from somewhere on the internet, the potential listener and speaker identity and the situation where the message happened. And then, you will rate some explanations of the message. Please answer all questions from an US cultural perspective; try to think about what would be prevalent opinions on these. Note: we will assume that MTurk workers are well-intentioned annotators.
            </p>
            <div class="alert alert-info" role="alert">
             This is the qualification test for the task. More HITs would be available later if you pass the qualification. 
-            Meanwhile, we would love to hear your feedback on how to make the task easier to understand!
+            Meanwhile, we would love to hear your feedback on how to make the task easier to understand! (Note that the qualification test has 
+            three messages while the normal HITs will only have one.)
           </div>
           </div>
 
         </div>
         <div class="row">
-          <div class="col-8">
+          <div class="col-9">
             <h5>Detailed instructions</h5>
             
             <p style="margin-bottom: .5rem;">
-              <em class="toyou"><span class="numbering">1)</span> 
-                Read the message carefully. 
+              <span class="numbering">1)</span> 
+                <em>Read the message carefully. </em>
                 When you interpret the message, make sure you take into account the speaker and listener's
                 identities as well as the situation.
-              </em>
             </p>
 
             <p style="margin-bottom: .5rem;">
-              <em class="toyou"><span class="numbering">2)</span> Rate the following explanations of the message. 
+              <span class="numbering">2)</span> <em>Rate the following explanations of the message.</em> 
                 If you think the provided explanation is somewhat unlikely or unlikely, please suggest a better 
                 explanation using the text box beside the radio buttons. 
                 The following table provides you with the questions
@@ -117,7 +117,7 @@ window.onload = function() {
                   </tr>
                   <tr>
                     <td class="cb-gold">Power dynamic</td>
-                    <td class="cb-gray">Which power difference/marginalization/oppression does the statement happen on?
+                    <td class="cb-gray">Which oppression, marginalization, or power difference between the speaker and listener or target group is relevant for this statement?
                     </td>
                   </tr>
                   <tr>
@@ -127,7 +127,7 @@ window.onload = function() {
                   </tr>
                   <tr>
                     <td class="cb-green">Target emotional reaction</td>
-                    <td class="cb-gray">What are some of the immediate emotional reactions that someone from the target group would have to this statement/biased implication?
+                    <td class="cb-gray">What are some of the immediate emotional reactions that someone from the target group would have to this statement/potentially biased implication?
                     </td>
                   </tr>
                   <tr>
@@ -137,30 +137,62 @@ window.onload = function() {
                   </tr>
                   <tr>
                     <td class="cb-pink">Type of offensiveness&nbsp;</td>
-                    <td class="cb-gray">Overall, using only a few words, how would you describe the offensiveness of the statement? This statement is an example of a ____.
+                    <td class="cb-gray">Overall, using only a few words, how would you describe the offensiveness of the statement? This statement is an example of a ____. 
+                    Here are some common
+                    <a href="#" data-toggle="tooltip" data-placement="right"
+                    data-html="true" 
+                    title="<p style='text-align:left'>
+                    <ul style='text-align:left;'> 
+                    <li>profanity</li>
+                    <li>microaggression</li>
+                    <li>offensive generalization</li>
+                    <li>stereotype</li>
+                    <li>sexism</li>
+                    <li>racism, and etc.</li>
+                    </ul>
+                    </p>
+                    ">types of offensiveness</a>. Note that you are not limited by the categories we suggest.
+                    We encourage you coming up with more accurate and specific type of offensiveness.
                     </td>
                   </tr>
                 </table>
                 <br>
-                <b>Notes</b>:
-                <ul>
-                  <li>Think about cognitive reactions as the likely lessons someone will draw or the likely subsequent actions someone will take. 
-                It's more long-term harm, whereas emotional reactions are more about immediate emotional reactions and feelings, which is more immediate harm.</li>
-                  <li>
-                    We will calculate your qualification scores according to your ratings of the explanation and manually check some of the explanations you provide.
-                  </li>
-                </ul> 
-              </em>
+                
+                <b>❗Notes</b>
+                <a data-toggle="collapse" href="#notes" role="button" aria-expanded="false" aria-controls="instructions" style="color:#0080ff;">
+                  (Expand/Collapse)
+                </a>:
+                <div id="notes" class="collapse show">
+                  <ul>
+                    <li>
+                      Think about cognitive reactions as the likely lessons someone will draw, the likely subsequent actions someone will take, or 
+                      what the <b>long-term harm</b> would be on repeatedly listening to statements like this.
+                      The emotional reactions are more about immediate emotional reactions and feelings, which is more <b>immediate harm</b>.
+                    </li>
+                    <li>
+                      It is <b>okay</b> that you may have different explanations for the posts.
+                      We want to assess whether our provided explanations are likely or not given the context, 
+                      while that <b>does not</b> necessarily cancel the possibility of other explanations.
+                    </li>
+                    <li>
+                      You can click the 'None' button for some of the relations if you think the current explanation is <b>unlikely</b> 
+                      and there is <b>no explanation</b> for this relation given the post and context. 
+                    </li>
+                    <li>
+                      We will calculate your qualification scores according to your ratings of the explanation and manually check some of the explanations you provide.
+                    </li>
+                  </ul> 
+                </div>
             </p>
 
             <p style="margin-bottom: .5rem;">
-              <em><span class="numbering">3)</span>Indicate your gender, age, race, political leaning, and whether you identify as a minority (this will remain confidential).</em><br>
+              <em><span class="numbering">3)</span>Indicate your gender, age, race, political leaning, and whether you identify as a minority (all your information will remain confidential).</em><br>
               Your own personal background and experiences influence what you think of as disrespectful or offensive.
               We collect this information to account for all types of backgrounds that MTurkers come from in our research.
               <em>If you answered this question once, your answers should pre-load in subsequent HITs.</em>
             </p>
           </div>
-          <div class="col-4">
+          <div class="col-3">
           <small>
             <h5>Background on our research project</h5>
             <p>
@@ -185,7 +217,7 @@ window.onload = function() {
               <em><strong style="color: #e60000;">Content Warning</strong></em>: posts were found on the (uncensored) internet;
               while it's crucial for us to annotate them, we do not endorse any of the stereotypes or offensive/immoral/rude material.
               You may find some of the content upsetting.
-              <em>If you have concerns, questions, or strong negative reactions to some of the content</em>, please either email us (Maarten Sap at msap@cs.washington.edu, or Professor Yejin Choi at yejin@cs.washington.edu) or <a href="https://www.crisistextline.org/">reach out</a> if in crisis.
+              <em>If you have concerns, questions, or strong negative reactions to some of the content</em>, please <a href="https://www.crisistextline.org/">reach out</a> if in crisis.
             </p>
           </div>
         </div>
@@ -540,9 +572,21 @@ window.onload = function() {
               <input id="dontUnderstand" name="dontUnderstand" type="checkbox" onclick="toggleDontUnderstandAck(this.checked)">I'm having a lot of trouble understanding this message.
             </label>
           </div>
+          <div class="col-12">
+            <label style="text-align: right; float: right; margin: 1em 0.3em;">
+              <input id="dontAgreeStituation" name="dontAgreeStituation" type="checkbox" onclick="toggleDontUnderstandAck(this.checked)">listener identity
+            </label>
+            <label style="text-align: right; float: right; margin: 1em 0.3em;">
+              <input id="dontAgreeSidentity" name="dontAgreeSidentity" type="checkbox" onclick="toggleDontUnderstandAck(this.checked)">speaker identity
+            </label>
+            <label style="text-align: right; float: right; margin: 1em 0.3em;">
+              <input id="dontAgreeLidentity" name="dontAgreeLidentity" type="checkbox" onclick="toggleDontUnderstandAck(this.checked)">situation
+            </label>
+            <label style="text-align: right; float: right; margin: 1em 0.3em;">I don't agree with the</label>
+          </div>
         </div>
         <div class="col-6 alert alert-warning" id="dontUnderstandAck" style="display: none;">
-          Thanks for letting us know that this message is hard to understand! Please still try your best to answer the questions below!
+          Thanks for letting us know that the message/context is hard to understand! Please still try your best to answer the questions below!
         </div>
         <div class="col-12 mt-5 mb-2">
           <h4 style="font-style: italic;">1. Rate the explanations about the message.</h4>
@@ -629,11 +673,33 @@ window.onload = function() {
               <label><input class="likelihood" type="radio" for="offensivenessRating1" name="offensivenessRating1" value=3 required> Very likely</label><br>
               <label><input class="likelihood" type="radio" for="offensivenessRating1" name="offensivenessRating1" value=2> Somewhat likely</label><br>
               <label><input class="likelihood" type="radio" for="offensivenessRating1" name="offensivenessRating1" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="offensivenessRating1" name="offensivenessRating1" value=0> Very unlikely</label>
+              <label><input class="likelihood" type="radio" for="offensivenessRating1" name="offensivenessRating1" value=0> Very unlikely</label><br>
+              <label><input class="likelihood" type="radio" for="offensivenessRating1" name="offensivenessRating1" value=-1> None/Harmless</label>
             </td>
-            <td>Suggest a better offensiveness:<br>
-            <input type="text" name="offensivenessSuggestion1" placeholder="..."></td>
+            <td>Suggest a better  <a href="#" data-toggle="tooltip" data-placement="right"
+                    data-html="true" 
+                    title="<p style='text-align:left'>
+                    <ul style='text-align:left;'> 
+                    <li>profanity</li>
+                    <li>microaggression</li>
+                    <li>offensive generalization</li>
+                    <li>stereotype</li>
+                    <li>sexism</li>
+                    <li>racism, and etc.</li>
+                    </ul> Feel free to come up other types you see fit!
+                    </p>
+                    ">offensiveness</a>:
+              <br>
+              <!-- <select class="form-select" id="inputGroupSelect01">
+                <option selected>Choose...</option>
+                <option value="1">general offensiveness</option>
+                <option value="2">Two</option>
+                <option value="3">None of these above </option>
+              </select> -->
+             
+              <input type="text" name="offensivenessSuggestion1" placeholder="..."></td>
           </tr>
+ 
  
         </table>
       </div>
@@ -659,6 +725,18 @@ window.onload = function() {
             <label style="text-align: right; float: right; margin: 1em 0;">
               <input id="dontUnderstand" name="dontUnderstand" type="checkbox" onclick="toggleDontUnderstandAck(this.checked)">I'm having a lot of trouble understanding this message.
             </label>
+          </div>
+          <div class="col-12">
+            <label style="text-align: right; float: right; margin: 1em 0.3em;">
+              <input id="dontAgreeStituation" name="dontAgreeStituation" type="checkbox" onclick="toggleDontUnderstandAck(this.checked)">listener identity
+            </label>
+            <label style="text-align: right; float: right; margin: 1em 0.3em;">
+              <input id="dontAgreeSidentity" name="dontAgreeSidentity" type="checkbox" onclick="toggleDontUnderstandAck(this.checked)">speaker identity
+            </label>
+            <label style="text-align: right; float: right; margin: 1em 0.3em;">
+              <input id="dontAgreeLidentity" name="dontAgreeLidentity" type="checkbox" onclick="toggleDontUnderstandAck(this.checked)">situation
+            </label>
+            <label style="text-align: right; float: right; margin: 1em 0.3em;">I don't agree with the</label>
           </div>
         </div>
         <div class="col-6 alert alert-warning" id="dontUnderstandAck" style="display: none;">
@@ -749,9 +827,22 @@ window.onload = function() {
               <label><input class="likelihood" type="radio" for="offensivenessRating2" name="offensivenessRating2" value=3 required> Very likely</label><br>
               <label><input class="likelihood" type="radio" for="offensivenessRating2" name="offensivenessRating2" value=2> Somewhat likely</label><br>
               <label><input class="likelihood" type="radio" for="offensivenessRating2" name="offensivenessRating2" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="offensivenessRating2" name="offensivenessRating2" value=0> Very unlikely</label>
+              <label><input class="likelihood" type="radio" for="offensivenessRating2" name="offensivenessRating2" value=0> Very unlikely</label><br>
+              <label><input class="likelihood" type="radio" for="offensivenessRating2" name="offensivenessRating2" value=-1> None/Harmless</label>
             </td>
-            <td>Suggest a better offensiveness:<br>
+            <td>Suggest a better  <a href="#" data-toggle="tooltip" data-placement="right"
+                    data-html="true" 
+                    title="<p style='text-align:left'>
+                    <ul style='text-align:left;'> 
+                    <li>profanity</li>
+                    <li>microaggression</li>
+                    <li>offensive generalization</li>
+                    <li>stereotype</li>
+                    <li>sexism</li>
+                    <li>racism, and etc.</li>
+                    </ul> Feel free to come up other types you see fit!
+                    </p>
+                    ">offensiveness</a>:<br>
             <input type="text" name="offensivenessSuggestion2" placeholder="..."></td>
           </tr>
  
@@ -779,6 +870,18 @@ window.onload = function() {
             <label style="text-align: right; float: right; margin: 1em 0;">
               <input id="dontUnderstand" name="dontUnderstand" type="checkbox" onclick="toggleDontUnderstandAck(this.checked)">I'm having a lot of trouble understanding this message.
             </label>
+          </div>
+          <div class="col-12">
+            <label style="text-align: right; float: right; margin: 1em 0.3em;">
+              <input id="dontAgreeStituation" name="dontAgreeStituation" type="checkbox" onclick="toggleDontUnderstandAck(this.checked)">listener identity
+            </label>
+            <label style="text-align: right; float: right; margin: 1em 0.3em;">
+              <input id="dontAgreeSidentity" name="dontAgreeSidentity" type="checkbox" onclick="toggleDontUnderstandAck(this.checked)">speaker identity
+            </label>
+            <label style="text-align: right; float: right; margin: 1em 0.3em;">
+              <input id="dontAgreeLidentity" name="dontAgreeLidentity" type="checkbox" onclick="toggleDontUnderstandAck(this.checked)">situation
+            </label>
+            <label style="text-align: right; float: right; margin: 1em 0.3em;">I don't agree with the</label>
           </div>
         </div>
         <div class="col-6 alert alert-warning" id="dontUnderstandAck" style="display: none;">
@@ -869,9 +972,22 @@ window.onload = function() {
               <label><input class="likelihood" type="radio" for="offensivenessRating3" name="offensivenessRating3" value=3 required> Very likely</label><br>
               <label><input class="likelihood" type="radio" for="offensivenessRating3" name="offensivenessRating3" value=2> Somewhat likely</label><br>
               <label><input class="likelihood" type="radio" for="offensivenessRating3" name="offensivenessRating3" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="offensivenessRating3" name="offensivenessRating3" value=0> Very unlikely</label>
+              <label><input class="likelihood" type="radio" for="offensivenessRating3" name="offensivenessRating3" value=0> Very unlikely</label><br>
+              <label><input class="likelihood" type="radio" for="offensivenessRating3" name="offensivenessRating3" value=-1> None/Harmless</label>
             </td>
-            <td>Suggest a better offensiveness:<br>
+            <td>Suggest a better  <a href="#" data-toggle="tooltip" data-placement="right"
+                    data-html="true" 
+                    title="<p style='text-align:left'>
+                    <ul style='text-align:left;'> 
+                    <li>profanity</li>
+                    <li>microaggression</li>
+                    <li>offensive generalization</li>
+                    <li>stereotype</li>
+                    <li>sexism</li>
+                    <li>racism, and etc.</li>
+                    </ul> Feel free to come up other types you see fit!
+                    </p>
+                    ">offensiveness</a>:<br>
             <input type="text" name="offensivenessSuggestion3" placeholder="..."></td>
           </tr>
  
@@ -1039,6 +1155,9 @@ window.onload = function() {
 <script>
   var targ, btngroup, event, selectedText, aspectDiv, workerInfo;
   var attentionChecks = ["first","second", "third", "fourth", "fifth"];
+  $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+  })
   
   $("label.btn-checkbox>input[type='checkbox']").each(function(ix,e){
     var value = $(e).parent().prop("innerText").trim();
@@ -1648,6 +1767,8 @@ p[class^="from-"].emoji::before {
 .margin-t_one {
   margin-top: 1rem !important;
 }
+
+
 
 
 </style>
