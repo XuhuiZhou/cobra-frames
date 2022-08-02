@@ -77,29 +77,28 @@ window.onload = function() {
         <div class="row">
           <div class="col-12 mb-4">
             <p style="font-size: 1.05rem; text-align: left">
-              You will read a message taken from somewhere on the internet, the potential listener and speaker identity and the situation where the message happened. And then, you will rate some explanations of the message. Please answer all questions from an American cultural perspective; try to think about what other people in today's society would think about these. Note: we will assume that MTurk workers only have good intentions when annotating these posts.
+              You will read a message taken from somewhere on the internet, the potential listener and speaker identity and the situation where the message happened. And then, you will rate some explanations of the message. Please answer all questions from an US cultural perspective; try to think about what would be prevalent opinions on these. Note: we will assume that MTurk workers are well-intentioned annotators.
            </p>
            <div class="alert alert-info" role="alert">
-            This is the qualification test for the task. More HITs would be available later if you pass the qualification. 
-            Meanwhile, we would love to hear your feedback on how to make it easier to understand!
+            This is the pilot test for the task. More HITs would be available in the future. 
+            Meanwhile, we would love to hear your feedback on how to make the task easier to understand! 
           </div>
           </div>
 
         </div>
         <div class="row">
-          <div class="col-8">
+          <div class="col-9">
             <h5>Detailed instructions</h5>
             
             <p style="margin-bottom: .5rem;">
-              <em class="toyou"><span class="numbering">1)</span> 
-                Read the message carefully. 
+              <span class="numbering">1)</span> 
+                <em>Read the message carefully. </em>
                 When you interpret the message, make sure you take into account the speaker and listener's
                 identities as well as the situation.
-              </em>
             </p>
 
             <p style="margin-bottom: .5rem;">
-              <em class="toyou"><span class="numbering">2)</span> Rate the following explanations of the message. 
+              <span class="numbering">2)</span> <em>Rate the following explanations of the message.</em> 
                 If you think the provided explanation is somewhat unlikely or unlikely, please suggest a better 
                 explanation using the text box beside the radio buttons. 
                 The following table provides you with the questions
@@ -109,7 +108,8 @@ window.onload = function() {
                 <table id="examples-table">
                   <tr>
                     <td class="cb-teal">Speaker intent</td>
-                    <td class="cb-gray">What do you think the speaker was trying to say? What was their intent with this statement?</td>
+                    <td class="cb-gray">What do you think the speaker was trying to express (attitude, feeling, and etc.)? What do you think the speaker was trying to accomplish through the statement? What was their intent with this statement?
+                    </td>
                   </tr>
                   <tr>
                     <td class="cb-purple">Target (group)</td>
@@ -117,17 +117,17 @@ window.onload = function() {
                   </tr>
                   <tr>
                     <td class="cb-gold">Power dynamic</td>
-                    <td class="cb-gray">Which power difference/marginalization/oppression does the statement happen on?
+                    <td class="cb-gray">Which oppression, marginalization, or power difference between the speaker and listener or target group is relevant for this statement?
                     </td>
                   </tr>
                   <tr>
                     <td class="cb-orange">Implication</td>
-                    <td class="cb-gray">What is the biased or harmful or stereotypical implication that the statement carries (perhaps unintentionally)?
+                    <td class="cb-gray">How will the statement be understood from the perspective of the listener/a target group member?
                     </td>
                   </tr>
                   <tr>
                     <td class="cb-green">Target emotional reaction</td>
-                    <td class="cb-gray">What are some of the immediate emotional reactions that someone from the target group would have to this statement/biased implication?
+                    <td class="cb-gray">What are some of the immediate emotional reactions that someone from the target group would have to this statement/potentially biased implication?
                     </td>
                   </tr>
                   <tr>
@@ -137,32 +137,64 @@ window.onload = function() {
                   </tr>
                   <tr>
                     <td class="cb-pink">Type of offensiveness&nbsp;</td>
-                    <td class="cb-gray">Overall, using only a few words, how would you describe the offensiveness of the statement? This statement is an example of a ____.
+                    <td class="cb-gray">Overall, using only a few words, how would you describe the offensiveness of the statement? This statement is an example of a ____. 
+                    Here are some common
+                    <a href="#" data-toggle="tooltip" data-placement="right"
+                    data-html="true" 
+                    title="<p style='text-align:left'>
+                    <ul style='text-align:left;'> 
+                    <li>profanity</li>
+                    <li>microaggression</li>
+                    <li>offensive generalization</li>
+                    <li>stereotype</li>
+                    <li>sexism</li>
+                    <li>racism, and etc.</li>
+                    </ul>
+                    </p>
+                    ">types of offensiveness</a>. Note that you are not limited by these types.
+                    We encourage you to write more accurate and specific types of offensiveness.
                     </td>
                   </tr>
                 </table>
                 <br>
-                <b>Notes</b>:
-                <ul>
-                  <li>Think about cognitive reactions as the likely lessons someone will draw or the likely subsequent actions someone will take. 
-                It's more long-term harm, whereas emotional reactions are more about immediate emotional reactions and feelings, which is more immediate harm.</li>
-                  <li>You will receive a <b>bonus</b> for your extra efforts in writing a better and necessary explanation. 
-                    Please avoid biasing your judgement just for getting the bonus.
-                    We expect to manually check some of the explanations you provide and will only assign the bonus if the explanation is 
-                    necessary and better than the current one.
-                  </li>
-                </ul> 
-              </em>
+                
+                <b>❗Notes</b>
+                <a data-toggle="collapse" href="#notes" role="button" aria-expanded="false" aria-controls="instructions" style="color:#0080ff;">
+                  (Expand/Collapse)
+                </a>:
+                <div id="notes" class="collapse show">
+                  <ul>
+                    <li>
+                      <b>Cognitive vs emotional reaction:</b> Think about cognitive reactions as the likely lessons someone will draw, the likely subsequent actions someone will take, or 
+                      what the <em>long-term harm</em> would be on repeatedly listening to statements like this.
+                      The emotional reactions are more about immediate emotional reactions and feelings, which is more <em>immediate harm</em>.
+                    </li>
+                    <li>
+                      <b>Speaker intent vs Implication: </b>Speaker intent and implication can be similar sometimes. 
+                      For some overtly hateful posts (e.g., "I hate gays"), writing down something like "implies that the speaker hates gays" for Implication, 
+                      and "the speaker was trying to express a homophobic/anti-gay attitude" for Speaker intent means that you understand our definitions correctly.
+                    </li>
+                    <li>
+                      <b>Different opinions:</b> It is <em>okay</em> that you may have different explanations for the posts.
+                      We want to assess whether our provided explanations are likely or not given the context, 
+                      while that <em>does not</em> necessarily cancel the possibility of other explanations.
+                    </li>
+                    <li>
+                      <b>'None' option:</b> You can click the 'None' button for some of the relations if you think the current explanation is <em>unlikely</em> 
+                      and there is <em>no explanation</em> for this relation given the post and context. 
+                    </li>
+                  </ul> 
+                </div>
             </p>
 
             <p style="margin-bottom: .5rem;">
-              <em><span class="numbering">3)</span>Indicate your gender, age, race, political leaning, and whether you identify as a minority (this will remain confidential).</em><br>
+              <em><span class="numbering">3)</span>Indicate your gender, age, race, political leaning, and whether you identify as a minority (all your information will remain confidential).</em><br>
               Your own personal background and experiences influence what you think of as disrespectful or offensive.
               We collect this information to account for all types of backgrounds that MTurkers come from in our research.
               <em>If you answered this question once, your answers should pre-load in subsequent HITs.</em>
             </p>
           </div>
-          <div class="col-4">
+          <div class="col-3">
           <small>
             <h5>Background on our research project</h5>
             <p>
@@ -187,7 +219,7 @@ window.onload = function() {
               <em><strong style="color: #e60000;">Content Warning</strong></em>: posts were found on the (uncensored) internet;
               while it's crucial for us to annotate them, we do not endorse any of the stereotypes or offensive/immoral/rude material.
               You may find some of the content upsetting.
-              <em>If you have concerns, questions, or strong negative reactions to some of the content</em>, please either email us (Maarten Sap at msap@cs.washington.edu, or Professor Yejin Choi at yejin@cs.washington.edu) or <a href="https://www.crisistextline.org/">reach out</a> if in crisis.
+              <em>If you have concerns, questions, or strong negative reactions to some of the content</em>, please <a href="https://www.crisistextline.org/">reach out</a> if in crisis.
             </p>
           </div>
         </div>
@@ -227,9 +259,9 @@ window.onload = function() {
                 <tbody>
                   <tr>
                     <td class="cb-teal">Speaker intent</td>
-                    <td>The speaker is trying to stress the importance of education in Mexico, especially in preventing people becoming rapists and murderers</td>
+                    <td>The speaker was trying to stress the importance of education in Mexico, especially in preventing people becoming rapists and murderers</td>
                     <td>very/somewhat unlikely</td>
-                    <td>The speaker is trying to express distrusts against immigrants from Mexico, calling them all rapists and murderers</td>
+                    <td>The speaker was trying to express distrusts against immigrants from Mexico, calling them all rapists and murderers</td>
                   </tr>
                   <tr>
                     <td class="cb-purple">Target (group)</td>
@@ -303,7 +335,7 @@ window.onload = function() {
                   <tbody>
                     <tr>
                       <td class="cb-teal">Speaker intent</td>
-                      <td>The speaker is trying to find someone in a position of authority</td>
+                      <td>The speaker was trying to find someone in a position of authority</td>
                       <td>very/somewhat likely</td>
                       <td></td>
                     </tr>
@@ -323,7 +355,7 @@ window.onload = function() {
                       <td class="cb-orange">Implication</td>
                       <td>implies that the woman in the office is not the boss</td>
                       <td>very/somewhat unlikely</td>
-                      <td>It implies that women are not capable of being in a position of authority, and that a man is needed to speak to someone in charge</td>
+                      <td>implies that women are not capable of being in a position of authority, and that a man is needed to speak to someone in charge</td>
                     </tr>
                     <tr>
                       <td class="cb-green">Target emotional reaction</td>
@@ -406,8 +438,8 @@ window.onload = function() {
                   <td>person who is not transgender</td>
                   <td>person who is transgender</td>
                   <td>intent</td>
-                  <td>The speaker is trying to convey a stereotype about a certain group of people</td>
-                  <td>The speaker is trying to advise their friends</td>
+                  <td>The speaker was trying to convey a stereotype about a certain group of people</td>
+                  <td>The speaker was trying to advise their friends</td>
                 </tr>
                <tr>
                   <td>Dark jokes are like a kid with cancer They never get old</td>
@@ -470,8 +502,8 @@ window.onload = function() {
                   <td>white person</td>
                   <td>white person</td>
                   <td>intent</td>
-                  <td>The speaker is trying to tell joke that might be offensive to jews</td>
-                  <td>The speaker is trying to convey a stereotype about a certain group of people</td>
+                  <td>The speaker was trying to tell joke that might be offensive to jews</td>
+                  <td>The speaker was trying to convey a stereotype about a certain group of people</td>
                 </tr>
                 <tr class="collapse show extra-rows">
                   <td>well today turned out to be a real fucking shitshow</td>
@@ -517,32 +549,46 @@ window.onload = function() {
       </div>
     </div>
     <div id="actualTask" style="display: none;">
-      <div class="row justify-content-center" style="background-color: ghostwhite; border: 1px solid darkgrey; border-radius: 3px; width: 70%; margin-left: auto; margin-right: auto;">
-        <div class="col-12 text-center" style="margin: 1em 0;">
-          <em style="font-size: 18; color: #006cd8;  font-weight: bold;">Situation</em>: <span id="speechContextInput">${speechContext}</span>
-        </div>
-        <div class="col-3">
-          <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Speaker identity</em>: <span id="speakerInput">${speakerIdentity}</span>
-        </div>
-        
-        <div class="col-6 imessage">
-          <p class="from-them">
-            ${statement}
-          </p>
-        </div>
-        <div class="col-3">
-          <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Listener identity</em>: <span id="listenerInput">${listenerIdentity}</span>
-        </div>
-        <div class="col-12">
-          <label style="text-align: right; float: right; margin: 1em 0;">
-            <input id="dontUnderstand" name="dontUnderstand" type="checkbox" onclick="toggleDontUnderstandAck(this.checked)">I'm having a lot of trouble understanding this message.
-          </label>
-        </div>
-      </div>
-      <div class="container" id="allQuestions">
+
+    
+    <div class="container" id="allQuestions">
       <div class="row justify-content-center">
+        <div class="row justify-content-center" style="background-color: ghostwhite; border: 1px solid darkgrey; border-radius: 3px; width: 70%; margin-left: auto; margin-right: auto;">
+          <div class="col-12 text-center" style="margin: 1em 0;">
+            <em style="font-size: 18; color: #006cd8;  font-weight: bold;">Situation</em>: <span id="speechContextInput">${speechContext}</span>
+          </div>
+          <div class="col-3">
+            <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Speaker identity</em>: <span id="speakerInput">${speakerIdentity}</span>
+          </div>
+          
+          <div class="col-6 imessage">
+            <p class="from-them">
+              ${statement}
+            </p>
+          </div>
+          <div class="col-3">
+            <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Listener identity</em>: <span id="listenerInput">${listenerIdentity}</span>
+          </div>
+          <div class="col-12">
+            <label style="text-align: right; float: right; margin: 1em 0;">
+              <input id="dontUnderstand" name="dontUnderstand" type="checkbox" onclick="toggleDontUnderstandAck(this.checked)">I'm having a lot of trouble understanding this message.
+            </label>
+          </div>
+          <div class="col-12">
+            <label style="text-align: right; float: right; margin: 1em 0.3em;">
+              <input id="dontAgreeStituation" name="dontAgreeStituation" type="checkbox" onclick="toggleDontUnderstandAck(this.checked)">listener identity
+            </label>
+            <label style="text-align: right; float: right; margin: 1em 0.3em;">
+              <input id="dontAgreeSidentity" name="dontAgreeSidentity" type="checkbox" onclick="toggleDontUnderstandAck(this.checked)">speaker identity
+            </label>
+            <label style="text-align: right; float: right; margin: 1em 0.3em;">
+              <input id="dontAgreeLidentity" name="dontAgreeLidentity" type="checkbox" onclick="toggleDontUnderstandAck(this.checked)">situation
+            </label>
+            <label style="text-align: right; float: right; margin: 1em 0.3em;">I don't agree with the</label>
+          </div>
+        </div>
         <div class="col-6 alert alert-warning" id="dontUnderstandAck" style="display: none;">
-          Thanks for letting us know that this message is hard to understand! Please still try your best to answer the questions below!
+          Thanks for letting us know that the message/context is hard to understand! Please still try your best to answer the questions below!
         </div>
         <div class="col-12 mt-5 mb-2">
           <h4 style="font-style: italic;">1. Rate the explanations about the message.</h4>
@@ -552,254 +598,278 @@ window.onload = function() {
             <td class="cb-teal" style="width: 15%;">Speaker intent</td>
             <td class="cb-gray" style="width: 30%;">${intent}</td>
             <td>
-              <label><input class="likelihood" type="radio" for="intentRating" name="intentRating" value=3 required> Very likely</label><br>
-              <label><input class="likelihood" type="radio" for="intentRating" name="intentRating" value=2> Somewhat likely</label><br>
-              <label><input class="likelihood" type="radio" for="intentRating" name="intentRating" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="intentRating" name="intentRating" value=0> Very unlikely</label></td>
+              <label><input class="likelihood" type="radio" for="intentRating1" name="intentRating1" value=3 required> Very likely</label><br>
+              <label><input class="likelihood" type="radio" for="intentRating1" name="intentRating1" value=2> Somewhat likely</label><br>
+              <label><input class="likelihood" type="radio" for="intentRating1" name="intentRating1" value=1> Somewhat unlikely</label><br>
+              <label><input class="likelihood" type="radio" for="intentRating1" name="intentRating1" value=0> Very unlikely</label></td>
             <td>Suggest a better speaker intent:<br>
-            <input type="text" placeholder="speaker was trying to..." name="intentSuggestion"></td>
+            <input type="text" placeholder="The speaker was trying to..." name="intentSuggestion1"></td>
           </tr>
           <tr>
             <td class="cb-purple">Target (group)</td>
             <td class="cb-gray">${targetGroup}&nbsp;</td>
             <td>
-              <label><input class="likelihood" type="radio" for="targetGroupRating" name="targetGroupRating" value=3 required> Very likely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupRating" name="targetGroupRating" value=2> Somewhat likely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupRating" name="targetGroupRating" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupRating" name="targetGroupRating" value=0> Very unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupRating" name="targetGroupRating" value=-1> None</label></td>
+              <label><input class="likelihood" type="radio" for="targetGroupRating1" name="targetGroupRating1" value=3 required> Very likely</label><br>
+              <label><input class="likelihood" type="radio" for="targetGroupRating1" name="targetGroupRating1" value=2> Somewhat likely</label><br>
+              <label><input class="likelihood" type="radio" for="targetGroupRating1" name="targetGroupRating1" value=1> Somewhat unlikely</label><br>
+              <label><input class="likelihood" type="radio" for="targetGroupRating1" name="targetGroupRating1" value=0> Very unlikely</label><br>
+              <label><input class="likelihood" type="radio" for="targetGroupRating1" name="targetGroupRating1" value=-1> None</label></td>
             <td>Suggest a better targeted group:<br>
-            <input type="text" placeholder="..." name="targetGroupSuggestion"></td>
+            <input type="text" placeholder="..." name="targetGroupSuggestion1"></td>
           </tr>
           <tr>
             <td class="cb-gold">Power dynamic</td>
             <td class="cb-gray">${relevantPowerDynamics}</td>
             <td>
-              <label><input class="likelihood" type="radio" for="powerDiffRating" name="powerDiffRating" value=3 required> Very likely</label><br>
-              <label><input class="likelihood" type="radio" for="powerDiffRating" name="powerDiffRating" value=2> Somewhat likely</label><br>
-              <label><input class="likelihood" type="radio" for="powerDiffRating" name="powerDiffRating" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="powerDiffRating" name="powerDiffRating" value=0> Very unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="powerDiffRating" name="powerDiffRating" value=-1> None</label><br>
+              <label><input class="likelihood" type="radio" for="powerDiffRating1" name="powerDiffRating1" value=3 required> Very likely</label><br>
+              <label><input class="likelihood" type="radio" for="powerDiffRating1" name="powerDiffRating1" value=2> Somewhat likely</label><br>
+              <label><input class="likelihood" type="radio" for="powerDiffRating1" name="powerDiffRating1" value=1> Somewhat unlikely</label><br>
+              <label><input class="likelihood" type="radio" for="powerDiffRating1" name="powerDiffRating1" value=0> Very unlikely</label><br>
+              <label><input class="likelihood" type="radio" for="powerDiffRating1" name="powerDiffRating1" value=-1> None</label><br>
             </td>
             <td>Suggest a better relevant power difference:<br>
-            <input type="text" name="powerDiffSuggestion" placeholder="power difference between..."></td>
+            <input type="text" name="powerDiffSuggestion1" placeholder="power difference between..."></td>
           </tr>
           <tr>
             <td class="cb-orange">Implication</td>
             <td class="cb-gray">${implication}&nbsp;</td>
             <td>
-              <label><input class="likelihood" type="radio" for="implicationRating" name="implicationRating" value=3 required> Very likely</label><br>
-              <label><input class="likelihood" type="radio" for="implicationRating" name="implicationRating" value=2> Somewhat likely</label><br>
-              <label><input class="likelihood" type="radio" for="implicationRating" name="implicationRating" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="implicationRating" name="implicationRating" value=0> Very unlikely</label>
+              <label><input class="likelihood" type="radio" for="implicationRating1" name="implicationRating1" value=3 required> Very likely</label><br>
+              <label><input class="likelihood" type="radio" for="implicationRating1" name="implicationRating1" value=2> Somewhat likely</label><br>
+              <label><input class="likelihood" type="radio" for="implicationRating1" name="implicationRating1" value=1> Somewhat unlikely</label><br>
+              <label><input class="likelihood" type="radio" for="implicationRating1" name="implicationRating1" value=0> Very unlikely</label>
             </td>
             <td>Suggest a better implication or stereotype:<br>
-            <input type="text" name="implicationSuggestion" placeholder="message implies that ..."></td>
+            <input type="text" name="implicationSuggestion1" placeholder="implies that ..."></td>
           </tr>
          <tr>
             <td class="cb-green">Target emotional reaction</td>
             <td class="cb-gray">${targetGroupEmotionalReaction}</td>
             <td>
-              <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating" name="targetGroupEmoReactRating" value=3 required> Very likely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating" name="targetGroupEmoReactRating" value=2> Somewhat likely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating" name="targetGroupEmoReactRating" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating" name="targetGroupEmoReactRating" value=0> Very unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating" name="targetGroupEmoReactRating" value=-1> None</label><br>
+              <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating1" name="targetGroupEmoReactRating1" value=3 required> Very likely</label><br>
+              <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating1" name="targetGroupEmoReactRating1" value=2> Somewhat likely</label><br>
+              <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating1" name="targetGroupEmoReactRating1" value=1> Somewhat unlikely</label><br>
+              <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating1" name="targetGroupEmoReactRating1" value=0> Very unlikely</label><br>
+              <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating1" name="targetGroupEmoReactRating1" value=-1> None</label><br>
             </td>
             <td>Suggest a better reaction:<br>
-            <input type="text" name="targetGroupEmoReactSuggestion" placeholder="target would likely feel..."></td>
+            <input type="text" name="targetGroupEmoReactSuggestion1" placeholder="target would likely feel..."></td>
           </tr>
           <tr>
             <td class="cb-brown">Target cognitive reaction</td>
             <td class="cb-gray">${targetGroupCognitiveReaction}</td>
             <td>
-              <label><input class="likelihood" type="radio" for="targetGroupCogReactRating" name="targetGroupCogReactRating" value=3 required> Very likely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupCogReactRating" name="targetGroupCogReactRating" value=2> Somewhat likely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupCogReactRating" name="targetGroupCogReactRating" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupCogReactRating" name="targetGroupCogReactRating" value=0> Very unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupCogReactRating" name="targetGroupCogReactRating" value=-1> None</label>
+              <label><input class="likelihood" type="radio" for="targetGroupCogReactRating1" name="targetGroupCogReactRating1" value=3 required> Very likely</label><br>
+              <label><input class="likelihood" type="radio" for="targetGroupCogReactRating1" name="targetGroupCogReactRating1" value=2> Somewhat likely</label><br>
+              <label><input class="likelihood" type="radio" for="targetGroupCogReactRating1" name="targetGroupCogReactRating1" value=1> Somewhat unlikely</label><br>
+              <label><input class="likelihood" type="radio" for="targetGroupCogReactRating1" name="targetGroupCogReactRating1" value=0> Very unlikely</label><br>
+              <label><input class="likelihood" type="radio" for="targetGroupCogReactRating1" name="targetGroupCogReactRating1" value=-1> None</label>
             </td>
             <td>Suggest a better reaction:<br>
-            <input type="text" name="targetGroupCogReactSuggestion" placeholder="the effect on the target will be..."></td>
+            <input type="text" name="targetGroupCogReactSuggestion1" placeholder="the effect on the target will be..."></td>
           </tr>
           <tr>
             <td class="cb-pink">Type of offensiveness&nbsp;</td>
             <td class="cb-gray">${offensiveness}</td>
             <td>
-              <label><input class="likelihood" type="radio" for="offensivenessRating" name="offensivenessRating" value=3 required> Very likely</label><br>
-              <label><input class="likelihood" type="radio" for="offensivenessRating" name="offensivenessRating" value=2> Somewhat likely</label><br>
-              <label><input class="likelihood" type="radio" for="offensivenessRating" name="offensivenessRating" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="offensivenessRating" name="offensivenessRating" value=0> Very unlikely</label>
+              <label><input class="likelihood" type="radio" for="offensivenessRating1" name="offensivenessRating1" value=3 required> Very likely</label><br>
+              <label><input class="likelihood" type="radio" for="offensivenessRating1" name="offensivenessRating1" value=2> Somewhat likely</label><br>
+              <label><input class="likelihood" type="radio" for="offensivenessRating1" name="offensivenessRating1" value=1> Somewhat unlikely</label><br>
+              <label><input class="likelihood" type="radio" for="offensivenessRating1" name="offensivenessRating1" value=0> Very unlikely</label><br>
+              <label><input class="likelihood" type="radio" for="offensivenessRating1" name="offensivenessRating1" value=-1> None/Harmless</label>
             </td>
-            <td>Suggest a better offensiveness:<br>
-            <input type="text" name="offensivenessSuggestion" placeholder="..."></td>
-          </tr>
- 
-        </table>
-        
-        <div class="col-12 mt-5" id="demogQuestions" style="display: inline-block;">
-          <h4 style="font-style: italic;">2. Please tell us about yourself <small>(this will remain confidential)</small></h4>How people perceive offensiveness/inequality is influenced by their own societal experience.
-          <form style="margin-top: 20px;">
-            <div class="form-group row">
-              <h6 class="col-12">What is your gender?</h6><label for="gender" class="col-sm-2 col-form-label">Gender identity</label>
-              <div class="col-sm-4">
-                <!--input type="text" id="gender" name="annotatorGender" placeholder="" class="form-control"-->
-                <select id="annotatorGender" name="annotatorGender" class="form-control" style="font-size: .85rem;" required="">
-                  <option disabled selected value="">
-                    -- please select --
-                  </option>
-                  <option value="man">
-                    Man/Male
-                  </option>
-                  <option value="woman">
-                    Woman/Female
-                  </option>
-                  <option value="nonBinary">
-                    Non-binary
-                  </option>
-                  <option value="other">
-                    Other
-                  </option>
-                  <option value="na">
-                    Prefer not to disclose
-                  </option>
-                </select>
-              </div>
-              <div class="col-sm-5 alert alert-secondary prefilled-message" id="demog-prefilled-message" style="padding: 3px; margin-bottom:0; display: none;">
-                To save you time, we've pre-filled these boxes based on your previous answers in our HITs! Feel free to change your answers if you want.
-              </div>
-            </div>
-            <div class="form-group row">
-              <h6 class="col-12">How old are you?</h6><label for="annotatorAge" class="col-sm-2 col-form-label">Age ranges</label>
-              <div class="col-sm-4">
-                <select id="annotatorAge" name="annotatorAge" class="form-control" style="font-size: .85rem;" required="">
-                  <option disabled selected value="">-- please select --</option>
-                  <option value="18">18-24</option>
-                  <option value="25">25-29</option>
-                  <option value="30">30-34</option>
-                  <option value="35">35-39</option>                 
-                  <option value="40">40-44</option>
-                  <option value="45">45-49</option>
-                  <option value="50">50-54</option>
-                  <option value="55">55-59</option>
-                  <option value="60">60-64</option>
-                  <option value="65">65+</option>
-                  <option value="na">-- prefer not to disclose --</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-group row">
-              <h6 class="col-12">What best describes your race/ethnicity?</h6><label for="race" class="col-sm-2 col-form-label">Race/ethnicity</label>
-              <div class="col-sm-4">
-                <select id="annotatorRace" name="annotatorRace" class="form-control" style="font-size: .85rem;" required="">
-                  <option disabled selected value="">
-                    -- please select --
-                  </option>
-                  <option value="asian">
-                    Asian/Asian American
-                  </option>
-                  <option value="indian">
-                    South Asian/Indian American
-                  </option>
-                  <option value="black">
-                    Black/African American
-                  </option>
-                  <option value="hisp">
-                    Hispanic/Latinx
-                  </option>
-                  <option value="white">
-                    White/Caucasian
-                  </option>
-                  <option value="middleEastern">
-                    Middle Eastern
-                  </option>
-                  <option value="islander">
-                    Native Hawaiian/Pacific Islander
-                  </option>
-                  <option value="native">
-                    Native American/First Nations
-                  </option>
-                  <option value="other">
-                    Mixed/other
-                  </option>
-                  <option value="na">
-                    Prefer not to disclose
-                  </option>
-                </select>
-              </div>
-              <div class="col-sm-3">
-                <small>Please select the racial/ethnic identity you most identify with currently.</small>
-              </div>
-            </div>
-            <div class="form-group row">
-              <div class="col-12">
-                <h6>What best describes your political orientation?</h6><!--input type="text" id="race" name="annotatorRace" placeholder="" class="form-control"-->
-                <!--select id="annotatorPolitics" name="annotatorPolitics" class="form-control" style="font-size: .85rem;" required>
-                        <option disabled selected value="">== please select ==</option>
-                        <option value="cons">Conservative</option>
-                        <option value="mod-cons">Moderate conservative</option>
-                        <option value="mod-liberal">Moderate liberal</option>
-                        <option value="liberal">Liberal/progressive</option>
-                        <option value="libert">Libertarian</option>
-                        <option value="other">Other/independent</option>
-                        <option value="na">Prefer not to disclose</option>
-                      </select-->
-                <div class="form-check form-check-inline ml-3 lickert">
-                  <label class="form-check-label" for="annotatorPolitics1">Strongly liberal &nbsp;</label> <input class="form-check-input right" type="radio" name="annotatorPolitics" id="annotatorPolitics1" value="1" required="">
-                </div>
-                <div class="form-check form-check-inline lickert">
-                  <label class="form-check-label" for="annotatorPolitics2">&nbsp;</label> <input class="form-check-input right" type="radio" name="annotatorPolitics" id="annotatorPolitics2" value="2">
-                </div>
-                <div class="form-check form-check-inline lickert">
-                  <label class="form-check-label" for="annotatorPolitics3">&nbsp;</label> <input class="form-check-input right" type="radio" name="annotatorPolitics" id="annotatorPolitics3" value="3">
-                </div>
-                <div class="form-check form-check-inline lickert">
-                  <label class="form-check-label" for="annotatorPolitics4">&nbsp;</label> <input class="form-check-input right" type="radio" name="annotatorPolitics" id="annotatorPolitics4" value="4">
-                </div>
-                <div class="form-check form-check-inline lickert">
-                  <label class="form-check-label" for="annotatorPolitics5">&nbsp;</label> <input class="form-check-input" type="radio" name="annotatorPolitics" id="annotatorPolitics5" value="5"> <label class="form-check-label" for="annotatorPolitics5">&nbsp; Strongly conservative</label>
-                </div>
-              </div>
-            </div>
-            <div class="form-group row">
-              <h6>Any other minority identity?</h6><label for="annotatorMinority" class="col-sm-12 col-form-label">Do you identify with any minority, disadvantaged, demographic, or other specific groups? If so, which one(s)?<br>
-              <small>(E.g., racial, gender identity, sexuality, disability, immigrant, veteran, etc.); use commas to separate groups.</small></label>
-              <div class="col-sm-6">
-                <input type="text" name="annotatorMinority" placeholder="" class="form-control" id="annotatorMinority" style="font-size: .85rem;">
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-      <div class="row justify-content-center">
-        <div class="col-9" id="commentSection" style="display: inline-block;text-align: center;">
-          <p style="font-size:10pt;margin-top: 50px;">
-            Optional Feedback: Thanks for filling out the questions above!
-            If something about the hit was unclear, please either leave a comment in the box below!
-            We would like to make this HIT easier for future workers, so we really appreciate feedback though it is optional.
-            <br>
-            If you have concerns or questions, please email us!
-          </p>
-          <textarea style="margin-left:10px;margin-top:10px;width: 95%;" rows="2" name="commentbox"></textarea>
-          <br><br>
-          <center>
-            <div class="alert alert-danger" id="submitAlert" style="display: none;">
-              Whoops you missed some questions!
+            <td>Suggest a better  <a href="#" data-toggle="tooltip" data-placement="right"
+                    data-html="true" 
+                    title="<p style='text-align:left'>
+                    <ul style='text-align:left;'> 
+                    <li>profanity</li>
+                    <li>microaggression</li>
+                    <li>offensive generalization</li>
+                    <li>stereotype</li>
+                    <li>sexism</li>
+                    <li>racism, and etc.</li>
+                    </ul> Feel free to come up with other types you see fit!
+                    </p>
+                    ">offensiveness</a>:
               <br>
-              Note: if the submit button is disabled and you're confident this is an error, please screenshot your answers and the console output (Ctrl+Shift+J or Cmd+Shift+J).
+              <!-- <select class="form-select" id="inputGroupSelect01">
+                <option selected>Choose...</option>
+                <option value="1">general offensiveness</option>
+                <option value="2">Two</option>
+                <option value="3">None of these above </option>
+              </select> -->
+             
+              <input type="text" name="offensivenessSuggestion1" placeholder="..."></td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="col-12 mt-5" id="demogQuestions" style="display: inline-block;">
+        <h4 style="font-style: italic;">2. Please tell us about yourself <small>(this will remain confidential)</small></h4>How people perceive offensiveness/inequality is influenced by their own societal experience.
+        <form style="margin-top: 20px;">
+          <div class="form-group row">
+            <h6 class="col-12">What is your gender?</h6><label for="gender" class="col-sm-2 col-form-label">Gender identity</label>
+            <div class="col-sm-4">
+              <!--input type="text" id="gender" name="annotatorGender" placeholder="" class="form-control"-->
+              <select id="annotatorGender" name="annotatorGender" class="form-control" style="font-size: .85rem;" required="">
+                <option disabled selected value="">
+                  -- please select --
+                </option>
+                <option value="man">
+                  Man/Male
+                </option>
+                <option value="woman">
+                  Woman/Female
+                </option>
+                <option value="nonBinary">
+                  Non-binary
+                </option>
+                <option value="other">
+                  Other
+                </option>
+                <option value="na">
+                  Prefer not to disclose
+                </option>
+              </select>
             </div>
-            <input type="submit" id="submitButton" class="btn btn-primary" value="Submit Hit!">       
-          </center>
-        </div>
+            <div class="col-sm-5 alert alert-secondary prefilled-message" id="demog-prefilled-message" style="padding: 3px; margin-bottom:0; display: none;">
+              To save you time, we've pre-filled these boxes based on your previous answers in our HITs! Feel free to change your answers if you want.
+            </div>
+          </div>
+          <div class="form-group row">
+            <h6 class="col-12">How old are you?</h6><label for="annotatorAge" class="col-sm-2 col-form-label">Age ranges</label>
+            <div class="col-sm-4">
+              <select id="annotatorAge" name="annotatorAge" class="form-control" style="font-size: .85rem;" required="">
+                <option disabled selected value="">-- please select --</option>
+                <option value="18">18-24</option>
+                <option value="25">25-29</option>
+                <option value="30">30-34</option>
+                <option value="35">35-39</option>                 
+                <option value="40">40-44</option>
+                <option value="45">45-49</option>
+                <option value="50">50-54</option>
+                <option value="55">55-59</option>
+                <option value="60">60-64</option>
+                <option value="65">65+</option>
+                <option value="na">-- prefer not to disclose --</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <h6 class="col-12">What best describes your race/ethnicity?</h6><label for="race" class="col-sm-2 col-form-label">Race/ethnicity</label>
+            <div class="col-sm-4">
+              <select id="annotatorRace" name="annotatorRace" class="form-control" style="font-size: .85rem;" required="">
+                <option disabled selected value="">
+                  -- please select --
+                </option>
+                <option value="asian">
+                  Asian/Asian American
+                </option>
+                <option value="indian">
+                  South Asian/Indian American
+                </option>
+                <option value="black">
+                  Black/African American
+                </option>
+                <option value="hisp">
+                  Hispanic/Latinx
+                </option>
+                <option value="white">
+                  White/Caucasian
+                </option>
+                <option value="middleEastern">
+                  Middle Eastern
+                </option>
+                <option value="islander">
+                  Native Hawaiian/Pacific Islander
+                </option>
+                <option value="native">
+                  Native American/First Nations
+                </option>
+                <option value="other">
+                  Mixed/other
+                </option>
+                <option value="na">
+                  Prefer not to disclose
+                </option>
+              </select>
+            </div>
+            <div class="col-sm-3">
+              <small>Please select the racial/ethnic identity you most identify with currently.</small>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-12">
+              <h6>What best describes your political orientation?</h6><!--input type="text" id="race" name="annotatorRace" placeholder="" class="form-control"-->
+              <!--select id="annotatorPolitics" name="annotatorPolitics" class="form-control" style="font-size: .85rem;" required>
+                      <option disabled selected value="">== please select ==</option>
+                      <option value="cons">Conservative</option>
+                      <option value="mod-cons">Moderate conservative</option>
+                      <option value="mod-liberal">Moderate liberal</option>
+                      <option value="liberal">Liberal/progressive</option>
+                      <option value="libert">Libertarian</option>
+                      <option value="other">Other/independent</option>
+                      <option value="na">Prefer not to disclose</option>
+                    </select-->
+              <div class="form-check form-check-inline ml-3 lickert">
+                <label class="form-check-label" for="annotatorPolitics1">Strongly liberal &nbsp;</label> <input class="form-check-input right" type="radio" name="annotatorPolitics" id="annotatorPolitics1" value="1" required="">
+              </div>
+              <div class="form-check form-check-inline lickert">
+                <label class="form-check-label" for="annotatorPolitics2">&nbsp;</label> <input class="form-check-input right" type="radio" name="annotatorPolitics" id="annotatorPolitics2" value="2">
+              </div>
+              <div class="form-check form-check-inline lickert">
+                <label class="form-check-label" for="annotatorPolitics3">&nbsp;</label> <input class="form-check-input right" type="radio" name="annotatorPolitics" id="annotatorPolitics3" value="3">
+              </div>
+              <div class="form-check form-check-inline lickert">
+                <label class="form-check-label" for="annotatorPolitics4">&nbsp;</label> <input class="form-check-input right" type="radio" name="annotatorPolitics" id="annotatorPolitics4" value="4">
+              </div>
+              <div class="form-check form-check-inline lickert">
+                <label class="form-check-label" for="annotatorPolitics5">&nbsp;</label> <input class="form-check-input" type="radio" name="annotatorPolitics" id="annotatorPolitics5" value="5"> <label class="form-check-label" for="annotatorPolitics5">&nbsp; Strongly conservative</label>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <h6>Any other minority identity?</h6><label for="annotatorMinority" class="col-sm-12 col-form-label">Do you identify with any minority, disadvantaged, demographic, or other specific groups? If so, which one(s)?<br>
+            <small>(E.g., racial, gender identity, sexuality, disability, immigrant, veteran, etc.); use commas to separate groups.</small></label>
+            <div class="col-sm-6">
+              <input type="text" name="annotatorMinority" placeholder="" class="form-control" id="annotatorMinority" style="font-size: .85rem;">
+            </div>
+          </div>
+        </form>
       </div>
     </div>
-  </fieldset>
+  </div>
+    <div class="row justify-content-center">
+      <div class="col-9" id="commentSection" style="display: inline-block;text-align: center;">
+        <p style="font-size:10pt;margin-top: 50px;">
+          Optional Feedback: Thanks for filling out the questions above!
+          If something about the hit was unclear, please either leave a comment in the box below!
+          We would like to make this HIT easier for future workers, so we really appreciate feedback though it is optional.
+          <br>
+          If you have concerns or questions, please email us!
+        </p>
+        <textarea style="margin-left:10px;margin-top:10px;width: 95%;" rows="2" name="commentbox"></textarea>
+        <br><br>
+        <center>
+          <div class="alert alert-danger" id="submitAlert" style="display: none;">
+            Whoops you missed some questions!
+            <br>
+            Note: if the submit button is disabled and you're confident this is an error, please screenshot your answers and the console output (Ctrl+Shift+J or Cmd+Shift+J).
+          </div>
+          <input type="submit" id="submitButton" class="btn btn-primary" value="Submit Hit!">       
+        </center>
+      </div>
+    </div>
+  </div>
+</fieldset>
 </section>
 
 <script>
   var targ, btngroup, event, selectedText, aspectDiv, workerInfo;
   var attentionChecks = ["first","second", "third", "fourth", "fifth"];
+  $(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+  })
   
   $("label.btn-checkbox>input[type='checkbox']").each(function(ix,e){
     var value = $(e).parent().prop("innerText").trim();
@@ -809,13 +879,14 @@ window.onload = function() {
   /* Make the textbox (suggestion) required for the value in a certain range */
   $(".likelihood").on("click",function(e){ 
     event = e; 
-    var dim = e.target.name.replace("Rating","")
-    var val = parseInt($("input[name='"+dim+"Rating']:checked").prop("value"));
+    var num = e.target.name.slice(-1) 
+    var dim = e.target.name.replace(/Rating\d/,"")
+    var val = parseInt($("input[name='"+dim+"Rating"+num+"']:checked").prop("value"));
     console.log(dim,val);
     if (val < 2 && val > -1) 
-      $("input[name='"+dim+"Suggestion']").prop("required","true");
+      $("input[name='"+dim+"Suggestion"+num+"']").prop("required","true");
     else 
-      $("input[name='"+dim+"Suggestion']").prop("required","");
+      $("input[name='"+dim+"Suggestion"+num+"']").prop("required","");
   })
   $(".btn-checkbox").on("click",function(e){
     targ = e.target;
@@ -1284,11 +1355,6 @@ todo {
   background-color: black;
 }
 
-xuhui {
-  color: #66a61e;
-  font-style: italic;
-}
-
 .possibleAnswer {
   margin-left: 2em;
 }
@@ -1413,7 +1479,6 @@ p[class^="from-"].emoji::before {
 .margin-t_one {
   margin-top: 1rem !important;
 }
-
 
 </style>
 </body>
