@@ -575,7 +575,7 @@ window.onload = function() {
             </label>
           </div>
           <div class="col-12">
-            <label style="text-align: right; float: right; margin: 1em 0em;">does not fit with other content.</label>
+            <label style="text-align: right; float: right; margin: 1em 0em;">&nbsp;does not fit in.</label>
             <label style="text-align: right; float: right; margin: 1em 0.1em;">
               <input id="dontFitStituation" name="dontFitStituation" type="checkbox" onclick="toggleDontUnderstandAck(this.checked)">listener identity
             </label>
@@ -643,6 +643,21 @@ window.onload = function() {
             <td>Suggest a better implication or stereotype:<br>
             <input type="text" name="implicationSuggestion1" placeholder="implies that ..."></td>
           </tr>
+          <tr>
+            <td class="cb-gray">---</td>
+            <td class="cb-gray">Please select the <span id="attentionCheckInstr">fifth</span> option from the top, to double check you're doing this task attentively.</td>
+            <div style="display: none;">
+              <input name="attentionCheckCorrect" id="attentionCheckCorrect" placeholder="3" type="number">
+            </div>
+            <td>
+              <label><input class="attentionCheck" type="radio" for="attentionCheck" name="attentionCheck" value="1" required> 1</label><br>
+              <label><input class="attentionCheck" type="radio" for="attentionCheck" name="attentionCheck" value="2"> 2</label><br>
+              <label><input class="attentionCheck" type="radio" for="attentionCheck" name="attentionCheck" value="3"> 3</label><br>
+              <label><input class="attentionCheck" type="radio" for="attentionCheck" name="attentionCheck" value="4"> 4</label><br>
+              <label><input class="attentionCheck" type="radio" for="attentionCheck" name="attentionCheck" value="5"> 5</label>
+            </td>
+            <td>---<br>
+         </tr>
          <tr>
             <td class="cb-green">Target emotional reaction</td>
             <td class="cb-gray">${targetGroupEmotionalReaction}</td>
