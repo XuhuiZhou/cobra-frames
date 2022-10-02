@@ -3,16 +3,13 @@ import sys
 from bert_score import score
 from collections import defaultdict
 
-def score_rule(i,j,v):
+def score_rule(i,j,v, method='bert_score'):
     """
     The rule to calculate the score.
     The score can come from one reference or multiple references.
     """
-    print("---------------------------sdfsdgsdf")
-    if type(j)==str:
+    if method=='bert_score':
         P, R, F1 = score([i], [j], lang='en', rescale_with_baseline=True)
-    else:
-        P, R, F1 = score([i], j, lang="en", rescale_with_baseline=True)
     return F1[0].item()
 
 def attention_check_filter(df):
@@ -59,6 +56,7 @@ def calculate_scores(suggestions, reference, suggestions_var):
         for i,j,v in zip(worker_suggestions, reference, suggestions_var):
             # If the reference is None, we don't calculate the score.
             if j!="":
+                j = j.split(";")
                 worker_score.append(score_rule(i,j,v))
         scores.append(sum(worker_score)/len(worker_score))
     return scores, suggestions.keys()
