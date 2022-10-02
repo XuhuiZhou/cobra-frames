@@ -30,39 +30,89 @@ window.onload = function() {
         // jQuery is not loaded
         alert("Warning: it seems that jquery is disabled on your browser.  This HIT might not work properly without javascript and jquery code enabled (if you have extensions that block jquery or an old browser version, this may prevent the dynamic elements of the HIT from functioning).  Please ensure that you have jquery enabled by temporarily disabling extensions that interfere with jquery and/or trying a different browser version."); 
     }
-    // checkIfWorkerExists();
+    //checkIfWorkerExists();
     layout();
 }
 </script>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script
+  src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 <!--For autocomplete-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.4.7/jquery.autocomplete.js"></script>
 <!--link ref="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-autocomplete/1.0.7/jquery.auto-complete.css"-->
 
-<!-- <script src="https://homes.cs.washington.edu/~msap/debug/neural-detox/emoji.json" ></script>
+<!--script src="https://homes.cs.washington.edu/~msap/debug/neural-detox/emoji.json" ></script>
 
-<script src="https://homes.cs.washington.edu/~msap/debug/neural-detox/emojiv2.js"></script> -->
+<script src="https://homes.cs.washington.edu/~msap/debug/neural-detox/emojiv2.js"></script-->
 
 
-<section class="container" id="preInstruction" style="margin-bottom:0px; padding: 0px 10px; font-family: Verdana, Geneva, sans-serif; color:#333333;">
-<div class="card">
-<div class="card-header" style="color: #fff;background-color: #337ab7;border-color: #337ab7;"><strong>Instructions</strong></div>
-<div class="card-body">
-  Read a potentially toxic message from the internet and some explanations of what it means, and tell us whether you agree with the explanations.
-  Note: this is a qualification test, more HITs will be available in the future.
-  <br>
-  <em><strong>Participation restriction: </strong>providers/turkers for this task cannot currently be employed by or a student at the University of Washington.</em>
-</div>
-</div>
+<section class="container" id="preInstruction" style="margin-bottom:0px; padding: 0px 10px; color:#333333;">
+   <div class="card">
+      <div class="card-header" style="color: #fff;background-color: #337ab7;border-color: #337ab7;"><strong>Short instructions &amp; Consent Form</strong></div>
+      <div class="card-body row">
+         <div class="col-7">
+            <p><em><strong>Summary</strong></em>: This research study aims to <strong>understand how toxicity, hate, and social biases appear in language</strong>. You will <strong>read a potentially toxic or biased statement and some explanations</strong> of what it means, and <strong>rate the explanations</strong>. This should take 5-10 minutes.
+            </p>
+            <p>
+               <em>Background:</em> Here at CMU, we are passionate about  about understanding how potentially toxic or disrespectful language or stereotypes can be used against certain demographics/groups of people (e.g. racism, sexism, etc.).
+               Although there is no direct benefit to you for participating, we very much appreciate your help in identifying and explaining such language/stereotypes, since this is something computational AI systems have no clue about. 
+            </p>
+            <p><em>Content warning</em>: 
+               Due to the nature of this study, you will encounter biased, offensive, or upsetting content.
+               While it's crucial for us to annotate them, we do not endorse any of the stereotypes or offensive/immoral/rude material.
+               If you have strong negative reactions to some of the content</em>, please reach out <a href="https://www.crisistextline.org/">to Crisis Text Line</a>.
+            </p>
+            <p>
+               <em>Participation</em>: You must be at least 18 years old. Participation is voluntary. You may discontinue participation at any time during the research activity. You may print a copy of this consent form for your records. 
+            </p>
+         </div>
+         <div class="col-5" style="font-size: .9em;">
+            <p>
+               <em>Data collection &amp; sharing</em>: 
+               We will not ask you for your name, and the data collected in this study will be made unidentifiable to the best of our extent.
+               We will securely store the data on our servers and only share with qualified researchers (e.g., who want to further the study of hate speech detection).
+               If you later decide that you do not want your responses included in this study, please email so we can exclude your work.
+            </p>
+            <p>
+               <em>Contact</em>: If you have any questions about this study, you should feel free to ask them by contacting us (via the MTurk interface or via email at maartensap@cmu.edu). If you have questions later, desire additional information, or wish to withdraw your participation please contact Maarten Sap via e-mail in accordance with the contact information listed above.  
+               If you have questions pertaining to your rights as a research participant; or to report concerns to this study, you should contact the Office of Research integrity and Compliance at Carnegie Mellon University, referencing study number STUDY2022_00000331. Email: <a href="mailto:irb-review@andrew.cmu.edu">irb-review@andrew.cmu.edu</a>. Phone: 412-268-1901 or 412-268-5460. 
+            </p>
+
+         </div>
+         <div class="col-12">
+            <div class="alert alert-info" role="alert">
+              Note: this is a <strong>pilot task</strong>. More HITs would be available in the future. 
+              Meanwhile, we would love to hear your feedback on how to make the task easier to understand! 
+            </div>
+            <hr>
+            <h6>Consent to the task to participate:</h6>
+            <div class="form-check">
+               <label class="form-check-label">
+               <input class="form-check-input" type="checkbox" id="consent" name="consent" onclick="toggleConsent(this.checked)">
+               Checking this box indicates that you have read and understood the information above, are 18 years or older, and agree to participate in our study.
+               </label>
+            </div>
+            <br>
+            <div class="alert alert-warning" id="consentMessage" style="max-width: 400px;margin: auto;">
+               You must check the box to continue the task! If you do not consent, feel free to return the HIT.
+            </div>
+            <div style="display: none;">
+               <input name="clickedConsentTime" id="clickedConsentTime" type="text" placeholder="">
+               <input name="clickedSubmitTime" id="clickedSubmitTime" type="text" placeholder="">
+            </div>
+         </div>
+      </div>
+   </div>
 </section>
+    
 
 <!--END OF HIT HEADER; START OF HIT BODY-->
-<section class="container" style="font-family: Verdana, Geneva, sans-serif; color:#333333;">
+<section class="container" style="color:#333333; display: none;" id="actualTask">
   <fieldset>
     <div class="card" style="display: block;">
       <div class="card-header">
@@ -73,40 +123,45 @@ window.onload = function() {
           </a> 
         </h4>
       </div>
-      <div id="instructions" class="collapse show" style="margin:10px">
+      <div id="instructions" class="collapse show" style="margin: 2em;">
         <div class="row">
-          <div class="col-12 mb-4">
-            <p style="font-size: 1.05rem; text-align: left">
-              You will read a message taken from somewhere on the internet, the potential listener and speaker identity and the situation where the message happened. And then, you will rate some explanations of the message. Please answer all questions from an US cultural perspective; try to think about what would be prevalent opinions on these. Note: we will assume that MTurk workers are well-intentioned annotators.
+          <!--div class="col-12 mb-4">
+            <p style="font-size: 1em; text-align: left">
+              You will read a message taken from somewhere on the internet, the potential listener and speaker identity and the situation where the message happened. And then, you will rate some explanations of the message. Please answer all questions from an US cultural perspective; try to think about what would be prevalent opinions on these.
            </p>
-           <div class="alert alert-info" role="alert">
-            This is the qualification test for the task. More HITs would be available later if you pass the qualification. 
-            Meanwhile, we would love to hear your feedback on how to make the task easier to understand! (Note that the qualification test has 
-            three messages while the normal HITs will only have one.)
-          </div>
-          </div>
+           
+          </div-->
 
-        </div>
-        <div class="row">
-          <div class="col-9">
+          <div class="col-12">
             <h5>Detailed instructions</h5>
-            
             <p style="margin-bottom: .5rem;">
               <span class="numbering">1)</span> 
-                <em>Read the message carefully. </em>
+                Carefully <strong>read the statement or message and its context</strong>, and with a US sociocultural perspective in mind.
+            </p>
+            
+            <p style="margin-bottom: .5rem;">
+              <span class="numbering">2)</span> 
+                <strong>Account for the context (situation, speaker and listener identities)</strong> when interpreting the statement.
+                <!--em>Read the message carefully. </em>
                 When you interpret the message, make sure you take into account the speaker and listener's
-                identities as well as the situation.
+                identities as well as the situation.-->
             </p>
 
             <p style="margin-bottom: .5rem;">
-              <span class="numbering">2)</span> <em>Rate the following explanations of the message.</em> 
-                If you think the provided explanation is somewhat unlikely or unlikely, please suggest a better 
-                explanation using the text box beside the radio buttons. 
-                The following table provides you with the questions
-                you should consider when rating or writing the explanation for each category.
-                <div class="col-12 mt-2 mb-2">
-                </div>
-                <table id="examples-table">
+              <span class="numbering">3)</span> <strong>Read and rate the explanations</strong> about the statement or message. 
+                <strong>If unlikely, please suggest a better 
+                explanation</strong> using the text box beside the radio buttons. See below for the <em>types of explanations</em> we consider.
+            </p>
+
+            <p style="margin-bottom: .5rem;">
+              <span class="numbering">4)</span><strong>Answer some questions about yourself.</strong> Indicate your gender, age, race, political leaning, and whether you identify as a minority (all your information will remain confidential).
+              Your own personal background and experiences influence what you think of as disrespectful or offensive.
+              We collect this information to account for all types of backgrounds that MTurkers come from in our research.
+              <!--em>If you answered this question once, your answers should pre-load in subsequent HITs.</em-->
+            </p>
+            <br>
+            <h5>Types of explanations</h5>
+            <table id="examples-table">
                   <tr>
                     <td class="cb-teal">Speaker intent</td>
                     <td class="cb-gray">What do you think the speaker was trying to express (attitude, feeling, and etc.)? What do you think the speaker was trying to accomplish through the statement? What was their intent with this statement?
@@ -184,22 +239,10 @@ window.onload = function() {
                       <b>'None' option:</b> You can click the 'None' button for some of the relations if you think the current explanation is <em>unlikely</em> 
                       and there is <em>no explanation</em> for this relation given the post and context. 
                     </li>
-                    <li>
-                      <b>Qualification test:</b> We will calculate your qualification scores according to your ratings 
-                      of the explanation and manually check some of the explanations you provide.
-                    </li>
                   </ul> 
                 </div>
-            </p>
-
-            <p style="margin-bottom: .5rem;">
-              <em><span class="numbering">3)</span>Indicate your gender, age, race, political leaning, and whether you identify as a minority (all your information will remain confidential).</em><br>
-              Your own personal background and experiences influence what you think of as disrespectful or offensive.
-              We collect this information to account for all types of backgrounds that MTurkers come from in our research.
-              <em>If you answered this question once, your answers should pre-load in subsequent HITs.</em>
-            </p>
           </div>
-          <div class="col-3">
+          <!--div class="col-3">
           <small>
             <h5>Background on our research project</h5>
             <p>
@@ -216,7 +259,7 @@ window.onload = function() {
               If you have questions about your rights as a research participant, or wish to obtain information, ask questions or discuss any concerns about this study with someone other than the researcher(s), please contact the University of Washington Human Subjects Division at 206-543-0098 (for international calls include the US Calling Code: +1-206-543-0098).
             </p>
           </small>
-          </div>
+          </div-->
         </div>
         <div class="row">
           <div class="col-12">
@@ -224,7 +267,7 @@ window.onload = function() {
               <em><strong style="color: #e60000;">Content Warning</strong></em>: posts were found on the (uncensored) internet;
               while it's crucial for us to annotate them, we do not endorse any of the stereotypes or offensive/immoral/rude material.
               You may find some of the content upsetting.
-              <em>If you have concerns, questions, or strong negative reactions to some of the content</em>, please <a href="https://www.crisistextline.org/">reach out</a> if in crisis.
+              <em>If you have concerns, questions, please reach out to the study team. If you have more immediate strong negative reactions to some of the content</em>, please reach out <a href="https://www.crisistextline.org/">to Crisis Text Line</a>.
             </p>
           </div>
         </div>
@@ -235,12 +278,16 @@ window.onload = function() {
               [-] less examples
             </a></small></h5>
             <div class="d-flex flex-column" style="margin-top: 20px; margin-bottom: 20px; border-radius: 3px; box-shadow: 1.5px 1.5px 3px 3px rgba(0, 0, 1, 0.2);">
-              <div class="row justify-content-center" style="background-color: ghostwhite; border: 1px solid darkgrey; border-radius: 3px; width: 70%; margin-left: auto; margin-right: auto; margin-top: 20px;">
+              <div class="row justify-content-center" style="background-color: ghostwhite; border: 1px solid darkgrey; border-radius: 3px; width: 80%; margin-left: auto; margin-right: auto; margin-top: 20px;">
                 <div class="col-12 text-center" style="margin: 1em 0;">
+                  <div class="situation">
                   <em style="font-size: 18; color: #006cd8;  font-weight: bold;">Situation</em>: <span id="speechContextInput">political speech or rant</span>
+                  </div>
                 </div>
                 <div class="col-3">
-                  <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Speaker identity</em>: <span id="speakerInput">white American person</span>
+                  <div class="speaker">
+                    <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Speaker identity</em>: <span id="speakerInput" >white American person</span>
+                    </div>
                 </div>
                 
                 <div class="col-6 imessage">
@@ -249,7 +296,9 @@ window.onload = function() {
                   </p>
                 </div>
                 <div class="col-3">
+                <div class="listener">
                   <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Listener identity</em>: <span id="listenerInput">general audience of US voters</span>
+                  </div>
                 </div>
               </div>
               <div class="mt-3" id="table-container"></div> 
@@ -276,7 +325,7 @@ window.onload = function() {
                   </tr>
                   <tr>
                     <td class="cb-gold">Power dynamic</td>
-                    <td>ethnicity and citizenship power differential between speaker and <b>targeted group</b></td>
+                    <td>ethnicity and citizenship power differential between speaker and targeted group</td>
                     <td>very/somewhat likely</td>
                     <td></td>
                   </tr>
@@ -311,12 +360,16 @@ window.onload = function() {
             </div>
             <div class="collapse show extra-exs">
               <div class="d-flex flex-column" style="margin-top: 20px; margin-bottom: 20px; border-radius: 3px; box-shadow: 1.5px 1.5px 3px 3px rgba(0, 0, 1, 0.2);">
-                <div class="row justify-content-center" style="background-color: ghostwhite; border: 1px solid darkgrey; border-radius: 3px; width: 70%; margin-left: auto; margin-right: auto; margin-top: 20px;">
+                <div class="row justify-content-center" style="background-color: ghostwhite; border: 1px solid darkgrey; border-radius: 3px; width: 80%; margin-left: auto; margin-right: auto; margin-top: 20px;">
                   <div class="col-12 text-center" style="margin: 1em 0;">
+                    <div class="situation">
                     <em style="font-size: 18; color: #006cd8;  font-weight: bold;">Situation</em>: <span id="speechContextInput">initial interaction in a workplace setting between customer and employee or boss</span>
+                    </div>
                   </div>
                   <div class="col-3">
+                    <div class="speaker">
                     <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Speaker identity</em>: <span id="speakerInput">man</span>
+                    </div>
                   </div>
                   
                   <div class="col-6 imessage">
@@ -325,7 +378,9 @@ window.onload = function() {
                     </p>
                   </div>
                   <div class="col-3">
+                  <div class="listener">
                     <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Listener identity</em>: <span id="listenerInput">woman</span>
+                    </div>
                   </div>
                 </div>
                 <div class="mt-3" id="table-container"></div> 
@@ -354,7 +409,7 @@ window.onload = function() {
                       <td class="cb-gold">Power dynamic</td>
                       <td>work place power differential between speaker and listener</td>
                       <td>very/somewhat unlikely</td>
-                      <td>gender power differential between speaker and <b>listener</b></td>
+                      <td>gender power differential between speaker and listener</td>
                     </tr>
                     <tr>
                       <td class="cb-orange">Implication</td>
@@ -533,46 +588,33 @@ window.onload = function() {
       </div>
 
     </div>
-    <div class="row" id="consent" style="margin: 30px 0;">
-      <div class="col-12">
-        
-        <h6>You have read and understood the instructions and agree to do the task</h6>
-        <div class="form-check">
-          <label class="form-check-label">
-            <input class="form-check-input" type="checkbox" id="consent" name="consent" onclick="toggleConsent(this.checked)">
-            By ticking this box, you are agreeing to be part of this data collection study. Be sure that questions you have about the study have been answered and that you understand what you are being asked to do. You may contact us if you think of a question later. You are free to release/quit the HIT at any time, and refusing to be in the experiment or stopping participation will involve no penalty or loss of benefits to which you are otherwise entitled. To save a copy of the consent form and instructions, you can save/print this webpage. 
-          </label>
-        </div>
-        <br>
-        <div class="alert alert-warning" id="consentMessage" style="max-width: 400px;margin: auto;">
-          You must check the box to continue the task!
-        </div>
-        <div style="display: none;">
-          <input name="clickedConsentTime" id="clickedConsentTime" type="text" placeholder="">
-          <input name="clickedSubmitTime" id="clickedSubmitTime" type="text" placeholder="">
-        </div>
-      </div>
-    </div>
-    <div id="actualTask" style="display: none;">
+    
+    
 
     
     <div class="container" id="allQuestions">
       <div class="row justify-content-center">
-        <div class="row justify-content-center" style="background-color: ghostwhite; border: 1px solid darkgrey; border-radius: 3px; width: 70%; margin-left: auto; margin-right: auto;">
+        <div class="row justify-content-center" style="background-color: ghostwhite; border: 1px solid darkgrey; border-radius: 3px; width: 80%; margin-left: auto; margin-right: auto;">
           <div class="col-12 text-center" style="margin: 1em 0;">
-            <em style="font-size: 18; color: #006cd8;  font-weight: bold;">Situation</em>: <span id="speechContextInput">${speechContext1}</span>
+            <div class="situation">
+            <em style="font-size: 18; color: #006cd8;  font-weight: bold;">Situation</em>: <span id="speechContextInput">${speechContext}</span>
+            </div>
           </div>
           <div class="col-3">
-            <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Speaker identity</em>: <span id="speakerInput">${speakerIdentity1}</span>
+          <div class="speaker">
+            <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Speaker identity</em>: <span id="speakerInput">${speakerIdentity}</span>
+            </div>
           </div>
           
           <div class="col-6 imessage">
             <p class="from-them">
-              ${statement1}
+              ${statement}
             </p>
           </div>
           <div class="col-3">
-            <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Listener identity</em>: <span id="listenerInput">${listenerIdentity1}</span>
+            <div class="listener">
+            <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Listener identity</em>: <span id="listenerInput">${listenerIdentity}</span>
+            </div>
           </div>
           <div class="col-12">
             <label style="text-align: right; float: right; margin: 1em 0;">
@@ -602,7 +644,7 @@ window.onload = function() {
         <table class="table table-striped" id="inputTable">
           <tr>
             <td class="cb-teal" style="width: 15%;">Speaker intent</td>
-            <td class="cb-gray" style="width: 30%;">${intent1}</td>
+            <td class="cb-gray" style="width: 30%;">${intent}</td>
             <td>
               <label><input class="likelihood" type="radio" for="intentRating1" name="intentRating1" value=3 required> Very likely</label><br>
               <label><input class="likelihood" type="radio" for="intentRating1" name="intentRating1" value=2> Somewhat likely</label><br>
@@ -613,7 +655,7 @@ window.onload = function() {
           </tr>
           <tr>
             <td class="cb-purple">Target (group)</td>
-            <td class="cb-gray">${targetGroup1}&nbsp;</td>
+            <td class="cb-gray">${targetGroup}&nbsp;</td>
             <td>
               <label><input class="likelihood" type="radio" for="targetGroupRating1" name="targetGroupRating1" value=3 required> Very likely</label><br>
               <label><input class="likelihood" type="radio" for="targetGroupRating1" name="targetGroupRating1" value=2> Somewhat likely</label><br>
@@ -625,7 +667,7 @@ window.onload = function() {
           </tr>
           <tr>
             <td class="cb-gold">Power dynamic</td>
-            <td class="cb-gray">${relevantPowerDynamics1}</td>
+            <td class="cb-gray">${relevantPowerDynamics}</td>
             <td>
               <label><input class="likelihood" type="radio" for="powerDiffRating1" name="powerDiffRating1" value=3 required> Very likely</label><br>
               <label><input class="likelihood" type="radio" for="powerDiffRating1" name="powerDiffRating1" value=2> Somewhat likely</label><br>
@@ -638,7 +680,7 @@ window.onload = function() {
           </tr>
           <tr>
             <td class="cb-orange">Implication</td>
-            <td class="cb-gray">${implication1}&nbsp;</td>
+            <td class="cb-gray">${implication}&nbsp;</td>
             <td>
               <label><input class="likelihood" type="radio" for="implicationRating1" name="implicationRating1" value=3 required> Very likely</label><br>
               <label><input class="likelihood" type="radio" for="implicationRating1" name="implicationRating1" value=2> Somewhat likely</label><br>
@@ -650,22 +692,22 @@ window.onload = function() {
           </tr>
           <tr>
             <td class="cb-gray">---</td>
-            <td class="cb-gray">Please select the <span id="attentionCheckInstr1">fifth</span> option from the top, to double check you're doing this task attentively.</td>
+            <td class="cb-gray">Please select the <span id="attentionCheckInstr">fifth</span> option from the top, to double check you're doing this task attentively.</td>
             <div style="display: none;">
-              <input name="attentionCheckCorrect1" id="attentionCheckCorrect1" placeholder="3" type="number">
+              <input name="attentionCheckCorrect" id="attentionCheckCorrect" placeholder="3" type="number">
             </div>
             <td>
-              <label><input class="attentionCheck1" type="radio" for="attentionCheck1" name="attentionCheck1" value="1" required> 1</label><br>
-              <label><input class="attentionCheck1" type="radio" for="attentionCheck1" name="attentionCheck1" value="2"> 2</label><br>
-              <label><input class="attentionCheck1" type="radio" for="attentionCheck1" name="attentionCheck1" value="3"> 3</label><br>
-              <label><input class="attentionCheck1" type="radio" for="attentionCheck1" name="attentionCheck1" value="4"> 4</label><br>
-              <label><input class="attentionCheck1" type="radio" for="attentionCheck1" name="attentionCheck1" value="5"> 5</label>
+              <label><input class="attentionCheck" type="radio" for="attentionCheck" name="attentionCheck" value="1" required> 1</label><br>
+              <label><input class="attentionCheck" type="radio" for="attentionCheck" name="attentionCheck" value="2"> 2</label><br>
+              <label><input class="attentionCheck" type="radio" for="attentionCheck" name="attentionCheck" value="3"> 3</label><br>
+              <label><input class="attentionCheck" type="radio" for="attentionCheck" name="attentionCheck" value="4"> 4</label><br>
+              <label><input class="attentionCheck" type="radio" for="attentionCheck" name="attentionCheck" value="5"> 5</label>
             </td>
             <td>---<br>
-          </tr>
-          <tr>
+         </tr>
+         <tr>
             <td class="cb-green">Target emotional reaction</td>
-            <td class="cb-gray">${targetGroupEmotionalReaction1}</td>
+            <td class="cb-gray">${targetGroupEmotionalReaction}</td>
             <td>
               <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating1" name="targetGroupEmoReactRating1" value=3 required> Very likely</label><br>
               <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating1" name="targetGroupEmoReactRating1" value=2> Somewhat likely</label><br>
@@ -678,7 +720,7 @@ window.onload = function() {
           </tr>
           <tr>
             <td class="cb-brown">Target cognitive reaction</td>
-            <td class="cb-gray">${targetGroupCognitiveReaction1}</td>
+            <td class="cb-gray">${targetGroupCognitiveReaction}</td>
             <td>
               <label><input class="likelihood" type="radio" for="targetGroupCogReactRating1" name="targetGroupCogReactRating1" value=3 required> Very likely</label><br>
               <label><input class="likelihood" type="radio" for="targetGroupCogReactRating1" name="targetGroupCogReactRating1" value=2> Somewhat likely</label><br>
@@ -691,7 +733,7 @@ window.onload = function() {
           </tr>
           <tr>
             <td class="cb-pink">Type of offensiveness&nbsp;</td>
-            <td class="cb-gray">${offensiveness1}</td>
+            <td class="cb-gray">${offensiveness}</td>
             <td>
               <label><input class="likelihood" type="radio" for="offensivenessRating1" name="offensivenessRating1" value=3 required> Very likely</label><br>
               <label><input class="likelihood" type="radio" for="offensivenessRating1" name="offensivenessRating1" value=2> Somewhat likely</label><br>
@@ -722,335 +764,11 @@ window.onload = function() {
              
               <input type="text" name="offensivenessSuggestion1" placeholder="..."></td>
           </tr>
- 
- 
         </table>
       </div>
-      <br><hr><br>
 
-      <div class="row justify-content-center">
-        <div class="row justify-content-center" style="background-color: ghostwhite; border: 1px solid darkgrey; border-radius: 3px; width: 70%; margin-left: auto; margin-right: auto;">
-          <div class="col-12 text-center" style="margin: 1em 0;">
-            <em style="font-size: 18; color: #006cd8;  font-weight: bold;">Situation</em>: <span id="speechContextInput">${speechContext2}</span>
-          </div>
-          <div class="col-3">
-            <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Speaker identity</em>: <span id="speakerInput">${speakerIdentity2}</span>
-          </div>
-          
-          <div class="col-6 imessage">
-            <p class="from-them">
-              ${statement2}
-            </p>
-          </div>
-          <div class="col-3">
-            <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Listener identity</em>: <span id="listenerInput">${listenerIdentity2}</span>
-          </div>
-          <div class="col-12">
-            <label style="text-align: right; float: right; margin: 1em 0;">
-              <input id="dontUnderstand" name="dontUnderstand" type="checkbox" onclick="toggleDontUnderstandAck(this.checked)">I'm having a lot of trouble understanding this message.
-            </label>
-          </div>
-          <div class="col-12">
-            <label style="text-align: right; float: right; margin: 1em 0em;">&nbsp;does not fit in.</label>
-            <label style="text-align: right; float: right; margin: 1em 0.1em;">
-              <input id="dontFitStituation" name="dontFitStituation" type="checkbox" onclick="toggleDontUnderstandAck(this.checked)">listener identity
-            </label>
-            <label style="text-align: right; float: right; margin: 1em 0.1em;">
-              <input id="dontFitSidentity" name="dontFitSidentity" type="checkbox" onclick="toggleDontUnderstandAck(this.checked)">speaker identity /
-            </label>
-            <label style="text-align: right; float: right; margin: 1em 0.1em;">
-              <input id="dontFitLidentity" name="dontFitLidentity" type="checkbox" onclick="toggleDontUnderstandAck(this.checked)">situation /
-            </label>
-            <label style="text-align: right; float: right; margin: 1em 0.3em;">The</label>
-          </div>
-        </div>
-        <div class="col-6 alert alert-warning" id="dontUnderstandAck" style="display: none;">
-          Thanks for letting us know that this message is hard to understand! Please still try your best to answer the questions below!
-        </div>
-        <div class="col-12 mt-5 mb-2">
-          <h4 style="font-style: italic;">2. Rate the explanations about the message.</h4>
-        </div>
-        <table class="table table-striped" id="inputTable">
-          <tr>
-            <td class="cb-teal" style="width: 15%;">Speaker intent</td>
-            <td class="cb-gray" style="width: 30%;">${intent2}</td>
-            <td>
-              <label><input class="likelihood" type="radio" for="intentRating2" name="intentRating2" value=3 required> Very likely</label><br>
-              <label><input class="likelihood" type="radio" for="intentRating2" name="intentRating2" value=2> Somewhat likely</label><br>
-              <label><input class="likelihood" type="radio" for="intentRating2" name="intentRating2" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="intentRating2" name="intentRating2" value=0> Very unlikely</label></td>
-            <td>Suggest a better speaker intent:<br>
-            <input type="text" placeholder="The speaker was trying to..." name="intentSuggestion2"></td>
-          </tr>
-          <tr>
-            <td class="cb-purple">Target (group)</td>
-            <td class="cb-gray">${targetGroup2}&nbsp;</td>
-            <td>
-              <label><input class="likelihood" type="radio" for="targetGroupRating2" name="targetGroupRating2" value=3 required> Very likely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupRating2" name="targetGroupRating2" value=2> Somewhat likely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupRating2" name="targetGroupRating2" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupRating2" name="targetGroupRating2" value=0> Very unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupRating2" name="targetGroupRating2" value=-1> None</label></td>
-            <td>Suggest a better targeted group:<br>
-            <input type="text" placeholder="..." name="targetGroupSuggestion2"></td>
-          </tr>
-          <tr>
-            <td class="cb-gold">Power dynamic</td>
-            <td class="cb-gray">${relevantPowerDynamics2}</td>
-            <td>
-              <label><input class="likelihood" type="radio" for="powerDiffRating2" name="powerDiffRating2" value=3 required> Very likely</label><br>
-              <label><input class="likelihood" type="radio" for="powerDiffRating2" name="powerDiffRating2" value=2> Somewhat likely</label><br>
-              <label><input class="likelihood" type="radio" for="powerDiffRating2" name="powerDiffRating2" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="powerDiffRating2" name="powerDiffRating2" value=0> Very unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="powerDiffRating2" name="powerDiffRating2" value=-1> None</label><br>
-            </td>
-            <td>Suggest a better relevant power difference:<br>
-            <input type="text" name="powerDiffSuggestion2" placeholder="power difference between..."></td>
-          </tr>
-          <tr>
-            <td class="cb-orange">Implication</td>
-            <td class="cb-gray">${implication2}&nbsp;</td>
-            <td>
-              <label><input class="likelihood" type="radio" for="implicationRating2" name="implicationRating2" value=3 required> Very likely</label><br>
-              <label><input class="likelihood" type="radio" for="implicationRating2" name="implicationRating2" value=2> Somewhat likely</label><br>
-              <label><input class="likelihood" type="radio" for="implicationRating2" name="implicationRating2" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="implicationRating2" name="implicationRating2" value=0> Very unlikely</label>
-            </td>
-            <td>Suggest a better implication or stereotype:<br>
-            <input type="text" name="implicationSuggestion2" placeholder="implies that ..."></td>
-          </tr>
-          <tr>
-            <td class="cb-gray">---</td>
-            <td class="cb-gray">Please select the <span id="attentionCheckInstr2">fifth</span> option from the top, to double check you're doing this task attentively.</td>
-            <div style="display: none;">
-              <input name="attentionCheckCorrect2" id="attentionCheckCorrect2" placeholder="3" type="number">
-            </div>
-            <td>
-              <label><input class="attentionCheck2" type="radio" for="attentionCheck2" name="attentionCheck2" value="1" required> 1</label><br>
-              <label><input class="attentionCheck2" type="radio" for="attentionCheck2" name="attentionCheck2" value="2"> 2</label><br>
-              <label><input class="attentionCheck2" type="radio" for="attentionCheck2" name="attentionCheck2" value="3"> 3</label><br>
-              <label><input class="attentionCheck2" type="radio" for="attentionCheck2" name="attentionCheck2" value="4"> 4</label><br>
-              <label><input class="attentionCheck2" type="radio" for="attentionCheck2" name="attentionCheck2" value="5"> 5</label>
-            </td>
-            <td>---<br>
-         </tr>
-         <tr>
-            <td class="cb-green">Target emotional reaction</td>
-            <td class="cb-gray">${targetGroupEmotionalReaction2}</td>
-            <td>
-              <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating2" name="targetGroupEmoReactRating2" value=3 required> Very likely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating2" name="targetGroupEmoReactRating2" value=2> Somewhat likely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating2" name="targetGroupEmoReactRating2" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating2" name="targetGroupEmoReactRating2" value=0> Very unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating2" name="targetGroupEmoReactRating2" value=-1> None</label><br>
-            </td>
-            <td>Suggest a better reaction:<br>
-            <input type="text" name="targetGroupEmoReactSuggestion2" placeholder="target would likely feel..."></td>
-          </tr>
-          <tr>
-            <td class="cb-brown">Target cognitive reaction</td>
-            <td class="cb-gray">${targetGroupCognitiveReaction2}</td>
-            <td>
-              <label><input class="likelihood" type="radio" for="targetGroupCogReactRating2" name="targetGroupCogReactRating2" value=3 required> Very likely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupCogReactRating2" name="targetGroupCogReactRating2" value=2> Somewhat likely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupCogReactRating2" name="targetGroupCogReactRating2" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupCogReactRating2" name="targetGroupCogReactRating2" value=0> Very unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupCogReactRating2" name="targetGroupCogReactRating2" value=-1> None</label>
-            </td>
-            <td>Suggest a better reaction:<br>
-            <input type="text" name="targetGroupCogReactSuggestion2" placeholder="the effect on the target will be..."></td>
-          </tr>
-          <tr>
-            <td class="cb-pink">Type of offensiveness&nbsp;</td>
-            <td class="cb-gray">${offensiveness2}</td>
-            <td>
-              <label><input class="likelihood" type="radio" for="offensivenessRating2" name="offensivenessRating2" value=3 required> Very likely</label><br>
-              <label><input class="likelihood" type="radio" for="offensivenessRating2" name="offensivenessRating2" value=2> Somewhat likely</label><br>
-              <label><input class="likelihood" type="radio" for="offensivenessRating2" name="offensivenessRating2" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="offensivenessRating2" name="offensivenessRating2" value=0> Very unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="offensivenessRating2" name="offensivenessRating2" value=-1> None/Harmless</label>
-            </td>
-            <td>Suggest a better  <a href="#" data-toggle="tooltip" data-placement="right"
-                    data-html="true" 
-                    title="<p style='text-align:left'>
-                    <ul style='text-align:left;'> 
-                    <li>profanity</li>
-                    <li>microaggression</li>
-                    <li>offensive generalization</li>
-                    <li>stereotype</li>
-                    <li>sexism</li>
-                    <li>racism, and etc.</li>
-                    </ul> Feel free to come up with other types you see fit!
-                    </p>
-                    ">offensiveness</a>:<br>
-            <input type="text" name="offensivenessSuggestion2" placeholder="..."></td>
-          </tr>
- 
-        </table>
-      </div>
-      <br><hr><br>
-      <div class="row justify-content-center">
-        <div class="row justify-content-center" style="background-color: ghostwhite; border: 1px solid darkgrey; border-radius: 3px; width: 70%; margin-left: auto; margin-right: auto;">
-          <div class="col-12 text-center" style="margin: 1em 0;">
-            <em style="font-size: 18; color: #006cd8;  font-weight: bold;">Situation</em>: <span id="speechContextInput">${speechContext3}</span>
-          </div>
-          <div class="col-3">
-            <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Speaker identity</em>: <span id="speakerInput">${speakerIdentity3}</span>
-          </div>
-          
-          <div class="col-6 imessage">
-            <p class="from-them">
-              ${statement3}
-            </p>
-          </div>
-          <div class="col-3">
-            <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Listener identity</em>: <span id="listenerInput">${listenerIdentity3}</span>
-          </div>
-          <div class="col-12">
-            <label style="text-align: right; float: right; margin: 1em 0;">
-              <input id="dontUnderstand" name="dontUnderstand" type="checkbox" onclick="toggleDontUnderstandAck(this.checked)">I'm having a lot of trouble understanding this message.
-            </label>
-          </div>
-          <div class="col-12">
-            <label style="text-align: right; float: right; margin: 1em 0em;">&nbsp;does not fit in.</label>
-            <label style="text-align: right; float: right; margin: 1em 0.1em;">
-              <input id="dontFitStituation" name="dontFitStituation" type="checkbox" onclick="toggleDontUnderstandAck(this.checked)">listener identity
-            </label>
-            <label style="text-align: right; float: right; margin: 1em 0.1em;">
-              <input id="dontFitSidentity" name="dontFitSidentity" type="checkbox" onclick="toggleDontUnderstandAck(this.checked)">speaker identity /
-            </label>
-            <label style="text-align: right; float: right; margin: 1em 0.1em;">
-              <input id="dontFitLidentity" name="dontFitLidentity" type="checkbox" onclick="toggleDontUnderstandAck(this.checked)">situation /
-            </label>
-            <label style="text-align: right; float: right; margin: 1em 0.3em;">The</label>
-          </div>
-        </div>
-        <div class="col-6 alert alert-warning" id="dontUnderstandAck" style="display: none;">
-          Thanks for letting us know that this message is hard to understand! Please still try your best to answer the questions below!
-        </div>
-        <div class="col-12 mt-5 mb-2">
-          <h4 style="font-style: italic;">3. Rate the explanations about the message.</h4>
-        </div>
-        <table class="table table-striped" id="inputTable">
-          <tr>
-            <td class="cb-teal" style="width: 15%;">Speaker intent</td>
-            <td class="cb-gray" style="width: 30%;">${intent3}</td>
-            <td>
-              <label><input class="likelihood" type="radio" for="intentRating3" name="intentRating3" value=3 required> Very likely</label><br>
-              <label><input class="likelihood" type="radio" for="intentRating3" name="intentRating3" value=2> Somewhat likely</label><br>
-              <label><input class="likelihood" type="radio" for="intentRating3" name="intentRating3" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="intentRating3" name="intentRating3" value=0> Very unlikely</label></td>
-            <td>Suggest a better speaker intent:<br>
-            <input type="text" placeholder="The speaker was trying to..." name="intentSuggestion3"></td>
-          </tr>
-          <tr>
-            <td class="cb-purple">Target (group)</td>
-            <td class="cb-gray">${targetGroup3}&nbsp;</td>
-            <td>
-              <label><input class="likelihood" type="radio" for="targetGroupRating3" name="targetGroupRating3" value=3 required> Very likely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupRating3" name="targetGroupRating3" value=2> Somewhat likely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupRating3" name="targetGroupRating3" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupRating3" name="targetGroupRating3" value=0> Very unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupRating3" name="targetGroupRating3" value=-1> None</label></td>
-            <td>Suggest a better targeted group:<br>
-            <input type="text" placeholder="..." name="targetGroupSuggestion3"></td>
-          </tr>
-          <tr>
-            <td class="cb-gold">Power dynamic</td>
-            <td class="cb-gray">${relevantPowerDynamics3}</td>
-            <td>
-              <label><input class="likelihood" type="radio" for="powerDiffRating3" name="powerDiffRating3" value=3 required> Very likely</label><br>
-              <label><input class="likelihood" type="radio" for="powerDiffRating3" name="powerDiffRating3" value=2> Somewhat likely</label><br>
-              <label><input class="likelihood" type="radio" for="powerDiffRating3" name="powerDiffRating3" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="powerDiffRating3" name="powerDiffRating3" value=0> Very unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="powerDiffRating3" name="powerDiffRating3" value=-1> None</label><br>
-            </td>
-            <td>Suggest a better relevant power difference:<br>
-            <input type="text" name="powerDiffSuggestion3" placeholder="power difference between..."></td>
-          </tr>
-          <tr>
-            <td class="cb-orange">Implication</td>
-            <td class="cb-gray">${implication3}&nbsp;</td>
-            <td>
-              <label><input class="likelihood" type="radio" for="implicationRating3" name="implicationRating3" value=3 required> Very likely</label><br>
-              <label><input class="likelihood" type="radio" for="implicationRating3" name="implicationRating3" value=2> Somewhat likely</label><br>
-              <label><input class="likelihood" type="radio" for="implicationRating3" name="implicationRating3" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="implicationRating3" name="implicationRating3" value=0> Very unlikely</label>
-            </td>
-            <td>Suggest a better implication or stereotype:<br>
-            <input type="text" name="implicationSuggestion3" placeholder="implies that ..."></td>
-          </tr>
-          <tr>
-            <td class="cb-gray">---</td>
-            <td class="cb-gray">Please select the <span id="attentionCheckInstr3">fifth</span> option from the top, to double check you're doing this task attentively.</td>
-            <div style="display: none;">
-              <input name="attentionCheckCorrect3" id="attentionCheckCorrect3" placeholder="3" type="number">
-            </div>
-            <td>
-              <label><input class="attentionCheck3" type="radio" for="attentionCheck3" name="attentionCheck3" value="1" required> 1</label><br>
-              <label><input class="attentionCheck3" type="radio" for="attentionCheck3" name="attentionCheck3" value="2"> 2</label><br>
-              <label><input class="attentionCheck3" type="radio" for="attentionCheck3" name="attentionCheck3" value="3"> 3</label><br>
-              <label><input class="attentionCheck3" type="radio" for="attentionCheck3" name="attentionCheck3" value="4"> 4</label><br>
-              <label><input class="attentionCheck3" type="radio" for="attentionCheck3" name="attentionCheck3" value="5"> 5</label>
-            </td>
-            <td>---<br>
-         </tr>
-         <tr>
-            <td class="cb-green">Target emotional reaction</td>
-            <td class="cb-gray">${targetGroupEmotionalReaction3}</td>
-            <td>
-              <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating3" name="targetGroupEmoReactRating3" value=3 required> Very likely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating3" name="targetGroupEmoReactRating3" value=2> Somewhat likely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating3" name="targetGroupEmoReactRating3" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating3" name="targetGroupEmoReactRating3" value=0> Very unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating3" name="targetGroupEmoReactRating3" value=-1> None</label><br>
-            </td>
-            <td>Suggest a better reaction:<br>
-            <input type="text" name="targetGroupEmoReactSuggestion3" placeholder="target would likely feel..."></td>
-          </tr>
-          <tr>
-            <td class="cb-brown">Target cognitive reaction</td>
-            <td class="cb-gray">${targetGroupCognitiveReaction3}</td>
-            <td>
-              <label><input class="likelihood" type="radio" for="targetGroupCogReactRating3" name="targetGroupCogReactRating3" value=3 required> Very likely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupCogReactRating3" name="targetGroupCogReactRating3" value=2> Somewhat likely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupCogReactRating3" name="targetGroupCogReactRating3" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupCogReactRating3" name="targetGroupCogReactRating3" value=0> Very unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupCogReactRating3" name="targetGroupCogReactRating3" value=-1> None</label>
-            </td>
-            <td>Suggest a better reaction:<br>
-            <input type="text" name="targetGroupCogReactSuggestion3" placeholder="the effect on the target will be..."></td>
-          </tr>
-          <tr>
-            <td class="cb-pink">Type of offensiveness&nbsp;</td>
-            <td class="cb-gray">${offensiveness3}</td>
-            <td>
-              <label><input class="likelihood" type="radio" for="offensivenessRating3" name="offensivenessRating3" value=3 required> Very likely</label><br>
-              <label><input class="likelihood" type="radio" for="offensivenessRating3" name="offensivenessRating3" value=2> Somewhat likely</label><br>
-              <label><input class="likelihood" type="radio" for="offensivenessRating3" name="offensivenessRating3" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="offensivenessRating3" name="offensivenessRating3" value=0> Very unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="offensivenessRating3" name="offensivenessRating3" value=-1> None/Harmless</label>
-            </td>
-            <td>Suggest a better  <a href="#" data-toggle="tooltip" data-placement="right"
-                    data-html="true" 
-                    title="<p style='text-align:left'>
-                    <ul style='text-align:left;'> 
-                    <li>profanity</li>
-                    <li>microaggression</li>
-                    <li>offensive generalization</li>
-                    <li>stereotype</li>
-                    <li>sexism</li>
-                    <li>racism, and etc.</li>
-                    </ul> Feel free to come up with other types you see fit!
-                    </p>
-                    ">offensiveness</a>:<br>
-            <input type="text" name="offensivenessSuggestion3" placeholder="..."></td>
-          </tr>
- 
-        </table>
-      </div>
       <div class="col-12 mt-5" id="demogQuestions" style="display: inline-block;">
-        <h4 style="font-style: italic;">Please tell us about yourself <small>(this will remain confidential)</small></h4>How people perceive offensiveness/inequality is influenced by their own societal experience.
+        <h4 style="font-style: italic;">2. Please tell us about yourself <small>(this will remain confidential)</small></h4>How people perceive offensiveness/inequality is influenced by their own societal experience.
         <form style="margin-top: 20px;">
           <div class="form-group row">
             <h6 class="col-12">What is your gender?</h6><label for="gender" class="col-sm-2 col-form-label">Gender identity</label>
@@ -1183,29 +901,30 @@ window.onload = function() {
         </form>
       </div>
     </div>
-      <div class="row justify-content-center">
-        <div class="col-9" id="commentSection" style="display: inline-block;text-align: center;">
-          <p style="font-size:10pt;margin-top: 50px;">
-            Optional Feedback: Thanks for filling out the questions above!
-            If something about the hit was unclear, please either leave a comment in the box below!
-            We would like to make this HIT easier for future workers, so we really appreciate feedback though it is optional.
+  
+    <div class="row justify-content-center">
+      <div class="col-9" id="commentSection" style="display: inline-block;text-align: center;">
+        <p style="font-size:10pt;margin-top: 50px;">
+          Optional Feedback: Thanks for filling out the questions above!
+          If something about the hit was unclear, please either leave a comment in the box below!
+          We would like to make this HIT easier for future workers, so we really appreciate feedback though it is optional.
+          <br>
+          If you have concerns or questions, please email us!
+        </p>
+        <textarea style="margin-left:10px;margin-top:10px;width: 95%;" rows="2" name="commentbox"></textarea>
+        <br><br>
+        <center>
+          <div class="alert alert-danger" id="submitAlert" style="display: none;">
+            Whoops you missed some questions!
             <br>
-            If you have concerns or questions, please email us!
-          </p>
-          <textarea style="margin-left:10px;margin-top:10px;width: 95%;" rows="2" name="commentbox"></textarea>
-          <br><br>
-          <center>
-            <div class="alert alert-danger" id="submitAlert" style="display: none;">
-              Whoops you missed some questions!
-              <br>
-              Note: if the submit button is disabled and you're confident this is an error, please screenshot your answers and the console output (Ctrl+Shift+J or Cmd+Shift+J).
-            </div>
-            <input type="submit" id="submitButton" class="btn btn-primary" value="Submit Hit!">       
-          </center>
-        </div>
+            Note: if the submit button is disabled and you're confident this is an error, please screenshot your answers and the console output (Ctrl+Shift+J or Cmd+Shift+J).
+          </div>
+          <input type="submit" id="submitButton" class="btn btn-primary" value="Submit Hit!">       
+        </center>
       </div>
     </div>
-  </fieldset>
+  </div>
+</fieldset>
 </section>
 
 <script>
@@ -1214,7 +933,11 @@ window.onload = function() {
   $(function () {
   $('[data-toggle="tooltip"]').tooltip()
   })
-  
+  function scrollToAnchor(aid){
+    console.log(aid);
+    var aTag = $(aid);
+    $('html,body').animate({scrollTop: aTag.offset().top},'slow');
+  }
   $("label.btn-checkbox>input[type='checkbox']").each(function(ix,e){
     var value = $(e).parent().prop("innerText").trim();
     e.value = value == "" ? "_other_" : value;
@@ -1301,20 +1024,12 @@ window.onload = function() {
   function layout(){
     $("#postText").each(function (i,e){
       ee = e;
-      e.innerText = renderEmoji(e.innerText);
+      //e.innerText = renderEmoji(e.innerText);
     });
-    var attnIx1 = Math.floor(Math.random()*attentionChecks.length);
-    var attnIx2 = Math.floor(Math.random()*attentionChecks.length);
-    var attnIx3 = Math.floor(Math.random()*attentionChecks.length); 
-    console.log("Attention check "+(attnIx1+1)+" "+attentionChecks[attnIx1])
-    $("#attentionCheckInstr1").text(attentionChecks[attnIx1]);
-    $("#attentionCheckCorrect1").val(attnIx1+1);
-    console.log("Attention check "+(attnIx2+1)+" "+attentionChecks[attnIx2])
-    $("#attentionCheckInstr2").text(attentionChecks[attnIx2]);
-    $("#attentionCheckCorrect2").val(attnIx2+1);
-    console.log("Attention check "+(attnIx3+1)+" "+attentionChecks[attnIx3])
-    $("#attentionCheckInstr3").text(attentionChecks[attnIx3]);
-    $("#attentionCheckCorrect3").val(attnIx3+1);
+    var attnIx = Math.floor(Math.random()*attentionChecks.length);
+    console.log("Attention check "+(attnIx+1)+" "+attentionChecks[attnIx])
+    $("#attentionCheckInstr").text(attentionChecks[attnIx]);
+    $("#attentionCheckCorrect").val(attnIx+1);
   }
   function getURLParams(){
     var search = location.search;
@@ -1340,6 +1055,7 @@ window.onload = function() {
       $("#actualTask").show();
       $("#consentMessage").hide();
       $("#clickedConsentTime").val((new Date()).getTime());
+      scrollToAnchor("#actualTask");
     } else {
       $("#actualTask").hide();
       $("#consentMessage").show();
@@ -1372,67 +1088,67 @@ window.onload = function() {
     
     return out;
   }
-  // function dealWithWorkerInfo(sqlResponse){
-  //   if (sqlResponse == ""){
-  //     /* we don't have this worker in our DB*/
-  //     console.log("New worker!");
-  //     $(".prefilled-message").hide();
-  //     if (location.hostname == "homes.cs.washington.edu"){
-  //       $("#consent").prop("checked",true);
-  //       toggleConsent(true);
-  //     }
-  //   } else {
-  //     workerInfo = JSON.parse(sqlResponse);
-  //     console.log(workerInfo);
-  //     // Bypass consent? Only on UW servers
-  //     if (location.hostname == "homes.cs.washington.edu"){
-  //       $("#consent").prop("checked",true);
-  //       toggleConsent(true);
-  //     }
-  //     $(".prefilled-message").show();
-  //     $("#annotatorGender").val(workerInfo["gender"]);
-  //     $("#annotatorAge").val(workerInfo["age"]);
-  //     $("#annotatorRace").val(workerInfo["race"]);
-  //     //$("#annotatorPolitics").val(workerInfo["politics"]);
-  //     $('#annotatorPolitics'+workerInfo["politics"]).prop("checked",true)
-  //     $("#annotatorMinority").val(workerInfo["otherMinority"]);
+  function dealWithWorkerInfo(sqlResponse){
+    if (sqlResponse == ""){
+      /* we don't have this worker in our DB*/
+      console.log("New worker!");
+      $(".prefilled-message").hide();
+      if (location.hostname == "homes.cs.washington.edu"){
+        $("#consent").prop("checked",true);
+        toggleConsent(true);
+      }
+    } else {
+      workerInfo = JSON.parse(sqlResponse);
+      console.log(workerInfo);
+      // Bypass consent? Only on UW servers
+      if (location.hostname == "homes.cs.washington.edu"){
+        $("#consent").prop("checked",true);
+        toggleConsent(true);
+      }
+      $(".prefilled-message").show();
+      $("#annotatorGender").val(workerInfo["gender"]);
+      $("#annotatorAge").val(workerInfo["age"]);
+      $("#annotatorRace").val(workerInfo["race"]);
+      //$("#annotatorPolitics").val(workerInfo["politics"]);
+      $('#annotatorPolitics'+workerInfo["politics"]).prop("checked",true)
+      $("#annotatorMinority").val(workerInfo["otherMinority"]);
     
-  //   }
-  // }
-  // function checkIfWorkerExists(){
-  //   var urlParams = getURLParams();
-  //   var requestParams = "?"+prepSQLparamsCheck(urlParams)+"&action=check";//location.search+"&action=check";
-  //   var requestURL = "https://homes.cs.washington.edu/~msap/debug/neural-detox/checkStoreWorkerDemographicsMore.php";
-  //   var xhttp = new XMLHttpRequest();
-  //   console.log(requestURL+requestParams);
-  //   xhttp.open("POST", requestURL+requestParams, true);
-  //   xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-  //   xhttp.onreadystatechange = function() {
-  //     if (this.readyState == 4 && this.status == 200) {
-  //       //var responseRaw = this.responseText;
-  //       dealWithWorkerInfo(this.responseText);
-  //       //console.log("Received an answer!"+this.responseText);
-  //     }
-  //   };
-  //   xhttp.send(requestParams);
-  // }
-  // function sendWorkerInfo(){
-  //   var urlParams = getURLParams();
-  //   var requestParams = "?"+prepSQLparamsCheck(urlParams)+"&action=store&"+prepSQLparamsStore();
-  //   var requestURL = "https://homes.cs.washington.edu/~msap/debug/neural-detox/checkStoreWorkerDemographicsMore.php";
-  //   var xhttp = new XMLHttpRequest();
-  //   console.log(requestURL+requestParams);
-  //   xhttp.open("POST", requestURL+requestParams, true);
-  //   xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-  //   xhttp.onreadystatechange = function() {
-  //     if (this.readyState == 4 && this.status == 200) {
-  //       //var responseRaw = this.responseText;
-  //       //dealWithWorkerInfo(this.responseText);
-  //       console.log("Received an answer: '"+this.responseText+"'");
-  //     }
-  //   };
-  //   xhttp.send(requestParams);
-  // }
+    }
+  }
+  function checkIfWorkerExists(){
+    var urlParams = getURLParams();
+    var requestParams = "?"+prepSQLparamsCheck(urlParams)+"&action=check";//location.search+"&action=check";
+    var requestURL = "https://homes.cs.washington.edu/~msap/debug/neural-detox/checkStoreWorkerDemographicsMore.php";
+    var xhttp = new XMLHttpRequest();
+    console.log(requestURL+requestParams);
+    xhttp.open("POST", requestURL+requestParams, true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        //var responseRaw = this.responseText;
+        dealWithWorkerInfo(this.responseText);
+        //console.log("Received an answer!"+this.responseText);
+      }
+    };
+    xhttp.send(requestParams);
+  }
+  function sendWorkerInfo(){
+    var urlParams = getURLParams();
+    var requestParams = "?"+prepSQLparamsCheck(urlParams)+"&action=store&"+prepSQLparamsStore();
+    var requestURL = "https://homes.cs.washington.edu/~msap/debug/neural-detox/checkStoreWorkerDemographicsMore.php";
+    var xhttp = new XMLHttpRequest();
+    console.log(requestURL+requestParams);
+    xhttp.open("POST", requestURL+requestParams, true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        //var responseRaw = this.responseText;
+        //dealWithWorkerInfo(this.responseText);
+        console.log("Received an answer: '"+this.responseText+"'");
+      }
+    };
+    xhttp.send(requestParams);
+  }
   function validate(){
   
     valid = $("input:invalid").length == 0;
@@ -1479,14 +1195,17 @@ window.onload = function() {
 <style type="text/css">
 
 #examples-table {
-  border-style: solid solid solid solid;
+  /*border-style: none solid none solid;*/
   border-width: 1px;
   border-color: #dee2e6;
   border-radius: 5px;
   padding: 2px;
 }
 #examples-table td {
-  border: #dee2e6;
+  border-top: #dee2e6;
+  border-bottom: #dee2e6;
+  border-left: #ffffff;
+  border-right: #ffffff;
   border-style: solid;
   border-width: 1px;
   padding: 2px;
@@ -1506,7 +1225,7 @@ window.onload = function() {
   padding: 0px 10px;
 }
 body, td, .btn { 
-  font-size:0.85rem;
+  /*font-size:0.85rem;*/
 }
 label {
   margin-bottom: 0px;
@@ -1724,8 +1443,8 @@ todo {
   border-radius: 0.25rem;
   display: flex;
   flex-direction: column;
-  font-family: "SanFrancisco";
-  font-size: 1.25rem;
+  /*font-family: "SanFrancisco";*/
+  /*font-size: 1.25rem;*/
   margin: 0 auto 1rem;
   max-width: 600px;
   padding: 0.5rem 1.5rem;
@@ -1831,8 +1550,21 @@ p[class^="from-"].emoji::before {
 .margin-t_one {
   margin-top: 1rem !important;
 }
-
-
+.speaker {
+  border-radius: .2em;
+  background-color: #ACCFF2;/*#D5E7F9;*/
+  padding: .5em;
+}
+.listener {
+  border-radius: .2em;
+  background-color: #CAE1F7;
+  padding: .5em;
+}
+.situation {
+  border-radius: .2em;
+  background-color: #DDECFA;
+  padding: .5em;
+}
 </style>
 </body>
 </html>

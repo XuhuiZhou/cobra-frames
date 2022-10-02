@@ -120,8 +120,7 @@ def addExamplesToPost(p,examples,n=10):
 def formatPosts(p,preamble="",**kwargs):
   # out = preamble+"\n\nStatement: "+p+"\nSocial context:"
   #f = [formatting[v].format(e[v]) for v in variables if e[v]]
-  f = [formatting[v].format(p[kwargs[v+"_col"]])
-       for v in variables if v+"_col" in kwargs and kwargs[v+"_col"] in p and p[kwargs[v+"_col"]] != ""]
+  f = [formatting[v].format(p[kwargs[v+"_col"]]) for v in variables if v+"_col" in kwargs and kwargs[v+"_col"] in p and p[kwargs[v+"_col"]] != ""]
   out = preamble+p["examples"]+"\n\n"+"\n".join(f)+"\n"
   out+= formatting[variables[variables.index("statement")+1]].split("{}")[0].strip()
   return out

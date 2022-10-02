@@ -1,6 +1,7 @@
 #!/bin/sh
 
-EXAMPLE='./data/examples.v2.toxonly.csv'
+EXAMPLE='./data/examples.v2.contextOnlyDiverse.csv'
+#EXAMPLE_CONT='./data/examples.v2.contextOnlyCombined.csv'
 #### pilot one
 #INPUT='./data/sbic.trn.r60.gpt3socCont.csv'
 #OUTPUT='./data/sbic.inference.csv'
@@ -8,15 +9,19 @@ EXAMPLE='./data/examples.v2.toxonly.csv'
 #OUTPUT='./data/mAgr.inference.csv'
 
 #### pilot two
-#INPUT='./data/source_data/mAgr.onlyQuotes.csv'
-#OUTPUT='./data/inference_data/mAgr.inference2.csv'
-INPUT='./data/source_data/SBIC.v2.agg.trn.csv'
-OUTPUT='./data/inference_data/sbic.inference2.csv'
-SEED=42
+# INPUT='./data/source_data/mAgr.onlyQuotes.csv'
+# OUTPUT='./data/inference_data/mAgr.inference2_ex.csv'
+# INPUT='./data/source_data/SBIC.v2.agg.trn.csv'
+# OUTPUT='./data/inference_data/sbic.inference_ex.csv'
+INPUT='./data/source_data/toxigen.csv'
+OUTPUT='./data/inference_data/toxigen.inference_ex.csv'
+# INPUT='./data/source_data/example_candidate_toxigen.csv'
+# OUTPUT='./data/inference_data/example_candidate.inference.csv'
+SEED=39
 
-python populateSBFwithGPT3.v2.py \
+python populateSBFwithGPT3.v5.py \
     --input_file $INPUT \
-    --example_file $EXAMPLE \
+    --example_file_context $EXAMPLE \
     --output_file $OUTPUT \
     --random_seed $SEED \
-    --sample 40 \
+    --sample 20 \
