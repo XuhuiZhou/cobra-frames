@@ -56,10 +56,13 @@ window.onload = function() {
       <div class="card-header" style="color: #fff;background-color: #337ab7;border-color: #337ab7;"><strong>Short instructions &amp; Consent Form</strong></div>
       <div class="card-body row">
          <div class="col-7">
-            <p><em><strong>Summary</strong></em>: This research study aims to <strong>understand how toxicity, hate, and social biases appear in language</strong>. You will <strong>read a potentially toxic or biased statement and some explanations</strong> of what it means, and <strong>rate the explanations</strong>. This should take 5-10 minutes.
+            <p><em><strong>Summary</strong></em>: This research study aims to <strong>understand how toxicity, hate, 
+              and social biases appear in language</strong>. 
+              You will <strong>read a potentially toxic or biased statement and its relevant context</strong>, 
+              and <strong>rate the context</strong>. This should take less than 3 minutes.
             </p>
             <p>
-               <em>Background:</em> Here at CMU, we are passionate about  about understanding how potentially toxic or disrespectful language or stereotypes can be used against certain demographics/groups of people (e.g. racism, sexism, etc.).
+               <em>Background:</em> Here at CMU, we are passionate about understanding how potentially toxic or disrespectful language or stereotypes can be used against certain demographics/groups of people (e.g. racism, sexism, etc.).
                Although there is no direct benefit to you for participating, we very much appreciate your help in identifying and explaining such language/stereotypes, since this is something computational AI systems have no clue about. 
             </p>
             <p><em>Content warning</em>: 
@@ -80,7 +83,7 @@ window.onload = function() {
             </p>
             <p>
                <em>Contact</em>: If you have any questions about this study, you should feel free to ask them by contacting us (via the MTurk interface or via email at maartensap@cmu.edu). If you have questions later, desire additional information, or wish to withdraw your participation please contact Maarten Sap via e-mail in accordance with the contact information listed above.  
-               If you have questions pertaining to your rights as a research participant; or to report concerns to this study, you should contact the Office of Research integrity and Compliance at Carnegie Mellon University, referencing study number STUDY2022_00000331. Email: <a href="mailto:irb-review@andrew.cmu.edu">irb-review@andrew.cmu.edu</a>. Phone: 412-268-1901 or 412-268-5460. 
+               If you have questions pertaining to your rights as a research participant; or to report concerns about this study, you should contact the Office of Research integrity and Compliance at Carnegie Mellon University, referencing study number STUDY2022_00000331. Email: <a href="mailto:irb-review@andrew.cmu.edu">irb-review@andrew.cmu.edu</a>. Phone: 412-268-1901 or 412-268-5460. 
             </p>
 
          </div>
@@ -131,23 +134,23 @@ window.onload = function() {
            </p>
            
           </div-->
-
           <div class="col-12">
             <h5>Detailed instructions</h5>
             <p style="margin-bottom: .5rem;">
               <span class="numbering">1)</span> 
-                Carefully <strong>read the statement or message and its context</strong>, and with a US sociocultural perspective in mind.
+              Carefully read the scenario where a <span class="cb-purple">speaker</span> 
+              is saying a <strong>statement</strong> to the <span class="cb-orange">listener</span> 
+              in a specific <span class="cb-teal">situational context</span>.
             </p>
             
             <p style="margin-bottom: .5rem;">
               <span class="numbering">2)</span> 
-                <strong>Account for the context (situation, speaker and listener identities)</strong> when interpreting the statement.
+              Rate how plausible/realistic/likely the <span class="cb-purple">speaker identity</span>, 
+              <span class="cb-orange">listener identity</span> , and <span class="cb-teal">situational contextal context</span> are. 
             </p>
 
             <p style="margin-bottom: .5rem;">
-              <span class="numbering">3)</span> <strong>Rate the context</strong> about the statement or message. 
-                <strong>If implausible, please suggest a better 
-                context</strong> using the text box beside the radio buttons. 
+              <span class="numbering">3)</span> If one aspect seems <strong>unrealistic or implausible/unrealistic</strong>, please provide a suggestion.
             </p>
             <br>
         </div>
@@ -196,21 +199,21 @@ window.onload = function() {
                 </thead>
                 <tbody>
                   <tr>
-                    <td class="cb-teal">Situation</td>
+                    <td class="cb-teal">Situational context</td>
                     <td>high school cafeteria chatting about a girl with learning disability</td>
-                    <td>plausible</td>
+                    <td>plausible/realistic</td>
                     <td></td>
                   </tr>
                   <tr>
                     <td class="cb-purple">Speaker identity</td>
                     <td>student with learning disability</td>
-                    <td>implausible</td>
+                    <td>implausible/unrealistic</td>
                     <td>student without learning disability</td>
                   </tr>
                   <tr>
                     <td class="cb-orange">Listener identity</td>
                     <td>other students</td>
-                    <td>plausible</td>
+                    <td>plausible/realistic</td>
                     <td></td>
                   </tr>
                   <!-- <tr>
@@ -261,21 +264,21 @@ window.onload = function() {
                           </thead>
                           <tbody>
                             <tr>
-                              <td class="cb-teal">Situation</td>
+                              <td class="cb-teal">Situational context</td>
                               <td>two friends talking about math in the school</td>
-                              <td>implausible</td>
+                              <td>implausible/unrealistic</td>
                               <td>two friends talking about culture in the school</td>
                             </tr>
                             <tr>
                               <td class="cb-purple">Speaker identity</td>
                               <td>black person</td>
-                              <td>plausible</td>
+                              <td>plausible/realistic</td>
                               <td></td>
                             </tr>
                             <tr>
                               <td class="cb-orange">Listener identity</td>
                               <td>black person</td>
-                              <td>plausible</td>
+                              <td>plausible/realistic</td>
                               <td></td>
                             </tr>
                             <!-- <tr>
@@ -326,21 +329,21 @@ window.onload = function() {
                           </thead>
                           <tbody>
                             <tr>
-                              <td class="cb-teal">Situation</td>
+                              <td class="cb-teal">Situational context</td>
                               <td>conversation between two people just met in a bar</td>
-                              <td>plausible</td>
+                              <td>plausible/realistic</td>
                               <td></td>
                             </tr>
                             <tr>
                               <td class="cb-purple">Speaker identity</td>
                               <td>white lesbian</td>
-                              <td>implausible</td>
+                              <td>implausible/unrealistic</td>
                               <td>white man</td>
                             </tr>
                             <tr>
                               <td class="cb-orange">Listener identity</td>
                               <td>white man</td>
-                              <td>implausible</td>
+                              <td>implausible/unrealistic</td>
                               <td>white lesbian</td>
                             </tr>
                             <!-- <tr>
@@ -371,7 +374,7 @@ window.onload = function() {
         <div class="row justify-content-center" style="background-color: ghostwhite; border: 1px solid darkgrey; border-radius: 3px; width: 80%; margin-left: auto; margin-right: auto;">
           <div class="col-12 text-center" style="margin: 1em 0;">
             <div class="situation">
-            <em style="font-size: 18; color: #006cd8;  font-weight: bold;">Situation</em>: <span id="speechContextInput">${speechContext}</span>
+            <em style="font-size: 18; color: #006cd8;  font-weight: bold;">Situational context</em>: <span id="speechContextInput">${speechContext}</span>
             </div>
           </div>
           <div class="col-3">
@@ -392,28 +395,28 @@ window.onload = function() {
           </div>
           <div class="col-12">
             <label style="text-align: right; float: right; margin: 1em 0;">
-              <input id="dontUnderstand" name="dontUnderstand" type="checkbox" onclick="toggleDontUnderstandAck(this.checked)">I'm having a lot of trouble understanding this message.
+              <input id="dontUnderstand" name="dontUnderstand" type="checkbox" onclick="toggleDontUnderstandAck(this.checked)">I'm having a lot of trouble understanding this statement.
             </label>
           </div>
         </div>
         <div class="col-6 alert alert-warning" id="dontUnderstandAck" style="display: none;">
-          Thanks for letting us know that the message/context is hard to understand! Please still try your best to answer the questions below!
+          Thanks for letting us know that the message is hard to understand! Please still try your best to answer the questions below!
         </div>
 
         <div class="col-12 mt-5 mb-2">
-          <h4 style="font-style: italic;">1. Does the <span class="cb-teal">situation</span> seem plausible/realistic?</h4>
+          <h4 style="font-style: italic;">1. Does the <span class="cb-teal">situational context</span> seem plausible/realistic?</h4>
         </div>
         <table class="table table-striped" id="inputTable">
           <tr>
-            <td class="cb-teal" style="width: 15%;">Situation</td>
+            <td class="cb-teal" style="width: 15%;">Situational context</td>
             <td class="cb-gray" style="width: 20%;">${speechContext}</td>
-            <td style="width: 50%;">
-              <label>very implausible <input class="agreement" type="radio" for="situationRating" name="situationRating" value=0 required></label>
+            <td style="width: 60%;">
+              <label>very implausible/unrealistic <input class="agreement" type="radio" for="situationRating" name="situationRating" value=0 required></label>
               <label><input class="agreement" type="radio" for="situationRating" name="situationRating" value=1> </label>
               <label><input class="agreement" type="radio" for="situationRating" name="situationRating" value=2> </label>
               <label><input class="agreement" type="radio" for="situationRating" name="situationRating" value=3> </label>
-              <label><input class="agreement" type="radio" for="situationRating" name="situationRating" value=4> very plausible</label></td>
-            <td>Suggest a better situation:<br>
+              <label><input class="agreement" type="radio" for="situationRating" name="situationRating" value=4> very plausible/realistic</label></td>
+            <td>Suggest a better situational context:<br>
             <input type="text" placeholder="..." name="situationSuggestion"></td>
           </tr>
         </table>
@@ -425,12 +428,12 @@ window.onload = function() {
           <tr>
             <td class="cb-purple" style="width: 15%;">Speaker identity</td>
             <td class="cb-gray" style="width: 20%;">${speakerIdentity}</td>
-            <td style="width: 50%;">
-              <label>very implausible <input class="agreement" type="radio" for="speakerIdenRating" name="speakerIdenRating" value=0 required></label>
+            <td style="width: 60%;">
+              <label>very implausible/unrealistic <input class="agreement" type="radio" for="speakerIdenRating" name="speakerIdenRating" value=0 required></label>
               <label><input class="agreement" type="radio" for="speakerIdenRating" name="speakerIdenRating" value=1> </label>
               <label><input class="agreement" type="radio" for="speakerIdenRating" name="speakerIdenRating" value=2> </label>
               <label><input class="agreement" type="radio" for="speakerIdenRating" name="speakerIdenRating" value=3> </label>
-              <label><input class="agreement" type="radio" for="speakerIdenRating" name="speakerIdenRating" value=4> very plausible</label></td>
+              <label><input class="agreement" type="radio" for="speakerIdenRating" name="speakerIdenRating" value=4> very plausible/realistic</label></td>
             <td>Suggest a better speaker identity:<br>
             <input type="text" placeholder="..." name="speakerIdenSuggestion"></td>
           </tr>
@@ -443,12 +446,12 @@ window.onload = function() {
           <tr>
             <td class="cb-orange" style="width: 15%;">Listener identity</td>
             <td class="cb-gray" style="width: 20%;">${listenerIdentity}</td>
-            <td style="width: 50%;">
-              <label>very implausible <input class="agreement" type="radio" for="listenerIdenRating" name="listenerIdenRating" value=0 required></label>
+            <td style="width: 60%;">
+              <label>very implausible/unrealistic <input class="agreement" type="radio" for="listenerIdenRating" name="listenerIdenRating" value=0 required></label>
               <label><input class="agreement" type="radio" for="listenerIdenRating" name="listenerIdenRating" value=1> </label>
               <label><input class="agreement" type="radio" for="listenerIdenRating" name="listenerIdenRating" value=2> </label>
               <label><input class="agreement" type="radio" for="listenerIdenRating" name="listenerIdenRating" value=3> </label>
-              <label><input class="agreement" type="radio" for="listenerIdenRating" name="listenerIdenRating" value=4> very plausible</label></td>
+              <label><input class="agreement" type="radio" for="listenerIdenRating" name="listenerIdenRating" value=4> very plausible/realistic</label></td>
             <td>Suggest a better listener identity:<br>
             <input type="text" placeholder="..." name="listenerIdenSuggestion"></td>
           </tr>
@@ -476,7 +479,9 @@ window.onload = function() {
         </div> 
         <table class="table table-striped" id="inputTable">
           <tr>
-            <td class="cb-gray" style="width: 30%;">Please select the <span id="attentionCheckInstr">fifth</span> option from the top, to double check you're doing this task attentively.</td>
+            <td class="cb-gray" style="width: 30%;">Please select the <strong><span id="attentionCheckInstr">fifth</span></strong> option from the top, 
+              to double check you're doing this task attentively. (<small>We apologize for asking you to do this. 
+              However, we get a lot of spammers so we need to prevent people from randomly clicking.</small>)</td> 
             <div style="display: none;">
               <input name="attentionCheckCorrect" id="attentionCheckCorrect" placeholder="3" type="number">
             </div>
