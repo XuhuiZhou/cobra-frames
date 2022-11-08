@@ -91,6 +91,7 @@ window.onload = function() {
             <div class="alert alert-info" role="alert">
               Note: this is a <strong>pilot task</strong>. More HITs would be available in the future. 
               Meanwhile, we would love to hear your feedback on how to make the task easier to understand! 
+              <b>For annotators who have done this task before, please make sure you read the updated notes under the detailed instructions!</b>
             </div>
             <hr>
             <h6>Consent to the task to participate:</h6>
@@ -142,23 +143,51 @@ window.onload = function() {
               is saying a <strong>statement</strong> to the <span class="cb-orange">listener</span> 
               in a specific <span class="cb-teal">situational context</span>.
             </p>
-            
+
             <p style="margin-bottom: .5rem;">
               <span class="numbering">2)</span> 
+              Rate how helpful/informative the <span class="cb-teal">situational context</span> is. 
+            </p>
+            
+            <p style="margin-bottom: .5rem;">
+              <span class="numbering">3)</span> 
               Rate how plausible/realistic/likely the <span class="cb-purple">speaker identity</span>, 
               <span class="cb-orange">listener identity</span> , and <span class="cb-teal">situational contextal context</span> are. 
             </p>
 
             <p style="margin-bottom: .5rem;">
-              <span class="numbering">3)</span> If one aspect seems <strong>unrealistic or implausible/unrealistic</strong>, please provide a suggestion.
+              <span class="numbering">4)</span> If one aspect seems <strong>implausible/unrealistic/unhelpful</strong>, please provide a suggestion.
             </p>
-            <br>
+            <b>❗Updated Notes</b>
+            <a data-toggle="collapse" href="#notes" role="button" aria-expanded="false" aria-controls="instructions" style="color:#0080ff;">
+              (Expand/Collapse)
+            </a>:
+            <div id="notes" class="collapse show">
+              <ul>
+                <li>
+                  <b>Rare situational context:</b> Sometimes some situational context may seem to rarely happen in real life. For example, a statement
+                  "all jews are money grabbing, hook-nosed monsters" has the situational context "a discussion about the Holocaust in a world history classroom".
+                  Though it is rarely the case someone would say things like this in a history classroom, it could happen and makes the statement extremely hateful.
+                </li>
+                <li>
+                  <b>Concrete scene:</b> An informative and helpful situational context should provide some background information. 
+                  It could be "a history class", "polical rally", and etc. It could also introduce the topic of the conversation and previous interactions such as 
+                  "a debate on single mothers' custody rights" and "reminiscing about childhood with friends". 
+                </li>
+                <li>
+                  <b>Avoid only writing the explanation:</b> The examples provide explanations to the ratings. However, you are not required to do so in 
+                  the actual task. You are welcome to write your explanation in the suggestion box, but please remember to write the better alternative first.
+                </li>
+                <!-- <li>
+                  <b>Think twice and be open-minded:</b> It is very easy to reject something or think something is implausible
+                </li> -->
+              </ul> 
+            </div>
         </div>
         <div class="row">
           <div class="col-12">
           </div>
         </div>
-
         <div class="row justify-content-center" style="margin-top: 20px;">
           <div class="col-11" id="table-container">
             <h5>Examples <small><a href=".extra-exs" class="collapsed" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample" onclick="expExamples();">
@@ -168,12 +197,12 @@ window.onload = function() {
               <div class="row justify-content-center" style="background-color: ghostwhite; border: 1px solid darkgrey; border-radius: 3px; width: 80%; margin-left: auto; margin-right: auto; margin-top: 20px;">
                 <div class="col-12 text-center" style="margin: 1em 0;">
                   <div class="situation">
-                  <em style="font-size: 18; color: #006cd8;  font-weight: bold;">Situation</em>: <span id="speechContextInput">high school cafeteria chatting about a girl with learning disability</span>
+                  <em style="font-size: 18; color: #1b9e77;  font-weight: bold;">Situational context</em>: <span id="speechContextInput">high school cafeteria chatting about a girl with learning disability</span>
                   </div>
                 </div>
                 <div class="col-3">
                   <div class="speaker">
-                    <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Speaker identity</em>: <span id="speakerInput" >student with learning disability</span>
+                    <em style="font-size: 15; color: #7570b3;  font-weight: bold;">Speaker identity</em>: <span id="speakerInput" >student with learning disability</span>
                     </div>
                 </div>
                 
@@ -184,7 +213,7 @@ window.onload = function() {
                 </div>
                 <div class="col-3">
                 <div class="listener">
-                  <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Listener identity</em>: <span id="listenerInput">other students</span>
+                  <em style="font-size: 15; color: #d95902;  font-weight: bold;">Listener identity</em>: <span id="listenerInput">other students</span>
                   </div>
                 </div>
               </div>
@@ -193,27 +222,34 @@ window.onload = function() {
               <table class="table table-hover" id="examples-table">
                 <thead class="thead-light">
                   <th scope="col" style="width: 10%;">Context</th>
-                  <th scope="col" style="width: 30%;"></th>
-                  <th scope="col" style="width: 20%;">Rating</th>
-                  <th scope="col" style="width: 40%;">Suggest a better alternative</th>
+                  <th scope="col" style="width: 25%;"></th>
+                  <th scope="col" style="width: 10%;">Rating</th>
+                  <th scope="col" style="width: 25%;">Suggest a better alternative</th>
+                  <th scope="col" style="width: 40%;">Explanation 
+                    <small>(Not the actual task, just for helping you understand it!)</small></th>
                 </thead>
                 <tbody>
                   <tr>
                     <td class="cb-teal">Situational context</td>
                     <td>high school cafeteria chatting about a girl with learning disability</td>
-                    <td>plausible/realistic</td>
+                    <td>helpful/informative <br>&<br> plausible </td>
                     <td></td>
+                    <td>This is <strong>helpful</strong> since it indicates the location where the statement happened and the casual environment.
+                      <br> This is <strong>plausible</strong> since the learning disability issue fits the statement.
+                    </td>
                   </tr>
                   <tr>
                     <td class="cb-purple">Speaker identity</td>
                     <td>student with learning disability</td>
-                    <td>implausible/unrealistic</td>
+                    <td>implausible/<br>unrealistic</td>
                     <td>student without learning disability</td>
+                    <td>This is <strong>implausible</strong> because someone with learning disability is unlikely to call other people retarded.</td>
                   </tr>
                   <tr>
                     <td class="cb-orange">Listener identity</td>
                     <td>other students</td>
                     <td>plausible/realistic</td>
+                    <td></td>
                     <td></td>
                   </tr>
                   <!-- <tr>
@@ -233,12 +269,12 @@ window.onload = function() {
                   <div class="row justify-content-center" style="background-color: ghostwhite; border: 1px solid darkgrey; border-radius: 3px; width: 80%; margin-left: auto; margin-right: auto; margin-top: 20px;">
                     <div class="col-12 text-center" style="margin: 1em 0;">
                             <div class="situation">
-                            <em style="font-size: 18; color: #006cd8;  font-weight: bold;">Situation</em>: <span id="speechContextInput">political argument between two friends</span>
+                            <em style="font-size: 18; color: #1b9e77;  font-weight: bold;">Situational context</em>: <span id="speechContextInput">a hate speech</span>
                             </div>
                           </div>
                           <div class="col-3">
                             <div class="speaker">
-                              <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Speaker identity</em>: <span id="speakerInput" >black person</span>
+                              <em style="font-size: 15; color: #7570b3;  font-weight: bold;">Speaker identity</em>: <span id="speakerInput" >black person</span>
                               </div>
                           </div>
                           
@@ -249,7 +285,7 @@ window.onload = function() {
                           </div>
                           <div class="col-3">
                           <div class="listener">
-                            <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Listener identity</em>: <span id="listenerInput">black person</span>
+                            <em style="font-size: 15; color: #d95902;  font-weight: bold;">Listener identity</em>: <span id="listenerInput">black person</span>
                             </div>
                           </div>
                         </div>
@@ -258,27 +294,34 @@ window.onload = function() {
                         <table class="table table-hover" id="examples-table">
                           <thead class="thead-light">
                             <th scope="col" style="width: 10%;">Context</th>
-                            <th scope="col" style="width: 30%;"></th>
-                            <th scope="col" style="width: 20%;">Rating</th>
-                            <th scope="col" style="width: 40%;">Suggest a better alternative</th>
+                            <th scope="col" style="width: 25%;"></th>
+                            <th scope="col" style="width: 10%;">Rating</th>
+                            <th scope="col" style="width: 25%;">Suggest a better alternative</th>
+                            <th scope="col" style="width: 40%;">Explanation 
+                              <small>(Not the actual task, just for helping you understand it!)</small></th>
                           </thead>
                           <tbody>
                             <tr>
                               <td class="cb-teal">Situational context</td>
-                              <td>two friends talking about math in the school</td>
-                              <td>implausible/unrealistic</td>
+                              <td>a hate speech</td>
+                              <td>unhelpful/<br>uninformative</td>
                               <td>two friends talking about culture in the school</td>
+                              <td>This is <strong>unhelpful/uninformative</strong> because the given context does not set a concrete scene.
+                              </td> 
                             </tr>
                             <tr>
                               <td class="cb-purple">Speaker identity</td>
                               <td>black person</td>
                               <td>plausible/realistic</td>
                               <td></td>
+                              <td>This is <strong>plausible</strong> because the speaker can be black even if the statement is discussing African-American people. 
+                                Biased statements can also come from in-group.</td> 
                             </tr>
                             <tr>
                               <td class="cb-orange">Listener identity</td>
                               <td>black person</td>
                               <td>plausible/realistic</td>
+                              <td></td>
                               <td></td>
                             </tr>
                             <!-- <tr>
@@ -291,6 +334,7 @@ window.onload = function() {
                         </table>
                         </div>
                 </div>
+
               </div>
 
             <div class="collapse show extra-exs">
@@ -298,12 +342,12 @@ window.onload = function() {
                   <div class="row justify-content-center" style="background-color: ghostwhite; border: 1px solid darkgrey; border-radius: 3px; width: 80%; margin-left: auto; margin-right: auto; margin-top: 20px;">
                     <div class="col-12 text-center" style="margin: 1em 0;">
                             <div class="situation">
-                            <em style="font-size: 18; color: #006cd8;  font-weight: bold;">Situation</em>: <span id="speechContextInput">conversation between two people just met in a bar</span>
+                            <em style="font-size: 18; color: #1b9e77;  font-weight: bold;">Situational context</em>: <span id="speechContextInput">conversation between two people just met in a bar</span>
                             </div>
                           </div>
                           <div class="col-3">
                             <div class="speaker">
-                              <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Speaker identity</em>: <span id="speakerInput" >white lesbian</span>
+                              <em style="font-size: 15; color: #7570b3;  font-weight: bold;">Speaker identity</em>: <span id="speakerInput" >white lesbian</span>
                               </div>
                           </div>
                           
@@ -314,7 +358,7 @@ window.onload = function() {
                           </div>
                           <div class="col-3">
                           <div class="listener">
-                            <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Listener identity</em>: <span id="listenerInput">white man</span>
+                            <em style="font-size: 15; color: #d95902;  font-weight: bold;">Listener identity</em>: <span id="listenerInput">white man</span>
                             </div>
                           </div>
                         </div>
@@ -323,28 +367,36 @@ window.onload = function() {
                         <table class="table table-hover" id="examples-table">
                           <thead class="thead-light">
                             <th scope="col" style="width: 10%;">Context</th>
-                            <th scope="col" style="width: 30%;"></th>
-                            <th scope="col" style="width: 20%;">Rating</th>
-                            <th scope="col" style="width: 40%;">Suggest a better alternative</th>
+                            <th scope="col" style="width: 25%;"></th>
+                            <th scope="col" style="width: 10%;">Rating</th>
+                            <th scope="col" style="width: 25%;">Suggest a better alternative</th>
+                            <th scope="col" style="width: 40%;">Explanation 
+                              <small>(Not the actual task, just for helping you understand it!)</small></th>
                           </thead>
                           <tbody>
                             <tr>
                               <td class="cb-teal">Situational context</td>
                               <td>conversation between two people just met in a bar</td>
-                              <td>plausible/realistic</td>
+                              <td>helpful/informative <br>&<br>
+                                plausible
+                              </td>
                               <td></td>
+                              <td>This is <strong>helpful/informative</strong> because it indicates that the two people are getting to know each other on a casual occasion.</td>
                             </tr>
                             <tr>
                               <td class="cb-purple">Speaker identity</td>
                               <td>white lesbian</td>
-                              <td>implausible/unrealistic</td>
-                              <td>white man</td>
+                              <td>plausible/realistic</td>
+                              <td></td>
+                              <td>This is <strong>somewhat plausible</strong>. Even though the statement 
+                                indicates that the speaker misunderstood college lesbians, the speaker can still be a lesbian.</td>
                             </tr>
                             <tr>
                               <td class="cb-orange">Listener identity</td>
                               <td>white man</td>
-                              <td>implausible/unrealistic</td>
+                              <td>implausible/<br>unrealistic</td>
                               <td>white lesbian</td>
+                              <td>This is <strong>implausible</strong> because the listener should be a lesbian according to the statement.</td>
                             </tr>
                             <!-- <tr>
                               <td class="cb-gold">Triple</td>
@@ -374,12 +426,12 @@ window.onload = function() {
         <div class="row justify-content-center" style="background-color: ghostwhite; border: 1px solid darkgrey; border-radius: 3px; width: 80%; margin-left: auto; margin-right: auto;">
           <div class="col-12 text-center" style="margin: 1em 0;">
             <div class="situation">
-            <em style="font-size: 18; color: #006cd8;  font-weight: bold;">Situational context</em>: <span id="speechContextInput">${speechContext}</span>
+            <em style="font-size: 18; color: #1b9e77;  font-weight: bold;">Situational context</em>: <span id="speechContextInput">${speechContext}</span>
             </div>
           </div>
           <div class="col-3">
           <div class="speaker">
-            <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Speaker identity</em>: <span id="speakerInput">${speakerIdentity}</span>
+            <em style="font-size: 15; color: #7570b3;  font-weight: bold;">Speaker identity</em>: <span id="speakerInput">${speakerIdentity}</span>
             </div>
           </div>
           
@@ -390,7 +442,7 @@ window.onload = function() {
           </div>
           <div class="col-3">
             <div class="listener">
-            <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Listener identity</em>: <span id="listenerInput">${listenerIdentity}</span>
+            <em style="font-size: 15; color: #d95902;  font-weight: bold;">Listener identity</em>: <span id="listenerInput">${listenerIdentity}</span>
             </div>
           </div>
           <div class="col-12">
@@ -404,20 +456,40 @@ window.onload = function() {
         </div>
 
         <div class="col-12 mt-5 mb-2">
-          <h4 style="font-style: italic;">1. Does the <span class="cb-teal">situational context</span> seem plausible/realistic?</h4>
+          <h4 style="font-style: italic;">1. Rate the <span class="cb-teal">situational context</span></h4>
+        </div>
+        <div class="col-12 mt-3 mb-2">
+          <h5 style="font-style: italic;">a. Does the <span class="cb-teal">situational context</span> supply appropriate and relevant information to set the scene and help you better understand the statement?</h5>
         </div>
         <table class="table table-striped" id="inputTable">
           <tr>
             <td class="cb-teal" style="width: 15%;">Situational context</td>
             <td class="cb-gray" style="width: 20%;">${speechContext}</td>
             <td style="width: 60%;">
-              <label>very implausible/unrealistic <input class="agreement" type="radio" for="situationRating" name="situationRating" value=0 required></label>
-              <label><input class="agreement" type="radio" for="situationRating" name="situationRating" value=1> </label>
-              <label><input class="agreement" type="radio" for="situationRating" name="situationRating" value=2> </label>
-              <label><input class="agreement" type="radio" for="situationRating" name="situationRating" value=3> </label>
-              <label><input class="agreement" type="radio" for="situationRating" name="situationRating" value=4> very plausible/realistic</label></td>
+              <label>unhelpful/uninformative <input class="agreement" type="radio" for="hsituationRating" name="hsituationRating" value=0 required></label>
+              <label><input class="agreement" type="radio" for="hsituationRating" name="hsituationRating" value=1> </label>
+              <label><input class="agreement" type="radio" for="hsituationRating" name="hsituationRating" value=2> </label>
+              <label><input class="agreement" type="radio" for="hsituationRating" name="hsituationRating" value=3> </label>
+              <label><input class="agreement" type="radio" for="hsituationRating" name="hsituationRating" value=4> helpful/informative</label></td>
             <td>Suggest a better situational context:<br>
-            <input type="text" placeholder="..." name="situationSuggestion"></td>
+            <input type="text" placeholder="..." name="hsituationSuggestion"></td>
+          </tr>
+        </table>
+        <div class="col-12 mt-3 mb-2">
+          <h5 style="font-style: italic;">b. Does the <span class="cb-teal">situational context</span> seem plausible/realistic?</h5>
+        </div>
+        <table class="table table-striped" id="inputTable">
+          <tr>
+            <td class="cb-teal" style="width: 15%;">Situational context</td>
+            <td class="cb-gray" style="width: 20%;">${speechContext}</td>
+            <td style="width: 60%;">
+              <label>very implausible/unrealistic <input class="agreement" type="radio" for="psituationRating" name="psituationRating" value=0 required></label>
+              <label><input class="agreement" type="radio" for="psituationRating" name="psituationRating" value=1> </label>
+              <label><input class="agreement" type="radio" for="psituationRating" name="psituationRating" value=2> </label>
+              <label><input class="agreement" type="radio" for="psituationRating" name="psituationRating" value=3> </label>
+              <label><input class="agreement" type="radio" for="psituationRating" name="psituationRating" value=4> very plausible/realistic</label></td>
+            <td>Suggest a better situational context:<br>
+            <input type="text" placeholder="..." name="psituationSuggestion"></td>
           </tr>
         </table>
 
@@ -474,7 +546,7 @@ window.onload = function() {
           </tr>
         </table> -->
         
-        <div class="col-12 mt-5 mb-2">
+        <!-- <div class="col-12 mt-5 mb-2">
           <h4 style="font-style: italic;">Attention check</h4>
         </div> 
         <table class="table table-striped" id="inputTable">
@@ -494,7 +566,7 @@ window.onload = function() {
             </td>
             <td><br>
          </tr>
-        </table>
+        </table> -->
       </div>
     </div>
   
@@ -545,7 +617,7 @@ window.onload = function() {
     var dim = e.target.name.replace(/Rating/,"")
     var val = parseInt($("input[name='"+dim+"Rating']:checked").prop("value"));
     console.log(dim,val);
-    if (val < 2 && val > -1) 
+    if (val < 3 && val > -1) 
       $("input[name='"+dim+"Suggestion']").prop("required","true");
     else 
       $("input[name='"+dim+"Suggestion']").prop("required","");
@@ -1147,17 +1219,17 @@ p[class^="from-"].emoji::before {
 }
 .speaker {
   border-radius: .2em;
-  background-color: #ACCFF2;/*#D5E7F9;*/
+  background-color: rgb(117, 112, 179, 0.2);/*#D5E7F9;*/
   padding: .5em;
 }
 .listener {
   border-radius: .2em;
-  background-color: #CAE1F7;
+  background-color: rgb(217, 95, 2, 0.2);
   padding: .5em;
 }
 .situation {
   border-radius: .2em;
-  background-color: #DDECFA;
+  background-color: rgb(27, 158, 119, 0.2);
   padding: .5em;
 }
 </style>

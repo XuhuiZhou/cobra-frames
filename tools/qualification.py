@@ -14,7 +14,6 @@ def main(args):
   df = pd.concat(dfs).set_index("WorkerId")
   
   print(df[args.qual_score_col].value_counts().sort_index())
-  breakpoint()
 
   if not args.qual_id:
     return
