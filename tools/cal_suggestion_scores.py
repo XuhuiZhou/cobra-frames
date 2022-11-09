@@ -1,4 +1,6 @@
 import pandas as pd
+import numpy as np
+from tqdm import tqdm
 import sys
 from bert_score import score
 from collections import defaultdict
@@ -49,7 +51,42 @@ def obtain_reference(df, s_var):
     return reference
 
 def calculate_scores(suggestions, reference, suggestions_var):
+    """
+    not gonna work for now
+    """
     scores = []
+    for id in tqdm(suggestions):
+        worker_score = []
+        worker_suggestions = suggestions[id]
+        for i,j,v in zip(worker_suggestions, reference, suggestions_var):
+            # If the reference is None, we don't calculate the score.
+            if j!="":
+                j = j.split(";")
+                print(i, j, v)
+                worker_score.append(score_rule(i,j,v))
+        scores.append(sum(worker_score)/len(worker_score))
+    return scores, suggestions.keys()
+
+def calculate_scores_accelerate(suggestions, reference, suggestions_var):
+    scores = []
+    cands = []
+    refs = []
+    for id in suggestions:
+        worker_suggestions = suggestions[id]
+        for i,j,v in zip(worker_suggestions, reference, suggestions_var):
+            # If the reference is None, we don't calculate the score.
+            if j!="":
+                j = j.split(";")
+                if type(i)==str:
+                    cands.append(i.replace('{}', ''))
+                    refs.append(j)
+                else:
+                    cands.append("")
+                    refs.append(j)
+    # Directly use the bert_score package to calculate the score here.
+    # TODO: Wrap it to a function to allow other methods.
+    P, R, F1 = score(cands, refs, lang='en', verbose=True)
+    index = 0
     for id in suggestions:
         worker_score = []
         worker_suggestions = suggestions[id]
@@ -57,7 +94,8 @@ def calculate_scores(suggestions, reference, suggestions_var):
             # If the reference is None, we don't calculate the score.
             if j!="":
                 j = j.split(";")
-                worker_score.append(score_rule(i,j,v))
+                worker_score.append(F1[index].item())
+                index += 1
         scores.append(sum(worker_score)/len(worker_score))
     return scores, suggestions.keys()
 
@@ -72,7 +110,7 @@ df_answer = pd.read_csv(answer_file)
 suggestions_var = [i for i in df.keys() if 'Suggestion' in i]
 worker_suggestions = compose_suggestions(df, suggestions_var)
 suggestions_reference = obtain_reference(df_answer, suggestions_var)
-scores, workers = calculate_scores(worker_suggestions, suggestions_reference, suggestions_var)
+scores, workers = calculate_scores_accelerate(worker_suggestions, suggestions_reference, suggestions_var)
 
 # Process the annotators' scores with attention checks
 # scores = [i*j for i,j in zip(scores, att_pass)]
