@@ -4,7 +4,7 @@ import torch
 import random
 import numpy as np
 import pandas as pd
-from datasets import load_dataset
+from datasets import Dataset
 from torch.utils.data import DataLoader, RandomSampler, SequentialSampler, TensorDataset
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
@@ -62,7 +62,7 @@ def set_seed(args):
 
 def tokenize_function(examples):
     breakpoint()
-    examples['text'] = f"Statement: {}"
+    examples['text'] = f"Statement: {sdf}"
     examples['text'] = text_prompt + examples['text']
     return tokenizer(examples["question"], examples['answer'], padding="max_length", truncation=True)
 
@@ -81,44 +81,19 @@ class T5_filter():
         self.stop = "\n\n"
         self.logprobs = 1
 
-    def getT5generation(self, x, variant="text-davinci-002", attempt=0):
-        time.sleep(0.06)
-        try:
-            r = openai.Completion.create(
-                engine=variant,
-                prompt=x,
-                temperature=self.temp,
-                stop=self.stop,
-                n=1,
-                # best_of=4,
-                top_p=0.9,
-                max_tokens=225,
-                presence_penalty=0.5,
-                frequency_penalty = 0.5,
-                logprobs=self.logprobs,
-            )
-        except openai.error.APIError as e:
-            print(e)
-            print("Sleeping for 10 seconds")
-            time.sleep(10)
-            if attempt > 10:
-                print("Reached attempt limit, giving up")
-                return None
-            else:
-                print("Trying again")
-                return self.getT5generation(x, variant=variant, attempt=attempt + 1)
-
-        c = r["choices"][0]
-        text = c["text"]
-        logprobs = c["logprobs"]["token_logprobs"]
-        # out = pd.Series(dict(socialContextGPT3=text,socialContextGPT3logprob=np.sum(logprobs)))
-        totalEx = x.split("\n\n")[-1]+text
-        d = self.parse_output(totalEx)
-
-        # d = {k: l.replace(v.replace(" {}",""),"").strip() for k, v in formatting.items() for l in totalEx.split("\n") if v.replace(" {}","") in l}
-        d["logprob"] = np.sum(logprobs)
-
-        return pd.Series(d)
+    def getT5generation(self, df):
+        dataset = Dataset.from_pandas(df)
+        device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
+        model = AutoModelForSeq2SeqLM.from_pretrained("google/flan-t5-small")
+        tokenizer = AutoTokenizer.from_pretrained("google/flan-t5-small")
+        tokenized_datasets = dataset.map(tokenize_function, batched=True)
+        dataloader = DataLoader(tokenized_datasets, batch_size=8)
+        model.eval()
+        for batch in dataloader:
+            batch = {k: v.to(device) for k, v in batch.items()}
+            with torch.no_grad():
+                outputs = model.generate(**batch)
+                print(tokenizer.batch_decode(outputs, skip_special_tokens=True))
 
     def parseOutput(self, t):
         fields = [f.strip() for f in t.split("[/]") if f]
@@ -158,7 +133,7 @@ class T5_filter():
         posts = posts.reset_index(drop=True)
         return posts
 
-    def sbflise_table(self, posts):
+    def generate_table(self, posts):
         # Table preprocess
         posts = posts.rename(
             columns={
@@ -176,24 +151,34 @@ class T5_filter():
         tqdm.pandas(ascii=True)
                 
         #out = fPosts.progress_apply(self.getT5generation)
-        out = self.get
+        out = self.getT5generation(fPosts)
         cols = [c for c in self.variables if c in out.columns]
         out = out[cols]
         posts = pd.concat([posts,out],axis=1)
         return posts
 
-file_name = './data/cache/annotation_summary.csv'
+def main(args):
+    examples = pd.read_csv(args.example_file)
+    posts = pd.read_csv(args.input_file)  # Read the csv file without index column
 
-dataset = load_dataset("csv", data_files = file_name)
-device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
-model = AutoModelForSeq2SeqLM.from_pretrained("google/flan-t5-small")
-tokenizer = AutoTokenizer.from_pretrained("google/flan-t5-small")
-tokenized_datasets = dataset.map(tokenize_function, batched=True)
-dataloader = DataLoader(tokenized_datasets, batch_size=8)
+    if args.sample:
+        posts = posts.sample(args.sample, random_state=args.random_seed)
 
-model.eval()
-for batch in dataloader:
-    batch = {k: v.to(device) for k, v in batch.items()}
-    with torch.no_grad():
-        outputs = model.generate(**batch)
-        print(tokenizer.batch_decode(outputs, skip_special_tokens=True))
+    t5_gen = T5_filter(args, examples)
+    posts = t5_gen.sbflise_table(posts)
+    posts.to_csv(args.output_file, index=False)
+
+
+if __name__ == "__main__":
+    p = argparse.ArgumentParser()
+    p.add_argument("--input_file")
+    p.add_argument("--example_file", default="./data/promptExamples.v2.csv", type=str)
+    p.add_argument("--example_file_context", default="./data/examples.v2.contextonly.csv", type=str)
+    p.add_argument("--statement_col", default="post")
+    p.add_argument("--conversationContext_col", default="conversationContext")
+    p.add_argument("--n_examples", default=7, type=int)
+    p.add_argument("--sample", type=int, default=0)
+    p.add_argument("--random_seed", type=int, default=42)
+    p.add_argument("--output_file")
+    args = p.parse_args()
+    main(args)
