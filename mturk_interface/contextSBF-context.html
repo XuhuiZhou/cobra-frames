@@ -155,9 +155,6 @@ window.onload = function() {
               <span class="cb-orange">listener identity</span> , and <span class="cb-teal">situational contextal context</span> are. 
             </p>
 
-            <p style="margin-bottom: .5rem;">
-              <span class="numbering">4)</span> If one aspect seems <strong>implausible/unrealistic/unhelpful</strong>, please provide a suggestion.
-            </p>
             <b>❗Updated Notes</b>
             <a data-toggle="collapse" href="#notes" role="button" aria-expanded="false" aria-controls="instructions" style="color:#0080ff;">
               (Expand/Collapse)
@@ -168,6 +165,7 @@ window.onload = function() {
                   <b>Rare situational context:</b> Sometimes some situational context may seem to rarely happen in real life. For example, a statement
                   "all jews are money grabbing, hook-nosed monsters" has the situational context "a discussion about the Holocaust in a world history classroom".
                   Though it is rarely the case someone would say things like this in a history classroom, it could happen and makes the statement extremely hateful.
+                  Since we would like to include these scenarios in our dataset, we consider these rare situational context as somewhat plausible.
                 </li>
                 <li>
                   <b>Concrete scene:</b> An informative and helpful situational context should provide some background information. 
@@ -175,8 +173,9 @@ window.onload = function() {
                   "a debate on single mothers' custody rights" and "reminiscing about childhood with friends". 
                 </li>
                 <li>
-                  <b>Avoid only writing the explanation:</b> The examples provide explanations to the ratings. However, you are not required to do so in 
-                  the actual task. You are welcome to write your explanation in the suggestion box, but please remember to write the better alternative first.
+                  <b>Think carefully: We provide some explanations and alternatives to help you understand the task better. Although you are not required to 
+                  write them down for the actual task, we encourage you to think about the explanations and alternatives before you rate the contexts. </b>
+                  </b> 
                 </li>
                 <!-- <li>
                   <b>Think twice and be open-minded:</b> It is very easy to reject something or think something is implausible
@@ -224,9 +223,9 @@ window.onload = function() {
                   <th scope="col" style="width: 10%;">Context</th>
                   <th scope="col" style="width: 25%;"></th>
                   <th scope="col" style="width: 10%;">Rating</th>
-                  <th scope="col" style="width: 25%;">Suggest a better alternative</th>
+                  <th scope="col" style="width: 25%;">Better alternative <small>(Not the actual task)</small></th>
                   <th scope="col" style="width: 40%;">Explanation 
-                    <small>(Not the actual task, just for helping you understand it!)</small></th>
+                    <small>(Not the actual task)</small></th>
                 </thead>
                 <tbody>
                   <tr>
@@ -296,9 +295,9 @@ window.onload = function() {
                             <th scope="col" style="width: 10%;">Context</th>
                             <th scope="col" style="width: 25%;"></th>
                             <th scope="col" style="width: 10%;">Rating</th>
-                            <th scope="col" style="width: 25%;">Suggest a better alternative</th>
+                            <th scope="col" style="width: 25%;">Better alternative <small>(Not the actual task)</small></th>
                             <th scope="col" style="width: 40%;">Explanation 
-                              <small>(Not the actual task, just for helping you understand it!)</small></th>
+                              <small>(Not the actual task)</small></th>
                           </thead>
                           <tbody>
                             <tr>
@@ -369,9 +368,9 @@ window.onload = function() {
                             <th scope="col" style="width: 10%;">Context</th>
                             <th scope="col" style="width: 25%;"></th>
                             <th scope="col" style="width: 10%;">Rating</th>
-                            <th scope="col" style="width: 25%;">Suggest a better alternative</th>
+                            <th scope="col" style="width: 25%;">Better alternative <small>(Not the actual task)</small></th>
                             <th scope="col" style="width: 40%;">Explanation 
-                              <small>(Not the actual task, just for helping you understand it!)</small></th>
+                              <small>(Not the actual task)</small></th>
                           </thead>
                           <tbody>
                             <tr>
@@ -465,14 +464,13 @@ window.onload = function() {
           <tr>
             <td class="cb-teal" style="width: 15%;">Situational context</td>
             <td class="cb-gray" style="width: 20%;">${speechContext}</td>
-            <td style="width: 60%;">
+            <td style="width: 65%;">
               <label>unhelpful/uninformative <input class="agreement" type="radio" for="hsituationRating" name="hsituationRating" value=0 required></label>
               <label><input class="agreement" type="radio" for="hsituationRating" name="hsituationRating" value=1> </label>
               <label><input class="agreement" type="radio" for="hsituationRating" name="hsituationRating" value=2> </label>
-              <label><input class="agreement" type="radio" for="hsituationRating" name="hsituationRating" value=3> </label>
-              <label><input class="agreement" type="radio" for="hsituationRating" name="hsituationRating" value=4> helpful/informative</label></td>
-            <td>Suggest a better situational context:<br>
-            <input type="text" placeholder="..." name="hsituationSuggestion"></td>
+              <label><input class="agreement" type="radio" for="hsituationRating" name="hsituationRating" value=3> helpful/informative</label></td>
+            <!-- <td>Suggest a better situational context:<br>
+            <input type="text" placeholder="..." name="hsituationSuggestion"></td> -->
           </tr>
         </table>
         <div class="col-12 mt-3 mb-2">
@@ -482,14 +480,13 @@ window.onload = function() {
           <tr>
             <td class="cb-teal" style="width: 15%;">Situational context</td>
             <td class="cb-gray" style="width: 20%;">${speechContext}</td>
-            <td style="width: 60%;">
+            <td style="width: 65%;">
               <label>very implausible/unrealistic <input class="agreement" type="radio" for="psituationRating" name="psituationRating" value=0 required></label>
               <label><input class="agreement" type="radio" for="psituationRating" name="psituationRating" value=1> </label>
               <label><input class="agreement" type="radio" for="psituationRating" name="psituationRating" value=2> </label>
-              <label><input class="agreement" type="radio" for="psituationRating" name="psituationRating" value=3> </label>
-              <label><input class="agreement" type="radio" for="psituationRating" name="psituationRating" value=4> very plausible/realistic</label></td>
-            <td>Suggest a better situational context:<br>
-            <input type="text" placeholder="..." name="psituationSuggestion"></td>
+              <label><input class="agreement" type="radio" for="psituationRating" name="psituationRating" value=3> very plausible/realistic</label></td>
+            <!-- <td>Suggest a better situational context:<br>
+            <input type="text" placeholder="..." name="psituationSuggestion"></td> -->
           </tr>
         </table>
 
@@ -500,14 +497,13 @@ window.onload = function() {
           <tr>
             <td class="cb-purple" style="width: 15%;">Speaker identity</td>
             <td class="cb-gray" style="width: 20%;">${speakerIdentity}</td>
-            <td style="width: 60%;">
+            <td style="width: 65%;">
               <label>very implausible/unrealistic <input class="agreement" type="radio" for="speakerIdenRating" name="speakerIdenRating" value=0 required></label>
               <label><input class="agreement" type="radio" for="speakerIdenRating" name="speakerIdenRating" value=1> </label>
               <label><input class="agreement" type="radio" for="speakerIdenRating" name="speakerIdenRating" value=2> </label>
-              <label><input class="agreement" type="radio" for="speakerIdenRating" name="speakerIdenRating" value=3> </label>
-              <label><input class="agreement" type="radio" for="speakerIdenRating" name="speakerIdenRating" value=4> very plausible/realistic</label></td>
-            <td>Suggest a better speaker identity:<br>
-            <input type="text" placeholder="..." name="speakerIdenSuggestion"></td>
+              <label><input class="agreement" type="radio" for="speakerIdenRating" name="speakerIdenRating" value=3> very plausible/realistic</label></td>
+            <!-- <td>Suggest a better speaker identity:<br>
+            <input type="text" placeholder="..." name="speakerIdenSuggestion"></td> -->
           </tr>
         </table>
 
@@ -518,14 +514,13 @@ window.onload = function() {
           <tr>
             <td class="cb-orange" style="width: 15%;">Listener identity</td>
             <td class="cb-gray" style="width: 20%;">${listenerIdentity}</td>
-            <td style="width: 60%;">
+            <td style="width: 65%;">
               <label>very implausible/unrealistic <input class="agreement" type="radio" for="listenerIdenRating" name="listenerIdenRating" value=0 required></label>
               <label><input class="agreement" type="radio" for="listenerIdenRating" name="listenerIdenRating" value=1> </label>
               <label><input class="agreement" type="radio" for="listenerIdenRating" name="listenerIdenRating" value=2> </label>
-              <label><input class="agreement" type="radio" for="listenerIdenRating" name="listenerIdenRating" value=3> </label>
-              <label><input class="agreement" type="radio" for="listenerIdenRating" name="listenerIdenRating" value=4> very plausible/realistic</label></td>
-            <td>Suggest a better listener identity:<br>
-            <input type="text" placeholder="..." name="listenerIdenSuggestion"></td>
+              <label><input class="agreement" type="radio" for="listenerIdenRating" name="listenerIdenRating" value=3> very plausible/realistic</label></td>
+            <!-- <td>Suggest a better listener identity:<br>
+            <input type="text" placeholder="..." name="listenerIdenSuggestion"></td> -->
           </tr>
         </table>
 
