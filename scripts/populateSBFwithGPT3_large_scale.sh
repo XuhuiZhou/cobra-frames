@@ -13,7 +13,7 @@ EXAMPLE='./data/examples.v2.contextOnlyDiverse.csv'
 # OUTPUT='./data/inference_data/mAgr.inference2_ex.csv'
 # INPUT='./data/source_data/SBIC.v2.agg.trn.csv'
 # OUTPUT='./data/inference_data/sbic.inference_ex.csv'
-for i in {31..90}
+for i in {91..200}
 do
     echo "Populate the $i toxigen file"
     INPUT="./data/cleaned_data/toxigen_shuffled/toxigen_${i}.csv"
