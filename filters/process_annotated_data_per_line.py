@@ -26,11 +26,11 @@ def process_type_data(data):
 
 
 def split_data(args):
-    data = pd.read_csv(args.input_data, sep='\t', header=0, encoding='ascii')
+    data = pd.read_csv(args.input_data)
 
 
-    train_0, valid_0, test_0 = np.split(data.loc[data['Final'] == 0], [int(.8*len(data.loc[data['Final'] == 0])), int(.9*len(data.loc[data['Final'] == 0]))])
-    train_1, valid_1, test_1 = np.split(data.loc[data['Final'] == 1], [int(.8*len(data.loc[data['Final'] == 1])), int(.9*len(data.loc[data['Final'] == 1]))])
+    train_0, valid_0, test_0 = np.split(data.loc[data['Answer.finalRating'] == 0], [int(.8*len(data.loc[data['Answer.finalRating'] == 0])), int(.9*len(data.loc[data['Answer.finalRating'] == 0]))])
+    train_1, valid_1, test_1 = np.split(data.loc[data['Answer.finalRating'] == 1], [int(.8*len(data.loc[data['Answer.finalRating'] == 1])), int(.9*len(data.loc[data['Answer.finalRating'] == 1]))])
 
     print("Final false - Train:{} Valid:{} Test: {}".format(len(train_0), len(valid_0), len(test_0)))
     print("Final true - Train:{} Valid:{} Test: {}".format(len(train_1), len(valid_1), len(test_1)))
@@ -80,8 +80,8 @@ def split_data(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--input_data', type=str, default='/home/ayerukol/context-sbf/filters/data/annotation_summary_acc.tsv')
-    parser.add_argument('--output_dir', type=str, default='/home/ayerukol/context-sbf/filters/data_single/')
+    parser.add_argument('--input_data', type=str, default=f'{os.environ["HOME"]}/Projects/context-sbf/filters/data/annotation_summary.csv')
+    parser.add_argument('--output_dir', type=str, default=f'{os.environ["HOME"]}/Projects/context-sbf/filters/data_single/')
     args = parser.parse_args()
 
     split_data(args)
