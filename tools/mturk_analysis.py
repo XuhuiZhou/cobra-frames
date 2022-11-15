@@ -63,23 +63,28 @@ def record_annotation_summary(df_info, df, args):
     warnings.warn("This function only applies to three annotators scanario bc of hard-coded values.")
     # Read the original file before mturk annotation
     # df_ori = pd.read_csv(args.original_file)
-    df_suggestion = df[[i for i in df.keys() if 'Suggestion' in i]]
-    # Warning: hard-coded value here
-    df_result = list()
-    df_suggestion_1 = df_suggestion[0::3]
-    df_suggestion_2 = df_suggestion[1::3]
-    df_suggestion_3 = df_suggestion[2::3]
-    for j in range(0, 3 * len(df_suggestion_1), 3):
-        row_dict = dict()
-        for i in df_suggestion.keys():
-            row_dict[i] = df_suggestion_1.loc[j, i] + df_suggestion_2.loc[j+1, i] + df_suggestion_3.loc[j+2, i]
-        df_result.append(row_dict)
-    df_suggestion = pd.DataFrame(df_result)    
+    if args.suggestion:
+        df_suggestion = df[[i for i in df.keys() if 'Suggestion' in i]]
+        # Warning: hard-coded value here
+        df_result = list()
+        df_suggestion_1 = df_suggestion[0::3]
+        df_suggestion_2 = df_suggestion[1::3]
+        df_suggestion_3 = df_suggestion[2::3]
+        for j in range(0, 3 * len(df_suggestion_1), 3):
+            row_dict = dict()
+            for i in df_suggestion.keys():
+                row_dict[i] = df_suggestion_1.loc[j, i] + df_suggestion_2.loc[j+1, i] + df_suggestion_3.loc[j+2, i]
+            df_result.append(row_dict)
+        df_suggestion = pd.DataFrame(df_result)    
     df = df[0::3]
     df = df[['HITId', 'Input.group', 'Input.statement', 'Input.speechContext', 'Input.speakerIdentity', 'Input.listenerIdentity']]
-    df = pd.concat([df.reset_index(drop=True), df_suggestion.reset_index(drop=True)], axis=1)
+    if args.suggestion:
+        df = pd.concat([df.reset_index(drop=True), df_suggestion.reset_index(drop=True)], axis=1)
+    else:
+        df = df.reset_index(drop=True)
     df_info = df.merge(df_info, on='HITId')
-    df_info = df_info[[
+
+    relevant_cols = [
         'HITId',
         'Input.group',
         'Input.statement',
@@ -90,11 +95,18 @@ def record_annotation_summary(df_info, df, args):
         'Answer.psituationRating',
         'Answer.speakerIdenRating',
         'Answer.listenerIdenRating',
-        'Answer.hsituationSuggestion',
-        'Answer.psituationSuggestion',
-        'Answer.speakerIdenSuggestion',
-        'Answer.listenerIdenSuggestion',
-    ]]
+        'Answer.finalRating'
+    ]
+
+    if args.suggestion:
+        relevant_cols += [
+            'Answer.hsituationSuggestion',
+            'Answer.psituationSuggestion',
+            'Answer.speakerIdenSuggestion',
+            'Answer.listenerIdenSuggestion',
+        ]
+
+    df_info = df_info[relevant_cols]
     # binarize the rating
     for i in df_info.keys():
         if 'Rating' in i:
@@ -108,6 +120,8 @@ def output_quality_ratio(df, col, args):
         df_info[col] = (df_info[col]>args.boundary).astype(int)
     df_info = df_info.groupby(by=["HITId"]).sum()
     df_info = (df_info>args.bar)
+    # produce the final label
+    df_info['Answer.finalRating'] = (df_info['Answer.hsituationRating'] & df_info['Answer.speakerIdenRating'] & df_info['Answer.listenerIdenRating']).astype(int)
     if args.record_annotation_summary:
         record_annotation_summary(df_info, df, args)
     sum_ = df_info.sum()
@@ -224,6 +238,7 @@ def main():
     parser.add_argument("--original_file")
     parser.add_argument("--output_folder")
     parser.add_argument("--task", default="explanation", type=str)
+    parser.add_argument("--suggestion", action="store_true")
     parser.add_argument("--bar", default=1, type=int, 
         help="Approve when there are more annotators than the bar")
     parser.add_argument("--boundary", default=1, type=int, 
@@ -254,7 +269,8 @@ def main():
     
     # print(time_analysis)
     df_stats = stats_of_interest(df[relevant_col])
-    df_stats_2 = stats_of_interest(df[relevant_col2], has_text=True)
+    if args.suggestion:
+        df_stats_2 = stats_of_interest(df[relevant_col2], has_text=True)
 
     # Assign the value to decide whether to approve the generation
     # boundary = 2 if args.task=="context" else 1
@@ -279,11 +295,13 @@ def main():
 
     #make the format of the table better    
     df_stats = pretty(df_stats)
-    df_stats_2 = pretty(df_stats_2)
+    if args.suggestion:
+        df_stats_2 = pretty(df_stats_2)
     df_final = pretty(df_final)
 
     df_stats.to_csv(args.output_folder+'/'+'stats.csv')
-    df_stats_2.to_csv(args.output_folder+'/'+'stats_2.csv')
+    if args.suggestion:
+        df_stats_2.to_csv(args.output_folder+'/'+'stats_2.csv')
     df_final.to_csv(args.output_folder+'/'+'quality.csv')
 
 if __name__ == '__main__':

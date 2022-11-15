@@ -4,7 +4,7 @@
 #INPUT='./data/mturk/CSBF-Verification-Pilot-2-incomplete.csv'
 #INPUT='./data/mturk/CSBF-Verification-Contexts-Pilots.csv'
 #INPUT='./data/mturk/Context-Pilots-2-Annotation.csv'
-INPUT='./data/mturk/contexts/CSBF-contexts-1.csv'
+INPUT='./data/mturk/contexts/CSBF-contexts-2.csv'
 
 OUTPUT='./data/mturk/contexts'
 
