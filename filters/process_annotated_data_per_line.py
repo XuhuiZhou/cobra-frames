@@ -6,23 +6,38 @@ import sklearn
 
 np.random.seed(12)
 
+def map(number):
+    if number==1:
+        return 'yes'
+    else:
+        return 'no'
+
 def process_type_data(data):
     inputs = []
     outputs = []
     for index, row in data.iterrows():
-        inputs.append('[Statement] ' + row['Input.statement'].strip() + ' [group] ' + row['Input.group'] + ' [speech_context] ' + row['Input.speechContext'] + ' [speaker_identity] ' +  row['Input.speakerIdentity'] + ' [listener_identity] ' + row['Input.listenerIdentity'] + ' [hSituationalRating] \n')
-        outputs.append(str(row['Answer.hsituationRating']) + '\n')
+        inputs.append('[Statement] ' + row['Input.statement'].strip() + ' [Situational context] ' + row['Input.speechContext'] + ' [Speaker identity] ' +  row['Input.speakerIdentity'] + ' [Listener identity] ' + row['Input.listenerIdentity'] + ' [Does the situational context supply appropriate and relevant information to set the scene and help you better understand the statement?] \n')
+        outputs.append(map(row['Answer.hsituationRating']) + '\n')
 
-        inputs.append('[Statement] ' + row['Input.statement'].strip() + ' [group] ' + row['Input.group'] + ' [speech_context] ' + row['Input.speechContext'] + ' [speaker_identity] ' +  row['Input.speakerIdentity'] + ' [listener_identity] ' + row['Input.listenerIdentity'] + ' [pSituationalRating] \n')
-        outputs.append(str(row['Answer.psituationRating']) + '\n')
+        inputs.append('[Statement] ' + row['Input.statement'].strip() + ' [Situational context] ' + row['Input.speechContext'] + ' [Speaker identity] ' +  row['Input.speakerIdentity'] + ' [Listener identity] ' + row['Input.listenerIdentity'] + ' [Does the situational context seem plausible/realistic?] \n')
+        outputs.append(map(row['Answer.psituationRating']) + '\n')
 
-        inputs.append('[Statement] ' + row['Input.statement'].strip() + ' [group] ' + row['Input.group'] + ' [speech_context] ' + row['Input.speechContext'] + ' [speaker_identity] ' +  row['Input.speakerIdentity'] + ' [listener_identity] ' + row['Input.listenerIdentity'] + ' [speakerIdenRating] \n')
-        outputs.append(str(row['Answer.speakerIdenRating']) + '\n')
+        inputs.append('[Statement] ' + row['Input.statement'].strip() + ' [Situational context] ' + row['Input.speechContext'] + ' [Speaker identity] ' +  row['Input.speakerIdentity'] + ' [Listener identity] ' + row['Input.listenerIdentity'] + ' [Does the speaker identity seem plausible/realistic?] \n')
+        outputs.append(map(row['Answer.speakerIdenRating']) + '\n')
 
-        inputs.append('[Statement] ' + row['Input.statement'].strip() + ' [group] ' + row['Input.group'] + ' [speech_context] ' + row['Input.speechContext'] + ' [speaker_identity] ' +  row['Input.speakerIdentity'] + ' [listener_identity] ' + row['Input.listenerIdentity'] + ' [listenerIdenRating] \n')
-        outputs.append(str(row['Answer.listenerIdenRating']) + '\n')
+        inputs.append('[Statement] ' + row['Input.statement'].strip() + ' [Situational context] ' + row['Input.speechContext'] + ' [Speaker identity] ' +  row['Input.speakerIdentity'] + ' [Listener identity] ' + row['Input.listenerIdentity'] + ' [Does the listener identity seem plausible/realistic?] \n')
+        outputs.append(map(row['Answer.listenerIdenRating']) + '\n')
 
     return inputs, outputs
+
+def combine_to_csv(split, source, target):
+    data = {
+        'text':source,
+        'labels':target
+    }
+    df = pd.DataFrame.from_dict(data)
+    df.to_csv(split, index=False)
+    print("Output csv done")
 
 
 def split_data(args):
@@ -78,10 +93,16 @@ def split_data(args):
         print(len(outputs_test))
         f.writelines(outputs_test)
 
+    combine_to_csv(os.path.join(args.output_dir, 'train.csv'), inputs_train, outputs_train)
+    combine_to_csv(os.path.join(args.output_dir, 'valid.csv'), inputs_valid, outputs_valid)
+    combine_to_csv(os.path.join(args.output_dir, 'test.csv'), inputs_test, outputs_test)
+
+    
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--input_data', type=str, default=f'{os.environ["HOME"]}/Projects/context-sbf/filters/data/annotation_summary.csv')
-    parser.add_argument('--output_dir', type=str, default=f'{os.environ["HOME"]}/Projects/context-sbf/filters/data_single/')
+    parser.add_argument('--input_data', type=str, default=f'{os.environ["HOME"]}/projects/xuhuiz/context-sbf/data/filters/chunk2-annotation_summary_acc.csv')
+    parser.add_argument('--output_dir', type=str, default=f'{os.environ["HOME"]}/projects/xuhuiz/context-sbf/data/filters/')
     args = parser.parse_args()
 
     split_data(args)
