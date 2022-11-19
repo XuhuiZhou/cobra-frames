@@ -4,15 +4,13 @@ from typing import Optional, Tuple, Union
 
 import torch
 from torch.utils.checkpoint import checkpoint
-from transformers import T5PreTrainedModel
+from transformers import T5Config, T5PreTrainedModel
 from transformers.models.t5.modeling_t5 import (
     T5EncoderModel,
     T5ForConditionalGeneration,
     T5Stack,
 )
 from transformers.utils import DUMMY_INPUTS, DUMMY_MASK
-
-from transformers import T5Config
 
 logger = logging.getLogger(__name__)
 import warnings
@@ -31,11 +29,13 @@ from frozen_lm_qa.conditional_generation_utils import (
     ConditionalGenerationMixin,
 )
 
+
 class T5ConfigWithMemory(T5Config):
     def __init__(self, *args, **kwargs):
         self.inp_features = kwargs.pop("inp_features", None)
         self.n_prompt_tokens = kwargs.pop("n_prompt_tokens", None)
         super().__init__(*args, **kwargs)
+
 
 class MlpBlock2d(nn.Module):
     def __init__(
@@ -540,6 +540,7 @@ class T5ForMemoryQuestionAnsweringModel(
             encoder_attentions=encoder_outputs.attentions,
         )
 
+
 class T5ForPromptTuningQuestionAnsweringModel(
     T5ForMemoryQuestionAnsweringModel
 ):
@@ -548,12 +549,14 @@ class T5ForPromptTuningQuestionAnsweringModel(
         for name, param in self.named_parameters():
             if not "prompt" in name:
                 param.requires_grad = False
-        self.prompt_emb = torch.Tensor(torch.randn((self.config.inp_features,)))
+        self.prompt_emb = torch.Tensor(
+            torch.randn((self.config.inp_features,))
+        )
         self.prepend_attention_mask = nn.Parameter(
             torch.ones((1, self.config.n_prompt_tokens)).long(),
             requires_grad=False,
         )
-    
+
     def forward(
         self,
         input_ids: Optional[torch.LongTensor] = None,
@@ -597,8 +600,9 @@ class T5ForPromptTuningQuestionAnsweringModel(
             use_cache=use_cache,
             output_attentions=output_attentions,
             output_hidden_states=output_hidden_states,
-            return_dict=return_dict
+            return_dict=return_dict,
         )
+
 
 class T5ForMemoryQuestionAnswering(
     ConditionalGenerationMixin,

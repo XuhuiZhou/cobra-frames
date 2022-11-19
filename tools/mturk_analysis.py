@@ -1,70 +1,78 @@
 import argparse
-from itertools import dropwhile
 import re
 import warnings
-import simpledorff
-import pandas as pd
-import numpy as np
 from collections import Counter, defaultdict
 from datetime import datetime
-from agreement import fleiss_kappa, computeAlpha
-#from disagree import metrics
+from itertools import dropwhile
+
+import numpy as np
+import pandas as pd
+import simpledorff
+from agreement import computeAlpha, fleiss_kappa
+
+# from disagree import metrics
 
 Task_cols = {
-    'explanation': (
+    "explanation": (
         [
-        'Answer.targetGroupRating',
-        'Answer.intentRating', 
-        'Answer.implicationRating',
-        'Answer.offensivenessRating',
-        'Answer.powerDiffRating',
-        'Answer.targetGroupEmoReactRating',
-        'Answer.targetGroupCogReactRating'],
+            "Answer.targetGroupRating",
+            "Answer.intentRating",
+            "Answer.implicationRating",
+            "Answer.offensivenessRating",
+            "Answer.powerDiffRating",
+            "Answer.targetGroupEmoReactRating",
+            "Answer.targetGroupCogReactRating",
+        ],
         [
-        'Answer.targetGroupSuggestion',
-        'Answer.intentSuggestion', 
-        'Answer.implicationSuggestion',
-        'Answer.offensivenessSuggestion',
-        'Answer.powerDiffSuggestion',
-        'Answer.targetGroupEmoReactSuggestion',
-        'Answer.targetGroupCogReactSuggestion']
+            "Answer.targetGroupSuggestion",
+            "Answer.intentSuggestion",
+            "Answer.implicationSuggestion",
+            "Answer.offensivenessSuggestion",
+            "Answer.powerDiffSuggestion",
+            "Answer.targetGroupEmoReactSuggestion",
+            "Answer.targetGroupCogReactSuggestion",
+        ],
     ),
-    'context': (
+    "context": (
         [
-            'Answer.listenerIdenRating',
+            "Answer.listenerIdenRating",
             # 'Answer.situationRating',
-            'Answer.psituationRating',
-            'Answer.hsituationRating',
-            'Answer.speakerIdenRating'],
+            "Answer.psituationRating",
+            "Answer.hsituationRating",
+            "Answer.speakerIdenRating",
+        ],
         [
-            'Answer.listenerIdenSuggestion',
+            "Answer.listenerIdenSuggestion",
             # 'Answer.situationSuggestion',
-            'Answer.psituationSuggestion',
-            'Answer.hsituationSuggestion',
-            'Answer.speakerIdenSuggestion'
-        ]
-    ) 
+            "Answer.psituationSuggestion",
+            "Answer.hsituationSuggestion",
+            "Answer.speakerIdenSuggestion",
+        ],
+    ),
 }
+
 
 def computeFleissKappa(df, col, groupCol, args):
     # Only works for binary setting.
     df = df.copy()
     if not args.binary:
-        df[col] = (df[col]>args.boundary).astype(int)
+        df[col] = (df[col] > args.boundary).astype(int)
     df = df[[groupCol, col]]
     df = df.groupby(by=[groupCol]).sum()
     # warning: hard-coded value here
-    df['Rating_neg'] = args.number_of_annotators - df[col]
-    score = fleiss_kappa(df.to_numpy(), method='randolf')
+    df["Rating_neg"] = args.number_of_annotators - df[col]
+    score = fleiss_kappa(df.to_numpy(), method="randolf")
     return score
 
 
 def record_annotation_summary(df_info, df, args):
-    warnings.warn("This function only applies to three annotators scanario bc of hard-coded values.")
+    warnings.warn(
+        "This function only applies to three annotators scanario bc of hard-coded values."
+    )
     # Read the original file before mturk annotation
     # df_ori = pd.read_csv(args.original_file)
     if args.suggestion:
-        df_suggestion = df[[i for i in df.keys() if 'Suggestion' in i]]
+        df_suggestion = df[[i for i in df.keys() if "Suggestion" in i]]
         # Warning: hard-coded value here
         df_result = list()
         df_suggestion_1 = df_suggestion[0::3]
@@ -73,64 +81,84 @@ def record_annotation_summary(df_info, df, args):
         for j in range(0, 3 * len(df_suggestion_1), 3):
             row_dict = dict()
             for i in df_suggestion.keys():
-                row_dict[i] = df_suggestion_1.loc[j, i] + df_suggestion_2.loc[j+1, i] + df_suggestion_3.loc[j+2, i]
+                row_dict[i] = (
+                    df_suggestion_1.loc[j, i]
+                    + df_suggestion_2.loc[j + 1, i]
+                    + df_suggestion_3.loc[j + 2, i]
+                )
             df_result.append(row_dict)
-        df_suggestion = pd.DataFrame(df_result)    
+        df_suggestion = pd.DataFrame(df_result)
     df = df[0::3]
-    df = df[['HITId', 'Input.group', 'Input.statement', 'Input.speechContext', 'Input.speakerIdentity', 'Input.listenerIdentity']]
+    df = df[
+        [
+            "HITId",
+            "Input.group",
+            "Input.statement",
+            "Input.speechContext",
+            "Input.speakerIdentity",
+            "Input.listenerIdentity",
+        ]
+    ]
     if args.suggestion:
-        df = pd.concat([df.reset_index(drop=True), df_suggestion.reset_index(drop=True)], axis=1)
+        df = pd.concat(
+            [df.reset_index(drop=True), df_suggestion.reset_index(drop=True)],
+            axis=1,
+        )
     else:
         df = df.reset_index(drop=True)
-    df_info = df.merge(df_info, on='HITId')
+    df_info = df.merge(df_info, on="HITId")
 
     relevant_cols = [
-        'HITId',
-        'Input.group',
-        'Input.statement',
-        'Input.speechContext',
-        'Input.speakerIdentity',
-        'Input.listenerIdentity',
-        'Answer.hsituationRating',
-        'Answer.psituationRating',
-        'Answer.speakerIdenRating',
-        'Answer.listenerIdenRating',
-        'Answer.finalRating'
+        "HITId",
+        "Input.group",
+        "Input.statement",
+        "Input.speechContext",
+        "Input.speakerIdentity",
+        "Input.listenerIdentity",
+        "Answer.hsituationRating",
+        "Answer.psituationRating",
+        "Answer.speakerIdenRating",
+        "Answer.listenerIdenRating",
+        "Answer.finalRating",
     ]
 
     if args.suggestion:
         relevant_cols += [
-            'Answer.hsituationSuggestion',
-            'Answer.psituationSuggestion',
-            'Answer.speakerIdenSuggestion',
-            'Answer.listenerIdenSuggestion',
+            "Answer.hsituationSuggestion",
+            "Answer.psituationSuggestion",
+            "Answer.speakerIdenSuggestion",
+            "Answer.listenerIdenSuggestion",
         ]
 
     df_info = df_info[relevant_cols]
     # binarize the rating
     for i in df_info.keys():
-        if 'Rating' in i:
+        if "Rating" in i:
             df_info[i] = df_info[i].astype(int)
-    df_info.to_csv(f'{args.output_folder}/annotation_summary.csv', index=False)
+    df_info.to_csv(f"{args.output_folder}/annotation_summary.csv", index=False)
 
 
 def output_quality_ratio(df, col, args):
     df_info = df.copy()
     if not args.binary:
-        df_info[col] = (df_info[col]>args.boundary).astype(int)
+        df_info[col] = (df_info[col] > args.boundary).astype(int)
     df_info = df_info.groupby(by=["HITId"]).sum()
-    df_info = (df_info>args.bar)
+    df_info = df_info > args.bar
     # produce the final label
-    df_info['Answer.finalRating'] = (df_info['Answer.hsituationRating'] & df_info['Answer.speakerIdenRating'] & df_info['Answer.listenerIdenRating']).astype(int)
+    df_info["Answer.finalRating"] = (
+        df_info["Answer.hsituationRating"]
+        & df_info["Answer.speakerIdenRating"]
+        & df_info["Answer.listenerIdenRating"]
+    ).astype(int)
     if args.record_annotation_summary:
         record_annotation_summary(df_info, df, args)
     sum_ = df_info.sum()
     total = len(df_info)
     frames = {}
     for i in col:
-        frames[i] = [f'{100*sum_[i]/total:.2f}%']
+        frames[i] = [f"{100*sum_[i]/total:.2f}%"]
     df_info = pd.DataFrame.from_dict(frames)
-    df_info = df_info.rename(index={0:"approval rate"})
+    df_info = df_info.rename(index={0: "approval rate"})
     return df_info
 
 
@@ -142,7 +170,7 @@ def stats_of_interest(df, has_text=False):
         frames = {}
         l = len(df)
         for i in df.keys():
-            num_has_text = l- df[i].str.contains('{}|none').sum()
+            num_has_text = l - df[i].str.contains("{}|none").sum()
             frames[i] = [num_has_text]
         stats = pd.DataFrame.from_dict(frames)
         return stats
@@ -151,51 +179,66 @@ def stats_of_interest(df, has_text=False):
         for i in df.keys():
             frames.append(df[i].value_counts())
         stats = pd.concat(frames, join="outer", axis=1)
-        stats = stats.rename(index={
-            3: "very likely", 
-            1: "somewhat unlikely", 
-            2: "somewhat likely",
-            0: "very unlikely",
-            -1: "none"
-            })
+        stats = stats.rename(
+            index={
+                3: "very likely",
+                1: "somewhat unlikely",
+                2: "somewhat likely",
+                0: "very unlikely",
+                -1: "none",
+            }
+        )
         return stats
+
 
 def pretty(df):
     """
     Customized function to make the table better readable
     """
     keys = df.keys()
-    new_keys = [i.split('.')[-1] for i in keys]
-    df = df.rename(columns={i:j for i,j in zip(keys, new_keys)})
+    new_keys = [i.split(".")[-1] for i in keys]
+    df = df.rename(columns={i: j for i, j in zip(keys, new_keys)})
     return df
 
+
 def select_workers(df, col):
-    """Select workers that at least have raise one unlikely ratings.
-    """
+    """Select workers that at least have raise one unlikely ratings."""
     workers = []
     for i in col:
-        workers += df[df[i]<2]['WorkerId'].tolist()
+        workers += df[df[i] < 2]["WorkerId"].tolist()
     workers = set(workers)
     return workers
 
+
 def analyze_perHitTime(df, unix=True):
     if unix:
-        df['WorkTimeInSeconds'] = (df['Answer.clickedSubmitTime']-df['Answer.clickedConsentTime'])/1000 
-        line = (df['WorkTimeInSeconds']/60).describe()
-        line_ignoreMax = df.sort_values('WorkTimeInSeconds').groupby('WorkerId').apply(lambda x : x[:-1])
-        line_ignoreMax = (line_ignoreMax['WorkTimeInSeconds']/60).describe()
+        df["WorkTimeInSeconds"] = (
+            df["Answer.clickedSubmitTime"] - df["Answer.clickedConsentTime"]
+        ) / 1000
+        line = (df["WorkTimeInSeconds"] / 60).describe()
+        line_ignoreMax = (
+            df.sort_values("WorkTimeInSeconds")
+            .groupby("WorkerId")
+            .apply(lambda x: x[:-1])
+        )
+        line_ignoreMax = (line_ignoreMax["WorkTimeInSeconds"] / 60).describe()
     else:
-        line = (df['WorkTimeInSeconds']/60).describe()
-        line_ignoreMax = df.sort_values('WorkTimeInSeconds').groupby('WorkerId').apply(lambda x : x[:-1])
-        line_ignoreMax = (line_ignoreMax['WorkTimeInSeconds']/60).describe() 
-    items = ['mean', 'std', 'min', '25%', '50%', '75%', 'max']
+        line = (df["WorkTimeInSeconds"] / 60).describe()
+        line_ignoreMax = (
+            df.sort_values("WorkTimeInSeconds")
+            .groupby("WorkerId")
+            .apply(lambda x: x[:-1])
+        )
+        line_ignoreMax = (line_ignoreMax["WorkTimeInSeconds"] / 60).describe()
+    items = ["mean", "std", "min", "25%", "50%", "75%", "max"]
     time_dict = defaultdict(list)
     for i in items:
         time_dict[i].append(line[i])
         time_dict[i].append(line_ignoreMax[i])
     df_time = pd.DataFrame.from_dict(time_dict)
-    #df_time = df_time.rename('')
+    # df_time = df_time.rename('')
     return df_time
+
 
 def calculate_agreement(df, col, args):
     """
@@ -203,30 +246,35 @@ def calculate_agreement(df, col, args):
     """
     frames = {}
     for i in col:
-        new_df = df[['HITId', 'WorkerId', i]]
+        new_df = df[["HITId", "WorkerId", i]]
         new_df = new_df.rename(columns={i: "Rating"})
         scores = computeAlpha(new_df, "Rating", groupCol="HITId")
-        fleiss_kappa_score = computeFleissKappa(new_df, "Rating", groupCol="HITId", args=args)
-        #k.to_csv(f'pairwise_matrix_{i}.csv')
-        #print(k)
+        fleiss_kappa_score = computeFleissKappa(
+            new_df, "Rating", groupCol="HITId", args=args
+        )
+        # k.to_csv(f'pairwise_matrix_{i}.csv')
+        # print(k)
         frames[i] = [
-            f"{scores['ppa']*100:.2f}%", 
+            f"{scores['ppa']*100:.2f}%",
             f"{scores['rnd_ppa']*100:.2f}%",
-            f"{scores['alpha']:.4f}", 
+            f"{scores['alpha']:.4f}",
             f"{fleiss_kappa_score:.4f}",
-            ]
+        ]
     df = pd.DataFrame.from_dict(frames)
-    df = df.rename(index={0:"pairwise agreement", 
-            1: "random agreement", 
+    df = df.rename(
+        index={
+            0: "pairwise agreement",
+            1: "random agreement",
             2: "Krippendorf's alpha",
-            3: "Fleiss' kappa"
-            })
+            3: "Fleiss' kappa",
+        }
+    )
     return df
 
 
 def normalize_df(df):
-    df = (df-df.min())/(df.max()-df.min())
-    return df 
+    df = (df - df.min()) / (df.max() - df.min())
+    return df
 
 
 def main():
@@ -239,34 +287,54 @@ def main():
     parser.add_argument("--output_folder")
     parser.add_argument("--task", default="explanation", type=str)
     parser.add_argument("--suggestion", action="store_true")
-    parser.add_argument("--bar", default=1, type=int, 
-        help="Approve when there are more annotators than the bar")
-    parser.add_argument("--boundary", default=1, type=int, 
-        help="Approve when the score is larger than the boundary")
-    parser.add_argument("--number_of_annotators", default=1, type=int, 
-        help="Number of annotators")
-    parser.add_argument("--binary", action='store_true', 
-        help="make the value of ratings to binary when calculating the agreement")
-    parser.add_argument("--record_annotation_summary", action='store_true', 
-        help="record the annotation summary")
+    parser.add_argument(
+        "--bar",
+        default=1,
+        type=int,
+        help="Approve when there are more annotators than the bar",
+    )
+    parser.add_argument(
+        "--boundary",
+        default=1,
+        type=int,
+        help="Approve when the score is larger than the boundary",
+    )
+    parser.add_argument(
+        "--number_of_annotators",
+        default=1,
+        type=int,
+        help="Number of annotators",
+    )
+    parser.add_argument(
+        "--binary",
+        action="store_true",
+        help="make the value of ratings to binary when calculating the agreement",
+    )
+    parser.add_argument(
+        "--record_annotation_summary",
+        action="store_true",
+        help="record the annotation summary",
+    )
 
     args = parser.parse_args()
     df = pd.read_csv(args.input_file)
     # df = df[df['source_tag']=='sbic']
-    df = df.rename(columns={
-        "Answer.targetGroupEffectSuggestion": "Answer.targetGroupCogReactSuggestion", 
-        "Answer.targetGroupReactionSuggestion": "Answer.targetGroupEmoReactSuggestion"
-    })
-    #df_stats = stats_of_interest(df)
+    df = df.rename(
+        columns={
+            "Answer.targetGroupEffectSuggestion": "Answer.targetGroupCogReactSuggestion",
+            "Answer.targetGroupReactionSuggestion": "Answer.targetGroupEmoReactSuggestion",
+        }
+    )
+    # df_stats = stats_of_interest(df)
     relevant_col, relevant_col2 = Task_cols[args.task]
 
-    #df = df[df['WorkerId'].isin(select_workers(df, relevant_col))]
-    #breakpoint()
+    # df = df[df['WorkerId'].isin(select_workers(df, relevant_col))]
+    # breakpoint()
     # time_analysis = analyze_perHitTime(df[[
-    #     'WorkerId', 'WorkTimeInSeconds', 
-    #     'Answer.clickedConsentTime', 
+    #     'WorkerId', 'WorkTimeInSeconds',
+    #     'Answer.clickedConsentTime',
     #     'Answer.clickedSubmitTime']])
-    
+
     # print(time_analysis)
     df_stats = stats_of_interest(df[relevant_col])
     if args.suggestion:
@@ -279,30 +347,29 @@ def main():
     # Assign special NaN value
     if args.binary:
         df[relevant_col] = df[relevant_col].replace(-1, np.nan)
-        df[relevant_col] = (df[relevant_col]>boundary).astype(int)
+        df[relevant_col] = (df[relevant_col] > boundary).astype(int)
     else:
-        #df[relevant_col] = df[relevant_col].replace(-1, np.nan)
-        df[relevant_col] = df[relevant_col].replace(-1, 1.5) 
+        # df[relevant_col] = df[relevant_col].replace(-1, np.nan)
+        df[relevant_col] = df[relevant_col].replace(-1, 1.5)
 
     # The current quality calculation process will binarize the rating automatically.
     df_quality = output_quality_ratio(df, relevant_col, args)
     df[relevant_col] = normalize_df(df[relevant_col])
     df_agreement = calculate_agreement(df, relevant_col, args)
 
-    df_final = pd.concat([
-        df_quality, df_agreement
-    ], join="outer") 
+    df_final = pd.concat([df_quality, df_agreement], join="outer")
 
-    #make the format of the table better    
+    # make the format of the table better
     df_stats = pretty(df_stats)
     if args.suggestion:
         df_stats_2 = pretty(df_stats_2)
     df_final = pretty(df_final)
 
-    df_stats.to_csv(args.output_folder+'/'+'stats.csv')
+    df_stats.to_csv(args.output_folder + "/" + "stats.csv")
     if args.suggestion:
-        df_stats_2.to_csv(args.output_folder+'/'+'stats_2.csv')
-    df_final.to_csv(args.output_folder+'/'+'quality.csv')
+        df_stats_2.to_csv(args.output_folder + "/" + "stats_2.csv")
+    df_final.to_csv(args.output_folder + "/" + "quality.csv")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

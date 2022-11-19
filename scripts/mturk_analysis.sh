@@ -18,6 +18,6 @@ python tools/mturk_analysis.py \
     --bar 1 \
     --boundary 1 \
     --original_file './data/inference_data/toxigen_shuffled/toxigen_1gen/toxigen_mturk.csv'
-    
-    # Approve when the score is larger than the boundary 
+
+    # Approve when the score is larger than the boundary
     # Approve when there are more annotators than the bar

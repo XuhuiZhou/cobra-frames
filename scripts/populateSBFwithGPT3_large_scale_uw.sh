@@ -24,5 +24,5 @@ do
         --input_file $INPUT \
         --example_file_context $EXAMPLE \
         --output_file $OUTPUT \
-        --random_seed $SEED 
+        --random_seed $SEED
 done

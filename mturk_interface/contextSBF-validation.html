@@ -26,9 +26,9 @@ function decode(strToDecode)
 }
 
 window.onload = function() {
-    if (!window.jQuery) {  
+    if (!window.jQuery) {
         // jQuery is not loaded
-        alert("Warning: it seems that jquery is disabled on your browser.  This HIT might not work properly without javascript and jquery code enabled (if you have extensions that block jquery or an old browser version, this may prevent the dynamic elements of the HIT from functioning).  Please ensure that you have jquery enabled by temporarily disabling extensions that interfere with jquery and/or trying a different browser version."); 
+        alert("Warning: it seems that jquery is disabled on your browser.  This HIT might not work properly without javascript and jquery code enabled (if you have extensions that block jquery or an old browser version, this may prevent the dynamic elements of the HIT from functioning).  Please ensure that you have jquery enabled by temporarily disabling extensions that interfere with jquery and/or trying a different browser version.");
     }
     checkIfWorkerExists();
     layout();
@@ -66,11 +66,11 @@ window.onload = function() {
   <fieldset>
     <div class="card" style="display: block;">
       <div class="card-header">
-        <h4 class="card-title" style=""> 
+        <h4 class="card-title" style="">
           Full Instructions &nbsp; &nbsp;
           <a data-toggle="collapse" href="#instructions" role="button" aria-expanded="false" aria-controls="instructions" style="color:#0080ff;text-decoration: underline;">
           (Expand/Collapse)
-          </a> 
+          </a>
         </h4>
       </div>
       <div id="instructions" class="collapse show" style="margin:10px">
@@ -80,8 +80,8 @@ window.onload = function() {
               You will read a message taken from somewhere on the internet, the potential listener and speaker identity and the situation where the message happened. And then, you will rate some explanations of the message. Please answer all questions from an US cultural perspective; try to think about what would be prevalent opinions on these. Note: we will assume that MTurk workers are well-intentioned annotators.
            </p>
            <div class="alert alert-info" role="alert">
-            This is the pilot test for the task. More HITs would be available in the future. 
-            Meanwhile, we would love to hear your feedback on how to make the task easier to understand! 
+            This is the pilot test for the task. More HITs would be available in the future.
+            Meanwhile, we would love to hear your feedback on how to make the task easier to understand!
           </div>
           </div>
 
@@ -89,18 +89,18 @@ window.onload = function() {
         <div class="row">
           <div class="col-9">
             <h5>Detailed instructions</h5>
-            
+
             <p style="margin-bottom: .5rem;">
-              <span class="numbering">1)</span> 
+              <span class="numbering">1)</span>
                 <em>Read the message carefully. </em>
                 When you interpret the message, make sure you take into account the speaker and listener's
                 identities as well as the situation.
             </p>
 
             <p style="margin-bottom: .5rem;">
-              <span class="numbering">2)</span> <em>Rate the following explanations of the message.</em> 
-                If you think the provided explanation is somewhat unlikely or unlikely, please suggest a better 
-                explanation using the text box beside the radio buttons. 
+              <span class="numbering">2)</span> <em>Rate the following explanations of the message.</em>
+                If you think the provided explanation is somewhat unlikely or unlikely, please suggest a better
+                explanation using the text box beside the radio buttons.
                 The following table provides you with the questions
                 you should consider when rating or writing the explanation for each category.
                 <div class="col-12 mt-2 mb-2">
@@ -137,12 +137,12 @@ window.onload = function() {
                   </tr>
                   <tr>
                     <td class="cb-pink">Type of offensiveness&nbsp;</td>
-                    <td class="cb-gray">Overall, using only a few words, how would you describe the offensiveness of the statement? This statement is an example of a ____. 
+                    <td class="cb-gray">Overall, using only a few words, how would you describe the offensiveness of the statement? This statement is an example of a ____.
                     Here are some common
                     <a href="#" data-toggle="tooltip" data-placement="right"
-                    data-html="true" 
+                    data-html="true"
                     title="<p style='text-align:left'>
-                    <ul style='text-align:left;'> 
+                    <ul style='text-align:left;'>
                     <li>profanity</li>
                     <li>microaggression</li>
                     <li>offensive generalization</li>
@@ -157,7 +157,7 @@ window.onload = function() {
                   </tr>
                 </table>
                 <br>
-                
+
                 <b>❗Notes</b>
                 <a data-toggle="collapse" href="#notes" role="button" aria-expanded="false" aria-controls="instructions" style="color:#0080ff;">
                   (Expand/Collapse)
@@ -165,28 +165,28 @@ window.onload = function() {
                 <div id="notes" class="collapse show">
                   <ul>
                     <li>
-                      <b>Cognitive vs emotional reaction:</b> Think about cognitive reactions as the likely lessons someone will draw, the likely subsequent actions someone will take, or 
+                      <b>Cognitive vs emotional reaction:</b> Think about cognitive reactions as the likely lessons someone will draw, the likely subsequent actions someone will take, or
                       what the <em>long-term harm</em> would be on repeatedly listening to statements like this.
                       The emotional reactions are more about immediate emotional reactions and feelings, which is more <em>immediate harm</em>.
                     </li>
                     <li>
-                      <b>Speaker intent vs Implication: </b>Speaker intent and implication can be similar sometimes. 
-                      For some overtly hateful posts (e.g., "I hate gays"), writing down something like "implies that the speaker hates gays" for Implication, 
+                      <b>Speaker intent vs Implication: </b>Speaker intent and implication can be similar sometimes.
+                      For some overtly hateful posts (e.g., "I hate gays"), writing down something like "implies that the speaker hates gays" for Implication,
                       and "the speaker was trying to express a homophobic/anti-gay attitude" for Speaker intent means that you understand our definitions correctly.
                     </li>
                     <li>
                       <b>Different opinions:</b> It is <em>okay</em> that you may have different explanations for the posts.
-                      We want to assess whether our provided explanations are likely or not given the context, 
+                      We want to assess whether our provided explanations are likely or not given the context,
                       while that <em>does not</em> necessarily cancel the possibility of other explanations.
                     </li>
                     <li>
-                      <b>'None' option:</b> You can click the 'None' button for some of the relations if you think the current explanation is <em>unlikely</em> 
-                      and there is <em>no explanation</em> for this relation given the post and context. 
+                      <b>'None' option:</b> You can click the 'None' button for some of the relations if you think the current explanation is <em>unlikely</em>
+                      and there is <em>no explanation</em> for this relation given the post and context.
                     </li>
                     <li>
-                      <b>Bonus:</b> We are aware it takes time 
+                      <b>Bonus:</b> We are aware it takes time
                     </li>
-                  </ul> 
+                  </ul>
                 </div>
             </p>
 
@@ -202,7 +202,7 @@ window.onload = function() {
             <h5>Background on our research project</h5>
             <p>
               At the University of Washington, we're passionate about understanding how potentially toxic or disrespectful language or stereotypes can be used against certain demographics/groups of people (e.g. racism, sexism, etc.).
-              Although there is no direct benefit to you for participating, we very much appreciate your help in identifying and explaining such language/stereotypes, since this is something computational models have no clue about. 
+              Although there is no direct benefit to you for participating, we very much appreciate your help in identifying and explaining such language/stereotypes, since this is something computational models have no clue about.
               We do not agree with any of the content/stereotypes presented to you, but it's important that we gather these annotations for research purposes.
             </p>
             <p>
@@ -240,7 +240,7 @@ window.onload = function() {
                 <div class="col-3">
                   <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Speaker identity</em>: <span id="speakerInput">white American person</span>
                 </div>
-                
+
                 <div class="col-6 imessage">
                   <p class="from-them">
                     Mexico isn't sending its best, it's sending rapists and murderers
@@ -250,7 +250,7 @@ window.onload = function() {
                   <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Listener identity</em>: <span id="listenerInput">general audience of US voters</span>
                 </div>
               </div>
-              <div class="mt-3" id="table-container"></div> 
+              <div class="mt-3" id="table-container"></div>
               <div class="table-responsive", style="margin-left: 20px; margin-right: 20px; width: 96%">
               <table class="table table-hover" id="examples-table">
                 <thead class="thead-light">
@@ -316,7 +316,7 @@ window.onload = function() {
                   <div class="col-3">
                     <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Speaker identity</em>: <span id="speakerInput">man</span>
                   </div>
-                  
+
                   <div class="col-6 imessage">
                     <p class="from-them">
                       Excuse me miss, are any of your bosses here?
@@ -326,7 +326,7 @@ window.onload = function() {
                     <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Listener identity</em>: <span id="listenerInput">woman</span>
                   </div>
                 </div>
-                <div class="mt-3" id="table-container"></div> 
+                <div class="mt-3" id="table-container"></div>
                 <div class="table-responsive", style="margin-left: 20px; margin-right: 20px; width: 96%">
                 <table class="table table-hover" id="examples-table">
                   <thead class="thead-light">
@@ -388,9 +388,9 @@ window.onload = function() {
               [-] less examples
             </a>
           </div>
-            
-        </div>   
-        
+
+        </div>
+
         <!-- <div class="row justify-content-center" style="margin-top: 20px;">
           <div class="col-11" id="table-container">
             <h5>Examples <small><a href=".extra-rows" class="collapsed" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample" onclick="expExamples();">
@@ -525,20 +525,20 @@ window.onload = function() {
               [-] less examples
             </a>
           </div>
-            
+
         </div>    -->
-  
+
       </div>
 
     </div>
     <div class="row" id="consent" style="margin: 30px 0;">
       <div class="col-12">
-        
+
         <h6>You have read and understood the instructions and agree to do the task</h6>
         <div class="form-check">
           <label class="form-check-label">
             <input class="form-check-input" type="checkbox" id="consent" name="consent" onclick="toggleConsent(this.checked)">
-            By ticking this box, you are agreeing to be part of this data collection study. Be sure that questions you have about the study have been answered and that you understand what you are being asked to do. You may contact us if you think of a question later. You are free to release/quit the HIT at any time, and refusing to be in the experiment or stopping participation will involve no penalty or loss of benefits to which you are otherwise entitled. To save a copy of the consent form and instructions, you can save/print this webpage. 
+            By ticking this box, you are agreeing to be part of this data collection study. Be sure that questions you have about the study have been answered and that you understand what you are being asked to do. You may contact us if you think of a question later. You are free to release/quit the HIT at any time, and refusing to be in the experiment or stopping participation will involve no penalty or loss of benefits to which you are otherwise entitled. To save a copy of the consent form and instructions, you can save/print this webpage.
           </label>
         </div>
         <br>
@@ -553,7 +553,7 @@ window.onload = function() {
     </div>
     <div id="actualTask" style="display: none;">
 
-    
+
     <div class="container" id="allQuestions">
       <div class="row justify-content-center">
         <div class="row justify-content-center" style="background-color: ghostwhite; border: 1px solid darkgrey; border-radius: 3px; width: 70%; margin-left: auto; margin-right: auto;">
@@ -563,7 +563,7 @@ window.onload = function() {
           <div class="col-3">
             <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Speaker identity</em>: <span id="speakerInput">${speakerIdentity}</span>
           </div>
-          
+
           <div class="col-6 imessage">
             <p class="from-them">
               ${statement}
@@ -698,9 +698,9 @@ window.onload = function() {
               <label><input class="likelihood" type="radio" for="offensivenessRating1" name="offensivenessRating1" value=-1> None/Harmless</label>
             </td>
             <td>Suggest a better  <a href="#" data-toggle="tooltip" data-placement="right"
-                    data-html="true" 
+                    data-html="true"
                     title="<p style='text-align:left'>
-                    <ul style='text-align:left;'> 
+                    <ul style='text-align:left;'>
                     <li>profanity</li>
                     <li>microaggression</li>
                     <li>offensive generalization</li>
@@ -717,7 +717,7 @@ window.onload = function() {
                 <option value="2">Two</option>
                 <option value="3">None of these above </option>
               </select> -->
-             
+
               <input type="text" name="offensivenessSuggestion1" placeholder="..."></td>
           </tr>
         </table>
@@ -763,7 +763,7 @@ window.onload = function() {
                 <option value="18">18-24</option>
                 <option value="25">25-29</option>
                 <option value="30">30-34</option>
-                <option value="35">35-39</option>                 
+                <option value="35">35-39</option>
                 <option value="40">40-44</option>
                 <option value="45">45-49</option>
                 <option value="50">50-54</option>
@@ -875,7 +875,7 @@ window.onload = function() {
             <br>
             Note: if the submit button is disabled and you're confident this is an error, please screenshot your answers and the console output (Ctrl+Shift+J or Cmd+Shift+J).
           </div>
-          <input type="submit" id="submitButton" class="btn btn-primary" value="Submit Hit!">       
+          <input type="submit" id="submitButton" class="btn btn-primary" value="Submit Hit!">
         </center>
       </div>
     </div>
@@ -889,22 +889,22 @@ window.onload = function() {
   $(function () {
   $('[data-toggle="tooltip"]').tooltip()
   })
-  
+
   $("label.btn-checkbox>input[type='checkbox']").each(function(ix,e){
     var value = $(e).parent().prop("innerText").trim();
     e.value = value == "" ? "_other_" : value;
   });
 
   /* Make the textbox (suggestion) required for the value in a certain range */
-  $(".likelihood").on("click",function(e){ 
-    event = e; 
-    var num = e.target.name.slice(-1) 
+  $(".likelihood").on("click",function(e){
+    event = e;
+    var num = e.target.name.slice(-1)
     var dim = e.target.name.replace(/Rating\d/,"")
     var val = parseInt($("input[name='"+dim+"Rating"+num+"']:checked").prop("value"));
     console.log(dim,val);
-    if (val < 2 && val > -1) 
+    if (val < 2 && val > -1)
       $("input[name='"+dim+"Suggestion"+num+"']").prop("required","true");
-    else 
+    else
       $("input[name='"+dim+"Suggestion"+num+"']").prop("required","");
   })
   $(".btn-checkbox").on("click",function(e){
@@ -915,10 +915,10 @@ window.onload = function() {
     if(e.target.tagName == "INPUT"){
       if (targ.checked)
         $(targ).parent().addClass("active");
-      else 
+      else
         $(targ).parent().removeClass("active");
     }
-    
+
     /* Make textboxes required if any checkbox is checked */
     if ($(targ).closest(".btn-group-vertical").find("input:checkbox:checked").length > 0) {
       aspectDiv.show();
@@ -951,7 +951,7 @@ window.onload = function() {
   });
   $("input[type='text']").prop("pattern",".{0}|.{3,}").prop("title","Minimum 3 characters");
 
-  
+
   $("button.btn-link").on("click",function(e){
     //Not sure why I need this, but otherwise accordion submits immediately
     e.preventDefault();
@@ -989,7 +989,7 @@ window.onload = function() {
       search = "?workerId=A1TW2IIFTWJIB2&hitId=Testing";
       console.log(search)
     }
-    
+
     search = search.substring(1);
     if (search == ""){
       console.log("No search params "+location.href);
@@ -1036,7 +1036,7 @@ window.onload = function() {
     out += "&politics="+$('input[name="annotatorPolitics"]:checked').val();
     out += "&otherMinority="+encodeURIComponent($("#annotatorMinority").val());
 
-    
+
     return out;
   }
   function dealWithWorkerInfo(sqlResponse){
@@ -1063,7 +1063,7 @@ window.onload = function() {
       //$("#annotatorPolitics").val(workerInfo["politics"]);
       $('#annotatorPolitics'+workerInfo["politics"]).prop("checked",true)
       $("#annotatorMinority").val(workerInfo["otherMinority"]);
-    
+
     }
   }
   function checkIfWorkerExists(){
@@ -1101,7 +1101,7 @@ window.onload = function() {
     xhttp.send(requestParams);
   }
   function validate(){
-  
+
     valid = $("input:invalid").length == 0;
     console.log("########## VALIDATING #########\nvalid? "+valid);
     $("input:invalid").each(function (i,e){
@@ -1124,7 +1124,7 @@ window.onload = function() {
     $("a:contains('examples')").each(function(ix,link){
       if (rows.hasClass("show"))
         link.innerText = "[+] more examples";
-      else 
+      else
         link.innerText = "[-] less examples";
       console.log(link);
     })
@@ -1136,7 +1136,7 @@ window.onload = function() {
     $("a:contains('examples')").each(function(ix,link){
       if (divs.hasClass("show"))
         link.innerText = "[+] more examples";
-      else 
+      else
         link.innerText = "[-] less examples";
       console.log(link);
     })
@@ -1172,7 +1172,7 @@ window.onload = function() {
 .card-header-accordion{
   padding: 0px 10px;
 }
-body, td, .btn { 
+body, td, .btn {
   font-size:0.85rem;
 }
 label {
@@ -1275,15 +1275,15 @@ textarea#postText {
   max-width: 400px;
   /*margin-right: 10px;*/
 }
-#introQuestion, 
+#introQuestion,
 #minorityQuestions,
 #demogQuestions {
   margin-bottom: 10px;
   margin-top: 10px;
 }
-.autocomplete-suggestions { 
+.autocomplete-suggestions {
   border: 1px solid #999;
-  background: #FFF; 
+  background: #FFF;
   overflow: auto;
 }
 #dummyMinority {
@@ -1307,13 +1307,13 @@ ul {
 fieldset {
   padding: 10px;
   background:#fbfbfb;
-  border-radius:5px; 
+  border-radius:5px;
   margin-bottom:5px;
 }
 .lickert>label{
     font-style: italic;
   }
-  
+
 .cb-teal {
   color: #1b9e77;
   font-weight: bold;
@@ -1337,7 +1337,7 @@ fieldset {
 }
 .cb-gold {
   color: #e6ab02;
-  font-weight: bold; 
+  font-weight: bold;
 }
 .cb-brown{
   color: #a6761d;
@@ -1362,7 +1362,7 @@ fieldset {
   background-color: #66a61e
 }
 .cb-bg-gold {
-  background-color: #e6ab02 
+  background-color: #e6ab02
 }
 .cb-bg-brown{
   background-color: #a6761d
@@ -1418,7 +1418,7 @@ todo {
 p.from-me {
   align-self: flex-end;
   background-color: #248bf5;
-  color: #fff; 
+  color: #fff;
 }
 
 p.from-me::before {
