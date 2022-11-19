@@ -11,6 +11,8 @@
     For more extensive dependencies, see `requirements.txt`.
 
         pip install -r requirements.txt
+        pip install .
+
 * We use `pre-commit` hooks to unify the code style, please refer to https://pre-commit.com/ for installation and usage.
 
 
