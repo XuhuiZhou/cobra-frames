@@ -18,8 +18,8 @@
 Generate contexts using the bash script:
 `populateSBFwithGPT3_large_scale.sh`
 
-## Dataset cartography
-Work on things in the cartography folder
+## Data cartography
+Work on things in the `cartography` folder
 
 ## Generating contexts and explanations with GPT3
 Main file for generating CSFB with GPT-3 is `populateSBFwithGPT3.v2.py`
