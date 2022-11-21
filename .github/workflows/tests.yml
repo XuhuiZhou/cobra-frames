@@ -3,7 +3,7 @@ name: Python Package Pytest
 on: [push]
 
 jobs:
-  build-linux:
+  test-all:
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 5
