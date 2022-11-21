@@ -1,6 +1,8 @@
 from typing import List, Tuple
+import numpy as np
+import numpy.typing as npt
 
-from datasets import Dataset
+from datasets.arrow_dataset import Dataset
 
 
 class RewardModel(object):
@@ -27,9 +29,18 @@ class RewardModel(object):
         Returns:
             RewardModel: The trained reward model.
         """
-        raise NotImplementedError
+        return self
 
     def predict(
         self, dataset: Dataset
-    ) -> List[Tuple[int, int, int, int, int, int, int]]:
-        raise NotImplementedError
+    ) -> np.ndarray:
+        """
+        Predict the reward for the given dataset.
+        
+        Args:
+            dataset (Dataset): The dataset to predict on. A single example is a dictionary with the same keys as train above except for "labels".
+        
+        Returns:
+            np.ndarray: The predicted reward for each example in the dataset.
+        """
+        return np.zeros((len(dataset), 7))
