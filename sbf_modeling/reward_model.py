@@ -1,15 +1,22 @@
 from typing import List, Tuple
+
 import numpy as np
 import numpy.typing as npt
-
 from datasets.arrow_dataset import Dataset
+from transformers import T5ForConditionalGeneration
 
 
 class RewardModel(object):
     def __init__(
         self,
+        t5_model_name: str = "google/flan-t5-small",
     ):
-        pass
+        assert "t5" in t5_model_name, "Reward model only supports T5 models."
+        try:
+            self.model: T5ForConditionalGeneration = T5ForConditionalGeneration.from_pretrained(t5_model_name)  # type: ignore
+        except Exception as e:
+            print(f"Error loading model {t5_model_name}: {e}")
+            raise e
 
     def train(self, dataset: Dataset) -> "RewardModel":
         """
@@ -31,15 +38,13 @@ class RewardModel(object):
         """
         return self
 
-    def predict(
-        self, dataset: Dataset
-    ) -> np.ndarray:
+    def predict(self, dataset: Dataset) -> np.ndarray:
         """
         Predict the reward for the given dataset.
-        
+
         Args:
             dataset (Dataset): The dataset to predict on. A single example is a dictionary with the same keys as train above except for "labels".
-        
+
         Returns:
             np.ndarray: The predicted reward for each example in the dataset.
         """
