@@ -24,14 +24,17 @@ class RewardModel(object):
 
         Args:
             dataset (Dataset): The dataset to train on. A single example is a dictionary with the following keys:
-                - "intent": str The intent of the statement.
-                - "targetGroup": str The target group of the statement.
-                - "relevantPowerDynamics": str The relevant power dynamics of the statement.
-                - "implication": str The implication of the statement.
-                - "targetGroupEmotionalReaction": str The emotional reaction of the target group to the statement.
-                - "targetGroupCognitiveReaction": str The cognitive reaction of the target group to the statement.
-                - "offensiveness": str The offensiveness of the statement.
-                - "labels": Tuple[int, int, int, int, int, int, int] The labels for the example.
+                - statement (str): The statement to be evaluated.
+                - speakerIdentity (str): The identity of the speaker.
+                - listenerIdentity (str): The identity of the listener.
+                - intent (str): The intent of the statement.
+                - targetGroup (str): The target group of the statement.
+                - relevantPowerDynamics (str): The relevant power dynamics of the statement.
+                - implication (str): The implication of the statement.
+                - targetGroupEmotionalReaction (str): The emotional reaction of the target group to the statement.
+                - targetGroupCognitiveReaction (str): The cognitive reaction of the target group to the statement.
+                - offensiveness (str): The offensiveness of the statement.
+                - labels (Tuple[int, int, int, int, int, int, int]): The labels for the example.
 
         Returns:
             RewardModel: The trained reward model.
