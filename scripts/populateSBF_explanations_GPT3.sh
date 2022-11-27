@@ -1,28 +1,23 @@
 #!/bin/sh
 
-EXAMPLE='./data/examples.v2.contextOnlyDiverse.csv'
-#EXAMPLE_CONT='./data/examples.v2.contextOnlyCombined.csv'
-#### pilot one
-#INPUT='./data/sbic.trn.r60.gpt3socCont.csv'
-#OUTPUT='./data/sbic.inference.csv'
-#INPUT='./data/mAgr.r60.gpt3socCont.csv'
-#OUTPUT='./data/mAgr.inference.csv'
+EXAMPLE='./data/prompts/examples_explanations.v2.csv'
 
 #### pilot two
 # INPUT='./data/source_data/mAgr.onlyQuotes.csv'
 # OUTPUT='./data/inference_data/mAgr.inference2_ex.csv'
 # INPUT='./data/source_data/SBIC.v2.agg.trn.csv'
 # OUTPUT='./data/inference_data/sbic.inference_ex.csv'
-for i in {91..200}
-do
-    echo "Populate the $i toxigen file"
-    INPUT="./data/cleaned_data/toxigen_shuffled/toxigen_${i}.csv"
-    OUTPUT="./data/inference_data/toxigen_shuffled/toxigen_${i}.csv"
-    SEED=$i
 
-    python ./gpt3_generation/populateSBFwithGPT3.v5.py \
+for i in {3..3}
+do
+    echo "Populate the ${i} toxigen file with explanations"
+    INPUT="./data/inference_data/toxigen_shuffled/toxigen_${i}gen/toxigen_complete.csv"
+    SUB_FOLDER="toxigen_${i}gen"
+    OUTPUT_FOLDER="./data/inference_data/toxigen_explanations/"
+
+    python ./gpt3_generation/populateExplanationswithGPT3.py \
         --input_file $INPUT \
         --example_file_context $EXAMPLE \
-        --output_file $OUTPUT \
-        --random_seed $SEED
+        --sub_dir $SUB_FOLDER \
+        --output_dir $OUTPUT_FOLDER
 done
