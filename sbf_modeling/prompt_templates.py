@@ -19,7 +19,7 @@ QUESTION_TEMPLATES = dict(
 )
 
 
-def map_dataset_to_prompt(
+def map_dataset_to_tokenized_prompt(
     tokenizer: PreTrainedTokenizer, element: Dataset
 ) -> Dict[str, np.ndarray]:
     element_cast: Dict[str, List[str]] = cast(Dict[str, List[str]], element)  # type: ignore
@@ -38,7 +38,8 @@ def map_dataset_to_prompt(
                     "offensiveness",
                 ]
             )
-        ),
+        )
+        + "\n",
         (dict(zip(element_cast, t)) for t in zip(*element_cast.values())),
     )
     outputs = tokenizer(
@@ -50,3 +51,13 @@ def map_dataset_to_prompt(
         return_tensors="np",
     )
     return {"input_ids": outputs["input_ids"]}  # type: ignore
+
+
+def map_dataset_to_prompt_prefix(element: Dataset) -> Dict[str, List[str]]:
+    element_cast: Dict[str, List[str]] = cast(Dict[str, List[str]], element)  # type: ignore
+    whole_prompt = map(
+        lambda instance: (CONTEXT_TEMPLATE.format(**instance)),
+        (dict(zip(element_cast, t)) for t in zip(*element_cast.values())),
+    )
+
+    return {"prefix": list(whole_prompt)}

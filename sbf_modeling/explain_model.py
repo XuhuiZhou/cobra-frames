@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from functools import partial
 from typing import Dict, List, Tuple
 
@@ -12,9 +13,13 @@ from transformers import (
     T5Tokenizer,
     Trainer,
     TrainingArguments,
+    pipeline,
 )
 
-from sbf_modeling.prompt_templates import map_dataset_to_prompt
+from sbf_modeling.prompt_templates import (
+    map_dataset_to_prompt_prefix,
+    map_dataset_to_tokenized_prompt,
+)
 
 
 class ExplainModel(object):
@@ -52,7 +57,7 @@ class ExplainModel(object):
             RewardModel: The trained reward model.
         """
         prompt_dataset = dataset.map(
-            partial(map_dataset_to_prompt, self.tokenizer),
+            partial(map_dataset_to_tokenized_prompt, self.tokenizer),
             batched=True,
             remove_columns=dataset.column_names,
         )
@@ -89,6 +94,8 @@ class ExplainModel(object):
 
         trainer.train()
 
+        trainer.save_model("explain-model")
+
         return self
 
     def predict(self, dataset: Dataset) -> Dict[str, List[str]]:
@@ -102,21 +109,41 @@ class ExplainModel(object):
             Dict[str, List[str]]: The predicted explanation for each example in the dataset, with the following keys:
                 -
         """
-
-        return dict(
-            intent=["The speaker is trying to state a fact"],
-            targetGroup=["mentally ill people"],
-            relevantPowerDynamics=[
-                "power differential between the mentally ill and the general public, as well as the speaker and the mentally ill"
-            ],
-            implication=[
-                "It implies that mentally ill people should not be allowed to have children, and that they are not capable of taking care of them"
-            ],
-            targetGroupEmotionalReaction=[
-                "could be offended or hurt by the statement, might feel like their abilities are being invalidated"
-            ],
-            targetGroupCognitiveReaction=[
-                "might want to avoid places where they could overhear something like that, could make them more cautious of people who think that way"
-            ],
-            offensiveness=["offensive"],
+        pipe = pipeline(
+            "text-generation",
+            model="explain-model",
         )
+
+        prefix_datset = dataset.map(
+            map_dataset_to_prompt_prefix,
+            batched=True,
+            remove_columns=dataset.column_names,
+        )
+        prefixes = prefix_datset["prefix"]
+
+        generated_text: List[str] = list(
+            map(
+                lambda i: i[0]["generated_text"],
+                pipe(prefixes, num_return_sequences=1),
+            )
+        )
+
+        keys = [
+            "intent",
+            "targetGroup",
+            "relevantPowerDynamics",
+            "implication",
+            "targetGroupEmotionalReaction",
+            "targetGroupCognitiveReaction",
+            "offensiveness",
+        ]
+        answer_dict: Dict[str, List[str]] = {key: [] for key in keys}
+        for txt in generated_text:
+            answers = re.findall(r"A: (.*?)\n", txt)
+            if len(answers) < 7:
+                answers += [""] * (7 - len(answers))
+            answers = answers[:7]
+            for key, answer in zip(keys, answers):
+                answer_dict[key].append(answer)
+
+        return answer_dict
