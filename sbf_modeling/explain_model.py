@@ -76,7 +76,6 @@ class ExplainModel(object):
             lr_scheduler_type="cosine",
             learning_rate=5e-4,
             save_steps=5_000,
-            push_to_hub=True,
         )
 
         trainer = Trainer(
