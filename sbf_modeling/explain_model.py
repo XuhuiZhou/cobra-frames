@@ -1,11 +1,20 @@
 from __future__ import annotations
 
+from functools import partial
 from typing import Dict, List, Tuple
 
 import numpy as np
 import numpy.typing as npt
 from datasets.arrow_dataset import Dataset
-from transformers import T5ForConditionalGeneration
+from transformers import (
+    DataCollatorForLanguageModeling,
+    T5ForConditionalGeneration,
+    T5Tokenizer,
+    Trainer,
+    TrainingArguments,
+)
+
+from sbf_modeling.prompt_templates import map_dataset_to_prompt
 
 
 class ExplainModel(object):
@@ -16,6 +25,7 @@ class ExplainModel(object):
         assert "t5" in t5_model_name, "Reward model only supports T5 models."
         try:
             self.model: T5ForConditionalGeneration = T5ForConditionalGeneration.from_pretrained(t5_model_name)  # type: ignore
+            self.tokenizer = T5Tokenizer.from_pretrained(t5_model_name)
         except Exception as e:
             print(f"Error loading model {t5_model_name}: {e}")
             raise e
@@ -41,6 +51,45 @@ class ExplainModel(object):
         Returns:
             RewardModel: The trained reward model.
         """
+        prompt_dataset = dataset.map(
+            partial(map_dataset_to_prompt, self.tokenizer),
+            batched=True,
+            remove_columns=dataset.column_names,
+        )
+
+        self.tokenizer.pad_token = self.tokenizer.eos_token
+        data_collator = DataCollatorForLanguageModeling(
+            self.tokenizer, mlm=False
+        )
+
+        args = TrainingArguments(  # TODO: move to a config file
+            output_dir="explain-model",
+            per_device_train_batch_size=32,
+            per_device_eval_batch_size=32,
+            evaluation_strategy="steps",
+            eval_steps=5_000,
+            logging_steps=5_000,
+            gradient_accumulation_steps=8,
+            num_train_epochs=1,
+            weight_decay=0.1,
+            warmup_steps=1_000,
+            lr_scheduler_type="cosine",
+            learning_rate=5e-4,
+            save_steps=5_000,
+            push_to_hub=True,
+        )
+
+        trainer = Trainer(
+            model=self.model,
+            tokenizer=self.tokenizer,
+            args=args,
+            data_collator=data_collator,
+            train_dataset=prompt_dataset,  # type: ignore
+            eval_dataset=prompt_dataset,  # type: ignore # TODO: use a separate eval dataset
+        )
+
+        trainer.train()
+
         return self
 
     def predict(self, dataset: Dataset) -> Dict[str, List[str]]:
