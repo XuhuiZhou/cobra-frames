@@ -1,0 +1,11 @@
+from __gin__ import dynamic_registration
+import __main__ as train_script
+import sbf_modeling
+import tests.sbf_modeling_code.utils as utils
+
+MODEL_DIR = %gin.required
+
+train_script.train:
+    model = @sbf_modeling.ExplainModel()
+    train_data = @utils.get_dummy_data()
+    model_dir = %MODEL_DIR

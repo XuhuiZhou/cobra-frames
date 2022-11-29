@@ -7,8 +7,10 @@ import numpy.typing as npt
 from datasets.arrow_dataset import Dataset
 from transformers import T5ForConditionalGeneration
 
+from sbf_modeling import BaseSBFModel
 
-class RewardModel(object):
+
+class RewardModel(BaseSBFModel):
     def __init__(
         self,
         t5_model_name: str = "google/flan-t5-small",

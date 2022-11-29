@@ -16,13 +16,14 @@ from transformers import (
     pipeline,
 )
 
+from sbf_modeling import BaseSBFModel
 from sbf_modeling.prompt_templates import (
     map_dataset_to_prompt_prefix,
     map_dataset_to_tokenized_prompt,
 )
 
 
-class ExplainModel(object):
+class ExplainModel(BaseSBFModel):
     def __init__(
         self,
         t5_model_name: str = "google/flan-t5-small",
@@ -53,6 +54,7 @@ class ExplainModel(object):
             learning_rate=5e-4,
             save_steps=5_000,
         ),
+        save_model_dir: str = "explain-model",
     ) -> ExplainModel:
         """
         Train the reward model on the given dataset.
@@ -96,7 +98,8 @@ class ExplainModel(object):
 
         trainer.train()
 
-        trainer.save_model("explain-model")
+        if save_model_dir != "":
+            trainer.save_model(save_model_dir)
 
         return self
 
