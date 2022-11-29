@@ -35,7 +35,25 @@ class ExplainModel(object):
             print(f"Error loading model {t5_model_name}: {e}")
             raise e
 
-    def train(self, dataset: Dataset) -> ExplainModel:
+    def train(
+        self,
+        dataset: Dataset,
+        args: TrainingArguments = TrainingArguments(
+            output_dir="explain-model",
+            per_device_train_batch_size=32,
+            per_device_eval_batch_size=32,
+            evaluation_strategy="steps",
+            eval_steps=5_000,
+            logging_steps=5_000,
+            gradient_accumulation_steps=8,
+            num_train_epochs=1,
+            weight_decay=0.1,
+            warmup_steps=1_000,
+            lr_scheduler_type="cosine",
+            learning_rate=5e-4,
+            save_steps=5_000,
+        ),
+    ) -> ExplainModel:
         """
         Train the reward model on the given dataset.
 
@@ -65,22 +83,6 @@ class ExplainModel(object):
         self.tokenizer.pad_token = self.tokenizer.eos_token
         data_collator = DataCollatorForLanguageModeling(
             self.tokenizer, mlm=False
-        )
-
-        args = TrainingArguments(  # TODO: move to a config file
-            output_dir="explain-model",
-            per_device_train_batch_size=32,
-            per_device_eval_batch_size=32,
-            evaluation_strategy="steps",
-            eval_steps=5_000,
-            logging_steps=5_000,
-            gradient_accumulation_steps=8,
-            num_train_epochs=1,
-            weight_decay=0.1,
-            warmup_steps=1_000,
-            lr_scheduler_type="cosine",
-            learning_rate=5e-4,
-            save_steps=5_000,
         )
 
         trainer = Trainer(
