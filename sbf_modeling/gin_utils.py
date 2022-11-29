@@ -13,11 +13,9 @@
 # limitations under the License.
 
 """Utilities for using gin configurations."""
-import os
 from typing import Optional, Sequence, Union
 
 import gin
-import jax
 from absl import app, logging
 
 
@@ -83,8 +81,8 @@ def run(main):
     """Wrapper for app.run that rewrites gin args before parsing."""
     app.run(
         main,
-        flags_parser=lambda a: app.parse_flags_with_usage(rewrite_gin_args(a)),
-    )  # type: ignore
+        flags_parser=lambda a: app.parse_flags_with_usage(rewrite_gin_args(a)),  # type: ignore
+    )
 
 
 # ====================== Configurable Utility Functions ======================
