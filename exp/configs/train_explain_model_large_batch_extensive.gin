@@ -1,0 +1,13 @@
+import transformers
+import sbf_modeling
+
+sbf_modeling.ExplainModel:
+    t5_model_name="google/flan-t5-xl"
+
+transformers.TrainingArguments:
+    eval_steps=20
+    logging_steps=20
+    per_device_train_batch_size=16
+    per_device_eval_batch_size=32
+    gradient_accumulation_steps=1
+    num_train_epochs=2

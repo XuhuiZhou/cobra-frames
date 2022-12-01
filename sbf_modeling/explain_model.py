@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import re
 from functools import partial
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, cast
 
 import numpy as np
 import numpy.typing as npt
@@ -30,7 +30,10 @@ class ExplainModel(BaseSBFModel):
     ):
         assert "t5" in t5_model_name, "Reward model only supports T5 models."
         try:
-            self.model: T5ForConditionalGeneration = T5ForConditionalGeneration.from_pretrained(t5_model_name)  # type: ignore
+            self.model = T5ForConditionalGeneration.from_pretrained(t5_model_name)  # type: ignore
+            self.model = cast(T5ForConditionalGeneration, self.model)
+            if t5_model_name in ["google/flan-t5-xxl", "google/flan-t5-xl"]:
+                self.model.parallelize()
             self.tokenizer = T5Tokenizer.from_pretrained(t5_model_name)
         except Exception as e:
             print(f"Error loading model {t5_model_name}: {e}")
