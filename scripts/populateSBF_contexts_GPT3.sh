@@ -2,7 +2,7 @@
 
 EXAMPLE='./data/prompts/examples.v2.contextOnlyDiverse.csv'
 
-for i in {222..300}
+for i in {278..300}
 do
     echo "Populate the $i toxigen file"
     INPUT="./data/cleaned_data/toxigen_shuffled/toxigen_${i}.csv"

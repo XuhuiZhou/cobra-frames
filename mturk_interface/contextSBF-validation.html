@@ -180,7 +180,7 @@ window.onload = function() {
                     </td>
                   </tr>
                   <tr>
-                    <td class="cb-brown">Target cognitive reaction</td>
+                    <td class="cb-brown">Effect on target</td>
                     <td class="cb-gray">Longer-term, what likely lessons will someone from the target group draw? How will they change their thinking or behavior?
                     </td>
                   </tr>
@@ -214,9 +214,9 @@ window.onload = function() {
                 <div id="notes" class="collapse show">
                   <ul>
                     <li>
-                      <b>Cognitive vs emotional reaction:</b> Think about cognitive reactions as the likely lessons someone will draw, the likely subsequent actions someone will take, or
+                      <b>Effects vs reactions:</b> Think about effects as the likely lessons someone will draw, the likely subsequent actions someone will take, or
                       what the <em>long-term harm</em> would be on repeatedly listening to statements like this.
-                      The emotional reactions are more about immediate emotional reactions and feelings, which is more <em>immediate harm</em>.
+                      The reactions are more about immediate emotional reactions and feelings, which is more <em>immediate harm</em>.
                     </li>
                     <li>
                       <b>Speaker intent vs Implication: </b>Speaker intent and implication can be similar sometimes.
@@ -335,7 +335,7 @@ window.onload = function() {
                     <td>Mexican immigrants could feel angry that the entire country of Mexico is being framed as criminal, afraid that people will believe that stereotype</td>
                   </tr>
                   <tr>
-                    <td class="cb-brown">Target cognitive reaction</td>
+                    <td class="cb-brown">Effect on target</td>
                     <td>Mexican would try to be more well-behaved and make efforts in improving their education in reducing future criminals</td>
                     <td>very/somewhat unlikely</td>
                     <td>Mexican immigrants could likely be more feared, and will feel less welcome in the country they are in</td>
@@ -417,7 +417,7 @@ window.onload = function() {
                       <td>listener and women could feel angry, feel condescended to, angry that they didn't think a woman was boss</td>
                     </tr>
                     <tr>
-                      <td class="cb-brown">Target cognitive reaction</td>
+                      <td class="cb-brown">Effect on target</td>
                       <td>might lead women bosses to change their behavior to appear more boss-like, might become more confrontational</td>
                       <td>very/somewhat likely</td>
                       <td></td>
@@ -639,10 +639,10 @@ window.onload = function() {
             <td class="cb-teal" style="width: 15%;">Speaker intent</td>
             <td class="cb-gray" style="width: 30%;">${intent}</td>
             <td>
-              <label><input class="likelihood" type="radio" for="intentRating1" name="intentRating1" value=3 required> Very likely</label><br>
-              <label><input class="likelihood" type="radio" for="intentRating1" name="intentRating1" value=2> Somewhat likely</label><br>
-              <label><input class="likelihood" type="radio" for="intentRating1" name="intentRating1" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="intentRating1" name="intentRating1" value=0> Very unlikely</label></td>
+              <label><input class="likelihood" type="radio" for="intentRating" name="intentRating" value=3 required> Very likely</label><br>
+              <label><input class="likelihood" type="radio" for="intentRating" name="intentRating" value=2> Somewhat likely</label><br>
+              <label><input class="likelihood" type="radio" for="intentRating" name="intentRating" value=1> Somewhat unlikely</label><br>
+              <label><input class="likelihood" type="radio" for="intentRating" name="intentRating" value=0> Very unlikely</label></td>
             <td>Suggest a better speaker intent:<br>
             <input type="text" placeholder="The speaker was trying to..." name="intentSuggestion1"></td>
           </tr>
@@ -650,11 +650,11 @@ window.onload = function() {
             <td class="cb-purple">Target (group)</td>
             <td class="cb-gray">${targetGroup}&nbsp;</td>
             <td>
-              <label><input class="likelihood" type="radio" for="targetGroupRating1" name="targetGroupRating1" value=3 required> Very likely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupRating1" name="targetGroupRating1" value=2> Somewhat likely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupRating1" name="targetGroupRating1" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupRating1" name="targetGroupRating1" value=0> Very unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupRating1" name="targetGroupRating1" value=-1> None</label></td>
+              <label><input class="likelihood" type="radio" for="targetGroupRating" name="targetGroupRating" value=3 required> Very likely</label><br>
+              <label><input class="likelihood" type="radio" for="targetGroupRating" name="targetGroupRating" value=2> Somewhat likely</label><br>
+              <label><input class="likelihood" type="radio" for="targetGroupRating" name="targetGroupRating" value=1> Somewhat unlikely</label><br>
+              <label><input class="likelihood" type="radio" for="targetGroupRating" name="targetGroupRating" value=0> Very unlikely</label><br>
+              <label><input class="likelihood" type="radio" for="targetGroupRating" name="targetGroupRating" value=-1> None</label></td>
             <td>Suggest a better targeted group:<br>
             <input type="text" placeholder="..." name="targetGroupSuggestion1"></td>
           </tr>
@@ -662,11 +662,11 @@ window.onload = function() {
             <td class="cb-gold">Power dynamic</td>
             <td class="cb-gray">${relevantPowerDynamics}</td>
             <td>
-              <label><input class="likelihood" type="radio" for="powerDiffRating1" name="powerDiffRating1" value=3 required> Very likely</label><br>
-              <label><input class="likelihood" type="radio" for="powerDiffRating1" name="powerDiffRating1" value=2> Somewhat likely</label><br>
-              <label><input class="likelihood" type="radio" for="powerDiffRating1" name="powerDiffRating1" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="powerDiffRating1" name="powerDiffRating1" value=0> Very unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="powerDiffRating1" name="powerDiffRating1" value=-1> None</label><br>
+              <label><input class="likelihood" type="radio" for="powerDiffRating" name="powerDiffRating" value=3 required> Very likely</label><br>
+              <label><input class="likelihood" type="radio" for="powerDiffRating" name="powerDiffRating" value=2> Somewhat likely</label><br>
+              <label><input class="likelihood" type="radio" for="powerDiffRating" name="powerDiffRating" value=1> Somewhat unlikely</label><br>
+              <label><input class="likelihood" type="radio" for="powerDiffRating" name="powerDiffRating" value=0> Very unlikely</label><br>
+              <label><input class="likelihood" type="radio" for="powerDiffRating" name="powerDiffRating" value=-1> None</label><br>
             </td>
             <td>Suggest a better relevant power difference:<br>
             <input type="text" name="powerDiffSuggestion1" placeholder="power difference between..."></td>
@@ -675,64 +675,49 @@ window.onload = function() {
             <td class="cb-orange">Implication</td>
             <td class="cb-gray">${implication}&nbsp;</td>
             <td>
-              <label><input class="likelihood" type="radio" for="implicationRating1" name="implicationRating1" value=3 required> Very likely</label><br>
-              <label><input class="likelihood" type="radio" for="implicationRating1" name="implicationRating1" value=2> Somewhat likely</label><br>
-              <label><input class="likelihood" type="radio" for="implicationRating1" name="implicationRating1" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="implicationRating1" name="implicationRating1" value=0> Very unlikely</label>
+              <label><input class="likelihood" type="radio" for="implicationRating" name="implicationRating" value=3 required> Very likely</label><br>
+              <label><input class="likelihood" type="radio" for="implicationRating" name="implicationRating" value=2> Somewhat likely</label><br>
+              <label><input class="likelihood" type="radio" for="implicationRating" name="implicationRating" value=1> Somewhat unlikely</label><br>
+              <label><input class="likelihood" type="radio" for="implicationRating" name="implicationRating" value=0> Very unlikely</label>
             </td>
             <td>Suggest a better implication or stereotype:<br>
             <input type="text" name="implicationSuggestion1" placeholder="implies that ..."></td>
           </tr>
-          <tr>
-            <td class="cb-gray">---</td>
-            <td class="cb-gray">Please select the <span id="attentionCheckInstr">fifth</span> option from the top, to double check you're doing this task attentively.</td>
-            <div style="display: none;">
-              <input name="attentionCheckCorrect" id="attentionCheckCorrect" placeholder="3" type="number">
-            </div>
-            <td>
-              <label><input class="attentionCheck" type="radio" for="attentionCheck" name="attentionCheck" value="1" required> 1</label><br>
-              <label><input class="attentionCheck" type="radio" for="attentionCheck" name="attentionCheck" value="2"> 2</label><br>
-              <label><input class="attentionCheck" type="radio" for="attentionCheck" name="attentionCheck" value="3"> 3</label><br>
-              <label><input class="attentionCheck" type="radio" for="attentionCheck" name="attentionCheck" value="4"> 4</label><br>
-              <label><input class="attentionCheck" type="radio" for="attentionCheck" name="attentionCheck" value="5"> 5</label>
-            </td>
-            <td>---<br>
-         </tr>
          <tr>
             <td class="cb-green">Target emotional reaction</td>
             <td class="cb-gray">${targetGroupEmotionalReaction}</td>
             <td>
-              <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating1" name="targetGroupEmoReactRating1" value=3 required> Very likely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating1" name="targetGroupEmoReactRating1" value=2> Somewhat likely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating1" name="targetGroupEmoReactRating1" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating1" name="targetGroupEmoReactRating1" value=0> Very unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating1" name="targetGroupEmoReactRating1" value=-1> None</label><br>
+              <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating" name="targetGroupEmoReactRating" value=3 required> Very likely</label><br>
+              <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating" name="targetGroupEmoReactRating" value=2> Somewhat likely</label><br>
+              <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating" name="targetGroupEmoReactRating" value=1> Somewhat unlikely</label><br>
+              <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating" name="targetGroupEmoReactRating" value=0> Very unlikely</label><br>
+              <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating" name="targetGroupEmoReactRating" value=-1> None</label><br>
             </td>
             <td>Suggest a better reaction:<br>
             <input type="text" name="targetGroupEmoReactSuggestion1" placeholder="target would likely feel..."></td>
           </tr>
           <tr>
-            <td class="cb-brown">Target cognitive reaction</td>
+            <td class="cb-brown">Effect on target</td>
             <td class="cb-gray">${targetGroupCognitiveReaction}</td>
             <td>
-              <label><input class="likelihood" type="radio" for="targetGroupCogReactRating1" name="targetGroupCogReactRating1" value=3 required> Very likely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupCogReactRating1" name="targetGroupCogReactRating1" value=2> Somewhat likely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupCogReactRating1" name="targetGroupCogReactRating1" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupCogReactRating1" name="targetGroupCogReactRating1" value=0> Very unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupCogReactRating1" name="targetGroupCogReactRating1" value=-1> None</label>
+              <label><input class="likelihood" type="radio" for="targetGroupCogReactRating" name="targetGroupCogReactRating" value=3 required> Very likely</label><br>
+              <label><input class="likelihood" type="radio" for="targetGroupCogReactRating" name="targetGroupCogReactRating" value=2> Somewhat likely</label><br>
+              <label><input class="likelihood" type="radio" for="targetGroupCogReactRating" name="targetGroupCogReactRating" value=1> Somewhat unlikely</label><br>
+              <label><input class="likelihood" type="radio" for="targetGroupCogReactRating" name="targetGroupCogReactRating" value=0> Very unlikely</label><br>
+              <label><input class="likelihood" type="radio" for="targetGroupCogReactRating" name="targetGroupCogReactRating" value=-1> None</label>
             </td>
-            <td>Suggest a better reaction:<br>
+            <td>Suggest a better effect:<br>
             <input type="text" name="targetGroupCogReactSuggestion1" placeholder="the effect on the target will be..."></td>
           </tr>
           <tr>
             <td class="cb-pink">Type of offensiveness&nbsp;</td>
             <td class="cb-gray">${offensiveness}</td>
             <td>
-              <label><input class="likelihood" type="radio" for="offensivenessRating1" name="offensivenessRating1" value=3 required> Very likely</label><br>
-              <label><input class="likelihood" type="radio" for="offensivenessRating1" name="offensivenessRating1" value=2> Somewhat likely</label><br>
-              <label><input class="likelihood" type="radio" for="offensivenessRating1" name="offensivenessRating1" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="offensivenessRating1" name="offensivenessRating1" value=0> Very unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="offensivenessRating1" name="offensivenessRating1" value=-1> None/Harmless</label>
+              <label><input class="likelihood" type="radio" for="offensivenessRating" name="offensivenessRating" value=3 required> Very likely</label><br>
+              <label><input class="likelihood" type="radio" for="offensivenessRating" name="offensivenessRating" value=2> Somewhat likely</label><br>
+              <label><input class="likelihood" type="radio" for="offensivenessRating" name="offensivenessRating" value=1> Somewhat unlikely</label><br>
+              <label><input class="likelihood" type="radio" for="offensivenessRating" name="offensivenessRating" value=0> Very unlikely</label><br>
+              <label><input class="likelihood" type="radio" for="offensivenessRating" name="offensivenessRating" value=-1> None/Harmless</label>
             </td>
             <td>Suggest a better  <a href="#" data-toggle="tooltip" data-placement="right"
                     data-html="true"

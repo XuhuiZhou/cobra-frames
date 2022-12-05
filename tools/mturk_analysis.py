@@ -66,6 +66,7 @@ def computeFleissKappa(df, col, groupCol, args):
 
 
 def record_annotation_summary(df_info, df, args):
+    # TODO: fix this chunk of code; too hard to read
     warnings.warn(
         "This function only applies to three annotators scanario bc of hard-coded values."
     )
@@ -89,48 +90,122 @@ def record_annotation_summary(df_info, df, args):
             df_result.append(row_dict)
         df_suggestion = pd.DataFrame(df_result)
     df = df[0::3]
-    df = df[
-        [
+    if args.task == "context":
+        df = df[
+            [
+                "HITId",
+                "Input.group",
+                "Input.statement",
+                "Input.speechContext",
+                "Input.speakerIdentity",
+                "Input.listenerIdentity",
+            ]
+        ]
+        if args.suggestion:
+            df = pd.concat(
+                [
+                    df.reset_index(drop=True),
+                    df_suggestion.reset_index(drop=True),
+                ],
+                axis=1,
+            )
+        else:
+            df = df.reset_index(drop=True)
+        df_info = df.merge(df_info, on="HITId")
+
+        relevant_cols = [
             "HITId",
             "Input.group",
             "Input.statement",
             "Input.speechContext",
             "Input.speakerIdentity",
             "Input.listenerIdentity",
+            "Answer.hsituationRating",
+            "Answer.psituationRating",
+            "Answer.speakerIdenRating",
+            "Answer.listenerIdenRating",
+            "Answer.finalRating",
         ]
-    ]
-    if args.suggestion:
-        df = pd.concat(
-            [df.reset_index(drop=True), df_suggestion.reset_index(drop=True)],
-            axis=1,
-        )
+
+        if args.suggestion:
+            relevant_cols += [
+                "Answer.hsituationSuggestion",
+                "Answer.psituationSuggestion",
+                "Answer.speakerIdenSuggestion",
+                "Answer.listenerIdenSuggestion",
+            ]
+
+        df_info = df_info[relevant_cols]
     else:
-        df = df.reset_index(drop=True)
-    df_info = df.merge(df_info, on="HITId")
+        df = df[
+            [
+                "HITId",
+                "Input.group",
+                "Input.model",
+                "Input.id",
+                "Input.statement",
+                "Input.speechContext",
+                "Input.speakerIdentity",
+                "Input.listenerIdentity",
+                "Input.targetGroup",
+                "Input.intent",
+                "Input.implication",
+                "Input.offensiveness",
+                "Input.relevantPowerDynamics",
+                "Input.targetGroupEmotionalReaction",
+                "Input.targetGroupCognitiveReaction",
+            ]
+        ]
+        if args.suggestion:
+            df = pd.concat(
+                [
+                    df.reset_index(drop=True),
+                    df_suggestion.reset_index(drop=True),
+                ],
+                axis=1,
+            )
+        else:
+            df = df.reset_index(drop=True)
+        df_info = df.merge(df_info, on="HITId")
 
-    relevant_cols = [
-        "HITId",
-        "Input.group",
-        "Input.statement",
-        "Input.speechContext",
-        "Input.speakerIdentity",
-        "Input.listenerIdentity",
-        "Answer.hsituationRating",
-        "Answer.psituationRating",
-        "Answer.speakerIdenRating",
-        "Answer.listenerIdenRating",
-        "Answer.finalRating",
-    ]
-
-    if args.suggestion:
-        relevant_cols += [
-            "Answer.hsituationSuggestion",
-            "Answer.psituationSuggestion",
-            "Answer.speakerIdenSuggestion",
-            "Answer.listenerIdenSuggestion",
+        relevant_cols = [
+            "HITId",
+            "Input.model",
+            "Input.id_x",  # TODO: fix this
+            "Input.group",
+            "Input.statement",
+            "Input.speechContext",
+            "Input.speakerIdentity",
+            "Input.listenerIdentity",
+            "Input.targetGroup",
+            "Input.intent",
+            "Input.implication",
+            "Input.offensiveness",
+            "Input.relevantPowerDynamics",
+            "Input.targetGroupEmotionalReaction",
+            "Input.targetGroupCognitiveReaction",
+            "Answer.targetGroupRating",
+            "Answer.intentRating",
+            "Answer.implicationRating",
+            "Answer.offensivenessRating",
+            "Answer.powerDiffRating",
+            "Answer.targetGroupEmoReactRating",
+            "Answer.targetGroupCogReactRating",
         ]
 
-    df_info = df_info[relevant_cols]
+        if args.suggestion:
+            relevant_cols += [
+                "Answer.targetGroupSuggestion",
+                "Answer.intentSuggestion",
+                "Answer.implicationSuggestion",
+                "Answer.offensivenessSuggestion",
+                "Answer.powerDiffSuggestion",
+                "Answer.targetGroupEmoReactSuggestion",
+                "Answer.targetGroupCogReactSuggestion",
+            ]
+
+        df_info = df_info[relevant_cols]
+
     # binarize the rating
     for i in df_info.keys():
         if "Rating" in i:
@@ -145,11 +220,12 @@ def output_quality_ratio(df, col, args):
     df_info = df_info.groupby(by=["HITId"]).sum()
     df_info = df_info > args.bar
     # produce the final label
-    df_info["Answer.finalRating"] = (
-        df_info["Answer.hsituationRating"]
-        & df_info["Answer.speakerIdenRating"]
-        & df_info["Answer.listenerIdenRating"]
-    ).astype(int)
+    if args.task == "context":
+        df_info["Answer.finalRating"] = (
+            df_info["Answer.hsituationRating"]
+            & df_info["Answer.speakerIdenRating"]
+            & df_info["Answer.listenerIdenRating"]
+        ).astype(int)
     if args.record_annotation_summary:
         record_annotation_summary(df_info, df, args)
     sum_ = df_info.sum()
@@ -283,7 +359,6 @@ def main():
     """
     parser = argparse.ArgumentParser()
     parser.add_argument("--input_file")
-    parser.add_argument("--original_file")
     parser.add_argument("--output_folder")
     parser.add_argument("--task", default="explanation", type=str)
     parser.add_argument("--suggestion", action="store_true")
@@ -318,6 +393,10 @@ def main():
 
     args = parser.parse_args()
     df = pd.read_csv(args.input_file)
+
+    # #### TEMPORARY FEATURE: seperate two models' stats
+    # df = df[df['Input.model'] == 'davinci-003']
+
     # df = df[df['source_tag']=='sbic']
     df = df.rename(
         columns={
@@ -336,6 +415,9 @@ def main():
     #     'Answer.clickedSubmitTime']])
 
     # print(time_analysis)
+
+    #### TEMPORARY FIX: remove 1 in the column names of the dataframe
+    df = df.rename(columns={i: i.replace("1", "") for i in df.columns})
     df_stats = stats_of_interest(df[relevant_col])
     if args.suggestion:
         df_stats_2 = stats_of_interest(df[relevant_col2], has_text=True)
