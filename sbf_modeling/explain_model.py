@@ -102,7 +102,7 @@ class ExplainModel(BaseSBFModel):
             args=args,
             data_collator=data_collator,
             train_dataset=prompt_train_dataset,  # type: ignore
-            eval_dataset=prompt_valid_dataset,  # type: ignore # TODO: use a separate eval dataset
+            eval_dataset=prompt_valid_dataset,  # type: ignore
         )
 
         trainer.train()
@@ -112,7 +112,9 @@ class ExplainModel(BaseSBFModel):
 
         return self
 
-    def predict(self, dataset: Dataset) -> Dict[str, List[str]]:
+    def predict(
+        self, dataset: DatasetDict, model_dir: str = "explain-model"
+    ) -> Dict[str, List[str]]:
         """
         Predict the reward for the given dataset.
 
@@ -125,15 +127,16 @@ class ExplainModel(BaseSBFModel):
         """
         pipe = pipeline(
             "text-generation",
-            model="explain-model",
+            model=model_dir,
         )
 
-        prefix_datset = dataset.map(
+        prefix_dataset = dataset["validation"].map(
             map_dataset_to_prompt_prefix,
             batched=True,
-            remove_columns=dataset.column_names,
+            remove_columns=dataset["validation"].column_names,
         )
-        prefixes = prefix_datset["prefix"]
+        prefixes = prefix_dataset["prefix"]
+        breakpoint()
 
         generated_text: List[str] = list(
             map(

@@ -1,5 +1,7 @@
 from __gin__ import dynamic_registration
-import __main__ as train_script
+import __main__ as inference_script
+import sbf_modeling.train as train_script
+# import sbf_modeling.inference as inference_script
 import sbf_modeling
 import scripts.training_explain_model.utils as utils
 import transformers
@@ -28,10 +30,18 @@ sbf_modeling.ExplainModel:
 sbf_modeling.ExplainModel.train:
     args = @transformers.TrainingArguments()
 
+sbf_modeling.ExplainModel.predict:
+    model_dir = %MODEL_DIR
+
 utils.get_data:
     mode = %MODE
 
 train_script.train:
     model = @sbf_modeling.ExplainModel()
     train_data = @utils.get_data()
+    model_dir = %MODEL_DIR
+
+inference_script.predict:
+    model = @sbf_modeling.ExplainModel()
+    test_data = @utils.get_data()
     model_dir = %MODEL_DIR

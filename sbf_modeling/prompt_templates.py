@@ -6,7 +6,7 @@ from transformers import PreTrainedTokenizer
 
 CONTEXT_LENGTH = 512
 
-CONTEXT_TEMPLATE = "This is {situationalContext} {speakerIdentity} speaking to {listenerIdentity}: {statement}\n"
+CONTEXT_TEMPLATE = "This is {situationalContext}, {speakerIdentity} speaking to {listenerIdentity}: {statement}\n"
 
 QUESTION_TEMPLATES = dict(
     intent="What is the intent of the speaker?",
