@@ -7,6 +7,7 @@ from typing import Dict, List, Tuple, cast
 import numpy as np
 import numpy.typing as npt
 from datasets.arrow_dataset import Dataset
+from datasets.dataset_dict import DatasetDict
 from transformers import (
     DataCollatorForLanguageModeling,
     T5ForConditionalGeneration,
@@ -41,7 +42,7 @@ class ExplainModel(BaseSBFModel):
 
     def train(
         self,
-        dataset: Dataset,
+        dataset: DatasetDict,
         args: TrainingArguments = TrainingArguments(
             output_dir="explain-model",
             per_device_train_batch_size=32,
@@ -79,10 +80,15 @@ class ExplainModel(BaseSBFModel):
         Returns:
             RewardModel: The trained reward model.
         """
-        prompt_dataset = dataset.map(
+        prompt_train_dataset = dataset["train"].map(
             partial(map_dataset_to_tokenized_prompt, self.tokenizer),
             batched=True,
-            remove_columns=dataset.column_names,
+            remove_columns=dataset["train"].column_names,
+        )
+        prompt_valid_dataset = dataset["validation"].map(
+            partial(map_dataset_to_tokenized_prompt, self.tokenizer),
+            batched=True,
+            remove_columns=dataset["validation"].column_names,
         )
 
         self.tokenizer.pad_token = self.tokenizer.eos_token
@@ -95,8 +101,8 @@ class ExplainModel(BaseSBFModel):
             tokenizer=self.tokenizer,
             args=args,
             data_collator=data_collator,
-            train_dataset=prompt_dataset,  # type: ignore
-            eval_dataset=prompt_dataset,  # type: ignore # TODO: use a separate eval dataset
+            train_dataset=prompt_train_dataset,  # type: ignore
+            eval_dataset=prompt_valid_dataset,  # type: ignore # TODO: use a separate eval dataset
         )
 
         trainer.train()

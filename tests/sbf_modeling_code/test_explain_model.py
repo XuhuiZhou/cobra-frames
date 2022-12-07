@@ -18,7 +18,7 @@ def test_explain_model_train_api():
 
 def test_explain_model_predict_api():
     explain_model = ExplainModel()
-    dummy_data = get_dummy_data()
+    dummy_data = get_dummy_data()["validation"]
     predictions = explain_model.predict(dummy_data)
     assert isinstance(predictions, dict)
     for key in [

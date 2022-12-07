@@ -18,7 +18,7 @@ def test_reward_model_train_api():
 
 def test_reward_model_predict_api():
     reward_model = RewardModel()
-    dummy_data = get_dummy_data()
+    dummy_data = get_dummy_data()["validation"]
     predictions = reward_model.predict(dummy_data)
     assert isinstance(predictions, np.ndarray)
     assert predictions.shape == (len(dummy_data), 7)

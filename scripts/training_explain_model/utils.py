@@ -12,5 +12,5 @@ def get_data(mode: str):
         raise ValueError(f"Unknown mode {mode}")
 
 
-def get_train_data() -> datasets.arrow_dataset.Dataset:
-    return datasets.load.load_dataset("context-sbf/context-sbf", split="train")  # type: ignore # we know this is a Dataset
+def get_train_data() -> datasets.dataset_dict.DatasetDict:
+    return datasets.load.load_dataset("context-sbf/context-sbf")  # type: ignore # we know this is a Dataset

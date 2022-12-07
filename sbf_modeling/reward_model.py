@@ -5,6 +5,7 @@ from typing import List, Tuple
 import numpy as np
 import numpy.typing as npt
 from datasets.arrow_dataset import Dataset
+from datasets.dataset_dict import DatasetDict
 from transformers import T5ForConditionalGeneration
 
 from sbf_modeling import BaseSBFModel
@@ -22,7 +23,7 @@ class RewardModel(BaseSBFModel):
             print(f"Error loading model {t5_model_name}: {e}")
             raise e
 
-    def train(self, dataset: Dataset) -> RewardModel:
+    def train(self, dataset: DatasetDict) -> RewardModel:
         """
         Train the reward model on the given dataset.
 

@@ -13,14 +13,17 @@ transformers.TrainingArguments:
     per_device_train_batch_size=2
     per_device_eval_batch_size=2
     evaluation_strategy="steps"
-    eval_steps=500
-    logging_steps=500
+    eval_steps=100
+    logging_steps=100
     gradient_accumulation_steps=8
     num_train_epochs=1
     weight_decay=0.1
     lr_scheduler_type="cosine"
     learning_rate=1e-4
     save_steps=5_000
+
+sbf_modeling.ExplainModel:
+    t5_model_name = "google/flan-t5-large"
 
 sbf_modeling.ExplainModel.train:
     args = @transformers.TrainingArguments()
