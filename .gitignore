@@ -136,5 +136,7 @@ hf_home/
 .DS_Store
 lightning_logs/*
 
-# Modeling output
-explain-model/
+# Modeling outpu
+.log/*
+
+.vscode/
