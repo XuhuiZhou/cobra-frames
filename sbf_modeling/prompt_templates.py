@@ -5,6 +5,7 @@ from datasets.arrow_dataset import Dataset
 from transformers import PreTrainedTokenizer
 
 CONTEXT_LENGTH = 512
+TARGET_LENGTH = 512
 
 CONTEXT_TEMPLATE = "This is {situationalContext}, {speakerIdentity} speaking to {listenerIdentity}: {statement}\n"
 
@@ -23,41 +24,38 @@ def map_dataset_to_tokenized_prompt(
     tokenizer: PreTrainedTokenizer, element: Dataset
 ) -> Dict[str, np.ndarray]:
     element_cast: Dict[str, List[str]] = cast(Dict[str, List[str]], element)  # type: ignore
-    whole_prompt = map(
-        lambda instance: (
-            CONTEXT_TEMPLATE.format(**instance)
-            + "\n".join(
-                f"Q: {QUESTION_TEMPLATES[key]} A: {instance[key]}"
-                for key in [
-                    "intent",
-                    "targetGroup",
-                    "relevantPowerDynamics",
-                    "implication",
-                    "targetGroupEmotionalReaction",
-                    "targetGroupCognitiveReaction",
-                    "offensiveness",
-                ]
-            )
-        )
-        + "\n",
+    context_input = map(
+        lambda instance: CONTEXT_TEMPLATE.format(**instance),
         (dict(zip(element_cast, t)) for t in zip(*element_cast.values())),
     )
-    outputs = tokenizer(
-        list(whole_prompt),
+    target = map(
+        lambda instance: "\n".join(
+            f"Q: {QUESTION_TEMPLATES[key]} A: {instance[key]}"
+            for key in [
+                "intent",
+                "targetGroup",
+                "relevantPowerDynamics",
+                "implication",
+                "targetGroupEmotionalReaction",
+                "targetGroupCognitiveReaction",
+                "offensiveness",
+            ]
+        ),
+        (dict(zip(element_cast, t)) for t in zip(*element_cast.values())),
+    )
+    tokenized_context_input = tokenizer(
+        list(context_input),
         truncation=True,
         max_length=CONTEXT_LENGTH,
         return_overflowing_tokens=True,
         return_length=True,
-        return_tensors="np",
     )
-    return {"input_ids": outputs["input_ids"]}  # type: ignore
-
-
-def map_dataset_to_prompt_prefix(element: Dataset) -> Dict[str, List[str]]:
-    element_cast: Dict[str, List[str]] = cast(Dict[str, List[str]], element)  # type: ignore
-    whole_prompt = map(
-        lambda instance: (CONTEXT_TEMPLATE.format(**instance)),
-        (dict(zip(element_cast, t)) for t in zip(*element_cast.values())),
+    tokenized_target = tokenizer(
+        list(target),
+        truncation=True,
+        max_length=TARGET_LENGTH,
+        return_overflowing_tokens=True,
+        return_length=True,
     )
-
-    return {"prefix": list(whole_prompt)}
+    tokenized_context_input.update({"labels": tokenized_target["input_ids"]})
+    return tokenized_context_input  # type: ignore

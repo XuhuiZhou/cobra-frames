@@ -3,10 +3,11 @@ from typing import Sequence
 
 import gin
 import pandas as pd
+import torch
 from absl import app, flags, logging
 from datasets.arrow_dataset import Dataset
 
-from sbf_modeling import BaseSBFModel, gin_utils
+from sbf_modeling import ExplainModel, gin_utils
 
 _DEFAULT_GIN_SEARCH_PATHS = [
     os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -17,12 +18,14 @@ FLAGS = flags.FLAGS
 
 def predict(
     *,
-    model: BaseSBFModel,
     test_data: Dataset,
     model_dir: str,
 ):
     logging.info("Model predicting")
-    answer_dict = model.predict(test_data, model_dir)
+    model = ExplainModel.from_pretrained(model_dir)
+    if torch.cuda.is_available():
+        model.model = model.model.cuda()
+    answer_dict = model.predict(test_data)
     logging.info("Model inference done")
     answer_df = pd.DataFrame.from_dict(answer_dict)
     answer_df.to_csv(os.path.join(model_dir, "answer.csv"), index=False)

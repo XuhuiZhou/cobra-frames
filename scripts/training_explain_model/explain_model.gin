@@ -1,7 +1,5 @@
 from __gin__ import dynamic_registration
-import __main__ as inference_script
-import sbf_modeling.train as train_script
-# import sbf_modeling.inference as inference_script
+import __main__ as train_script
 import sbf_modeling
 import scripts.training_explain_model.utils as utils
 import transformers
@@ -10,7 +8,7 @@ import transformers
 MODE="tests"
 MODEL_DIR = %gin.required
 
-transformers.TrainingArguments:
+transformers.Seq2SeqTrainingArguments:
     output_dir="_explain_model"
     per_device_train_batch_size=2
     per_device_eval_batch_size=2
@@ -23,15 +21,13 @@ transformers.TrainingArguments:
     lr_scheduler_type="cosine"
     learning_rate=1e-4
     save_steps=5_000
+    generation_max_length=512
 
 sbf_modeling.ExplainModel:
     t5_model_name = "google/flan-t5-large"
 
 sbf_modeling.ExplainModel.train:
-    args = @transformers.TrainingArguments()
-
-sbf_modeling.ExplainModel.predict:
-    model_dir = %MODEL_DIR
+    args = @transformers.Seq2SeqTrainingArguments()
 
 utils.get_data:
     mode = %MODE
@@ -41,7 +37,7 @@ train_script.train:
     train_data = @utils.get_data()
     model_dir = %MODEL_DIR
 
-inference_script.predict:
-    model = @sbf_modeling.ExplainModel()
-    test_data = @utils.get_data()
-    model_dir = %MODEL_DIR
+# inference_script.predict:
+#     model = @sbf_modeling.ExplainModel()
+#     test_data = @utils.get_data()
+#     model_dir = %MODEL_DIR

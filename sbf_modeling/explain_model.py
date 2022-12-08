@@ -6,20 +6,21 @@ from typing import Dict, List, Tuple, cast
 
 import numpy as np
 import numpy.typing as npt
+import torch
+import tqdm
 from datasets.arrow_dataset import Dataset
 from datasets.dataset_dict import DatasetDict
 from transformers import (
-    DataCollatorForLanguageModeling,
+    DataCollatorForSeq2Seq,
+    Seq2SeqTrainer,
+    Seq2SeqTrainingArguments,
     T5ForConditionalGeneration,
     T5Tokenizer,
-    Trainer,
-    TrainingArguments,
     pipeline,
 )
 
 from sbf_modeling import BaseSBFModel
 from sbf_modeling.prompt_templates import (
-    map_dataset_to_prompt_prefix,
     map_dataset_to_tokenized_prompt,
 )
 
@@ -28,35 +29,48 @@ class ExplainModel(BaseSBFModel):
     def __init__(
         self,
         t5_model_name: str = "google/flan-t5-small",
+        from_local: bool = False,
     ):
-        assert "t5" in t5_model_name, "Reward model only supports T5 models."
+        assert (
+            "t5" in t5_model_name or from_local
+        ), "Reward model only supports T5 models."
         try:
             self.model = T5ForConditionalGeneration.from_pretrained(t5_model_name)  # type: ignore
-            self.model = cast(T5ForConditionalGeneration, self.model)
-            if t5_model_name in ["google/flan-t5-xxl", "google/flan-t5-xl"]:
-                self.model.parallelize()
-            self.tokenizer = T5Tokenizer.from_pretrained(t5_model_name)
         except Exception as e:
             print(f"Error loading model {t5_model_name}: {e}")
             raise e
 
+        self.model: T5ForConditionalGeneration = cast(
+            T5ForConditionalGeneration, self.model
+        )
+        if t5_model_name in ["google/flan-t5-xxl", "google/flan-t5-xl"]:
+            self.model.parallelize()
+        self.tokenizer: T5Tokenizer = T5Tokenizer.from_pretrained(
+            t5_model_name
+        )
+
+    @classmethod
+    def from_pretrained(cls, model_dir: str) -> ExplainModel:
+        model = cls(model_dir, from_local=True)
+        return model
+
     def train(
         self,
         dataset: DatasetDict,
-        args: TrainingArguments = TrainingArguments(
-            output_dir="explain-model",
-            per_device_train_batch_size=32,
-            per_device_eval_batch_size=32,
+        args: Seq2SeqTrainingArguments = Seq2SeqTrainingArguments(
+            output_dir="_explain_model",
+            per_device_train_batch_size=2,
+            per_device_eval_batch_size=2,
             evaluation_strategy="steps",
-            eval_steps=5_000,
-            logging_steps=5_000,
+            eval_steps=100,
+            logging_steps=100,
             gradient_accumulation_steps=8,
             num_train_epochs=1,
             weight_decay=0.1,
-            warmup_steps=1_000,
             lr_scheduler_type="cosine",
-            learning_rate=5e-4,
+            learning_rate=1e-4,
             save_steps=5_000,
+            generation_max_length=512,
         ),
         save_model_dir: str = "explain-model",
     ) -> ExplainModel:
@@ -92,12 +106,10 @@ class ExplainModel(BaseSBFModel):
         )
 
         self.tokenizer.pad_token = self.tokenizer.eos_token
-        data_collator = DataCollatorForLanguageModeling(
-            self.tokenizer, mlm=False
-        )
+        data_collator = DataCollatorForSeq2Seq(self.tokenizer)
 
-        trainer = Trainer(
-            model=self.model,
+        trainer = Seq2SeqTrainer(
+            model=self.model,  # type: ignore
             tokenizer=self.tokenizer,
             args=args,
             data_collator=data_collator,
@@ -112,9 +124,7 @@ class ExplainModel(BaseSBFModel):
 
         return self
 
-    def predict(
-        self, dataset: DatasetDict, model_dir: str = "explain-model"
-    ) -> Dict[str, List[str]]:
+    def predict(self, dataset: Dataset) -> Dict[str, List[str]]:
         """
         Predict the reward for the given dataset.
 
@@ -125,25 +135,29 @@ class ExplainModel(BaseSBFModel):
             Dict[str, List[str]]: The predicted explanation for each example in the dataset, with the following keys:
                 -
         """
-        pipe = pipeline(
-            "text-generation",
-            model=model_dir,
-        )
-
-        prefix_dataset = dataset["validation"].map(
-            map_dataset_to_prompt_prefix,
+        prompt_dataset = dataset.map(
+            partial(map_dataset_to_tokenized_prompt, self.tokenizer),
             batched=True,
-            remove_columns=dataset["validation"].column_names,
+            remove_columns=dataset.column_names,
         )
-        prefixes = prefix_dataset["prefix"]
-        breakpoint()
+        tokenized_prompt = prompt_dataset["input_ids"]
 
         generated_text: List[str] = list(
-            map(
-                lambda i: i[0]["generated_text"],
-                pipe(prefixes, num_return_sequences=1),
-            )
+            self.tokenizer.batch_decode(
+                self.model.generate(
+                    input_ids=torch.Tensor(input_ids)
+                    .unsqueeze(0)
+                    .long()
+                    .to(self.model.device),
+                    max_length=512,
+                    num_beams=4,
+                    early_stopping=True,
+                )
+            )[0]
+            for input_ids in tqdm.tqdm(tokenized_prompt[:100])
         )
+
+        print(generated_text)
 
         keys = [
             "intent",
