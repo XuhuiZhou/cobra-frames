@@ -1,17 +1,17 @@
 from __gin__ import dynamic_registration
 import __main__ as inference_script
 import sbf_modeling
-import scripts.training_explain_model.utils as utils
+import sbf_modeling.utils.data as data_utils
 import transformers
 
 # MODE is either "tests" or "deployment"
 MODE="tests"
 MODEL_DIR = %gin.required
 
-utils.get_data:
+data_utils.get_data:
     mode = %MODE
     split = "validation"
 
 inference_script.predict:
-    test_data = @utils.get_data()
+    test_data = @data_utils.get_data()
     model_dir = %MODEL_DIR

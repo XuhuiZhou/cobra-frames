@@ -1,6 +1,5 @@
-from utils import get_dummy_data
-
 from sbf_modeling import ExplainModel, train
+from sbf_modeling.utils.data import get_dummy_data
 
 
 def test_train_func():
