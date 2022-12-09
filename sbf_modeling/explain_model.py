@@ -71,6 +71,8 @@ class ExplainModel(BaseSBFModel):
             learning_rate=1e-4,
             save_steps=5_000,
             generation_max_length=512,
+            predict_with_generate=True,  # generation in evaluation
+            prediction_loss_only=False,  # generation in evaluation
         ),
         save_model_dir: str = "explain-model",
     ) -> ExplainModel:
@@ -117,6 +119,7 @@ class ExplainModel(BaseSBFModel):
             data_collator=data_collator,
             train_dataset=prompt_train_dataset,  # type: ignore
             eval_dataset=prompt_valid_dataset,  # type: ignore
+            compute_metrics=lambda _: dict(),  # dummy metrics to generate predictions
         )
 
         trainer.train()
