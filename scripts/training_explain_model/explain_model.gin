@@ -24,7 +24,7 @@ transformers.Seq2SeqTrainingArguments:
     generation_max_length=512
 
 sbf_modeling.ExplainModel:
-    t5_model_name = "google/flan-t5-large"
+    t5_model_name = "google/flan-t5-small"
 
 sbf_modeling.ExplainModel.train:
     args = @transformers.Seq2SeqTrainingArguments()
