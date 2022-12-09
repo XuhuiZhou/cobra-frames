@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import re
 from functools import partial
 from typing import Dict, List, Tuple, cast
@@ -12,17 +13,26 @@ from datasets.arrow_dataset import Dataset
 from datasets.dataset_dict import DatasetDict
 from transformers import (
     DataCollatorForSeq2Seq,
+    EvalPrediction,
     Seq2SeqTrainer,
     Seq2SeqTrainingArguments,
     T5ForConditionalGeneration,
     T5Tokenizer,
-    pipeline,
 )
+from transformers.integrations import WandbCallback
 
 from sbf_modeling import BaseSBFModel
 from sbf_modeling.prompt_templates import (
     map_dataset_to_tokenized_prompt,
 )
+
+os.environ["WANDB_PROJECT"] = "context-sbf"
+
+
+def sample_prediction_metrics(p: EvalPrediction):
+    predictions = p.predictions
+    breakpoint()
+    return {"predictions": predictions}
 
 
 class ExplainModel(BaseSBFModel):
@@ -71,6 +81,7 @@ class ExplainModel(BaseSBFModel):
             learning_rate=1e-4,
             save_steps=5_000,
             generation_max_length=512,
+            report_to="wandb",
         ),
         save_model_dir: str = "explain-model",
     ) -> ExplainModel:
@@ -94,6 +105,7 @@ class ExplainModel(BaseSBFModel):
         Returns:
             RewardModel: The trained reward model.
         """
+        dataset["validation"] = Dataset.from_dict(dataset["validation"][:100])
         prompt_train_dataset = dataset["train"].map(
             partial(map_dataset_to_tokenized_prompt, self.tokenizer),
             batched=True,
@@ -117,6 +129,7 @@ class ExplainModel(BaseSBFModel):
             data_collator=data_collator,
             train_dataset=prompt_train_dataset,  # type: ignore
             eval_dataset=prompt_valid_dataset,  # type: ignore
+            compute_metrics=sample_prediction_metrics,
         )
 
         trainer.train()
