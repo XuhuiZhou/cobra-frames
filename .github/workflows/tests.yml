@@ -3,7 +3,7 @@ on: [push]
 
 jobs:
   test-all:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     strategy:
       max-parallel: 5
 
