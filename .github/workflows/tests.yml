@@ -1,11 +1,9 @@
 name: Python Package Pytest
-runs-on: self-hosted
-
 on: [push]
 
 jobs:
   test-all:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     strategy:
       max-parallel: 5
 
