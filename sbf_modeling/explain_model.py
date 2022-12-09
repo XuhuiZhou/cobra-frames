@@ -97,11 +97,13 @@ class ExplainModel(BaseSBFModel):
         prompt_train_dataset = dataset["train"].map(
             partial(map_dataset_to_tokenized_prompt, self.tokenizer),
             batched=True,
+            load_from_cache_file=False,
             remove_columns=dataset["train"].column_names,
         )
         prompt_valid_dataset = dataset["validation"].map(
             partial(map_dataset_to_tokenized_prompt, self.tokenizer),
             batched=True,
+            load_from_cache_file=False,
             remove_columns=dataset["validation"].column_names,
         )
 
@@ -138,6 +140,7 @@ class ExplainModel(BaseSBFModel):
         prompt_dataset = dataset.map(
             partial(map_dataset_to_tokenized_prompt, self.tokenizer),
             batched=True,
+            load_from_cache_file=False,
             remove_columns=dataset.column_names,
         )
         tokenized_prompt = prompt_dataset["input_ids"]
@@ -154,10 +157,8 @@ class ExplainModel(BaseSBFModel):
                     early_stopping=True,
                 )
             )[0]
-            for input_ids in tqdm.tqdm(tokenized_prompt[:100])
+            for input_ids in tqdm.tqdm(tokenized_prompt)
         )
-
-        print(generated_text)
 
         keys = [
             "intent",
