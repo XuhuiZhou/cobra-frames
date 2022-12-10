@@ -135,7 +135,7 @@ class ExplainModel(BaseSBFModel):
         Returns:
             RewardModel: The trained reward model.
         """
-        dataset["validation"] = Dataset.from_dict(dataset["validation"][:100])
+        dataset["validation"] = Dataset.from_dict(dataset["validation"][:300])
         prompt_train_dataset = dataset["train"].map(
             partial(map_dataset_to_tokenized_prompt, self.tokenizer),
             batched=True,
@@ -161,7 +161,7 @@ class ExplainModel(BaseSBFModel):
             data_collator=data_collator,
             train_dataset=prompt_train_dataset,
             eval_dataset=prompt_valid_dataset,
-            compute_metrics=lambda _: dict(),  # dummy metrics to generate predictions
+            compute_metrics=self.prediction_metrics,
         )
         trainer.train()
 
