@@ -47,7 +47,7 @@ def test_wandb_log():
     model = explain_model.train(
         get_dummy_data(),
         args=Seq2SeqTrainingArguments(
-            output_dir="_explain_model",
+            output_dir=".log/_explain_model",
             per_device_train_batch_size=2,
             per_device_eval_batch_size=2,
             evaluation_strategy="steps",
