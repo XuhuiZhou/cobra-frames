@@ -97,7 +97,7 @@ class ExplainModel(BaseSBFModel):
         self,
         dataset: DatasetDict,
         args: Seq2SeqTrainingArguments = Seq2SeqTrainingArguments(
-            output_dir="_explain_model",
+            output_dir=".log/_explain_model",
             per_device_train_batch_size=2,
             per_device_eval_batch_size=2,
             evaluation_strategy="steps",
