@@ -111,7 +111,7 @@ class ExplainModel(BaseSBFModel):
         Returns:
             RewardModel: The trained reward model.
         """
-        dataset["validation"] = Dataset.from_dict(dataset["validation"][:100])
+        dataset["validation"] = Dataset.from_dict(dataset["validation"][:300])
         prompt_train_dataset = dataset["train"].map(
             partial(map_dataset_to_tokenized_prompt, self.tokenizer),
             batched=True,
