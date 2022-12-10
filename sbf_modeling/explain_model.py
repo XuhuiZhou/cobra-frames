@@ -12,11 +12,6 @@ import torch
 import tqdm
 from datasets.arrow_dataset import Dataset
 from datasets.dataset_dict import DatasetDict
-from metrics import (
-    aggregated_metrics_with_postprocess,
-    bleu_metrics,
-    prediction_metrics,
-)
 from torch.utils.data import Dataset as TorchDataset
 from transformers import (
     DataCollatorForSeq2Seq,
@@ -29,7 +24,12 @@ from transformers import (
 from transformers.integrations import WandbCallback
 
 from sbf_modeling import BaseSBFModel
-from sbf_modeling.metrics import aggregated_metrics, prediction_metrics
+from sbf_modeling.metrics import (
+    aggregated_metrics,
+    aggregated_metrics_with_postprocess,
+    bleu_metrics,
+    prediction_metrics,
+)
 from sbf_modeling.prompt_templates import (
     map_dataset_to_tokenized_prompt,
 )

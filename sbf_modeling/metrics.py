@@ -13,9 +13,8 @@ def postprocess_text(
     tokenizer: PreTrainedTokenizer, eval_preds: EvalPrediction
 ) -> Tuple[List[str], List[str]]:
     preds, labels = eval_preds
-    if isinstance(preds, tuple):
+    if not isinstance(preds, np.ndarray):
         preds = preds[0]
-    preds = tokenizer.batch_decode(preds, skip_special_tokens=True)
     assert isinstance(tokenizer.pad_token_id, int)
     preds = np.where(labels != -100, preds, tokenizer.pad_token_id)
     preds = tokenizer.batch_decode(preds, skip_special_tokens=True)
@@ -83,9 +82,8 @@ def bleu_metrics(preds: List[str], labels: List[str]) -> Dict[str, float]:
     bleu = evaluate.load("bleu")
     result = cast(
         Dict[str, float],
-        bleu.compute(predictions=preds, references=labels, use_stemmer=True),
+        bleu.compute(predictions=preds, references=labels),
     )
-    result = {k: round(v * 100, 4) for k, v in result.items()}
     prediction_lens = [len(pred.split()) for pred in preds]
     result["gen_len"] = np.mean(prediction_lens)
     return result
