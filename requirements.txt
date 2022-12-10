@@ -12,3 +12,5 @@ datasets
 sentencepiece
 gin-config
 wandb
+nltk
+evaluate

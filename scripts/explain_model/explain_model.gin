@@ -38,8 +38,3 @@ train_script.train:
     model = @sbf_modeling.ExplainModel()
     train_data = @data_utils.get_data()
     model_dir = %MODEL_DIR
-
-# inference_script.predict:
-#     model = @sbf_modeling.ExplainModel()
-#     test_data = @utils.get_data()
-#     model_dir = %MODEL_DIR

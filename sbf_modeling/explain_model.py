@@ -24,6 +24,12 @@ from transformers import (
 from transformers.integrations import WandbCallback
 
 from sbf_modeling import BaseSBFModel
+from sbf_modeling.metrics import (
+    aggregated_metrics,
+    aggregated_metrics_with_postprocess,
+    bleu_metrics,
+    prediction_metrics,
+)
 from sbf_modeling.prompt_templates import (
     map_dataset_to_tokenized_prompt,
 )
@@ -62,27 +68,6 @@ class ExplainModel(BaseSBFModel):
     def from_pretrained(cls, model_dir: str) -> ExplainModel:
         model = cls(model_dir, from_local=True)
         return model
-
-    def prediction_metrics(
-        self, eval_preds: EvalPrediction
-    ) -> Dict[str, pd.DataFrame]:
-        preds, labels = eval_preds
-        if isinstance(preds, tuple):
-            preds = preds[0]
-        decoded_preds = self.tokenizer.batch_decode(
-            preds, skip_special_tokens=True
-        )
-        # Replace -100 in the labels as we can't decode them.
-        labels = np.where(labels != -100, labels, self.tokenizer.pad_token_id)
-        decoded_labels = self.tokenizer.batch_decode(
-            labels, skip_special_tokens=True
-        )
-        predictions = decoded_preds[:100]
-        decoded_labels = decoded_labels[:100]
-        sample_df = pd.DataFrame.from_dict(
-            {"predictions": predictions, "labels": decoded_labels}
-        )
-        return {"predictions": sample_df}
 
     def train(
         self,
@@ -152,7 +137,11 @@ class ExplainModel(BaseSBFModel):
             data_collator=data_collator,
             train_dataset=prompt_train_dataset,
             eval_dataset=prompt_valid_dataset,
-            compute_metrics=self.prediction_metrics,
+            compute_metrics=partial(
+                aggregated_metrics_with_postprocess,
+                [partial(prediction_metrics, 300), bleu_metrics],
+                self.tokenizer,
+            ),
         )
         trainer.train()
 
