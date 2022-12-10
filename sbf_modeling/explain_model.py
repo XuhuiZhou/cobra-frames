@@ -72,20 +72,11 @@ class ExplainModel(BaseSBFModel):
         decoded_preds = self.tokenizer.batch_decode(
             preds, skip_special_tokens=True
         )
-        # if data_args.ignore_pad_token_for_loss:
-        #     # Replace -100 in the labels as we can't decode them.
-        #     labels = np.where(labels != -100, labels, self.tokenizer.pad_token_id)
+        # Replace -100 in the labels as we can't decode them.
+        labels = np.where(labels != -100, labels, self.tokenizer.pad_token_id)
         decoded_labels = self.tokenizer.batch_decode(
             labels, skip_special_tokens=True
         )
-
-        # # Some simple post-processing
-        # decoded_preds, decoded_labels = postprocess_text(decoded_preds, decoded_labels)
-
-        # result = metric.compute(predictions=decoded_preds, references=decoded_labels, use_stemmer=True)
-        # result = {k: round(v * 100, 4) for k, v in result.items()}
-        # prediction_lens = [np.count_nonzero(pred != tokenizer.pad_token_id) for pred in preds]
-        # result["gen_len"] = np.mean(prediction_lens)
         predictions = decoded_preds[:100]
         decoded_labels = decoded_labels[:100]
         sample_df = pd.DataFrame.from_dict(
@@ -102,8 +93,8 @@ class ExplainModel(BaseSBFModel):
             per_device_eval_batch_size=2,
             evaluation_strategy="steps",
             eval_steps=1,
-            logging_steps=100,
-            gradient_accumulation_steps=8,
+            logging_steps=1,
+            gradient_accumulation_steps=1,
             num_train_epochs=2,
             weight_decay=0.1,
             lr_scheduler_type="cosine",
