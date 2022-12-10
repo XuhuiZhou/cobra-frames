@@ -1,5 +1,4 @@
 name: Python Package Pytest
-
 on: [push]
 
 jobs:

@@ -81,7 +81,9 @@ def run(main):
     """Wrapper for app.run that rewrites gin args before parsing."""
     app.run(
         main,
-        flags_parser=lambda a: app.parse_flags_with_usage(rewrite_gin_args(a)),  # type: ignore
+        flags_parser=lambda args: app.parse_flags_with_usage(
+            rewrite_gin_args(args)
+        ),
     )
 
 
@@ -102,10 +104,10 @@ def bool_fn(var1=gin.REQUIRED):
 
 @gin.configurable
 def string_split_fn(
-    text=gin.REQUIRED, separator=gin.REQUIRED, maxsplit=-1, index=None
+    text: str = gin.REQUIRED, separator: str = gin.REQUIRED, maxsplit=-1, index=None  # type: ignore
 ):
     """String split function to use inside gin files."""
-    values = text.split(separator, maxsplit)  # type: ignore
+    values = text.split(separator, maxsplit)
     if index is None:
         return values
     else:

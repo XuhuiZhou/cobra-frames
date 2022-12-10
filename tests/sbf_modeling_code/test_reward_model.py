@@ -1,8 +1,8 @@
 # tests/sbf_modeling_code/test_reward_model.py
 import numpy as np
-from utils import get_dummy_data
 
 from sbf_modeling import RewardModel
+from sbf_modeling.utils.data import get_dummy_data
 
 
 def test_create_reward_model():

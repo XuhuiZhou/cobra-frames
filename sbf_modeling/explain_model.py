@@ -12,6 +12,7 @@ import torch
 import tqdm
 from datasets.arrow_dataset import Dataset
 from datasets.dataset_dict import DatasetDict
+from torch.utils.data import Dataset as TorchDataset
 from transformers import (
     DataCollatorForSeq2Seq,
     EvalPrediction,
@@ -40,12 +41,15 @@ class ExplainModel(BaseSBFModel):
             "t5" in t5_model_name or from_local
         ), "Reward model only supports T5 models."
         try:
-            self.model = T5ForConditionalGeneration.from_pretrained(t5_model_name)  # type: ignore
+            self.model: T5ForConditionalGeneration = cast(
+                T5ForConditionalGeneration,
+                T5ForConditionalGeneration.from_pretrained(t5_model_name),
+            )
         except Exception as e:
             print(f"Error loading model {t5_model_name}: {e}")
             raise e
 
-        self.model: T5ForConditionalGeneration = cast(
+        self.model: T5ForConditionalGeneration = cast(  # type: ignore
             T5ForConditionalGeneration, self.model
         )
         if t5_model_name in ["google/flan-t5-xxl", "google/flan-t5-xl"]:
@@ -139,24 +143,26 @@ class ExplainModel(BaseSBFModel):
             load_from_cache_file=False,
             remove_columns=dataset["train"].column_names,
         )
+        prompt_train_dataset = cast(TorchDataset, prompt_train_dataset)  # type: ignore
         prompt_valid_dataset = dataset["validation"].map(
             partial(map_dataset_to_tokenized_prompt, self.tokenizer),
             batched=True,
             load_from_cache_file=False,
             remove_columns=dataset["validation"].column_names,
         )
+        prompt_valid_dataset = cast(TorchDataset, prompt_valid_dataset)  # type: ignore
 
         self.tokenizer.pad_token = self.tokenizer.eos_token
         data_collator = DataCollatorForSeq2Seq(self.tokenizer)
 
         trainer = Seq2SeqTrainer(
-            model=self.model,  # type: ignore
+            model=self.model,
             tokenizer=self.tokenizer,
             args=args,
             data_collator=data_collator,
-            train_dataset=prompt_train_dataset,  # type: ignore
-            eval_dataset=prompt_valid_dataset,  # type: ignore
-            compute_metrics=self.prediction_metrics,
+            train_dataset=prompt_train_dataset,
+            eval_dataset=prompt_valid_dataset,
+            compute_metrics=lambda _: dict(),  # dummy metrics to generate predictions
         )
         trainer.train()
 

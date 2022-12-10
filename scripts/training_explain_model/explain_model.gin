@@ -1,7 +1,7 @@
 from __gin__ import dynamic_registration
 import __main__ as train_script
 import sbf_modeling
-import scripts.training_explain_model.utils as utils
+import sbf_modeling.utils.data as data_utils
 import transformers
 
 # MODE is either "tests" or "deployment"
@@ -24,17 +24,17 @@ transformers.Seq2SeqTrainingArguments:
     generation_max_length=512
 
 sbf_modeling.ExplainModel:
-    t5_model_name = "google/flan-t5-large"
+    t5_model_name = "google/flan-t5-small"
 
 sbf_modeling.ExplainModel.train:
     args = @transformers.Seq2SeqTrainingArguments()
 
-utils.get_data:
+data_utils.get_data:
     mode = %MODE
 
 train_script.train:
     model = @sbf_modeling.ExplainModel()
-    train_data = @utils.get_data()
+    train_data = @data_utils.get_data()
     model_dir = %MODEL_DIR
 
 # inference_script.predict:

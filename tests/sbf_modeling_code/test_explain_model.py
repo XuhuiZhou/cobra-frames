@@ -1,8 +1,8 @@
 # tests/sbf_modeling_code/test_explain_model.py
 import numpy as np
-from utils import get_dummy_data
 
 from sbf_modeling import ExplainModel
+from sbf_modeling.utils.data import get_dummy_data
 
 
 def test_create_explain_model():

@@ -1,9 +1,9 @@
 import os
-from typing import Sequence
+from typing import Callable, Sequence, cast
 
 import gin
 from absl import app, flags, logging
-from datasets.arrow_dataset import Dataset
+from datasets.dataset_dict import DatasetDict
 
 from sbf_modeling import BaseSBFModel, gin_utils
 
@@ -17,7 +17,7 @@ FLAGS = flags.FLAGS
 def train(
     *,
     model: BaseSBFModel,
-    train_data: Dataset,
+    train_data: DatasetDict,
     model_dir: str,
 ):
     logging.info("Training model")
@@ -28,6 +28,7 @@ def train(
 def main(_):
     # Create gin-configurable version of `train`.
     train_using_gin = gin.configurable(train)
+    train_using_gin = cast(Callable[..., None], train_using_gin)
 
     gin_utils.parse_gin_flags(
         # User-provided gin paths take precedence if relative paths conflict.
@@ -36,7 +37,7 @@ def main(_):
         FLAGS.gin_bindings,
     )
 
-    train_using_gin()  # type: ignore
+    train_using_gin()
 
 
 if __name__ == "__main__":
