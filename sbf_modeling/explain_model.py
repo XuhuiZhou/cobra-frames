@@ -65,7 +65,7 @@ class ExplainModel(BaseSBFModel):
 
     def prediction_metrics(
         self, eval_preds: EvalPrediction
-    ) -> Dict[str, list]:
+    ) -> Dict[str, pd.DataFrame]:
         preds, labels = eval_preds
         if isinstance(preds, tuple):
             preds = preds[0]
