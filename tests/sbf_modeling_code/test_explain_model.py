@@ -1,8 +1,12 @@
 # tests/sbf_modeling_code/test_explain_model.py
+import os
+
 import numpy as np
 
 from sbf_modeling import ExplainModel
 from sbf_modeling.utils.data import get_dummy_data
+
+os.environ["WANDB_MODE"] = "offline"
 
 
 def test_create_explain_model():

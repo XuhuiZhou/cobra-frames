@@ -1,8 +1,12 @@
 # tests/sbf_modeling_code/test_reward_model.py
+import os
+
 import numpy as np
 
 from sbf_modeling import RewardModel
 from sbf_modeling.utils.data import get_dummy_data
+
+os.environ["WANDB_MODE"] = "offline"
 
 
 def test_create_reward_model():
