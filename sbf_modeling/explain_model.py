@@ -110,7 +110,6 @@ class ExplainModel(BaseSBFModel):
             learning_rate=1e-4,
             save_steps=5_000,
             generation_max_length=512,
-            report_to="wandb",
             predict_with_generate=True,  # generation in evaluation
             prediction_loss_only=False,  # generation in evaluation
         ),

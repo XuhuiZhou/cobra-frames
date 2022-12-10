@@ -13,7 +13,7 @@
 # limitations under the License.
 
 """Utilities for using gin configurations."""
-from typing import Optional, Sequence, Union
+from typing import Optional, Sequence, Union, cast
 
 import gin
 from absl import app, logging
@@ -91,12 +91,6 @@ def run(main):
 
 
 @gin.configurable
-def sum_fn(var1=gin.REQUIRED, var2=gin.REQUIRED):
-    """sum function to use inside gin files."""
-    return var1 + var2  # type: ignore
-
-
-@gin.configurable
 def bool_fn(var1=gin.REQUIRED):
     """bool function to use inside gin files."""
     return bool(var1)
@@ -104,7 +98,10 @@ def bool_fn(var1=gin.REQUIRED):
 
 @gin.configurable
 def string_split_fn(
-    text: str = gin.REQUIRED, separator: str = gin.REQUIRED, maxsplit=-1, index=None  # type: ignore
+    text: str = cast(str, gin.REQUIRED),
+    separator: str = cast(str, gin.REQUIRED),
+    maxsplit=-1,
+    index=None,
 ):
     """String split function to use inside gin files."""
     values = text.split(separator, maxsplit)
