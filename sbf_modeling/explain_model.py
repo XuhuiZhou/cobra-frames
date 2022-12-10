@@ -1,11 +1,13 @@
 from __future__ import annotations
 
+import os
 import re
 from functools import partial
 from typing import Dict, List, Tuple, cast
 
 import numpy as np
 import numpy.typing as npt
+import pandas as pd
 import torch
 import tqdm
 from datasets.arrow_dataset import Dataset
@@ -13,17 +15,20 @@ from datasets.dataset_dict import DatasetDict
 from torch.utils.data import Dataset as TorchDataset
 from transformers import (
     DataCollatorForSeq2Seq,
+    EvalPrediction,
     Seq2SeqTrainer,
     Seq2SeqTrainingArguments,
     T5ForConditionalGeneration,
     T5Tokenizer,
-    pipeline,
 )
+from transformers.integrations import WandbCallback
 
 from sbf_modeling import BaseSBFModel
 from sbf_modeling.prompt_templates import (
     map_dataset_to_tokenized_prompt,
 )
+
+os.environ["WANDB_PROJECT"] = "context-sbf"
 
 
 class ExplainModel(BaseSBFModel):
@@ -58,6 +63,36 @@ class ExplainModel(BaseSBFModel):
         model = cls(model_dir, from_local=True)
         return model
 
+    def prediction_metrics(
+        self, eval_preds: EvalPrediction
+    ) -> Dict[str, list]:
+        preds, labels = eval_preds
+        if isinstance(preds, tuple):
+            preds = preds[0]
+        decoded_preds = self.tokenizer.batch_decode(
+            preds, skip_special_tokens=True
+        )
+        # if data_args.ignore_pad_token_for_loss:
+        #     # Replace -100 in the labels as we can't decode them.
+        #     labels = np.where(labels != -100, labels, self.tokenizer.pad_token_id)
+        decoded_labels = self.tokenizer.batch_decode(
+            labels, skip_special_tokens=True
+        )
+
+        # # Some simple post-processing
+        # decoded_preds, decoded_labels = postprocess_text(decoded_preds, decoded_labels)
+
+        # result = metric.compute(predictions=decoded_preds, references=decoded_labels, use_stemmer=True)
+        # result = {k: round(v * 100, 4) for k, v in result.items()}
+        # prediction_lens = [np.count_nonzero(pred != tokenizer.pad_token_id) for pred in preds]
+        # result["gen_len"] = np.mean(prediction_lens)
+        predictions = decoded_preds[:100]
+        decoded_labels = decoded_labels[:100]
+        sample_df = pd.DataFrame.from_dict(
+            {"predictions": predictions, "labels": decoded_labels}
+        )
+        return {"predictions": sample_df}
+
     def train(
         self,
         dataset: DatasetDict,
@@ -66,15 +101,16 @@ class ExplainModel(BaseSBFModel):
             per_device_train_batch_size=2,
             per_device_eval_batch_size=2,
             evaluation_strategy="steps",
-            eval_steps=100,
+            eval_steps=1,
             logging_steps=100,
             gradient_accumulation_steps=8,
-            num_train_epochs=1,
+            num_train_epochs=2,
             weight_decay=0.1,
             lr_scheduler_type="cosine",
             learning_rate=1e-4,
             save_steps=5_000,
             generation_max_length=512,
+            report_to="wandb",
             predict_with_generate=True,  # generation in evaluation
             prediction_loss_only=False,  # generation in evaluation
         ),
@@ -100,6 +136,7 @@ class ExplainModel(BaseSBFModel):
         Returns:
             RewardModel: The trained reward model.
         """
+        dataset["validation"] = Dataset.from_dict(dataset["validation"][:100])
         prompt_train_dataset = dataset["train"].map(
             partial(map_dataset_to_tokenized_prompt, self.tokenizer),
             batched=True,
@@ -127,7 +164,6 @@ class ExplainModel(BaseSBFModel):
             eval_dataset=prompt_valid_dataset,
             compute_metrics=lambda _: dict(),  # dummy metrics to generate predictions
         )
-
         trainer.train()
 
         if save_model_dir != "":
