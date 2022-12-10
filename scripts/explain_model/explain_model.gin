@@ -22,6 +22,8 @@ transformers.Seq2SeqTrainingArguments:
     learning_rate=1e-4
     save_steps=5_000
     generation_max_length=512
+    predict_with_generate=True  # generation in evaluation
+    prediction_loss_only=False  # generation in evaluation
 
 sbf_modeling.ExplainModel:
     t5_model_name = "google/flan-t5-small"
