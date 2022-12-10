@@ -7,6 +7,7 @@ from typing import Dict, List, Tuple, cast
 
 import numpy as np
 import numpy.typing as npt
+import pandas as pd
 import torch
 import tqdm
 from datasets.arrow_dataset import Dataset
@@ -27,12 +28,6 @@ from sbf_modeling.prompt_templates import (
 )
 
 os.environ["WANDB_PROJECT"] = "context-sbf"
-
-
-def sample_prediction_metrics(p: EvalPrediction):
-    predictions = p.predictions
-    breakpoint()
-    return {"predictions": predictions}
 
 
 class ExplainModel(BaseSBFModel):
@@ -64,6 +59,36 @@ class ExplainModel(BaseSBFModel):
         model = cls(model_dir, from_local=True)
         return model
 
+    def prediction_metrics(
+        self, eval_preds: EvalPrediction
+    ) -> Dict[str, list]:
+        preds, labels = eval_preds
+        if isinstance(preds, tuple):
+            preds = preds[0]
+        decoded_preds = self.tokenizer.batch_decode(
+            preds, skip_special_tokens=True
+        )
+        # if data_args.ignore_pad_token_for_loss:
+        #     # Replace -100 in the labels as we can't decode them.
+        #     labels = np.where(labels != -100, labels, self.tokenizer.pad_token_id)
+        decoded_labels = self.tokenizer.batch_decode(
+            labels, skip_special_tokens=True
+        )
+
+        # # Some simple post-processing
+        # decoded_preds, decoded_labels = postprocess_text(decoded_preds, decoded_labels)
+
+        # result = metric.compute(predictions=decoded_preds, references=decoded_labels, use_stemmer=True)
+        # result = {k: round(v * 100, 4) for k, v in result.items()}
+        # prediction_lens = [np.count_nonzero(pred != tokenizer.pad_token_id) for pred in preds]
+        # result["gen_len"] = np.mean(prediction_lens)
+        predictions = decoded_preds[:100]
+        decoded_labels = decoded_labels[:100]
+        sample_df = pd.DataFrame.from_dict(
+            {"predictions": predictions, "labels": decoded_labels}
+        )
+        return {"predictions": sample_df}
+
     def train(
         self,
         dataset: DatasetDict,
@@ -72,10 +97,10 @@ class ExplainModel(BaseSBFModel):
             per_device_train_batch_size=2,
             per_device_eval_batch_size=2,
             evaluation_strategy="steps",
-            eval_steps=100,
+            eval_steps=1,
             logging_steps=100,
             gradient_accumulation_steps=8,
-            num_train_epochs=1,
+            num_train_epochs=2,
             weight_decay=0.1,
             lr_scheduler_type="cosine",
             learning_rate=1e-4,
@@ -131,9 +156,8 @@ class ExplainModel(BaseSBFModel):
             data_collator=data_collator,
             train_dataset=prompt_train_dataset,  # type: ignore
             eval_dataset=prompt_valid_dataset,  # type: ignore
-            compute_metrics=sample_prediction_metrics,
+            compute_metrics=self.prediction_metrics,
         )
-
         trainer.train()
 
         if save_model_dir != "":
