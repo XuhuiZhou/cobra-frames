@@ -9,7 +9,7 @@ os.environ["WANDB_MODE"] = "offline"
 def test_train_func():
     explain_model = ExplainModel()
     model = explain_model.train(get_dummy_data())
-    model_dir = "./log/_explain_model"
+    model_dir = ".log/_explain_model"
     train.train(model=model, train_data=get_dummy_data(), model_dir=model_dir)
 
 
