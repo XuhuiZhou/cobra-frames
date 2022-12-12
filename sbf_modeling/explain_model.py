@@ -159,7 +159,6 @@ class ExplainModel(BaseSBFModel):
             predict_with_generate=True,  # generation in evaluation
             prediction_loss_only=False,  # generation in evaluation
         ),
-        model_dir: str = "explain-model",
     ) -> Dict[str, List[str]]:
         """
         Predict the reward for the given dataset.

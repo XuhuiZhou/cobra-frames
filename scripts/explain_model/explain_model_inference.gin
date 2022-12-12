@@ -7,6 +7,7 @@ import transformers
 # MODE is either "tests" or "deployment"
 MODE="tests"
 MODEL_DIR = %gin.required
+BATCH_SIZE = %gin.required
 
 data_utils.get_data:
     mode = %MODE
@@ -15,3 +16,5 @@ data_utils.get_data:
 inference_script.predict:
     test_data = @data_utils.get_data()
     model_dir = %MODEL_DIR
+    output_dir=".log/_explain_model"
+    per_device_predict_batch_size=%BATCH_SIZE
