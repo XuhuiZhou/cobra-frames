@@ -45,7 +45,7 @@ class ExplainModel(BaseSBFModel):
     ):
         assert (
             "t5" in t5_model_name or from_local
-        ), "Reward model only supports T5 models."
+        ), "Explain model only supports T5 models."
         try:
             self.model: T5ForConditionalGeneration = cast(
                 T5ForConditionalGeneration,
@@ -92,7 +92,7 @@ class ExplainModel(BaseSBFModel):
         save_model_dir: str = "explain-model",
     ) -> ExplainModel:
         """
-        Train the reward model on the given dataset.
+        Train the explain model on the given dataset.
 
         Args:
             dataset (Dataset): The dataset to train on. A single example is a dictionary with the following keys:
@@ -109,7 +109,7 @@ class ExplainModel(BaseSBFModel):
                 - offensiveness (str): The offensiveness of the statement.
 
         Returns:
-            RewardModel: The trained reward model.
+            Explain model: The trained explain model.
         """
         dataset["validation"] = Dataset.from_dict(dataset["validation"][:300])
         prompt_train_dataset = dataset["train"].map(
@@ -150,7 +150,17 @@ class ExplainModel(BaseSBFModel):
 
         return self
 
-    def predict(self, dataset: Dataset) -> Dict[str, List[str]]:
+    def predict(
+        self,
+        dataset: Dataset,
+        args: Seq2SeqTrainingArguments = Seq2SeqTrainingArguments(
+            output_dir=".log/_explain_model",
+            per_device_eval_batch_size=16,
+            predict_with_generate=True,  # generation in evaluation
+            prediction_loss_only=False,  # generation in evaluation
+        ),
+        model_dir: str = "explain-model",
+    ) -> Dict[str, List[str]]:
         """
         Predict the reward for the given dataset.
 
@@ -167,23 +177,27 @@ class ExplainModel(BaseSBFModel):
             load_from_cache_file=False,
             remove_columns=dataset.column_names,
         )
-        tokenized_prompt = prompt_dataset["input_ids"]
+        data_collator = DataCollatorForSeq2Seq(self.tokenizer)
 
-        generated_text: List[str] = list(
-            self.tokenizer.batch_decode(
-                self.model.generate(
-                    input_ids=torch.Tensor(input_ids)
-                    .unsqueeze(0)
-                    .long()
-                    .to(self.model.device),
-                    max_length=512,
-                    num_beams=4,
-                    early_stopping=True,
-                )
-            )[0]
-            for input_ids in tqdm.tqdm(tokenized_prompt)
+        trainer = Seq2SeqTrainer(
+            model=self.model,
+            tokenizer=self.tokenizer,
+            args=args,
+            data_collator=data_collator,
+            train_dataset=None,
+            eval_dataset=prompt_dataset,
         )
 
+        predict_results = trainer.predict(
+            prompt_dataset,
+            metric_key_prefix="predict",
+            max_length=512,
+            num_beams=4,
+        )
+        predictions = predict_results.predictions
+        predictions = self.tokenizer.batch_decode(
+            predictions, skip_special_tokens=True
+        )
         keys = [
             "intent",
             "targetGroup",
@@ -194,7 +208,7 @@ class ExplainModel(BaseSBFModel):
             "offensiveness",
         ]
         answer_dict: Dict[str, List[str]] = {key: [] for key in keys}
-        for txt in generated_text:
+        for txt in predictions:
             answers = re.findall(r"A: (.*?)\n", txt)
             if len(answers) < 7:
                 answers += [""] * (7 - len(answers))
