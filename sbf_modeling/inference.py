@@ -8,7 +8,7 @@ from absl import app, flags, logging
 from datasets.arrow_dataset import Dataset
 from transformers import Seq2SeqTrainingArguments
 
-from sbf_modeling import ExplainModel, gin_utils
+from sbf_modeling import BaseSBFModel, ExplainModel, gin_utils
 
 _DEFAULT_GIN_SEARCH_PATHS = [
     os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -19,27 +19,16 @@ FLAGS = flags.FLAGS
 
 def predict(
     *,
-    test_data: Dataset,
-    model_dir: str,
+    model: BaseSBFModel,
     output_dir: str,
-    per_device_predict_batch_size: int = 16,
 ):
     logging.info("Model predicting")
-    model = ExplainModel.from_pretrained(model_dir)
     if torch.cuda.is_available():
-        model.model = model.model.cuda()
-    answer_dict = model.predict(
-        test_data,
-        args=Seq2SeqTrainingArguments(
-            output_dir=output_dir,
-            per_device_eval_batch_size=per_device_predict_batch_size,
-            predict_with_generate=True,  # generation in evaluation
-            prediction_loss_only=False,  # generation in evaluation
-        ),
-    )
+        model.model = model.model.cuda()  # type: ignore
+    answer_dict = model.predict()
     logging.info("Model inference done")
     answer_df = pd.DataFrame.from_dict(answer_dict)
-    answer_df.to_csv(os.path.join(model_dir, "answer.csv"), index=False)
+    answer_df.to_csv(os.path.join(output_dir, "answer.csv"), index=False)
 
 
 def main(_):

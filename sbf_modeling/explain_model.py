@@ -64,11 +64,6 @@ class ExplainModel(BaseSBFModel):
             t5_model_name
         )
 
-    @classmethod
-    def from_pretrained(cls, model_dir: str) -> ExplainModel:
-        model = cls(model_dir, from_local=True)
-        return model
-
     def train(
         self,
         dataset: DatasetDict,
@@ -209,11 +204,11 @@ class ExplainModel(BaseSBFModel):
         ]
         answer_dict: Dict[str, List[str]] = {key: [] for key in keys}
         for txt in predictions:
-            answers = re.findall(r"A: (.*?)\n", txt)
+            answers: List[str] = re.findall(r"A: (.*?)(?:Q:|$)", txt)
             if len(answers) < 7:
                 answers += [""] * (7 - len(answers))
             answers = answers[:7]
             for key, answer in zip(keys, answers):
-                answer_dict[key].append(answer)
+                answer_dict[key].append(answer.strip())
 
         return answer_dict
