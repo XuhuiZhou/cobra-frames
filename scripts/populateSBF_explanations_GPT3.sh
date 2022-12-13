@@ -8,7 +8,7 @@ EXAMPLE='./data/prompts/examples_explanations.v2.csv'
 # INPUT='./data/source_data/SBIC.v2.agg.trn.csv'
 # OUTPUT='./data/inference_data/sbic.inference_ex.csv'
 
-for i in {5..5}
+for i in {6..6}
 do
     echo "Populate the ${i} toxigen file with explanations"
     INPUT="./data/inference_data/toxigen_shuffled/toxigen_${i}gen/toxigen_complete.csv"

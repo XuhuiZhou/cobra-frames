@@ -2,7 +2,7 @@
 
 EXAMPLE='./data/prompts/examples.v2.contextOnlyDiverse.csv'
 
-for i in {301..400}
+for i in {401..500}
 do
     echo "Populate the $i toxigen file"
     INPUT="./data/cleaned_data/toxigen_shuffled/toxigen_${i}.csv"
@@ -17,5 +17,5 @@ do
 done
 echo "Done generating contexts for toxigen files"
 echo "Combining all toxigen files"
-python tools/combine_toxigen.py toxigen_5gen 301 400
+python tools/combine_toxigen_contexts.py toxigen_6gen 401 500
 echo "Done combining all toxigen files"
