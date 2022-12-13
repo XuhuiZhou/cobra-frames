@@ -2,12 +2,14 @@
 import os
 
 import numpy as np
+from huggingface_hub._snapshot_download import snapshot_download
 from transformers import Seq2SeqTrainingArguments
 
 from sbf_modeling import ExplainModel
 from sbf_modeling.utils.data import get_dummy_data
 
 os.environ["WANDB_MODE"] = "offline"
+SMALL_MODEL_REVISION = "efa3468d5e7fa1f66d97e0387e87c21285a32578"
 
 
 def test_create_explain_model():
@@ -39,6 +41,31 @@ def test_explain_model_predict_api():
         assert isinstance(predictions[key], list)
         assert len(predictions[key]) == len(dummy_data)
         assert all(isinstance(p, str) for p in predictions[key])
+
+
+def test_explain_model_load_and_predict_api():
+    model_dir = snapshot_download(
+        repo_id="context-sbf/test_explain_model_small",
+        revision=SMALL_MODEL_REVISION,
+    )
+    explain_model = ExplainModel(model_dir, from_local=True)
+    dummy_data = get_dummy_data()["validation"]
+    predictions = explain_model.predict(dummy_data)
+    assert isinstance(predictions, dict)
+    for key in [
+        "intent",
+        "targetGroup",
+        "relevantPowerDynamics",
+        "implication",
+        "targetGroupEmotionalReaction",
+        "targetGroupCognitiveReaction",
+        "offensiveness",
+    ]:
+        assert key in predictions
+        assert isinstance(predictions[key], list)
+        assert len(predictions[key]) == len(dummy_data)
+        assert all(isinstance(p, str) for p in predictions[key])
+        assert all(len(p) > 0 for p in predictions[key])
 
 
 def test_wandb_log():
