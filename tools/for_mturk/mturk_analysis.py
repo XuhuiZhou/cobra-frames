@@ -213,9 +213,48 @@ def record_annotation_summary(df_info, df, args):
     df_info.to_csv(f"{args.output_folder}/annotation_summary.csv", index=False)
 
 
+def render_offensiveness_labels(offensiveness):
+    offensive = []
+    for i, row in enumerate(offensiveness.str.split(",", expand=False)):
+        # if not isinstance(row, float):
+        offensive.append(row[0])
+
+    offensive = list(map(lambda x: x.lstrip().lower(), offensive))
+    offensive = list(map(lambda x: x.replace("very ", ""), offensive))
+    offensive = list(map(lambda x: x.replace("highly ", ""), offensive))
+    offensive = list(map(lambda x: x.replace("extremely ", ""), offensive))
+
+    for i, off in enumerate(offensive):
+        if "anti-sem" in off:
+            offensive[i] = "anti-semitic"
+        if (
+            "none" in off
+            or "not offensive" in off
+            or "not necessarily offensive" in off
+            or "n/a" in off
+            or "not applicable" in off
+        ):
+            offensive[i] = "not offensive"
+        if "ableis" in off:
+            offensive[i] = "ableist"
+        if "racis" in off:
+            offensive[i] = "racist"
+        if "stereotype" in off:
+            offensive[i] = "offensive stereotype"
+    return offensive
+
+
 def output_quality_ratio(df, col, args):
     df_info = df.copy()
     if not args.binary:
+        # Special treatment for the offensiveness rating
+        df["Answer.offensivenessRating"] = [
+            args.boundary + 1 if j == "not offensive" and i == -1 else i
+            for i, j in zip(
+                df["Answer.offensivenessRating"],
+                render_offensiveness_labels(df["Input.offensiveness"]),
+            )
+        ]
         df_info[col] = (df_info[col] > args.boundary).astype(int)
     df_info = df_info.groupby(by=["HITId"]).sum()
     df_info = df_info > args.bar
@@ -422,14 +461,18 @@ def main():
     if args.suggestion:
         df_stats_2 = stats_of_interest(df[relevant_col2], has_text=True)
 
-    # Assign the value to decide whether to approve the generation
-    # boundary = 2 if args.task=="context" else 1
-    boundary = args.boundary
-
     # Assign special NaN value
     if args.binary:
+        # Special treatment for the offensiveness rating
+        df["Answer.offensivenessRating"] = [
+            args.boundary + 1 if j == "not offensive" and i == -1 else i
+            for i, j in zip(
+                df["Answer.offensivenessRating"],
+                render_offensiveness_labels(df["Input.offensiveness"]),
+            )
+        ]
         df[relevant_col] = df[relevant_col].replace(-1, np.nan)
-        df[relevant_col] = (df[relevant_col] > boundary).astype(int)
+        df[relevant_col] = (df[relevant_col] > args.boundary).astype(int)
     else:
         # df[relevant_col] = df[relevant_col].replace(-1, np.nan)
         df[relevant_col] = df[relevant_col].replace(-1, 1.5)
