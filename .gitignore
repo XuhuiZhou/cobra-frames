@@ -135,3 +135,11 @@ hf_home/
 # DS
 .DS_Store
 lightning_logs/*
+
+# Modeling outpu
+.log/*
+
+.vscode/
+
+# Wandb
+wandb/*

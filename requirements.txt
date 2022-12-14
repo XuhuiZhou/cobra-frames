@@ -8,3 +8,9 @@ transformers==4.22.2
 torch==1.12.1
 pytorch-lightning==1.8.1
 scikit-learn==1.1.3
+datasets
+sentencepiece
+gin-config
+wandb
+nltk
+evaluate
