@@ -106,7 +106,6 @@ class ExplainModel(BaseSBFModel):
         Returns:
             Explain model: The trained explain model.
         """
-        dataset["validation"] = Dataset.from_dict(dataset["validation"][:300])
         prompt_train_dataset = dataset["train"].map(
             partial(map_dataset_to_tokenized_prompt, self.tokenizer),
             batched=True,
@@ -151,6 +150,8 @@ class ExplainModel(BaseSBFModel):
         args: Seq2SeqTrainingArguments = Seq2SeqTrainingArguments(
             output_dir=".log/_explain_model",
             per_device_eval_batch_size=16,
+            generation_max_length=512,
+            generation_num_beams=4,
             predict_with_generate=True,  # generation in evaluation
             prediction_loss_only=False,  # generation in evaluation
         ),
@@ -186,8 +187,6 @@ class ExplainModel(BaseSBFModel):
         predict_results = trainer.predict(
             prompt_dataset,
             metric_key_prefix="predict",
-            max_length=512,
-            num_beams=4,
         )
         predictions = predict_results.predictions
         predictions = self.tokenizer.batch_decode(
