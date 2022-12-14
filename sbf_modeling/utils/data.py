@@ -94,7 +94,7 @@ def get_data(mode: str, split: str = ""):
     if mode == "deployment":
         return get_train_data(split)
     elif mode == "tests":
-        return get_dummy_data()
+        return get_dummy_data() if split == "" else get_dummy_data()[split]
     else:
         raise ValueError(f"Unknown mode {mode}")
 

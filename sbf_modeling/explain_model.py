@@ -85,6 +85,7 @@ class ExplainModel(BaseSBFModel):
             prediction_loss_only=False,  # generation in evaluation
         ),
         save_model_dir: str = "explain-model",
+        print_prediction_num_examples: int = 300,
     ) -> ExplainModel:
         """
         Train the explain model on the given dataset.
@@ -133,7 +134,10 @@ class ExplainModel(BaseSBFModel):
             eval_dataset=prompt_valid_dataset,
             compute_metrics=partial(
                 aggregated_metrics_with_postprocess,
-                [partial(prediction_metrics, 300), bleu_metrics],
+                [
+                    partial(prediction_metrics, print_prediction_num_examples),
+                    bleu_metrics,
+                ],
                 self.tokenizer,
             ),
         )

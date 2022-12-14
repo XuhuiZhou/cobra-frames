@@ -22,3 +22,14 @@ def test_train_script():
         )
         == 0
     )
+
+
+def test_predict_script():
+    import os
+
+    assert (
+        os.system(
+            'python sbf_modeling/inference.py --gin_file="scripts/explain_model/explain_model_inference.gin" --gin.MODEL_DIR="\'.log/explain-model\'" --gin.BATCH_SIZE=1'
+        )
+        == 0
+    )

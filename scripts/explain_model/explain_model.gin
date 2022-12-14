@@ -30,6 +30,7 @@ sbf_modeling.ExplainModel:
 
 sbf_modeling.ExplainModel.train:
     args = @transformers.Seq2SeqTrainingArguments()
+    print_prediction_num_examples = 300
 
 data_utils.get_data:
     mode = %MODE

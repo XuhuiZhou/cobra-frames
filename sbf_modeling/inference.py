@@ -1,5 +1,5 @@
 import os
-from typing import Sequence
+from typing import Callable, Sequence, cast
 
 import gin
 import pandas as pd
@@ -19,24 +19,13 @@ FLAGS = flags.FLAGS
 
 def predict(
     *,
-    model_dir: str,
-    test_data: Dataset,
+    model: BaseSBFModel,
     output_dir: str,
-    per_device_predict_batch_size: int = 16,
 ):
     logging.info("Model predicting")
-    model = ExplainModel(model_dir, from_local=True)
     if torch.cuda.is_available():
         model.model = model.model.cuda()  # type: ignore
-    answer_dict = model.predict(
-        test_data,
-        args=Seq2SeqTrainingArguments(
-            output_dir=".log/_explain_model",
-            per_device_eval_batch_size=per_device_predict_batch_size,
-            predict_with_generate=True,  # generation in evaluation
-            prediction_loss_only=False,  # generation in evaluation
-        ),
-    )
+    answer_dict = model.predict()
     logging.info("Model inference done")
     answer_df = pd.DataFrame.from_dict(answer_dict)
     answer_df.to_csv(os.path.join(output_dir, "answer.csv"), index=False)
@@ -45,6 +34,7 @@ def predict(
 def main(_):
     # Create gin-configurable version of `train`.
     predict_using_gin = gin.configurable(predict)
+    predict_using_gin = cast(Callable[[], None], predict_using_gin)
 
     gin_utils.parse_gin_flags(
         # User-provided gin paths take precedence if relative paths conflict.
@@ -53,7 +43,7 @@ def main(_):
         FLAGS.gin_bindings,
     )
 
-    predict_using_gin()  # type: ignore
+    predict_using_gin()
 
 
 if __name__ == "__main__":

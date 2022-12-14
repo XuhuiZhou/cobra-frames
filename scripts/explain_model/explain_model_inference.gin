@@ -13,8 +13,22 @@ data_utils.get_data:
     mode = %MODE
     split = "validation"
 
-inference_script.predict:
-    test_data = @data_utils.get_data()
-    model_dir = %MODEL_DIR
+transformers.Seq2SeqTrainingArguments:
     output_dir=".log/_explain_model"
-    per_device_predict_batch_size=%BATCH_SIZE
+    per_device_eval_batch_size=%BATCH_SIZE
+    generation_max_length=512
+    generation_num_beams=4
+    predict_with_generate=True  # generation in evaluation
+    prediction_loss_only=False  # generation in evaluation
+
+sbf_modeling.ExplainModel:
+    t5_model_name = %MODEL_DIR
+    from_local=True
+
+sbf_modeling.ExplainModel.predict:
+    dataset = @data_utils.get_data()
+    args = @transformers.Seq2SeqTrainingArguments()
+
+inference_script.predict:
+    model = @sbf_modeling.ExplainModel()
+    output_dir=".log/_explain_model"
