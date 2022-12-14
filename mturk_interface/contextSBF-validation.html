@@ -1,1354 +1,1205 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-</head>
-<body>
-<script>
-//
-// This method Gets URL Parameters (GUP)
-//
-function gup( name )
-{
-  var regexS = "[\\?&]"+name+"=([^&#]*)";
-  var regex = new RegExp( regexS );
-  var tmpURL = window.location.href;
-  var results = regex.exec( tmpURL );
-  if( results == null )
-    return "";
-  else
-    return results[1];
-}
-function decode(strToDecode)
-{
-  var encoded = strToDecode;
-  return unescape(encoded.replace(/\+/g,  " "));
-}
+<meta charset="utf-8" /><script>
+  //
+  // This method Gets URL Parameters (GUP)
+  //
+  function gup( name )
+  {
+    var regexS = "[\\?&]"+name+"=([^&#]*)";
+    var regex = new RegExp( regexS );
+    var tmpURL = window.location.href;
+    var results = regex.exec( tmpURL );
+    if( results == null )
+      return "";
+    else
+      return results[1];
+  }
+  function decode(strToDecode)
+  {
+    var encoded = strToDecode;
+    return unescape(encoded.replace(/\+/g,  " "));
+  }
 
-window.onload = function() {
-    if (!window.jQuery) {
-        // jQuery is not loaded
-        alert("Warning: it seems that jquery is disabled on your browser.  This HIT might not work properly without javascript and jquery code enabled (if you have extensions that block jquery or an old browser version, this may prevent the dynamic elements of the HIT from functioning).  Please ensure that you have jquery enabled by temporarily disabling extensions that interfere with jquery and/or trying a different browser version.");
-    }
-    //checkIfWorkerExists();
-    layout();
-}
-</script>
+  window.onload = function() {
+      if (!window.jQuery) {
+          // jQuery is not loaded
+          alert("Warning: it seems that jquery is disabled on your browser.  This HIT might not work properly without javascript and jquery code enabled (if you have extensions that block jquery or an old browser version, this may prevent the dynamic elements of the HIT from functioning).  Please ensure that you have jquery enabled by temporarily disabling extensions that interfere with jquery and/or trying a different browser version.");
+      }
+      //checkIfWorkerExists();
+      layout();
+  }
+  </script>
+  <link crossorigin="anonymous" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet" /><script
+    src="https://code.jquery.com/jquery-3.5.1.js"
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script><!--For autocomplete--><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.4.7/jquery.autocomplete.js"></script><!--link ref="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-autocomplete/1.0.7/jquery.auto-complete.css"--><!--script src="https://homes.cs.washington.edu/~msap/debug/neural-detox/emoji.json" ></script>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script
-  src="https://code.jquery.com/jquery-3.5.1.js"
-  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-  crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://homes.cs.washington.edu/~msap/debug/neural-detox/emojiv2.js"></script-->
+  <section class="container" id="preInstruction" style="margin-bottom:0px; padding: 0px 10px; color:#333333;">
+  <div class="card">
+  <div class="card-header" style="color: #fff;background-color: #337ab7;border-color: #337ab7;"><strong>Short instructions &amp; Consent Form</strong></div>
 
-<!--For autocomplete-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.4.7/jquery.autocomplete.js"></script>
-<!--link ref="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-autocomplete/1.0.7/jquery.auto-complete.css"-->
+  <div class="card-body row">
+  <div class="col-7">
+  <p><em><strong>Summary</strong></em>: This research study aims to <strong>understand how toxicity, hate, and social biases appear in language</strong>. You will <strong>read a potentially toxic or biased statement and some explanations</strong> of what it means, and <strong>rate the explanations</strong>. This should take 5-10 minutes.</p>
 
-<!--script src="https://homes.cs.washington.edu/~msap/debug/neural-detox/emoji.json" ></script>
+  <p><em>Background:</em> Here at CMU, we are passionate about understanding how potentially toxic or disrespectful language or stereotypes can be used against certain demographics/groups of people (e.g. racism, sexism, etc.). Although there is no direct benefit to you for participating, we very much appreciate your help in identifying and explaining such language/stereotypes, since this is something computational AI systems have no clue about.</p>
 
-<script src="https://homes.cs.washington.edu/~msap/debug/neural-detox/emojiv2.js"></script-->
+  <p><em>Content warning</em>: Due to the nature of this study, you will encounter biased, offensive, or upsetting content. While it&#39;s crucial for us to annotate them, we do not endorse any of the stereotypes or offensive/immoral/rude material. If you have strong negative reactions to some of the content, please reach out <a href="https://www.crisistextline.org/">to Crisis Text Line</a>.</p>
 
+  <p><em>Participation</em>: You must be at least 18 years old. Participation is voluntary. You may discontinue participation at any time during the research activity. You may print a copy of this consent form for your records.</p>
+  </div>
 
-<section class="container" id="preInstruction" style="margin-bottom:0px; padding: 0px 10px; color:#333333;">
-   <div class="card">
-      <div class="card-header" style="color: #fff;background-color: #337ab7;border-color: #337ab7;"><strong>Short instructions &amp; Consent Form</strong></div>
-      <div class="card-body row">
-         <div class="col-7">
-            <p><em><strong>Summary</strong></em>: This research study aims to <strong>understand how toxicity, hate, and social biases appear in language</strong>. You will <strong>read a potentially toxic or biased statement and some explanations</strong> of what it means, and <strong>rate the explanations</strong>. This should take 5-10 minutes.
-            </p>
-            <p>
-               <em>Background:</em> Here at CMU, we are passionate about  about understanding how potentially toxic or disrespectful language or stereotypes can be used against certain demographics/groups of people (e.g. racism, sexism, etc.).
-               Although there is no direct benefit to you for participating, we very much appreciate your help in identifying and explaining such language/stereotypes, since this is something computational AI systems have no clue about.
-            </p>
-            <p><em>Content warning</em>:
-               Due to the nature of this study, you will encounter biased, offensive, or upsetting content.
-               While it's crucial for us to annotate them, we do not endorse any of the stereotypes or offensive/immoral/rude material.
-               If you have strong negative reactions to some of the content</em>, please reach out <a href="https://www.crisistextline.org/">to Crisis Text Line</a>.
-            </p>
-            <p>
-               <em>Participation</em>: You must be at least 18 years old. Participation is voluntary. You may discontinue participation at any time during the research activity. You may print a copy of this consent form for your records.
-            </p>
-         </div>
-         <div class="col-5" style="font-size: .9em;">
-            <p>
-               <em>Data collection &amp; sharing</em>:
-               We will not ask you for your name, and the data collected in this study will be made unidentifiable to the best of our extent.
-               We will securely store the data on our servers and only share with qualified researchers (e.g., who want to further the study of hate speech detection).
-               If you later decide that you do not want your responses included in this study, please email so we can exclude your work.
-            </p>
-            <p>
-               <em>Contact</em>: If you have any questions about this study, you should feel free to ask them by contacting us (via the MTurk interface or via email at maartensap@cmu.edu). If you have questions later, desire additional information, or wish to withdraw your participation please contact Maarten Sap via e-mail in accordance with the contact information listed above.
-               If you have questions pertaining to your rights as a research participant; or to report concerns to this study, you should contact the Office of Research integrity and Compliance at Carnegie Mellon University, referencing study number STUDY2022_00000331. Email: <a href="mailto:irb-review@andrew.cmu.edu">irb-review@andrew.cmu.edu</a>. Phone: 412-268-1901 or 412-268-5460.
-            </p>
+  <div class="col-5" style="font-size: .9em;">
+  <p><em>Data collection &amp; sharing</em>: We will not ask you for your name, and the data collected in this study will be made unidentifiable to the best of our extent. We will securely store the data on our servers and only share with qualified researchers (e.g., who want to further the study of hate speech detection). If you later decide that you do not want your responses included in this study, please email so we can exclude your work.</p>
 
-         </div>
-         <div class="col-12">
-            <div class="alert alert-info" role="alert">
-              Note: this is a <strong>pilot task</strong>. More HITs would be available in the future.
-              Meanwhile, we would love to hear your feedback on how to make the task easier to understand!
-            </div>
-            <hr>
-            <h6>Consent to the task to participate:</h6>
-            <div class="form-check">
-               <label class="form-check-label">
-               <input class="form-check-input" type="checkbox" id="consent" name="consent" onclick="toggleConsent(this.checked)">
-               Checking this box indicates that you have read and understood the information above, are 18 years or older, and agree to participate in our study.
-               </label>
-            </div>
-            <br>
-            <div class="alert alert-warning" id="consentMessage" style="max-width: 400px;margin: auto;">
-               You must check the box to continue the task! If you do not consent, feel free to return the HIT.
-            </div>
-            <div style="display: none;">
-               <input name="clickedConsentTime" id="clickedConsentTime" type="text" placeholder="">
-               <input name="clickedSubmitTime" id="clickedSubmitTime" type="text" placeholder="">
-            </div>
-         </div>
-      </div>
-   </div>
-</section>
+  <p><em>Contact</em>: If you have any questions about this study, you should feel free to ask them by contacting us (via the MTurk interface or via email at maartensap@cmu.edu). If you have questions later, desire additional information, or wish to withdraw your participation please contact Maarten Sap via e-mail in accordance with the contact information listed above. If you have questions pertaining to your rights as a research participant; or to report concerns to this study, you should contact the Office of Research Integrity and Compliance at Carnegie Mellon University, referencing study number STUDY2022_00000331. Email: <a href="mailto:irb-review@andrew.cmu.edu">irb-review@andrew.cmu.edu</a>. Phone: 412-268-1901 or 412-268-5460.</p>
+  </div>
 
+  <div class="col-12">
+  <div class="alert alert-info" role="alert">Note: More HITs would be available in the future. Meanwhile, we would love to hear your feedback on how to make the task easier to understand!</div>
 
-<!--END OF HIT HEADER; START OF HIT BODY-->
-<section class="container" style="color:#333333; display: none;" id="actualTask">
+  <hr />
+  <h6>Consent to the task to participate:</h6>
+
+  <div class="form-check"><label class="form-check-label"><input class="form-check-input" id="consent" name="consent" onclick="toggleConsent(this.checked)" type="checkbox" /> Checking this box indicates that you have read and understood the information above, are 18 years or older, and agree to participate in our study. </label></div>
+  &nbsp;
+
+  <div class="alert alert-warning" id="consentMessage" style="max-width: 400px;margin: auto;">You must check the box to continue the task! If you do not consent, feel free to return the HIT.</div>
+
+  <div style="display: none;"><input id="clickedConsentTime" name="clickedConsentTime" placeholder="" type="text" /> <input id="clickedSubmitTime" name="clickedSubmitTime" placeholder="" type="text" /></div>
+  </div>
+  </div>
+  </div>
+  </section>
+  <!--END OF HIT HEADER; START OF HIT BODY-->
+
+  <section class="container" id="actualTask" style="color:#333333; display: none;">
   <fieldset>
-    <div class="card" style="display: block;">
-      <div class="card-header">
-        <h4 class="card-title" style="">
-          Full Instructions &nbsp; &nbsp;
-          <a data-toggle="collapse" href="#instructions" role="button" aria-expanded="false" aria-controls="instructions" style="color:#0080ff;text-decoration: underline;">
-          (Expand/Collapse)
-          </a>
-        </h4>
-      </div>
-      <div id="instructions" class="collapse show" style="margin: 2em;">
-        <div class="row">
-          <!--div class="col-12 mb-4">
-            <p style="font-size: 1em; text-align: left">
-              You will read a message taken from somewhere on the internet, the potential listener and speaker identity and the situation where the message happened. And then, you will rate some explanations of the message. Please answer all questions from an US cultural perspective; try to think about what would be prevalent opinions on these.
-           </p>
+  <div class="card" style="display: block;">
+  <div class="card-header">
+  <h4 class="card-title" style="">Full Instructions &nbsp; &nbsp; <a aria-controls="instructions" aria-expanded="false" data-toggle="collapse" href="#instructions" role="button" style="color:#0080ff;text-decoration: underline;"> (Expand/Collapse) </a></h4>
+  </div>
 
-          </div-->
+  <div class="collapse show" id="instructions" style="margin: 2em;">
+  <div class="row"><!--div class="col-12 mb-4">
+              <p style="font-size: 1em; text-align: left">
+                You will read a message taken from somewhere on the internet, the potential listener and speaker identity and the situation where the message happened. And then, you will rate some explanations of the message. Please answer all questions from an US cultural perspective; try to think about what would be prevalent opinions on these.
+             </p>
 
-          <div class="col-12">
-            <h5>Detailed instructions</h5>
-            <p style="margin-bottom: .5rem;">
-              <span class="numbering">1)</span>
-                Carefully <strong>read the statement or message and its context</strong>, and with a US sociocultural perspective in mind.
-            </p>
+            </div-->
+  <div class="col-12">
+  <h5>Detailed instructions</h5>
 
-            <p style="margin-bottom: .5rem;">
-              <span class="numbering">2)</span>
-                <strong>Account for the context (situational context, speaker and listener identities)</strong> when interpreting the statement.
-                <!--em>Read the message carefully. </em>
-                When you interpret the message, make sure you take into account the speaker and listener's
-                identities as well as the situation.-->
-            </p>
+  <p style="margin-bottom: .5rem;"><span class="numbering">1)</span> Carefully <strong>read the statement or message and its context</strong>, and with a US sociocultural perspective in mind.</p>
 
-            <p style="margin-bottom: .5rem;">
-              <span class="numbering">3)</span> <strong>Read and rate the explanations</strong> about the statement or message.
-                <strong>If unlikely, please suggest a better
-                explanation</strong> using the text box beside the radio buttons. See below for the <em>types of explanations</em> we consider.
-            </p>
-            <br>
-            <h5>Types of explanations</h5>
-            <table id="examples-table">
-                  <tr>
-                    <td class="cb-teal">Speaker intent</td>
-                    <td class="cb-gray">What do you think the speaker was trying to express (attitude, feeling, and etc.)? What do you think the speaker was trying to accomplish through the statement? What was their intent with this statement?
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="cb-purple">Target (group)</td>
-                    <td class="cb-gray">Who is referenced or targeted by the statement? It could be demographic groups and/or the listener themselves.</td>
-                  </tr>
-                  <tr>
-                    <td class="cb-gold">Power dynamic</td>
-                    <td class="cb-gray">Which oppression, marginalization, or power difference between the speaker and listener or target group is relevant for this statement?
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="cb-orange">Implication</td>
-                    <td class="cb-gray">How will the statement be understood from the perspective of the listener/a target group member?
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="cb-green">Target emotional reaction</td>
-                    <td class="cb-gray">What are some of the immediate emotional reactions that someone from the target group would have to this statement/potentially biased implication?
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="cb-brown">Effect on target</td>
-                    <td class="cb-gray">Longer-term, what likely lessons will someone from the target group draw? How will they change their thinking or behavior?
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="cb-pink">Type of offensiveness&nbsp;</td>
-                    <td class="cb-gray">Overall, using only a few words, how would you describe the offensiveness of the statement? This statement is an example of a ____.
-                    Here are some common
-                    <a href="#" data-toggle="tooltip" data-placement="right"
-                    data-html="true"
-                    title="<p style='text-align:left'>
-                    <ul style='text-align:left;'>
-                    <li>profanity</li>
-                    <li>microaggression</li>
-                    <li>offensive generalization</li>
-                    <li>stereotype</li>
-                    <li>sexism</li>
-                    <li>racism, and etc.</li>
-                    </ul>
-                    </p>
-                    ">types of offensiveness</a>. Note that you are not limited by these types.
-                    We encourage you to write more accurate and specific types of offensiveness.
-                    </td>
-                  </tr>
-                </table>
+  <p style="margin-bottom: .5rem;"><span class="numbering">2)</span> <strong>Account for the context (situational context, speaker and listener identities)</strong> when interpreting the statement. <!--em>Read the message carefully. </em>
+                  When you interpret the message, make sure you take into account the speaker and listener's
+                  identities as well as the situation.--></p>
+
+  <p style="margin-bottom: .5rem;"><span class="numbering">3)</span> <strong>Read and rate the explanations</strong> about the statement or message. <strong>If unlikely, please suggest a better explanation</strong> using the text box beside the radio buttons. See below for the <em>types of explanations</em> we consider.</p>
+  &nbsp;
+
+  <h5>Types of explanations</h5>
+
+  <table id="examples-table">
+    <tbody>
+      <tr>
+        <td class="cb-teal">Speaker intent</td>
+        <td class="cb-gray">What do you think the speaker was trying to express (attitude, feeling, and etc.)? What do you think the speaker was trying to accomplish through the statement? What was their intent with this statement?</td>
+      </tr>
+      <tr>
+        <td class="cb-purple">Target (group)</td>
+        <td class="cb-gray">Who is referenced or targeted by the statement? It could be demographic groups and/or the listener themselves.</td>
+      </tr>
+      <tr>
+        <td class="cb-gold">Power dynamic</td>
+        <td class="cb-gray">Which oppression, marginalization, or power difference between the speaker and listener or target group is relevant for this statement?</td>
+      </tr>
+      <tr>
+        <td class="cb-orange">Implication</td>
+        <td class="cb-gray">How will the statement be understood from the perspective of the listener/a target group member?</td>
+      </tr>
+      <tr>
+        <td class="cb-green">Target emotional reaction</td>
+        <td class="cb-gray">What are some of the immediate emotional reactions that someone from the target group would have to this statement/potentially biased implication?</td>
+      </tr>
+      <tr>
+        <td class="cb-brown">Effect on target</td>
+        <td class="cb-gray">Longer-term, what likely lessons will someone from the target group draw? How will they change their thinking or behavior?</td>
+      </tr>
+      <tr>
+        <td class="cb-pink">Type of offensiveness&nbsp;</td>
+        <td class="cb-gray">Overall, using only a few words, how would you describe the offensiveness of the statement? This statement is an example of a ____. Here are some common <a data-html="true" data-placement="right" data-toggle="tooltip" href="#" title="&lt;p style='text-align:left'&gt;
+                      &lt;ul style='text-align:left;'&gt;
+                      &lt;li&gt;profanity&lt;/li&gt;
+                      &lt;li&gt;microaggression&lt;/li&gt;
+                      &lt;li&gt;offensive generalization&lt;/li&gt;
+                      &lt;li&gt;stereotype&lt;/li&gt;
+                      &lt;li&gt;sexism&lt;/li&gt;
+                      &lt;li&gt;racism, and etc.&lt;/li&gt;
+                      &lt;/ul&gt;
+                      &lt;/p&gt;
+                      ">types of offensiveness</a>. Note that you are not limited by these types. We encourage you to write more accurate and specific types of offensiveness.</td>
+      </tr>
+    </tbody>
+  </table>
+  <br />
+  <b>❗Notes</b> <a aria-controls="instructions" aria-expanded="false" data-toggle="collapse" href="#notes" role="button" style="color:#0080ff;"> (Expand/Collapse) </a>:
+
+  <div class="collapse show" id="notes">
+  <ul>
+    <li><b>Effects vs reactions:</b> Think about effects as the likely lessons someone will draw, the likely subsequent actions someone will take, or what the <em>long-term harm</em> would be on repeatedly listening to statements like this. The reactions are more about immediate emotional reactions and feelings, which is more <em>immediate harm</em>.</li>
+    <li><b>Speaker intent vs Implication: </b>Speaker intent and implication can be similar sometimes. For some overtly hateful posts (e.g., &quot;I hate gays&quot;), writing down something like &quot;implies that the speaker hates gays&quot; for Implication, and &quot;the speaker was trying to express a homophobic/anti-gay attitude&quot; for Speaker intent means that you understand our definitions correctly.</li>
+    <li><b>Different opinions:</b> It is <em>okay</em> that you may have different explanations for the posts. We want to assess whether our provided explanations are likely or not given the context, while that <em>does not</em> necessarily cancel the possibility of other explanations.</li>
+    <li><b>&#39;None&#39; option:</b> You can click the &#39;None&#39; button for some of the relations if you think the current explanation is <em>unlikely</em> and there is <em>no explanation</em> for this relation given the post and context.</li>
+    <li><b>Bonus:</b> To encourage <em>high-quality</em> suggestions, we will give bonus to annotators for the better suggestions provided. Note that we won't start assigning the bonus until the end of this study.</li>
+  </ul>
+  </div>
+  </div>
+  <!--div class="col-3">
+            <small>
+              <h5>Background on our research project</h5>
+              <p>
+                At the University of Washington, we're passionate about understanding how potentially toxic or disrespectful language or stereotypes can be used against certain demographics/groups of people (e.g. racism, sexism, etc.).
+                Although there is no direct benefit to you for participating, we very much appreciate your help in identifying and explaining such language/stereotypes, since this is something computational models have no clue about.
+                We do not agree with any of the content/stereotypes presented to you, but it's important that we gather these annotations for research purposes.
+              </p>
+              <p>
+                <strong>Data collection & sharing</strong><br>
+                We will not ask you for your name, and the data collected in this study will be made unidentifiable to the best of our extent.
+                We will securely store the data on our servers and only share with qualified researchers (e.g. who want to further the study of hate speech detection).
+                If you later decide that you do not want your responses included in this study, please email so we can exclude your work.
                 <br>
+                If you have questions about your rights as a research participant, or wish to obtain information, ask questions or discuss any concerns about this study with someone other than the researcher(s), please contact the University of Washington Human Subjects Division at 206-543-0098 (for international calls include the US Calling Code: +1-206-543-0098).
+              </p>
+            </small>
+            </div--></div>
 
-                <b>❗Notes</b>
-                <a data-toggle="collapse" href="#notes" role="button" aria-expanded="false" aria-controls="instructions" style="color:#0080ff;">
-                  (Expand/Collapse)
-                </a>:
-                <div id="notes" class="collapse show">
-                  <ul>
-                    <li>
-                      <b>Effects vs reactions:</b> Think about effects as the likely lessons someone will draw, the likely subsequent actions someone will take, or
-                      what the <em>long-term harm</em> would be on repeatedly listening to statements like this.
-                      The reactions are more about immediate emotional reactions and feelings, which is more <em>immediate harm</em>.
-                    </li>
-                    <li>
-                      <b>Speaker intent vs Implication: </b>Speaker intent and implication can be similar sometimes.
-                      For some overtly hateful posts (e.g., "I hate gays"), writing down something like "implies that the speaker hates gays" for Implication,
-                      and "the speaker was trying to express a homophobic/anti-gay attitude" for Speaker intent means that you understand our definitions correctly.
-                    </li>
-                    <li>
-                      <b>Different opinions:</b> It is <em>okay</em> that you may have different explanations for the posts.
-                      We want to assess whether our provided explanations are likely or not given the context,
-                      while that <em>does not</em> necessarily cancel the possibility of other explanations.
-                    </li>
-                    <li>
-                      <b>'None' option:</b> You can click the 'None' button for some of the relations if you think the current explanation is <em>unlikely</em>
-                      and there is <em>no explanation</em> for this relation given the post and context.
-                    </li>
-                  </ul>
-                </div>
-          </div>
-          <!--div class="col-3">
-          <small>
-            <h5>Background on our research project</h5>
-            <p>
-              At the University of Washington, we're passionate about understanding how potentially toxic or disrespectful language or stereotypes can be used against certain demographics/groups of people (e.g. racism, sexism, etc.).
-              Although there is no direct benefit to you for participating, we very much appreciate your help in identifying and explaining such language/stereotypes, since this is something computational models have no clue about.
-              We do not agree with any of the content/stereotypes presented to you, but it's important that we gather these annotations for research purposes.
-            </p>
-            <p>
-              <strong>Data collection &amp; sharing</strong><br>
-              We will not ask you for your name, and the data collected in this study will be made unidentifiable to the best of our extent.
-              We will securely store the data on our servers and only share with qualified researchers (e.g. who want to further the study of hate speech detection).
-              If you later decide that you do not want your responses included in this study, please email so we can exclude your work.
-              <br>
-              If you have questions about your rights as a research participant, or wish to obtain information, ask questions or discuss any concerns about this study with someone other than the researcher(s), please contact the University of Washington Human Subjects Division at 206-543-0098 (for international calls include the US Calling Code: +1-206-543-0098).
-            </p>
-          </small>
-          </div-->
-        </div>
-        <div class="row">
-          <div class="col-12">
-            <p class="mt-4">
-              <em><strong style="color: #e60000;">Content Warning</strong></em>: posts were found on the (uncensored) internet;
-              while it's crucial for us to annotate them, we do not endorse any of the stereotypes or offensive/immoral/rude material.
-              You may find some of the content upsetting.
-              <em>If you have concerns, questions, please reach out to the study team. If you have more immediate strong negative reactions to some of the content</em>, please reach out <a href="https://www.crisistextline.org/">to Crisis Text Line</a>.
-            </p>
-          </div>
-        </div>
+  <div class="row">
+  <div class="col-12">
+  <p class="mt-4"><em><strong style="color: #e60000;">Content Warning</strong></em>: posts were found on the (uncensored) internet; while it&#39;s crucial for us to annotate them, we do not endorse any of the stereotypes or offensive/immoral/rude material. You may find some of the content upsetting. <em>If you have concerns, questions, please reach out to the study team. If you have more immediate strong negative reactions to some of the content</em>, please reach out <a href="https://www.crisistextline.org/">to Crisis Text Line</a>.</p>
+  </div>
+  </div>
 
-        <div class="row justify-content-center" style="margin-top: 20px;">
-          <div class="col-11" id="table-container">
-            <h5>Examples <small><a href=".extra-exs" class="collapsed" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample" onclick="expExamples();">
-              [-] less examples
-            </a></small></h5>
-            <div class="d-flex flex-column" style="margin-top: 20px; margin-bottom: 20px; border-radius: 3px; box-shadow: 1.5px 1.5px 3px 3px rgba(0, 0, 1, 0.2);">
-              <div class="row justify-content-center" style="background-color: ghostwhite; border: 1px solid darkgrey; border-radius: 3px; width: 80%; margin-left: auto; margin-right: auto; margin-top: 20px;">
-                <div class="col-12 text-center" style="margin: 1em 0;">
-                  <div class="situation">
-                  <em style="font-size: 18; color: #006cd8;  font-weight: bold;">Situational context</em>: <span id="speechContextInput">political speech or rant</span>
-                  </div>
-                </div>
-                <div class="col-3">
-                  <div class="speaker">
-                    <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Speaker identity</em>: <span id="speakerInput" >white American person</span>
-                    </div>
-                </div>
+  <div class="row justify-content-center" style="margin-top: 20px;">
+  <div class="col-11" id="table-container">
+  <h5>Examples <small><a aria-controls="collapseExample" aria-expanded="false" class="collapsed" data-toggle="collapse" href=".extra-exs" onclick="expExamples();"> [-] less examples </a></small></h5>
 
-                <div class="col-6 imessage">
-                  <p class="from-them">
-                    Mexico isn't sending its best, it's sending rapists and murderers
-                  </p>
-                </div>
-                <div class="col-3">
-                <div class="listener">
-                  <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Listener identity</em>: <span id="listenerInput">general audience of US voters</span>
-                  </div>
-                </div>
-              </div>
-              <div class="mt-3" id="table-container"></div>
-              <div class="table-responsive", style="margin-left: 20px; margin-right: 20px; width: 96%">
+  <div class="d-flex flex-column" style="margin-top: 20px; margin-bottom: 20px; border-radius: 3px; box-shadow: 1.5px 1.5px 3px 3px rgba(0, 0, 1, 0.2);">
+  <div class="row justify-content-center" style="background-color: ghostwhite; border: 1px solid darkgrey; border-radius: 3px; width: 80%; margin-left: auto; margin-right: auto; margin-top: 20px;">
+  <div class="col-12 text-center" style="margin: 1em 0;">
+  <div class="situation"><em style="font-size: 18; color: #006cd8;  font-weight: bold;">Situational context</em>: <span id="speechContextInput">political speech or rant</span></div>
+  </div>
+
+  <div class="col-3">
+  <div class="speaker"><em style="font-size: 15; color: #006cd8;  font-weight: bold;">Speaker identity</em>: <span id="speakerInput">white American person</span></div>
+  </div>
+
+  <div class="col-6 imessage">
+  <p class="from-them">Mexico isn&#39;t sending its best, it&#39;s sending rapists and murderers</p>
+  </div>
+
+  <div class="col-3">
+  <div class="listener"><em style="font-size: 15; color: #006cd8;  font-weight: bold;">Listener identity</em>: <span id="listenerInput">general audience of US voters</span></div>
+  </div>
+  </div>
+
+  <div class="mt-3" id="table-container">&nbsp;</div>
+
+  <div class="table-responsive" style="margin-left: 20px; margin-right: 20px; width: 96%">
+  <table class="table table-hover" id="examples-table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col" style="width: 10%;">Relation</th>
+        <th scope="col" style="width: 40%;">Inference</th>
+        <th scope="col" style="width: 10%;">Answer</th>
+        <th scope="col" style="width: 40%;">Suggest a better alternative</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="cb-teal">Speaker intent</td>
+        <td>The speaker was trying to stress the importance of education in Mexico, especially in preventing people becoming rapists and murderers</td>
+        <td>very/somewhat unlikely</td>
+        <td>The speaker was trying to express distrusts against immigrants from Mexico, calling them all rapists and murderers</td>
+      </tr>
+      <tr>
+        <td class="cb-purple">Target (group)</td>
+        <td>general Mexicans</td>
+        <td>very/somewhat unlikely</td>
+        <td>Mexican immigrants</td>
+      </tr>
+      <tr>
+        <td class="cb-gold">Power dynamic</td>
+        <td>ethnicity and citizenship power differential between speaker and targeted group</td>
+        <td>very/somewhat likely</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td class="cb-orange">Implication</td>
+        <td>implies that Mexico does not send good people outside</td>
+        <td>very/somewhat unlikely</td>
+        <td>implies that all Mexican immigrants are rapists and murderers, and that immigration is generally bad</td>
+      </tr>
+      <tr>
+        <td class="cb-green">Target emotional reaction</td>
+        <td>Mexicans could feel ashamed that the they don&#39;t provide enough ethical education for their children</td>
+        <td>very/somewhat unlikely</td>
+        <td>Mexican immigrants could feel angry that the entire country of Mexico is being framed as criminal, afraid that people will believe that stereotype</td>
+      </tr>
+      <tr>
+        <td class="cb-brown">Effect on target</td>
+        <td>Mexican would try to be more well-behaved and make efforts in improving their education in reducing future criminals</td>
+        <td>very/somewhat unlikely</td>
+        <td>Mexican immigrants could likely be more feared, and will feel less welcome in the country they are in</td>
+      </tr>
+      <tr>
+        <td class="cb-pink">Type of offensiveness</td>
+        <td>offensive generalization</td>
+        <td>very/somewhat likely</td>
+        <td>&nbsp;</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  </div>
+
+  <div class="collapse show extra-exs">
+  <div class="d-flex flex-column" style="margin-top: 20px; margin-bottom: 20px; border-radius: 3px; box-shadow: 1.5px 1.5px 3px 3px rgba(0, 0, 1, 0.2);">
+  <div class="row justify-content-center" style="background-color: ghostwhite; border: 1px solid darkgrey; border-radius: 3px; width: 80%; margin-left: auto; margin-right: auto; margin-top: 20px;">
+  <div class="col-12 text-center" style="margin: 1em 0;">
+  <div class="situation"><em style="font-size: 18; color: #006cd8;  font-weight: bold;">Situational context</em>: <span id="speechContextInput">initial interaction in a workplace setting between customer and employee or boss</span></div>
+  </div>
+
+  <div class="col-3">
+  <div class="speaker"><em style="font-size: 15; color: #006cd8;  font-weight: bold;">Speaker identity</em>: <span id="speakerInput">man</span></div>
+  </div>
+
+  <div class="col-6 imessage">
+  <p class="from-them">Excuse me miss, are any of your bosses here?</p>
+  </div>
+
+  <div class="col-3">
+  <div class="listener"><em style="font-size: 15; color: #006cd8;  font-weight: bold;">Listener identity</em>: <span id="listenerInput">woman</span></div>
+  </div>
+  </div>
+
+  <div class="mt-3" id="table-container">&nbsp;</div>
+
+  <div class="table-responsive" style="margin-left: 20px; margin-right: 20px; width: 96%">
+  <table class="table table-hover" id="examples-table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col" style="width: 10%;">Relation</th>
+        <th scope="col" style="width: 40%;">Inference</th>
+        <th scope="col" style="width: 10%;">Answer</th>
+        <th scope="col" style="width: 40%;">Suggest a better alternative</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="cb-teal">Speaker intent</td>
+        <td>The speaker was trying to find someone in a position of authority</td>
+        <td>very/somewhat likely</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td class="cb-purple">Target (group)</td>
+        <td>man</td>
+        <td>very/somewhat unlikely</td>
+        <td>listener, women</td>
+      </tr>
+      <tr>
+        <td class="cb-gold">Power dynamic</td>
+        <td>work place power differential between speaker and listener</td>
+        <td>very/somewhat unlikely</td>
+        <td>gender power differential between speaker and listener</td>
+      </tr>
+      <tr>
+        <td class="cb-orange">Implication</td>
+        <td>implies that the woman in the office is not the boss</td>
+        <td>very/somewhat unlikely</td>
+        <td>implies that women are not capable of being in a position of authority, and that a man is needed to speak to someone in charge</td>
+      </tr>
+      <tr>
+        <td class="cb-green">Target emotional reaction</td>
+        <td>listener and women could feel sorry for not being about to answer the speaker&#39;s question</td>
+        <td>very/somewhat unlikely</td>
+        <td>listener and women could feel angry, feel condescended to, angry that they didn&#39;t think a woman was boss</td>
+      </tr>
+      <tr>
+        <td class="cb-brown">Effect on target</td>
+        <td>might lead women bosses to change their behavior to appear more boss-like, might become more confrontational</td>
+        <td>very/somewhat likely</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td class="cb-pink">Type of offensiveness</td>
+        <td>offensive generalization</td>
+        <td>very/somewhat unlikely</td>
+        <td>microaggression</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  </div>
+  </div>
+  <a aria-controls="collapseExample" aria-expanded="false" class="collapsed" data-toggle="collapse" href=".extra-exs" onclick="expExamples();">[-] less examples </a></div>
+  </div>
+  <!-- <div class="row justify-content-center" style="margin-top: 20px;">
+            <div class="col-11" id="table-container">
+              <h5>Examples <small><a href=".extra-rows" class="collapsed" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample" onclick="expExamples();">
+                [-] less examples
+              </a></small></h5>
+              <div class="table-responsive">
               <table class="table table-hover" id="examples-table">
                 <thead class="thead-light">
+                  <th scope="col">Statement</th>
+                  <th scope="col">Situation</th>
+                  <th scope="col">Speaker Identity</th>
+                  <th scope="col">Listener Identity</th>
                   <th scope="col" style="width: 10%;">Relation</th>
-                  <th scope="col" style="width: 40%;">Inference</th>
-                  <th scope="col" style="width: 10%;">Answer</th>
-                  <th scope="col" style="width: 40%;">Suggest a better alternative</th>
+                  <th scope="col" style="width: 20%;">Good Inference ✔ </th>
+                  <th scope="col" style="width: 20%;">Bad Inference ❌</th>
                 </thead>
                 <tbody>
                   <tr>
-                    <td class="cb-teal">Speaker intent</td>
-                    <td>The speaker was trying to stress the importance of education in Mexico, especially in preventing people becoming rapists and murderers</td>
-                    <td>very/somewhat unlikely</td>
-                    <td>The speaker was trying to express distrusts against immigrants from Mexico, calling them all rapists and murderers</td>
-                  </tr>
-                  <tr>
-                    <td class="cb-purple">Target (group)</td>
-                    <td>general Mexicans</td>
-                    <td>very/somewhat unlikely</td>
-                    <td>Mexican immigrants</td>
-                  </tr>
-                  <tr>
-                    <td class="cb-gold">Power dynamic</td>
-                    <td>ethnicity and citizenship power differential between speaker and targeted group</td>
-                    <td>very/somewhat likely</td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td class="cb-orange">Implication</td>
-                    <td>implies that Mexico does not send good people outside</td>
-                    <td>very/somewhat unlikely</td>
+                    <td>Mexico isn't sending its best, it's sending rapists and murderers</td>
+                    <td>political speech or rant</td>
+                    <td>white American person</td>
+                    <td>general audience of US voters</td>
+                    <td>implication</td>
                     <td>implies that all Mexican immigrants are rapists and murderers, and that immigration is generally bad</td>
+                    <td>implies that Mexico does not send good people outside</td>
                   </tr>
                   <tr>
-                    <td class="cb-green">Target emotional reaction</td>
-                    <td>Mexicans could feel ashamed that the they don't provide enough ethical education for their children</td>
-                    <td>very/somewhat unlikely</td>
-                    <td>Mexican immigrants could feel angry that the entire country of Mexico is being framed as criminal, afraid that people will believe that stereotype</td>
-                  </tr>
-                  <tr>
-                    <td class="cb-brown">Effect on target</td>
-                    <td>Mexican would try to be more well-behaved and make efforts in improving their education in reducing future criminals</td>
-                    <td>very/somewhat unlikely</td>
-                    <td>Mexican immigrants could likely be more feared, and will feel less welcome in the country they are in</td>
-                  </tr>
-                  <tr>
-                    <td class="cb-pink">Type of offensiveness</td>
+                    <td>Mexico isn't sending its best, it's sending rapists and murderers</td>
+                    <td>political speech or rant</td>
+                    <td>white American person</td>
+                    <td>general audience of US voters</td>
+                    <td>offensiveness</td>
                     <td>offensive generalization</td>
-                    <td>very/somewhat likely</td>
-                    <td></td>
+                    <td>quoting of something biased</td>
                   </tr>
+                  <tr>
+                    <td>Mexico isn't sending its best, it's sending rapists and murderers</td>
+                    <td>political speech or rant</td>
+                    <td>white American person</td>
+                    <td>general audience of US voters</td>
+                    <td>Targeted group cognitive reaction</td>
+                    <td>Mexican immigrants could likely be more feared, and will feel less welcome in the country they are in</td>
+                    <td>Mexican would try to be more well-behaved</td>
+                  </tr>
+                  <tr>
+                    <td>Don't get too extreme, okay? We don't want you all to be prostitutes... Or transgender.</td>
+                    <td>conversation between friends</td>
+                    <td>person who is not transgender</td>
+                    <td>person who is transgender</td>
+                    <td>intent</td>
+                    <td>The speaker was trying to convey a stereotype about a certain group of people</td>
+                    <td>The speaker was trying to advise their friends</td>
+                  </tr>
+                 <tr>
+                    <td>Dark jokes are like a kid with cancer They never get old</td>
+                    <td>stand-up comedy set</td>
+                    <td>comedian</td>
+                    <td>general audience</td>
+                    <td>targeted group emotional reaction</td>
+                    <td>people with cancer could feel offended that their experiences are being used for humor; people with cancer <b>might</b> find the joke funny</td>
+                    <td>people with cancer <b>will</b> find the joke funny</td>
+                  </tr>
+                  <tr>
+                    <td>Your history teacher has to do what the zionist butt heads want them to do .</td>
+                    <td>conversation between friends</td>
+                    <td>man</td>
+                    <td>man</td>
+                    <td>targeted group</td>
+                    <td>Jews</td>
+                    <td>butt heads</td>
+                  </tr>
+                  <tr class="collapse show extra-rows">
+                    <td>Excuse me miss, are any of your bosses here?</td>
+                    <td>initial interaction in a workplace setting between customer and employee or bosss</td>
+                    <td>man</td>
+                    <td>woman</td>
+                    <td>power dynamic</td>
+                    <td>gender power differential between speaker and listener</td>
+                    <td>gender power dynamic</td>
+                  </tr>
+                  <tr class="collapse show extra-rows">
+                    <td>Excuse me miss, are any of your bosses here?</td>
+                    <td>initial interaction in a workplace setting between customer and employee or bosss</td>
+                    <td>man</td>
+                    <td>woman</td>
+                    <td>targeted group emotional reaction</td>
+                    <td>listener and women could feel angry, feel condescended to, angry that they didn't think a woman was boss</td>
+                    <td>listener may feel bad about not being able to answer the question</td>
+                  </tr>
+                  <tr class="collapse show extra-rows">
+                    <td>Excuse me miss, are any of your bosses here?</td>
+                    <td>initial interaction in a workplace setting between customer and employee or bosss</td>
+                    <td>man</td>
+                    <td>woman</td>
+                    <td>targeted group</td>
+                    <td>Listener,women</td>
+                    <td>men</td>
+                  </tr>
+
+                  <tr class="collapse show extra-rows">
+                    <td>We shouldn't lower our standards just to hire more women</td>
+                    <td>workplace hiring conversation</td>
+                    <td>man</td>
+                    <td>other coworkers</td>
+                    <td>targeted group cognitive reaction</td>
+                    <td>will feel less welcome and be less likely to want to work there, will want to avoid those kinds of jobs with men like the speaker</td>
+                    <td>will feel the standards are not high enough.</td>
+                  </tr>
+                  <tr class="collapse show extra-rows">
+                    <td>Why did jews do so well in class ? they went to concentration camps</td>
+                    <td>casual conversation between friends</td>
+                    <td>white person</td>
+                    <td>white person</td>
+                    <td>intent</td>
+                    <td>The speaker was trying to tell joke that might be offensive to jews</td>
+                    <td>The speaker was trying to convey a stereotype about a certain group of people</td>
+                  </tr>
+                  <tr class="collapse show extra-rows">
+                    <td>well today turned out to be a real fucking shitshow</td>
+                    <td>conversation between friends</td>
+                    <td>white person</td>
+                    <td>white person</td>
+                    <td>implication</td>
+                    <td>the speaker implies that today was a bad day for them</td>
+                    <td>the speaker is communicating that today was a bad day for people of color, and that it was not good for them </td>
+                  </tr>
+
                 </tbody>
               </table>
-
               </div>
+              <a href=".extra-rows" class="collapsed" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample" onclick="expExamples();">
+                [-] less examples
+              </a>
             </div>
-            <div class="collapse show extra-exs">
-              <div class="d-flex flex-column" style="margin-top: 20px; margin-bottom: 20px; border-radius: 3px; box-shadow: 1.5px 1.5px 3px 3px rgba(0, 0, 1, 0.2);">
-                <div class="row justify-content-center" style="background-color: ghostwhite; border: 1px solid darkgrey; border-radius: 3px; width: 80%; margin-left: auto; margin-right: auto; margin-top: 20px;">
-                  <div class="col-12 text-center" style="margin: 1em 0;">
-                    <div class="situation">
-                    <em style="font-size: 18; color: #006cd8;  font-weight: bold;">Situational context</em>: <span id="speechContextInput">initial interaction in a workplace setting between customer and employee or boss</span>
-                    </div>
-                  </div>
-                  <div class="col-3">
-                    <div class="speaker">
-                    <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Speaker identity</em>: <span id="speakerInput">man</span>
-                    </div>
-                  </div>
 
-                  <div class="col-6 imessage">
-                    <p class="from-them">
-                      Excuse me miss, are any of your bosses here?
-                    </p>
-                  </div>
-                  <div class="col-3">
-                  <div class="listener">
-                    <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Listener identity</em>: <span id="listenerInput">woman</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="mt-3" id="table-container"></div>
-                <div class="table-responsive", style="margin-left: 20px; margin-right: 20px; width: 96%">
-                <table class="table table-hover" id="examples-table">
-                  <thead class="thead-light">
-                    <th scope="col" style="width: 10%;">Relation</th>
-                    <th scope="col" style="width: 40%;">Inference</th>
-                    <th scope="col" style="width: 10%;">Answer</th>
-                    <th scope="col" style="width: 40%;">Suggest a better alternative</th>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="cb-teal">Speaker intent</td>
-                      <td>The speaker was trying to find someone in a position of authority</td>
-                      <td>very/somewhat likely</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td class="cb-purple">Target (group)</td>
-                      <td>man</td>
-                      <td>very/somewhat unlikely</td>
-                      <td>listener, women</td>
-                    </tr>
-                    <tr>
-                      <td class="cb-gold">Power dynamic</td>
-                      <td>work place power differential between speaker and listener</td>
-                      <td>very/somewhat unlikely</td>
-                      <td>gender power differential between speaker and listener</td>
-                    </tr>
-                    <tr>
-                      <td class="cb-orange">Implication</td>
-                      <td>implies that the woman in the office is not the boss</td>
-                      <td>very/somewhat unlikely</td>
-                      <td>implies that women are not capable of being in a position of authority, and that a man is needed to speak to someone in charge</td>
-                    </tr>
-                    <tr>
-                      <td class="cb-green">Target emotional reaction</td>
-                      <td>listener and women could feel sorry for not being about to answer the speaker's question</td>
-                      <td>very/somewhat unlikely</td>
-                      <td>listener and women could feel angry, feel condescended to, angry that they didn't think a woman was boss</td>
-                    </tr>
-                    <tr>
-                      <td class="cb-brown">Effect on target</td>
-                      <td>might lead women bosses to change their behavior to appear more boss-like, might become more confrontational</td>
-                      <td>very/somewhat likely</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td class="cb-pink">Type of offensiveness</td>
-                      <td>offensive generalization</td>
-                      <td>very/somewhat unlikely</td>
-                      <td>microaggression</td>
-                    </tr>
-                  </tbody>
-                </table>
-
-                </div>
-              </div>
-            </div>
-            <a href=".extra-exs" class="collapsed" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample" onclick="expExamples();">
-              [-] less examples
-            </a>
-          </div>
-
-        </div>
-
-        <!-- <div class="row justify-content-center" style="margin-top: 20px;">
-          <div class="col-11" id="table-container">
-            <h5>Examples <small><a href=".extra-rows" class="collapsed" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample" onclick="expExamples();">
-              [-] less examples
-            </a></small></h5>
-            <div class="table-responsive">
-            <table class="table table-hover" id="examples-table">
-              <thead class="thead-light">
-                <th scope="col">Statement</th>
-                <th scope="col">Situation</th>
-                <th scope="col">Speaker Identity</th>
-                <th scope="col">Listener Identity</th>
-                <th scope="col" style="width: 10%;">Relation</th>
-                <th scope="col" style="width: 20%;">Good Inference ✔ </th>
-                <th scope="col" style="width: 20%;">Bad Inference ❌</th>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Mexico isn't sending its best, it's sending rapists and murderers</td>
-                  <td>political speech or rant</td>
-                  <td>white American person</td>
-                  <td>general audience of US voters</td>
-                  <td>implication</td>
-                  <td>implies that all Mexican immigrants are rapists and murderers, and that immigration is generally bad</td>
-                  <td>implies that Mexico does not send good people outside</td>
-                </tr>
-                <tr>
-                  <td>Mexico isn't sending its best, it's sending rapists and murderers</td>
-                  <td>political speech or rant</td>
-                  <td>white American person</td>
-                  <td>general audience of US voters</td>
-                  <td>offensiveness</td>
-                  <td>offensive generalization</td>
-                  <td>quoting of something biased</td>
-                </tr>
-                <tr>
-                  <td>Mexico isn't sending its best, it's sending rapists and murderers</td>
-                  <td>political speech or rant</td>
-                  <td>white American person</td>
-                  <td>general audience of US voters</td>
-                  <td>Targeted group cognitive reaction</td>
-                  <td>Mexican immigrants could likely be more feared, and will feel less welcome in the country they are in</td>
-                  <td>Mexican would try to be more well-behaved</td>
-                </tr>
-                <tr>
-                  <td>Don't get too extreme, okay? We don't want you all to be prostitutes... Or transgender.</td>
-                  <td>conversation between friends</td>
-                  <td>person who is not transgender</td>
-                  <td>person who is transgender</td>
-                  <td>intent</td>
-                  <td>The speaker was trying to convey a stereotype about a certain group of people</td>
-                  <td>The speaker was trying to advise their friends</td>
-                </tr>
-               <tr>
-                  <td>Dark jokes are like a kid with cancer They never get old</td>
-                  <td>stand-up comedy set</td>
-                  <td>comedian</td>
-                  <td>general audience</td>
-                  <td>targeted group emotional reaction</td>
-                  <td>people with cancer could feel offended that their experiences are being used for humor; people with cancer <b>might</b> find the joke funny</td>
-                  <td>people with cancer <b>will</b> find the joke funny</td>
-                </tr>
-                <tr>
-                  <td>Your history teacher has to do what the zionist butt heads want them to do .</td>
-                  <td>conversation between friends</td>
-                  <td>man</td>
-                  <td>man</td>
-                  <td>targeted group</td>
-                  <td>Jews</td>
-                  <td>butt heads</td>
-                </tr>
-                <tr class="collapse show extra-rows">
-                  <td>Excuse me miss, are any of your bosses here?</td>
-                  <td>initial interaction in a workplace setting between customer and employee or bosss</td>
-                  <td>man</td>
-                  <td>woman</td>
-                  <td>power dynamic</td>
-                  <td>gender power differential between speaker and listener</td>
-                  <td>gender power dynamic</td>
-                </tr>
-                <tr class="collapse show extra-rows">
-                  <td>Excuse me miss, are any of your bosses here?</td>
-                  <td>initial interaction in a workplace setting between customer and employee or bosss</td>
-                  <td>man</td>
-                  <td>woman</td>
-                  <td>targeted group emotional reaction</td>
-                  <td>listener and women could feel angry, feel condescended to, angry that they didn't think a woman was boss</td>
-                  <td>listener may feel bad about not being able to answer the question</td>
-                </tr>
-                <tr class="collapse show extra-rows">
-                  <td>Excuse me miss, are any of your bosses here?</td>
-                  <td>initial interaction in a workplace setting between customer and employee or bosss</td>
-                  <td>man</td>
-                  <td>woman</td>
-                  <td>targeted group</td>
-                  <td>Listener,women</td>
-                  <td>men</td>
-                </tr>
-
-                <tr class="collapse show extra-rows">
-                  <td>We shouldn't lower our standards just to hire more women</td>
-                  <td>workplace hiring conversation</td>
-                  <td>man</td>
-                  <td>other coworkers</td>
-                  <td>targeted group cognitive reaction</td>
-                  <td>will feel less welcome and be less likely to want to work there, will want to avoid those kinds of jobs with men like the speaker</td>
-                  <td>will feel the standards are not high enough.</td>
-                </tr>
-                <tr class="collapse show extra-rows">
-                  <td>Why did jews do so well in class ? they went to concentration camps</td>
-                  <td>casual conversation between friends</td>
-                  <td>white person</td>
-                  <td>white person</td>
-                  <td>intent</td>
-                  <td>The speaker was trying to tell joke that might be offensive to jews</td>
-                  <td>The speaker was trying to convey a stereotype about a certain group of people</td>
-                </tr>
-                <tr class="collapse show extra-rows">
-                  <td>well today turned out to be a real fucking shitshow</td>
-                  <td>conversation between friends</td>
-                  <td>white person</td>
-                  <td>white person</td>
-                  <td>implication</td>
-                  <td>the speaker implies that today was a bad day for them</td>
-                  <td>the speaker is communicating that today was a bad day for people of color, and that it was not good for them </td>
-                </tr>
-
-              </tbody>
-            </table>
-            </div>
-            <a href=".extra-rows" class="collapsed" data-toggle="collapse" aria-expanded="false" aria-controls="collapseExample" onclick="expExamples();">
-              [-] less examples
-            </a>
-          </div>
-
-        </div>    -->
-
-      </div>
-
-    </div>
-
-
-
-    <br>
-    <div class="container" id="allQuestions">
-      <div class="row justify-content-center">
-        <div class="row justify-content-center" style="background-color: ghostwhite; border: 1px solid darkgrey; border-radius: 3px; width: 80%; margin-left: auto; margin-right: auto;">
-          <div class="col-12 text-center" style="margin: 1em 0;">
-            <div class="situation">
-            <em style="font-size: 18; color: #006cd8;  font-weight: bold;">Situational context</em>: <span id="speechContextInput">${speechContext}</span>
-            </div>
-          </div>
-          <div class="col-3">
-          <div class="speaker">
-            <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Speaker identity</em>: <span id="speakerInput">${speakerIdentity}</span>
-            </div>
-          </div>
-
-          <div class="col-6 imessage">
-            <p class="from-them">
-              ${statement}
-            </p>
-          </div>
-          <div class="col-3">
-            <div class="listener">
-            <em style="font-size: 15; color: #006cd8;  font-weight: bold;">Listener identity</em>: <span id="listenerInput">${listenerIdentity}</span>
-            </div>
-          </div>
-          <div class="col-12">
-            <label style="text-align: right; float: right; margin: 1em 0;">
-              <input id="dontUnderstand" name="dontUnderstand" type="checkbox" onclick="toggleDontUnderstandAck(this.checked)">I'm having a lot of trouble understanding this message.
-            </label>
-          </div>
-          <div class="col-12">
-            <label style="text-align: right; float: right; margin: 1em 0em;">&nbsp;seems implausible.</label>
-            <label style="text-align: right; float: right; margin: 1em 0.1em;">
-              <input id="dontFitStituation" name="dontFitStituation" type="checkbox" onclick="toggleDontUnderstandAck(this.checked)">listener identity
-            </label>
-            <label style="text-align: right; float: right; margin: 1em 0.1em;">
-              <input id="dontFitSidentity" name="dontFitSidentity" type="checkbox" onclick="toggleDontUnderstandAck(this.checked)">speaker identity /
-            </label>
-            <label style="text-align: right; float: right; margin: 1em 0.1em;">
-              <input id="dontFitLidentity" name="dontFitLidentity" type="checkbox" onclick="toggleDontUnderstandAck(this.checked)">situational context /
-            </label>
-            <label style="text-align: right; float: right; margin: 1em 0.3em;">The</label>
-          </div>
-        </div>
-        <div class="col-6 alert alert-warning" id="dontUnderstandAck" style="display: none;">
-          Thanks for letting us know that the message/context is hard to understand! Please still try your best to answer the questions below!
-        </div>
-        <div class="col-12 mt-5 mb-2">
-          <h4 style="font-style: italic;">Rate the explanations about the message.</h4>
-        </div>
-        <table class="table table-striped" id="inputTable">
-          <tr>
-            <td class="cb-teal" style="width: 15%;">Speaker intent</td>
-            <td class="cb-gray" style="width: 30%;">${intent}</td>
-            <td>
-              <label><input class="likelihood" type="radio" for="intentRating" name="intentRating" value=3 required> Very likely</label><br>
-              <label><input class="likelihood" type="radio" for="intentRating" name="intentRating" value=2> Somewhat likely</label><br>
-              <label><input class="likelihood" type="radio" for="intentRating" name="intentRating" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="intentRating" name="intentRating" value=0> Very unlikely</label></td>
-            <td>Suggest a better speaker intent:<br>
-            <input type="text" placeholder="The speaker was trying to..." name="intentSuggestion1"></td>
-          </tr>
-          <tr>
-            <td class="cb-purple">Target (group)</td>
-            <td class="cb-gray">${targetGroup}&nbsp;</td>
-            <td>
-              <label><input class="likelihood" type="radio" for="targetGroupRating" name="targetGroupRating" value=3 required> Very likely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupRating" name="targetGroupRating" value=2> Somewhat likely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupRating" name="targetGroupRating" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupRating" name="targetGroupRating" value=0> Very unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupRating" name="targetGroupRating" value=-1> None</label></td>
-            <td>Suggest a better targeted group:<br>
-            <input type="text" placeholder="..." name="targetGroupSuggestion1"></td>
-          </tr>
-          <tr>
-            <td class="cb-gold">Power dynamic</td>
-            <td class="cb-gray">${relevantPowerDynamics}</td>
-            <td>
-              <label><input class="likelihood" type="radio" for="powerDiffRating" name="powerDiffRating" value=3 required> Very likely</label><br>
-              <label><input class="likelihood" type="radio" for="powerDiffRating" name="powerDiffRating" value=2> Somewhat likely</label><br>
-              <label><input class="likelihood" type="radio" for="powerDiffRating" name="powerDiffRating" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="powerDiffRating" name="powerDiffRating" value=0> Very unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="powerDiffRating" name="powerDiffRating" value=-1> None</label><br>
-            </td>
-            <td>Suggest a better relevant power difference:<br>
-            <input type="text" name="powerDiffSuggestion1" placeholder="power difference between..."></td>
-          </tr>
-          <tr>
-            <td class="cb-orange">Implication</td>
-            <td class="cb-gray">${implication}&nbsp;</td>
-            <td>
-              <label><input class="likelihood" type="radio" for="implicationRating" name="implicationRating" value=3 required> Very likely</label><br>
-              <label><input class="likelihood" type="radio" for="implicationRating" name="implicationRating" value=2> Somewhat likely</label><br>
-              <label><input class="likelihood" type="radio" for="implicationRating" name="implicationRating" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="implicationRating" name="implicationRating" value=0> Very unlikely</label>
-            </td>
-            <td>Suggest a better implication or stereotype:<br>
-            <input type="text" name="implicationSuggestion1" placeholder="implies that ..."></td>
-          </tr>
-         <tr>
-            <td class="cb-green">Target emotional reaction</td>
-            <td class="cb-gray">${targetGroupEmotionalReaction}</td>
-            <td>
-              <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating" name="targetGroupEmoReactRating" value=3 required> Very likely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating" name="targetGroupEmoReactRating" value=2> Somewhat likely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating" name="targetGroupEmoReactRating" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating" name="targetGroupEmoReactRating" value=0> Very unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupEmoReactRating" name="targetGroupEmoReactRating" value=-1> None</label><br>
-            </td>
-            <td>Suggest a better reaction:<br>
-            <input type="text" name="targetGroupEmoReactSuggestion1" placeholder="target would likely feel..."></td>
-          </tr>
-          <tr>
-            <td class="cb-brown">Effect on target</td>
-            <td class="cb-gray">${targetGroupCognitiveReaction}</td>
-            <td>
-              <label><input class="likelihood" type="radio" for="targetGroupCogReactRating" name="targetGroupCogReactRating" value=3 required> Very likely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupCogReactRating" name="targetGroupCogReactRating" value=2> Somewhat likely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupCogReactRating" name="targetGroupCogReactRating" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupCogReactRating" name="targetGroupCogReactRating" value=0> Very unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="targetGroupCogReactRating" name="targetGroupCogReactRating" value=-1> None</label>
-            </td>
-            <td>Suggest a better effect:<br>
-            <input type="text" name="targetGroupCogReactSuggestion1" placeholder="the effect on the target will be..."></td>
-          </tr>
-          <tr>
-            <td class="cb-pink">Type of offensiveness&nbsp;</td>
-            <td class="cb-gray">${offensiveness}</td>
-            <td>
-              <label><input class="likelihood" type="radio" for="offensivenessRating" name="offensivenessRating" value=3 required> Very likely</label><br>
-              <label><input class="likelihood" type="radio" for="offensivenessRating" name="offensivenessRating" value=2> Somewhat likely</label><br>
-              <label><input class="likelihood" type="radio" for="offensivenessRating" name="offensivenessRating" value=1> Somewhat unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="offensivenessRating" name="offensivenessRating" value=0> Very unlikely</label><br>
-              <label><input class="likelihood" type="radio" for="offensivenessRating" name="offensivenessRating" value=-1> None/Harmless</label>
-            </td>
-            <td>Suggest a better  <a href="#" data-toggle="tooltip" data-placement="right"
-                    data-html="true"
-                    title="<p style='text-align:left'>
-                    <ul style='text-align:left;'>
-                    <li>profanity</li>
-                    <li>microaggression</li>
-                    <li>offensive generalization</li>
-                    <li>stereotype</li>
-                    <li>sexism</li>
-                    <li>racism, and etc.</li>
-                    </ul> Feel free to come up with other types you see fit!
-                    </p>
-                    ">offensiveness</a>:
-              <br>
-              <!-- <select class="form-select" id="inputGroupSelect01">
-                <option selected>Choose...</option>
-                <option value="1">general offensiveness</option>
-                <option value="2">Two</option>
-                <option value="3">None of these above </option>
-              </select> -->
-
-              <input type="text" name="offensivenessSuggestion1" placeholder="..."></td>
-          </tr>
-        </table>
-      </div>
-    </div>
-
-    <div class="row justify-content-center">
-      <div class="col-9" id="commentSection" style="display: inline-block;text-align: center;">
-        <p style="font-size:10pt;margin-top: 50px;">
-          Optional Feedback: Thanks for filling out the questions above!
-          If something about the hit was unclear, please either leave a comment in the box below!
-          We would like to make this HIT easier for future workers, so we really appreciate feedback though it is optional.
-          <br>
-          If you have concerns or questions, please email us!
-        </p>
-        <textarea style="margin-left:10px;margin-top:10px;width: 95%;" rows="2" name="commentbox"></textarea>
-        <br><br>
-        <center>
-          <div class="alert alert-danger" id="submitAlert" style="display: none;">
-            Whoops you missed some questions!
-            <br>
-            Note: if the submit button is disabled and you're confident this is an error, please screenshot your answers and the console output (Ctrl+Shift+J or Cmd+Shift+J).
-          </div>
-          <input type="submit" id="submitButton" class="btn btn-primary" value="Submit Hit!">
-        </center>
-      </div>
-    </div>
+          </div>    --></div>
   </div>
-</fieldset>
-</section>
+  &nbsp;
 
-<script>
-  var targ, btngroup, event, selectedText, aspectDiv, workerInfo;
-  var attentionChecks = ["first","second", "third", "fourth", "fifth"];
-  $(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-  })
-  function scrollToAnchor(aid){
-    console.log(aid);
-    var aTag = $(aid);
-    $('html,body').animate({scrollTop: aTag.offset().top},'slow');
-  }
-  $("label.btn-checkbox>input[type='checkbox']").each(function(ix,e){
-    var value = $(e).parent().prop("innerText").trim();
-    e.value = value == "" ? "_other_" : value;
-  });
+  <div class="container" id="allQuestions">
+  <div class="row justify-content-center">
+  <div class="row justify-content-center" style="background-color: ghostwhite; border: 1px solid darkgrey; border-radius: 3px; width: 80%; margin-left: auto; margin-right: auto;">
+  <div class="col-12 text-center" style="margin: 1em 0;">
+  <div class="situation"><em style="font-size: 18; color: #006cd8;  font-weight: bold;">Situational context</em>: <span id="speechContextInput">${speechContext}</span></div>
+  </div>
 
-  /* Make the textbox (suggestion) required for the value in a certain range */
-  $(".likelihood").on("click",function(e){
-    event = e;
-    var num = e.target.name.slice(-1)
-    var dim = e.target.name.replace(/Rating\d/,"")
-    var val = parseInt($("input[name='"+dim+"Rating"+num+"']:checked").prop("value"));
-    console.log(dim,val);
-    if (val < 2 && val > -1)
-      $("input[name='"+dim+"Suggestion"+num+"']").prop("required","true");
-    else
-      $("input[name='"+dim+"Suggestion"+num+"']").prop("required","");
-  })
-  $(".btn-checkbox").on("click",function(e){
-    targ = e.target;
-    aspectDiv = $(targ).closest(".card-body").find(".aspects");
+  <div class="col-3">
+  <div class="speaker"><em style="font-size: 15; color: #006cd8;  font-weight: bold;">Speaker identity</em>: <span id="speakerInput">${speakerIdentity}</span></div>
+  </div>
 
-    /* Highlight button if checkbox is clicked */
-    if(e.target.tagName == "INPUT"){
-      if (targ.checked)
-        $(targ).parent().addClass("active");
+  <div class="col-6 imessage">
+  <p class="from-them">${statement}</p>
+  </div>
+
+  <div class="col-3">
+  <div class="listener"><em style="font-size: 15; color: #006cd8;  font-weight: bold;">Listener identity</em>: <span id="listenerInput">${listenerIdentity}</span></div>
+  </div>
+
+  <div class="col-12"><label style="text-align: right; float: right; margin: 1em 0;"><input id="dontUnderstand" name="dontUnderstand" onclick="toggleDontUnderstandAck(this.checked)" type="checkbox" />I&#39;m having a lot of trouble understanding this message. </label></div>
+
+  <div class="col-12"><label style="text-align: right; float: right; margin: 1em 0em;">&nbsp;seems implausible.</label> <label style="text-align: right; float: right; margin: 1em 0.1em;"> <input id="dontFitStituation" name="dontFitStituation" onclick="toggleDontUnderstandAck(this.checked)" type="checkbox" />listener identity </label> <label style="text-align: right; float: right; margin: 1em 0.1em;"> <input id="dontFitSidentity" name="dontFitSidentity" onclick="toggleDontUnderstandAck(this.checked)" type="checkbox" />speaker identity / </label> <label style="text-align: right; float: right; margin: 1em 0.1em;"> <input id="dontFitLidentity" name="dontFitLidentity" onclick="toggleDontUnderstandAck(this.checked)" type="checkbox" />situational context / </label> <label style="text-align: right; float: right; margin: 1em 0.3em;">The</label></div>
+  </div>
+
+  <div class="col-6 alert alert-warning" id="dontUnderstandAck" style="display: none;">Thanks for letting us know that the message/context is hard to understand! Please still try your best to answer the questions below!</div>
+
+  <div class="col-12 mt-5 mb-2">
+  <h4 style="font-style: italic;">Rate the explanations about the message.</h4>
+  </div>
+
+  <table class="table table-striped" id="inputTable">
+    <tbody>
+      <tr>
+        <td class="cb-teal" style="width: 15%;">Speaker intent</td>
+        <td class="cb-gray" style="width: 30%;">${intent}</td>
+        <td><label><input class="likelihood" for="intentRating1" name="intentRating1" required="" type="radio" value="3" /> Very likely</label><br />
+        <label><input class="likelihood" for="intentRating1" name="intentRating1" type="radio" value="2" /> Somewhat likely</label><br />
+        <label><input class="likelihood" for="intentRating1" name="intentRating1" type="radio" value="1" /> Somewhat unlikely</label><br />
+        <label><input class="likelihood" for="intentRating1" name="intentRating1" type="radio" value="0" /> Very unlikely</label></td>
+        <td>Suggest a better speaker intent:<br />
+        <input name="intentSuggestion1" placeholder="The speaker was trying to..." type="text" /></td>
+      </tr>
+      <tr>
+        <td class="cb-purple">Target (group)</td>
+        <td class="cb-gray">${targetGroup}&nbsp;</td>
+        <td><label><input class="likelihood" for="targetGroupRating1" name="targetGroupRating1" required="" type="radio" value="3" /> Very likely</label><br />
+        <label><input class="likelihood" for="targetGroupRating1" name="targetGroupRating1" type="radio" value="2" /> Somewhat likely</label><br />
+        <label><input class="likelihood" for="targetGroupRating1" name="targetGroupRating1" type="radio" value="1" /> Somewhat unlikely</label><br />
+        <label><input class="likelihood" for="targetGroupRating1" name="targetGroupRating1" type="radio" value="0" /> Very unlikely</label><br />
+        <label><input class="likelihood" for="targetGroupRating1" name="targetGroupRating1" type="radio" value="-1" /> None</label></td>
+        <td>Suggest a better targeted group:<br />
+        <input name="targetGroupSuggestion1" placeholder="..." type="text" /></td>
+      </tr>
+      <tr>
+        <td class="cb-gold">Power dynamic</td>
+        <td class="cb-gray">${relevantPowerDynamics}</td>
+        <td><label><input class="likelihood" for="powerDiffRating1" name="powerDiffRating1" required="" type="radio" value="3" /> Very likely</label><br />
+        <label><input class="likelihood" for="powerDiffRating1" name="powerDiffRating1" type="radio" value="2" /> Somewhat likely</label><br />
+        <label><input class="likelihood" for="powerDiffRating1" name="powerDiffRating1" type="radio" value="1" /> Somewhat unlikely</label><br />
+        <label><input class="likelihood" for="powerDiffRating1" name="powerDiffRating1" type="radio" value="0" /> Very unlikely</label><br />
+        <label><input class="likelihood" for="powerDiffRating1" name="powerDiffRating1" type="radio" value="-1" /> None</label></td>
+        <td>Suggest a better relevant power difference:<br />
+        <input name="powerDiffSuggestion1" placeholder="power difference between..." type="text" /></td>
+      </tr>
+      <tr>
+        <td class="cb-orange">Implication</td>
+        <td class="cb-gray">${implication}&nbsp;</td>
+        <td><label><input class="likelihood" for="implicationRating1" name="implicationRating1" required="" type="radio" value="3" /> Very likely</label><br />
+        <label><input class="likelihood" for="implicationRating1" name="implicationRating1" type="radio" value="2" /> Somewhat likely</label><br />
+        <label><input class="likelihood" for="implicationRating1" name="implicationRating1" type="radio" value="1" /> Somewhat unlikely</label><br />
+        <label><input class="likelihood" for="implicationRating1" name="implicationRating1" type="radio" value="0" /> Very unlikely</label></td>
+        <td>Suggest a better implication or stereotype:<br />
+        <input name="implicationSuggestion1" placeholder="implies that ..." type="text" /></td>
+      </tr>
+      <tr>
+        <td class="cb-green">Target emotional reaction</td>
+        <td class="cb-gray">${targetGroupEmotionalReaction}</td>
+        <td><label><input class="likelihood" for="targetGroupEmoReactRating1" name="targetGroupEmoReactRating1" required="" type="radio" value="3" /> Very likely</label><br />
+        <label><input class="likelihood" for="targetGroupEmoReactRating1" name="targetGroupEmoReactRating1" type="radio" value="2" /> Somewhat likely</label><br />
+        <label><input class="likelihood" for="targetGroupEmoReactRating1" name="targetGroupEmoReactRating1" type="radio" value="1" /> Somewhat unlikely</label><br />
+        <label><input class="likelihood" for="targetGroupEmoReactRating1" name="targetGroupEmoReactRating1" type="radio" value="0" /> Very unlikely</label><br />
+        <label><input class="likelihood" for="targetGroupEmoReactRating1" name="targetGroupEmoReactRating1" type="radio" value="-1" /> None</label></td>
+        <td>Suggest a better reaction:<br />
+        <input name="targetGroupEmoReactSuggestion1" placeholder="target would likely feel..." type="text" /></td>
+      </tr>
+      <tr>
+        <td class="cb-brown">Effect on target</td>
+        <td class="cb-gray">${targetGroupCognitiveReaction}</td>
+        <td><label><input class="likelihood" for="targetGroupCogReactRating1" name="targetGroupCogReactRating1" required="" type="radio" value="3" /> Very likely</label><br />
+        <label><input class="likelihood" for="targetGroupCogReactRating1" name="targetGroupCogReactRating1" type="radio" value="2" /> Somewhat likely</label><br />
+        <label><input class="likelihood" for="targetGroupCogReactRating1" name="targetGroupCogReactRating1" type="radio" value="1" /> Somewhat unlikely</label><br />
+        <label><input class="likelihood" for="targetGroupCogReactRating1" name="targetGroupCogReactRating1" type="radio" value="0" /> Very unlikely</label><br />
+        <label><input class="likelihood" for="targetGroupCogReactRating1" name="targetGroupCogReactRating1" type="radio" value="-1" /> None</label></td>
+        <td>Suggest a better effect:<br />
+        <input name="targetGroupCogReactSuggestion1" placeholder="the effect on the target will be..." type="text" /></td>
+      </tr>
+      <tr>
+        <td class="cb-pink">Type of offensiveness&nbsp;</td>
+        <td class="cb-gray">${offensiveness}</td>
+        <td><label><input class="likelihood" for="offensivenessRating1" name="offensivenessRating1" required="" type="radio" value="3" /> Very likely</label><br />
+        <label><input class="likelihood" for="offensivenessRating1" name="offensivenessRating1" type="radio" value="2" /> Somewhat likely</label><br />
+        <label><input class="likelihood" for="offensivenessRating1" name="offensivenessRating1" type="radio" value="1" /> Somewhat unlikely</label><br />
+        <label><input class="likelihood" for="offensivenessRating1" name="offensivenessRating1" type="radio" value="0" /> Very unlikely</label><br />
+        <label><input class="likelihood" for="offensivenessRating1" name="offensivenessRating1" type="radio" value="-1" /> None/Harmless</label></td>
+        <td>Suggest a better <a data-html="true" data-placement="right" data-toggle="tooltip" href="#" title="&lt;p style='text-align:left'&gt;
+                      &lt;ul style='text-align:left;'&gt;
+                      &lt;li&gt;profanity&lt;/li&gt;
+                      &lt;li&gt;microaggression&lt;/li&gt;
+                      &lt;li&gt;offensive generalization&lt;/li&gt;
+                      &lt;li&gt;stereotype&lt;/li&gt;
+                      &lt;li&gt;sexism&lt;/li&gt;
+                      &lt;li&gt;racism, and etc.&lt;/li&gt;
+                      &lt;/ul&gt; Feel free to come up with other types you see fit!
+                      &lt;/p&gt;
+                      ">offensiveness</a>:<br />
+        <!-- <select class="form-select" id="inputGroupSelect01">
+                  <option selected>Choose...</option>
+                  <option value="1">general offensiveness</option>
+                  <option value="2">Two</option>
+                  <option value="3">None of these above </option>
+                </select> --> <input name="offensivenessSuggestion1" placeholder="..." type="text" /></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  </div>
+
+  <div class="row justify-content-center">
+  <div class="col-9" id="commentSection" style="display: inline-block;text-align: center;">
+  <p style="font-size:10pt;margin-top: 50px;">Optional Feedback: Thanks for filling out the questions above! If something about the hit was unclear, please either leave a comment in the box below! We would like to make this HIT easier for future workers, so we really appreciate feedback though it is optional.<br />
+  If you have concerns or questions, please email us!</p>
+  <textarea name="commentbox" rows="2" style="margin-left:10px;margin-top:10px;width: 95%;"></textarea><br />
+  &nbsp;
+  <center>
+  <div class="alert alert-danger" id="submitAlert" style="display: none;">Whoops you missed some questions!<br />
+  Note: if the submit button is disabled and you&#39;re confident this is an error, please screenshot your answers and the console output (Ctrl+Shift+J or Cmd+Shift+J).</div>
+  <input class="btn btn-primary" id="submitButton" type="submit" value="Submit Hit!" /></center>
+  </div>
+  </div>
+  </fieldset>
+  </section>
+  <script>
+    var targ, btngroup, event, selectedText, aspectDiv, workerInfo;
+    var attentionChecks = ["first","second", "third", "fourth", "fifth"];
+    $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+    })
+    function scrollToAnchor(aid){
+      console.log(aid);
+      var aTag = $(aid);
+      $('html,body').animate({scrollTop: aTag.offset().top},'slow');
+    }
+    $("label.btn-checkbox>input[type='checkbox']").each(function(ix,e){
+      var value = $(e).parent().prop("innerText").trim();
+      e.value = value == "" ? "_other_" : value;
+    });
+
+    /* Make the textbox (suggestion) required for the value in a certain range */
+    $(".likelihood").on("click",function(e){
+      event = e;
+      var num = e.target.name.slice(-1)
+      var dim = e.target.name.replace(/Rating\d/,"")
+      var val = parseInt($("input[name='"+dim+"Rating"+num+"']:checked").prop("value"));
+      console.log(dim,val);
+      if (val < 2 && val > -1)
+        $("input[name='"+dim+"Suggestion"+num+"']").prop("required","true");
       else
-        $(targ).parent().removeClass("active");
-    }
+        $("input[name='"+dim+"Suggestion"+num+"']").prop("required","");
+    })
+    $(".btn-checkbox").on("click",function(e){
+      targ = e.target;
+      aspectDiv = $(targ).closest(".card-body").find(".aspects");
 
-    /* Make textboxes required if any checkbox is checked */
-    if ($(targ).closest(".btn-group-vertical").find("input:checkbox:checked").length > 0) {
-      aspectDiv.show();
-      aspectDiv.find("input[type='text']").each(function (i,e){
-        if (i>1)
-          return;
-        $(e).prop("required","true");
-      });
-    } else {
-      aspectDiv.hide();
-      aspectDiv.find("input[type='text']").each(function (i,e){
-        $(e).prop("value","");
-        if (i>1)
-          return;
-        $(e).prop("required","");
-      });
-    }
-    alertMinorityQs("yes");
-  });
-  $('.collapse-checkbox').on('hide.bs.collapse', function (e) {
-  /* If any checkboxes are checked, this makes sure the buttons don't disappear */
-  btngroup = e.target;
-  if ($(btngroup).find("input:checkbox:checked").length > 0)
-    e.preventDefault();
-  })
-  $(".othercheckbox").on("click",function(e){
-    var checked = $(e.target).prop("checked")
-    $(e.target).next().prop("disabled",!checked);
-    $(e.target).next().prop("required",checked? "true": "");
-  });
-  $("input[type='text']").prop("pattern",".{0}|.{3,}").prop("title","Minimum 3 characters");
+      /* Highlight button if checkbox is clicked */
+      if(e.target.tagName == "INPUT"){
+        if (targ.checked)
+          $(targ).parent().addClass("active");
+        else
+          $(targ).parent().removeClass("active");
+      }
+
+      /* Make textboxes required if any checkbox is checked */
+      if ($(targ).closest(".btn-group-vertical").find("input:checkbox:checked").length > 0) {
+        aspectDiv.show();
+        aspectDiv.find("input[type='text']").each(function (i,e){
+          if (i>1)
+            return;
+          $(e).prop("required","true");
+        });
+      } else {
+        aspectDiv.hide();
+        aspectDiv.find("input[type='text']").each(function (i,e){
+          $(e).prop("value","");
+          if (i>1)
+            return;
+          $(e).prop("required","");
+        });
+      }
+      alertMinorityQs("yes");
+    });
+    $('.collapse-checkbox').on('hide.bs.collapse', function (e) {
+    /* If any checkboxes are checked, this makes sure the buttons don't disappear */
+    btngroup = e.target;
+    if ($(btngroup).find("input:checkbox:checked").length > 0)
+      e.preventDefault();
+    })
+    $(".othercheckbox").on("click",function(e){
+      var checked = $(e.target).prop("checked")
+      $(e.target).next().prop("disabled",!checked);
+      $(e.target).next().prop("required",checked? "true": "");
+    });
+    $("input[type='text']").prop("pattern",".{0}|.{3,}").prop("title","Minimum 3 characters");
 
 
-  $("button.btn-link").on("click",function(e){
-    //Not sure why I need this, but otherwise accordion submits immediately
-    e.preventDefault();
-    event = e;
-    //console.log(e.target);
-  });
-  $("#submitButton").on("click",function(e){
-    var val = validate();
-    if (!val) {
+    $("button.btn-link").on("click",function(e){
+      //Not sure why I need this, but otherwise accordion submits immediately
       e.preventDefault();
       event = e;
-      $("#submitAlert").show();
-      setTimeout(function(){
-        $("#submitAlert").hide(300);
-      }, 10000);
-    } else {
-      // sendWorkerInfo();
-      $("#clickedSubmitTime").val((new Date()).getTime());
-      console.log("Submitted");
-    }
-  });
-  function layout(){
-    $("#postText").each(function (i,e){
-      ee = e;
-      //e.innerText = renderEmoji(e.innerText);
+      //console.log(e.target);
     });
-    var attnIx = Math.floor(Math.random()*attentionChecks.length);
-    console.log("Attention check "+(attnIx+1)+" "+attentionChecks[attnIx])
-    $("#attentionCheckInstr").text(attentionChecks[attnIx]);
-    $("#attentionCheckCorrect").val(attnIx+1);
-  }
-  function getURLParams(){
-    var search = location.search;
-    if (location.hostname === "homes.cs.washington.edu"){
-      search = "?workerId=A1TW2IIFTWJIB2&hitId=Testing";
-      console.log(search)
-    }
-
-    search = search.substring(1);
-    if (search == ""){
-      console.log("No search params "+location.href);
-      return {};
-    }
-    var params = JSON.parse('{"' + search.replace(/&/g, '","').replace(/=/g,'":"') + '"}', function(key, value) { return key===""?value:decodeURIComponent(value) });
-
-    params["HITId"] = params["hitId"];
-    params["HITType"] = "contextSBF-validation";
-    console.log(params);
-    return params;
-  }
-  function toggleConsent(checked){
-    if (checked){
-      $("#actualTask").show();
-      $("#consentMessage").hide();
-      $("#clickedConsentTime").val((new Date()).getTime());
-      scrollToAnchor("#actualTask");
-    } else {
-      $("#actualTask").hide();
-      $("#consentMessage").show();
-    }
-  }
-  function toggleDontUnderstandAck(checked){
-    if(checked)
-      $("#dontUnderstandAck").show()
-    else
-      $("#dontUnderstandAck").hide()
-  }
-  function prepSQLparamsCheck(urlParams){
-    var out="";
-    out += "tableName="+"workerDemographics";
-    out += "&workerId="+urlParams["workerId"];
-    out += "&HITType="+urlParams["HITType"];
-    out += "&assignmentId="+urlParams["assignmentId"];
-    out += "&HITId="+urlParams["HITId"];
-    return out;
-  }
-  function prepSQLparamsStore(){
-    var out="";
-    out += "tableName="+"workerDemographics";
-    out += "&gender="+$("#annotatorGender").val();
-    out += "&age="+$("#annotatorAge").val();
-    out += "&race="+$("#annotatorRace").val();
-    out += "&politics="+$('input[name="annotatorPolitics"]:checked').val();
-    out += "&otherMinority="+encodeURIComponent($("#annotatorMinority").val());
-
-
-    return out;
-  }
-
-  function validate(){
-
-    valid = $("input:invalid").length == 0;
-    console.log("########## VALIDATING #########\nvalid? "+valid);
-    $("input:invalid").each(function (i,e){
-      console.log(e);
+    $("#submitButton").on("click",function(e){
+      var val = validate();
+      if (!val) {
+        e.preventDefault();
+        event = e;
+        $("#submitAlert").show();
+        setTimeout(function(){
+          $("#submitAlert").hide(300);
+        }, 10000);
+      } else {
+        // sendWorkerInfo();
+        $("#clickedSubmitTime").val((new Date()).getTime());
+        console.log("Submitted");
+      }
     });
-    return valid;
-  }
-  function alertMinorityQs(val){
-    if (val == "yes" && $(".btn-checkbox>input:checked").length == 0) {
-      //$("#dummyMinority").prop("required","true");
-      $("#alertQminority").show();
-    } else {
-      //$("#dummyMinority").prop("required","");
-      $("#alertQminority").hide();
+    function layout(){
+      $("#postText").each(function (i,e){
+        ee = e;
+        //e.innerText = renderEmoji(e.innerText);
+      });
+      var attnIx = Math.floor(Math.random()*attentionChecks.length);
+      console.log("Attention check "+(attnIx+1)+" "+attentionChecks[attnIx])
+      $("#attentionCheckInstr").text(attentionChecks[attnIx]);
+      $("#attentionCheckCorrect").val(attnIx+1);
     }
-  }
-  var rows;
-  function expRows(){
-    rows = $("tr.extra-rows");
-    $("a:contains('examples')").each(function(ix,link){
-      if (rows.hasClass("show"))
-        link.innerText = "[+] more examples";
+    function getURLParams(){
+      var search = location.search;
+      if (location.hostname === "homes.cs.washington.edu"){
+        search = "?workerId=A1TW2IIFTWJIB2&hitId=Testing";
+        console.log(search)
+      }
+
+      search = search.substring(1);
+      if (search == ""){
+        console.log("No search params "+location.href);
+        return {};
+      }
+      var params = JSON.parse('{"' + search.replace(/&/g, '","').replace(/=/g,'":"') + '"}', function(key, value) { return key===""?value:decodeURIComponent(value) });
+
+      params["HITId"] = params["hitId"];
+      params["HITType"] = "contextSBF-validation";
+      console.log(params);
+      return params;
+    }
+    function toggleConsent(checked){
+      if (checked){
+        $("#actualTask").show();
+        $("#consentMessage").hide();
+        $("#clickedConsentTime").val((new Date()).getTime());
+        scrollToAnchor("#actualTask");
+      } else {
+        $("#actualTask").hide();
+        $("#consentMessage").show();
+      }
+    }
+    function toggleDontUnderstandAck(checked){
+      if(checked)
+        $("#dontUnderstandAck").show()
       else
-        link.innerText = "[-] less examples";
-      console.log(link);
-    })
+        $("#dontUnderstandAck").hide()
+    }
+    function prepSQLparamsCheck(urlParams){
+      var out="";
+      out += "tableName="+"workerDemographics";
+      out += "&workerId="+urlParams["workerId"];
+      out += "&HITType="+urlParams["HITType"];
+      out += "&assignmentId="+urlParams["assignmentId"];
+      out += "&HITId="+urlParams["HITId"];
+      return out;
+    }
+    function prepSQLparamsStore(){
+      var out="";
+      out += "tableName="+"workerDemographics";
+      out += "&gender="+$("#annotatorGender").val();
+      out += "&age="+$("#annotatorAge").val();
+      out += "&race="+$("#annotatorRace").val();
+      out += "&politics="+$('input[name="annotatorPolitics"]:checked').val();
+      out += "&otherMinority="+encodeURIComponent($("#annotatorMinority").val());
+
+
+      return out;
+    }
+
+    function validate(){
+
+      valid = $("input:invalid").length == 0;
+      console.log("########## VALIDATING #########\nvalid? "+valid);
+      $("input:invalid").each(function (i,e){
+        console.log(e);
+      });
+      return valid;
+    }
+    function alertMinorityQs(val){
+      if (val == "yes" && $(".btn-checkbox>input:checked").length == 0) {
+        //$("#dummyMinority").prop("required","true");
+        $("#alertQminority").show();
+      } else {
+        //$("#dummyMinority").prop("required","");
+        $("#alertQminority").hide();
+      }
+    }
+    var rows;
+    function expRows(){
+      rows = $("tr.extra-rows");
+      $("a:contains('examples')").each(function(ix,link){
+        if (rows.hasClass("show"))
+          link.innerText = "[+] more examples";
+        else
+          link.innerText = "[-] less examples";
+        console.log(link);
+      })
+    }
+
+    var divs;
+    function expExamples(){
+      divs = $("div.extra-exs");
+      $("a:contains('examples')").each(function(ix,link){
+        if (divs.hasClass("show"))
+          link.innerText = "[+] more examples";
+        else
+          link.innerText = "[-] less examples";
+        console.log(link);
+      })
+    }
+
+  </script>
+  <style type="text/css">#examples-table {
+    /*border-style: none solid none solid;*/
+    border-width: 1px;
+    border-color: #dee2e6;
+    border-radius: 5px;
+    padding: 2px;
+  }
+  #examples-table td {
+    border-top: #dee2e6;
+    border-bottom: #dee2e6;
+    border-left: #ffffff;
+    border-right: #ffffff;
+    border-style: solid;
+    border-width: 1px;
+    padding: 2px;
   }
 
-  var divs;
-  function expExamples(){
-    divs = $("div.extra-exs");
-    $("a:contains('examples')").each(function(ix,link){
-      if (divs.hasClass("show"))
-        link.innerText = "[+] more examples";
-      else
-        link.innerText = "[-] less examples";
-      console.log(link);
-    })
+  #inputTable {
+    border:1px solid #b3adad;
+    border-collapse:collapse;
+    padding:5px;
+  }
+  #inputTable td {
+    border:1px solid #b3adad;
+    padding:5px;
   }
 
-</script>
-<style type="text/css">
-
-#examples-table {
-  /*border-style: none solid none solid;*/
-  border-width: 1px;
-  border-color: #dee2e6;
-  border-radius: 5px;
-  padding: 2px;
-}
-#examples-table td {
-  border-top: #dee2e6;
-  border-bottom: #dee2e6;
-  border-left: #ffffff;
-  border-right: #ffffff;
-  border-style: solid;
-  border-width: 1px;
-  padding: 2px;
-}
-
-#inputTable {
-  border:1px solid #b3adad;
-  border-collapse:collapse;
-  padding:5px;
-}
-#inputTable td {
-  border:1px solid #b3adad;
-  padding:5px;
-}
-
-.card-header-accordion{
-  padding: 0px 10px;
-}
-body, td, .btn {
-  /*font-size:0.85rem;*/
-}
-label {
-  margin-bottom: 0px;
-}
-.story-excerpt {
-  margin: 40px auto;
-  min-width: 500px;
-  border:2px #333333;
-  background-color: #f2f2f2;
-  border-style: solid;
-  padding-right:10px;
-  padding-left:10px;
-  display:table;
-  border-radius:15px;
-}
-.story-excerpt-example {
-  border: 1px solid #666666;
-  background-color: #f2f2f2;
-  border-radius: 3px;
-  padding: 3px;
-  display: inline-block;
-  margin: 10px;
-}
-span.numbering {
-  font-weight: bold;
-  margin-right: .5em;
-}
-#introQuestion>div>label>input,
-#intentQuestion>div>label>input {
-  vertical-align: middle;
-}
-.prefilled-message{
-  font-style: italic;
-}
-
-#detailed-instructions>p {
-  margin-bottom: 0px;
-}
-span.instrQuestion {
-  background-color: #f2f2f2;
-  font-style: italic;
-  font-size: .9rem;
-  margin: 5px 0 3px -15px;
-  padding: 0 .3rem 0 .3rem;
-  display: inline-block;
-}
-span.instrDescription {
-  font-size: .9rem;
-  margin-left: -15px;
-}
-label > input[type='text'] {
-  width: 90%;
-}
-input[type='text'] {
-  width: 300px;
-}
-input[type='text'].opt-target {
-  background-color: #f8f8f8;
-}
-
-input[type="text"]:invalid {
-  color: #a94442;
-  background-color: #f2dede;
-}
-
-textarea#postText {
-  margin-left: 20px;
-  font-size: 12pt;
-  width: auto;
-  background-color: transparent;
-  overflow: auto;
-  resize: none;
-}
-
-.btn-checkbox, .btn-checkbox-two {
-  .btn-light;
-  color: black;
-  text-align: left;
-  margin: 0px;
-  background-color: #e9ecef;
-  border-color: #d1d4d7;
-}
-
-.btn-checkbox.active,
-.btn-checkbox:active,
-.btn-checkbox:hover {
-  background-color: #babcbf;
-  border-color: #8b8d8f;
-}
-
-.btn-checkbox-two.active,
-.btn-checkbox-two:active,
-.btn-checkbox-two:hover {
-  background-color: #babcbf;
-  border-color: #8b8d8f;
-}
-
-.btn-group-vertical {
-  max-width: 400px;
-  /*margin-right: 10px;*/
-}
-#introQuestion,
-#minorityQuestions,
-#demogQuestions {
-  margin-bottom: 10px;
-  margin-top: 10px;
-}
-.autocomplete-suggestions {
-  border: 1px solid #999;
-  background: #FFF;
-  overflow: auto;
-}
-#dummyMinority {
-  /*opacity:0;*/
-  width: 0px;
-}
-.autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; }
-.autocomplete-selected { background: #F0F0F0; }
-.autocomplete-suggestions strong { font-weight: normal; color: #3399FF; }
-.autocomplete-group { padding: 2px 5px; }
-.autocomplete-group strong { display: block; border-bottom: 1px solid #000; }
-
-input[type='checkbox'] {
-  /* All <input> elements that are immediate children of a class="btn-checkbox" */
-  margin-right: 5px;
-}
-ul {
-  padding-left: 30px;
-  margin-bottom: 10px;
-}
-fieldset {
-  padding: 10px;
-  background:#fbfbfb;
-  border-radius:5px;
-  margin-bottom:5px;
-}
-.lickert>label{
+  .card-header-accordion{
+    padding: 0px 10px;
+  }
+  body, td, .btn {
+    /*font-size:0.85rem;*/
+  }
+  label {
+    margin-bottom: 0px;
+  }
+  .story-excerpt {
+    margin: 40px auto;
+    min-width: 500px;
+    border:2px #333333;
+    background-color: #f2f2f2;
+    border-style: solid;
+    padding-right:10px;
+    padding-left:10px;
+    display:table;
+    border-radius:15px;
+  }
+  .story-excerpt-example {
+    border: 1px solid #666666;
+    background-color: #f2f2f2;
+    border-radius: 3px;
+    padding: 3px;
+    display: inline-block;
+    margin: 10px;
+  }
+  span.numbering {
+    font-weight: bold;
+    margin-right: .5em;
+  }
+  #introQuestion>div>label>input,
+  #intentQuestion>div>label>input {
+    vertical-align: middle;
+  }
+  .prefilled-message{
     font-style: italic;
   }
 
-.cb-teal {
-  color: #1b9e77;
-  font-weight: bold;
+  #detailed-instructions>p {
+    margin-bottom: 0px;
+  }
+  span.instrQuestion {
+    background-color: #f2f2f2;
+    font-style: italic;
+    font-size: .9rem;
+    margin: 5px 0 3px -15px;
+    padding: 0 .3rem 0 .3rem;
+    display: inline-block;
+  }
+  span.instrDescription {
+    font-size: .9rem;
+    margin-left: -15px;
+  }
+  label > input[type='text'] {
+    width: 90%;
+  }
+  input[type='text'] {
+    width: 300px;
+  }
+  input[type='text'].opt-target {
+    background-color: #f8f8f8;
+  }
 
-}
-.cb-orange {
-  color: #d95f02;
-  font-weight: bold;
-}
-.cb-purple {
-  color: #7570b3;
-  font-weight: bold;
-}
-.cb-pink {
-  color: #e7298a;
-  font-weight: bold;
-}
-.cb-green {
-  color: #66a61e;
-  font-weight: bold;
-}
-.cb-gold {
-  color: #e6ab02;
-  font-weight: bold;
-}
-.cb-brown{
-  color: #a6761d;
-  font-weight: bold;
-}
-.cb-gray{
-  color: #3f3f3f;
-}
-.cb-bg-teal {
-  background-color: #1b9e77
-}
-.cb-bg-orange {
-  background-color: #d95f02
-}
-.cb-bg-purple {
-  background-color: #7570b3
-}
-.cb-bg-pink {
-  background-color: #e7298a
-}
-.cb-bg-green {
-  background-color: #66a61e
-}
-.cb-bg-gold {
-  background-color: #e6ab02
-}
-.cb-bg-brown{
-  background-color: #a6761d
-}
-todo {
-  font-style: italic;
-  font-weight: bold;
-  color: #e60000;
-  background-color: black;
-}
+  input[type="text"]:invalid {
+    color: #a94442;
+    background-color: #f2dede;
+  }
 
-.possibleAnswer {
-  margin-left: 2em;
-}
-.badTd {
-  background: #FF8C8C;
-}
-.goodTd{
-  background: #14C38E;
-}
+  textarea#postText {
+    margin-left: 20px;
+    font-size: 12pt;
+    width: auto;
+    background-color: transparent;
+    overflow: auto;
+    resize: none;
+  }
 
-/*********************************/
-.imessage {
-  background-color: #fff;
-  border: 1px solid #e5e5ea;
-  border-radius: 0.25rem;
-  display: flex;
-  flex-direction: column;
-  /*font-family: "SanFrancisco";*/
-  /*font-size: 1.25rem;*/
-  margin: 0 auto 1rem;
-  max-width: 600px;
-  padding: 0.5rem 1.5rem;
-}
+  .btn-checkbox, .btn-checkbox-two {
+    .btn-light;
+    color: black;
+    text-align: left;
+    margin: 0px;
+    background-color: #e9ecef;
+    border-color: #d1d4d7;
+  }
 
-.imessage p {
-  border-radius: 1.15rem;
-  line-height: 1.25;
-  max-width: 75%;
-  padding: 0.5rem .875rem;
-  position: relative;
-  word-wrap: break-word;
-}
+  .btn-checkbox.active,
+  .btn-checkbox:active,
+  .btn-checkbox:hover {
+    background-color: #babcbf;
+    border-color: #8b8d8f;
+  }
 
-.imessage p::before,
-.imessage p::after {
-  bottom: -0.1rem;
-  content: "";
-  height: 1rem;
-  position: absolute;
-}
+  .btn-checkbox-two.active,
+  .btn-checkbox-two:active,
+  .btn-checkbox-two:hover {
+    background-color: #babcbf;
+    border-color: #8b8d8f;
+  }
 
-p.from-me {
-  align-self: flex-end;
-  background-color: #248bf5;
-  color: #fff;
-}
+  .btn-group-vertical {
+    max-width: 400px;
+    /*margin-right: 10px;*/
+  }
+  #introQuestion,
+  #minorityQuestions,
+  #demogQuestions {
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+  .autocomplete-suggestions {
+    border: 1px solid #999;
+    background: #FFF;
+    overflow: auto;
+  }
+  #dummyMinority {
+    /*opacity:0;*/
+    width: 0px;
+  }
+  .autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; }
+  .autocomplete-selected { background: #F0F0F0; }
+  .autocomplete-suggestions strong { font-weight: normal; color: #3399FF; }
+  .autocomplete-group { padding: 2px 5px; }
+  .autocomplete-group strong { display: block; border-bottom: 1px solid #000; }
 
-p.from-me::before {
-  border-bottom-left-radius: 0.8rem 0.7rem;
-  border-right: 1rem solid #248bf5;
-  right: -0.35rem;
-  transform: translate(0, -0.1rem);
-}
+  input[type='checkbox'] {
+    /* All <input> elements that are immediate children of a class="btn-checkbox" */
+    margin-right: 5px;
+  }
+  ul {
+    padding-left: 30px;
+    margin-bottom: 10px;
+  }
+  fieldset {
+    padding: 10px;
+    background:#fbfbfb;
+    border-radius:5px;
+    margin-bottom:5px;
+  }
+  .lickert>label{
+      font-style: italic;
+    }
 
-p.from-me::after {
-  background-color: #fff;
-  border-bottom-left-radius: 0.5rem;
-  right: -40px;
-  transform:translate(-30px, -2px);
-  width: 10px;
-}
+  .cb-teal {
+    color: #1b9e77;
+    font-weight: bold;
 
-p[class^="from-"] {
-  margin: 0.5rem 0;
-  width: fit-content;
-}
+  }
+  .cb-orange {
+    color: #d95f02;
+    font-weight: bold;
+  }
+  .cb-purple {
+    color: #7570b3;
+    font-weight: bold;
+  }
+  .cb-pink {
+    color: #e7298a;
+    font-weight: bold;
+  }
+  .cb-green {
+    color: #66a61e;
+    font-weight: bold;
+  }
+  .cb-gold {
+    color: #e6ab02;
+    font-weight: bold;
+  }
+  .cb-brown{
+    color: #a6761d;
+    font-weight: bold;
+  }
+  .cb-gray{
+    color: #3f3f3f;
+  }
+  .cb-bg-teal {
+    background-color: #1b9e77
+  }
+  .cb-bg-orange {
+    background-color: #d95f02
+  }
+  .cb-bg-purple {
+    background-color: #7570b3
+  }
+  .cb-bg-pink {
+    background-color: #e7298a
+  }
+  .cb-bg-green {
+    background-color: #66a61e
+  }
+  .cb-bg-gold {
+    background-color: #e6ab02
+  }
+  .cb-bg-brown{
+    background-color: #a6761d
+  }
+  todo {
+    font-style: italic;
+    font-weight: bold;
+    color: #e60000;
+    background-color: black;
+  }
 
-p.from-me ~ p.from-me {
-  margin: 0.25rem 0 0;
-}
+  .possibleAnswer {
+    margin-left: 2em;
+  }
+  .badTd {
+    background: #FF8C8C;
+  }
+  .goodTd{
+    background: #14C38E;
+  }
 
-p.from-me ~ p.from-me:not(:last-child) {
-  margin: 0.25rem 0 0;
-}
+  /*********************************/
+  .imessage {
+    background-color: #fff;
+    border: 1px solid #e5e5ea;
+    border-radius: 0.25rem;
+    display: flex;
+    flex-direction: column;
+    /*font-family: "SanFrancisco";*/
+    /*font-size: 1.25rem;*/
+    margin: 0 auto 1rem;
+    max-width: 600px;
+    padding: 0.5rem 1.5rem;
+  }
 
-p.from-me ~ p.from-me:last-child {
-  margin-bottom: 0.5rem;
-}
+  .imessage p {
+    border-radius: 1.15rem;
+    line-height: 1.25;
+    max-width: 75%;
+    padding: 0.5rem .875rem;
+    position: relative;
+    word-wrap: break-word;
+  }
 
-p.from-them {
-  align-items: flex-start;
-  background-color: #e5e5ea;
-  color: #000;
-}
+  .imessage p::before,
+  .imessage p::after {
+    bottom: -0.1rem;
+    content: "";
+    height: 1rem;
+    position: absolute;
+  }
 
-p.from-them:before {
-  border-bottom-right-radius: 0.8rem 0.7rem;
-  border-left: 1rem solid #e5e5ea;
-  left: -0.35rem;
-  transform: translate(0, -0.1rem);
-}
+  p.from-me {
+    align-self: flex-end;
+    background-color: #248bf5;
+    color: #fff;
+  }
 
-p.from-them::after {
-  background-color: #fff;
-  border-bottom-right-radius: 0.5rem;
-  left: 20px;
-  transform: translate(-30px, -2px);
-  width: 10px;
-}
+  p.from-me::before {
+    border-bottom-left-radius: 0.8rem 0.7rem;
+    border-right: 1rem solid #248bf5;
+    right: -0.35rem;
+    transform: translate(0, -0.1rem);
+  }
 
-p[class^="from-"].emoji {
-  background: none;
-  font-size: 2.5rem;
-}
+  p.from-me::after {
+    background-color: #fff;
+    border-bottom-left-radius: 0.5rem;
+    right: -40px;
+    transform:translate(-30px, -2px);
+    width: 10px;
+  }
 
-p[class^="from-"].emoji::before {
-  content: none;
-}
+  p[class^="from-"] {
+    margin: 0.5rem 0;
+    width: fit-content;
+  }
 
-.no-tail::before {
-  display: none;
-}
+  p.from-me ~ p.from-me {
+    margin: 0.25rem 0 0;
+  }
 
-.margin-b_none {
-  margin-bottom: 0 !important;
-}
+  p.from-me ~ p.from-me:not(:last-child) {
+    margin: 0.25rem 0 0;
+  }
 
-.margin-b_one {
-  margin-bottom: 1rem !important;
-}
+  p.from-me ~ p.from-me:last-child {
+    margin-bottom: 0.5rem;
+  }
 
-.margin-t_one {
-  margin-top: 1rem !important;
-}
-.speaker {
-  border-radius: .2em;
-  background-color: #ACCFF2;/*#D5E7F9;*/
-  padding: .5em;
-}
-.listener {
-  border-radius: .2em;
-  background-color: #CAE1F7;
-  padding: .5em;
-}
-.situation {
-  border-radius: .2em;
-  background-color: #DDECFA;
-  padding: .5em;
-}
-</style>
-</body>
-</html>
+  p.from-them {
+    align-items: flex-start;
+    background-color: #e5e5ea;
+    color: #000;
+  }
+
+  p.from-them:before {
+    border-bottom-right-radius: 0.8rem 0.7rem;
+    border-left: 1rem solid #e5e5ea;
+    left: -0.35rem;
+    transform: translate(0, -0.1rem);
+  }
+
+  p.from-them::after {
+    background-color: #fff;
+    border-bottom-right-radius: 0.5rem;
+    left: 20px;
+    transform: translate(-30px, -2px);
+    width: 10px;
+  }
+
+  p[class^="from-"].emoji {
+    background: none;
+    font-size: 2.5rem;
+  }
+
+  p[class^="from-"].emoji::before {
+    content: none;
+  }
+
+  .no-tail::before {
+    display: none;
+  }
+
+  .margin-b_none {
+    margin-bottom: 0 !important;
+  }
+
+  .margin-b_one {
+    margin-bottom: 1rem !important;
+  }
+
+  .margin-t_one {
+    margin-top: 1rem !important;
+  }
+  .speaker {
+    border-radius: .2em;
+    background-color: #ACCFF2;/*#D5E7F9;*/
+    padding: .5em;
+  }
+  .listener {
+    border-radius: .2em;
+    background-color: #CAE1F7;
+    padding: .5em;
+  }
+  .situation {
+    border-radius: .2em;
+    background-color: #DDECFA;
+    padding: .5em;
+  }
+  </style>
