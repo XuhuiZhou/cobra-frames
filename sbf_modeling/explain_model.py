@@ -173,6 +173,8 @@ class ExplainModel(BaseSBFModel):
             remove_columns=dataset.column_names,
         )
         prompt_dataset = cast(TorchDataset, prompt_dataset)  # type: ignore
+        # limit dataset size for faster evaluation
+        # prompt_dataset = Dataset.from_dict(prompt_dataset[:300])
         data_collator = DataCollatorForSeq2Seq(self.tokenizer)
 
         trainer = Seq2SeqTrainer(

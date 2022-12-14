@@ -19,13 +19,24 @@ FLAGS = flags.FLAGS
 
 def predict(
     *,
-    model: BaseSBFModel,
+    model_dir: str,
+    test_data: Dataset,
     output_dir: str,
+    per_device_predict_batch_size: int = 16,
 ):
     logging.info("Model predicting")
+    model = ExplainModel(model_dir, from_local=True)
     if torch.cuda.is_available():
         model.model = model.model.cuda()  # type: ignore
-    answer_dict = model.predict()
+    answer_dict = model.predict(
+        test_data,
+        args=Seq2SeqTrainingArguments(
+            output_dir=".log/_explain_model",
+            per_device_eval_batch_size=per_device_predict_batch_size,
+            predict_with_generate=True,  # generation in evaluation
+            prediction_loss_only=False,  # generation in evaluation
+        ),
+    )
     logging.info("Model inference done")
     answer_df = pd.DataFrame.from_dict(answer_dict)
     answer_df.to_csv(os.path.join(output_dir, "answer.csv"), index=False)
