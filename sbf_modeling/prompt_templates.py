@@ -11,7 +11,7 @@ CONTEXT_TEMPLATE = "This is {situationalContext}, {speakerIdentity} speaking to 
 
 QUESTION_TEMPLATES = dict(
     intent="What is the intent of the speaker?",
-    targetGroup="Who are the speaker targeting at?",
+    targetGroup="Who are the statement targeting at?",
     relevantPowerDynamics="What are the relevant power dynamics?",
     implication="What is the implication of the statement?",
     targetGroupEmotionalReaction="What is the emotional reaction of the target group?",
