@@ -7,6 +7,8 @@ import pandas as pd
 from bert_score import score
 from tqdm import tqdm
 
+from tools.combine_toxigen_contexts import clean_for_mturk
+
 
 def score_rule(i, j, v, method="bert_score"):
     """
@@ -59,6 +61,27 @@ def get_pairs(df):
     return pairs
 
 
+def prepare_mturk_data(df, num=200):
+    """
+    Prepare the mturk data.
+    """
+    sampled_statements = np.random.choice(df["statement"].unique(), num)
+    df_mturk = df.groupby("statement").filter(
+        lambda x: x["statement"].values[0] in sampled_statements
+    )
+    num = df_mturk["statement"].nunique()
+    print(f"There are {num} unique statements in the sampled dataframe")
+    # df_mturk = df[-range_start:-range_end]
+    # df_mturk = df.sample(n=500, random_state=1)
+    df_mturk.fillna("none", inplace=True)
+    df_mturk = clean_for_mturk(df_mturk)
+    df_mturk = df_mturk.drop(
+        columns=["examples", "prompt", "statementCheck", "generation_method"]
+    )
+    print("the number of rows in the dataframe is {}".format(len(df_mturk)))
+    return df_mturk
+
+
 def main():
     anno_file = (
         sys.argv[1]
@@ -66,6 +89,7 @@ def main():
         else "./data/inference_data/toxigen_explanations/toxigen_explanations_val.csv"
     )
     df = pd.read_csv(anno_file)
+    df = prepare_mturk_data(df, num=100)
     pair_list = df.groupby("statement", sort=False).apply(get_pairs)
     overall_signals = []
     for i in tqdm(pair_list):
