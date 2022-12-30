@@ -33,6 +33,26 @@ Task_cols = {
             "Answer.targetGroupCogReactSuggestion",
         ],
     ),
+    "sensitivity": (
+        [
+            "Answer.targetGroupRating",
+            "Answer.intentRating",
+            "Answer.implicationRating",
+            "Answer.offensivenessRating",
+            "Answer.powerDiffRating",
+            "Answer.targetGroupEmoReactRating",
+            "Answer.targetGroupCogReactRating",
+        ],
+        [
+            "Answer.targetGroupSuggestion",
+            "Answer.intentSuggestion",
+            "Answer.implicationSuggestion",
+            "Answer.offensivenessSuggestion",
+            "Answer.powerDiffSuggestion",
+            "Answer.targetGroupEmoReactSuggestion",
+            "Answer.targetGroupCogReactSuggestion",
+        ],
+    ),
     "context": (
         [
             "Answer.listenerIdenRating",
@@ -70,6 +90,7 @@ def record_annotation_summary(df_info, df, args):
     warnings.warn(
         "This function only applies to three annotators scanario bc of hard-coded values."
     )
+    df = df.copy()
     # Read the original file before mturk annotation
     # df_ori = pd.read_csv(args.original_file)
     if args.suggestion:
@@ -136,7 +157,74 @@ def record_annotation_summary(df_info, df, args):
             ]
 
         df_info = df_info[relevant_cols]
-    else:
+
+    elif args.task == "sensitivity":
+        df = df[
+            [
+                "HITId",
+                "Input.group",
+                "Input.id",
+                "Input.statement",
+                "Input.situationalContext",
+                "Input.speaker",
+                "Input.listener",
+                "Input.targetGroup",
+                "Input.intent",
+                "Input.implication",
+                "Input.offensiveness",
+                "Input.relevantPowerDynamics",
+                "Input.targetGroupEmotionalReaction",
+                "Input.targetGroupCognitiveReaction",
+                "Input.situationalContext2",
+                "Input.speaker2",
+                "Input.listener2",
+                "Input.targetGroup2",
+                "Input.intent2",
+                "Input.implication2",
+                "Input.offensiveness2",
+                "Input.relevantPowerDynamics2",
+                "Input.targetGroupEmotionalReaction2",
+                "Input.targetGroupCognitiveReaction2",
+            ]
+        ]
+        df_info = df.merge(df_info, on="HITId")
+
+        relevant_cols = [
+            "HITId",
+            "Input.id_x",  # TODO: fix this
+            "Input.group",
+            "Input.statement",
+            "Input.situationalContext",
+            "Input.speaker",
+            "Input.listener",
+            "Input.targetGroup",
+            "Input.intent",
+            "Input.implication",
+            "Input.offensiveness",
+            "Input.relevantPowerDynamics",
+            "Input.targetGroupEmotionalReaction",
+            "Input.targetGroupCognitiveReaction",
+            "Input.situationalContext2",
+            "Input.speaker2",
+            "Input.listener2",
+            "Input.targetGroup2",
+            "Input.intent2",
+            "Input.implication2",
+            "Input.offensiveness2",
+            "Input.relevantPowerDynamics2",
+            "Input.targetGroupEmotionalReaction2",
+            "Input.targetGroupCognitiveReaction2",
+            "Answer.targetGroupRating",
+            "Answer.intentRating",
+            "Answer.implicationRating",
+            "Answer.offensivenessRating",
+            "Answer.powerDiffRating",
+            "Answer.targetGroupEmoReactRating",
+            "Answer.targetGroupCogReactRating",
+        ]
+        df_info = df_info[relevant_cols]
+
+    elif args.task == "explanation":
         df = df[
             [
                 "HITId",
@@ -208,7 +296,7 @@ def record_annotation_summary(df_info, df, args):
     for i in df_info.keys():
         if "Rating" in i:
             df_info[i] = df_info[i].astype(int)
-    df_info.to_csv(f"{args.output_folder}/annotation_summary.csv", index=False)
+    return df_info
 
 
 def render_offensiveness_labels(offensiveness):
@@ -242,7 +330,7 @@ def render_offensiveness_labels(offensiveness):
     return offensive
 
 
-def output_quality_ratio(df, col, args):
+def output_aggregation(df, col, args):
     df_info = df.copy()
     if not args.binary:
         # Special treatment for the offensiveness rating
@@ -263,15 +351,7 @@ def output_quality_ratio(df, col, args):
             & df_info["Answer.speakerIdenRating"]
             & df_info["Answer.listenerIdenRating"]
         ).astype(int)
-    if args.record_annotation_summary:
-        record_annotation_summary(df_info, df, args)
-    sum_ = df_info.sum()
-    total = len(df_info)
-    frames = {}
-    for i in col:
-        frames[i] = [f"{100*sum_[i]/total:.2f}%"]
-    df_info = pd.DataFrame.from_dict(frames)
-    df_info = df_info.rename(index={0: "approval rate"})
+
     return df_info
 
 
@@ -390,6 +470,17 @@ def normalize_df(df):
     return df
 
 
+def calculate_quality(df_info, col):
+    sum_ = df_info.sum()
+    total = len(df_info)
+    frames = {}
+    for i in col:
+        frames[i] = [f"{100*sum_[i]/total:.2f}%"]
+    df_info = pd.DataFrame.from_dict(frames)
+    df_info = df_info.rename(index={0: "approval rate"})
+    return df_info
+
+
 def main():
     """
     Script for analyzing Mturk produced data
@@ -476,7 +567,14 @@ def main():
         df[relevant_col] = df[relevant_col].replace(-1, 1.5)
 
     # The current quality calculation process will binarize the rating automatically.
-    df_quality = output_quality_ratio(df, relevant_col, args)
+    df_info = output_aggregation(df, relevant_col, args)
+    if args.record_annotation_summary:
+        df_info = record_annotation_summary(df_info, df, args)
+        df_info.to_csv(
+            f"{args.output_folder}/annotation_summary.csv", index=False
+        )
+    df_quality = calculate_quality(df_info, relevant_col)
+
     df[relevant_col] = normalize_df(df[relevant_col])
     df_agreement = calculate_agreement(df, relevant_col, args)
 
