@@ -141,7 +141,6 @@ def record_annotation_summary(df_info, df, args):
             [
                 "HITId",
                 "Input.group",
-                "Input.model",
                 "Input.id",
                 "Input.statement",
                 "Input.speechContext",
@@ -170,7 +169,6 @@ def record_annotation_summary(df_info, df, args):
 
         relevant_cols = [
             "HITId",
-            "Input.model",
             "Input.id_x",  # TODO: fix this
             "Input.group",
             "Input.statement",

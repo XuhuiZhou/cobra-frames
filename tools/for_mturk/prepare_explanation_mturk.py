@@ -18,9 +18,11 @@ def tag_explanations(df):
 
 
 def main():
-    file = "data/inference_data/toxigen_explanations/toxigen_explanations_tagged.csv"
+    file = (
+        "data/inference_data/toxigen_explanations_v2/toxigen_explanations.csv"
+    )
     previous_mturk_file = (
-        "data/inference_data/toxigen_explanations/toxigen_mturk_1.csv"
+        "data/inference_data/toxigen_explanations/toxigen_mturk_2.csv"
     )
     df = pd.read_csv(file)
     # # temporary info for the 002& 003 difference
@@ -28,7 +30,7 @@ def main():
     # df.to_csv("data/inference_data/toxigen_explanations/toxigen_explanations_tagged.csv", index=False)
     df_mturk_previous = pd.read_csv(previous_mturk_file)
     df = df[~df["id"].isin(df_mturk_previous["id"])]
-    sampled_statements = np.random.choice(df["statement"].unique(), 200)
+    sampled_statements = np.random.choice(df["statement"].unique(), 35)
     df_mturk = df.groupby("statement").filter(
         lambda x: x["statement"].values[0] in sampled_statements
     )
@@ -43,7 +45,7 @@ def main():
     )
     print("the number of rows in the dataframe is {}".format(len(df_mturk)))
     df_mturk.to_csv(
-        "data/inference_data/toxigen_explanations/toxigen_mturk_2.csv",
+        "data/inference_data/toxigen_explanations_v2/toxigen_mturk.csv",
         index=False,
     )
 

@@ -6,8 +6,8 @@
 #INPUT='./data/mturk/Context-Pilots-2-Annotation.csv'
 # INPUT='./data/mturk/contexts/CSBF-contexts-2.csv'
 # OUTPUT='./data/mturk/contexts'
-INPUT='./data/mturk/explanations/CSBF-explanations-2.csv'
-OUTPUT='./data/mturk/explanations'
+INPUT='./data/mturk/explanations_v2/mturk_1.csv'
+OUTPUT='./data/mturk/explanations_v2'
 
 python tools/for_mturk/mturk_analysis.py \
     --input_file $INPUT \
