@@ -146,6 +146,8 @@
     <div class="collapse show" id="notes">
     <ul>
       <li><b>Effects vs reactions:</b> Think about effects as the likely lessons someone will draw, the likely subsequent actions someone will take, or what the <em>long-term harm</em> would be on repeatedly listening to statements like this. The reactions are more about immediate emotional reactions and feelings, which is more <em>immediate harm</em>.</li>
+      <li><b>Wrongly coded explanations:</b> If you believe the explanations of those statements are wrong, you should assign the label to either <em class="context">different, not due to contexts</em> or <em class="context">similar, but should be different</em> according to your best judgment. </li>
+      <li><b>Different but should be similar:</b> If you believe one pair belongs to this category, please assign the label to <em class="context">different, not due to contexts</em>.</li>
     </ul>
     </div>
     </div>
@@ -159,71 +161,128 @@
 
     <div class="row justify-content-center" style="margin-top: 20px;">
     <div class="col-11" id="table-container">
-    <h5>Examples</h5>
+    <h5>Examples <small><a aria-controls="collapseExample" aria-expanded="false" class="collapsed" data-toggle="collapse" href=".extra-exs" onclick="expExamples();"> [-] less examples </a></small></h5>
 
     <div class="d-flex flex-column" style="margin-top: 20px; margin-bottom: 20px; border-radius: 3px; box-shadow: 1.5px 1.5px 3px 3px rgba(0, 0, 1, 0.2);">
-    <div class="mt-3" id="table-container">&nbsp;</div>
-
+      <table class="table table-striped" id="inputTable">
+        <tbody>
+          <tr>
+            <td colspan="2"> <em class="context">Statement</em>: living in new jersey means living amongst the most despicably narcissistic, arrogant, and prejudiced people in america &nbsp;</td>
+          </tr>
+          <tr>
+            <td>
+              <em class="context">Scenario A</em></br>
+              <em class="context_small">Situational context</em>: Conversation between two friends about their home state</br>
+              <em class="context_small">Speaker identity</em>: native New Jerseyan</br>
+              <em class="context_small">Listener identity</em>: native New Jerseyan
+            </td>
+            <td>
+              <em class="context">Scenario B</em></br>
+              <em class="context_small">Situational context</em>: group chat discussing different states</br>
+              <em class="context_small">Speaker identity</em>: out-of-state person</br>
+              <em class="context_small">Listener identity</em>: other out-of-state people or New Jersey residents
+            </td>
+            <td><em class="context">Answer</em></td>
+          </tr>
+          <tr>
+            <td class="cb-gray" style="width: 35%;"><span class="cb-teal">Speaker intent A</span></br> The speaker is trying to express their dislike for their home state</td>
+            <td class="cb-gray" style="width: 35%;"><span class="cb-teal">Speaker intent B</span></br> The speaker is trying to express their dislike for New Jersey</td>
+            <td>different, due to contexts (the change of the intent here is aligned with my expection because the speaker identity changes from in-group to out-group)</td>
+          </tr>
+          <tr>
+            <td class="cb-gray" style="width: 35%;"><span class="cb-purple">Target (group) A</span></br> people of New Jersey&nbsp;</td>
+            <td class="cb-gray" style="width: 35%;"><span class="cb-purple">Target (group) B</span></br> out of state residents&nbsp;</td>
+            <td>different, not due to contexts (the contexts here should not change the target group)</td>
+          </tr>
+          <tr>
+            <td class="cb-gray" style="width: 35%;"><span class="cb-gold">Power dynamic A</span></br> none</td>
+            <td class="cb-gray" style="width: 35%;"><span class="cb-gold">Power dynamic B</span></br> regional power differential between speaker and targeted group</td>
+            <td>different, due to contexts (there's no obvious power dynamic in the first context since the speaker is from New Jersey)</td>
+          </tr>
+          <tr>
+            <td class="cb-gray" style="width: 35%;"><span class="cb-orange">Implication A</span></br> It implies that all people from New Jersey are narcissistic, arrogant, and prejudiced&nbsp;</td>
+            <td class="cb-gray" style="width: 35%;"><span class="cb-orange">Implication B</span></br> implies that all people from New Jersey are narcissistic, arrogant, and prejudiced&nbsp;</td>
+            <td>similar, but should be different (the implication are the same here but the first implication should be something like "all people exclude the speaker")</td>
+          </tr>
+          <tr>
+            <td class="cb-gray" style="width: 35%;"><span class="cb-green">Target emotional reaction A</span></br> People from New Jersey could feel angry or embarrassed at the generalization</td>
+            <td class="cb-gray" style="width: 35%;"><span class="cb-green">Target emotional reaction B</span></br> New Jersey residents could feel angry that their state is being stereotyped in such a negative way, feel like they don't belong in the conversation or in the chatroom</td>
+            <td>different, due to contexts (the change of the target emotional reaction here reflects the difference in the situational context)</td>
+          </tr>
+          <tr>
+            <td class="cb-gray" style="width: 35%;"><span class="cb-brown">Effect on target A</span></br> People from New Jersey might be more hesitant to talk about where they are from, and could start to believe the stereotype themselves.</td>
+            <td class="cb-gray" style="width: 35%;"><span class="cb-brown">Effect on target B</span></br> New Jersey residents could become defensive and try to prove the speaker wrong</td>
+            <td>different, due to contexts (it could be the case when the speech comes from in-group speakers, the target group is more likely to internalize it)</td>
+          </tr>
+          <tr>
+            <td class="cb-gray" style="width: 35%;"><span class="cb-pink">Type of offensiveness A</span></br> offensive generalization</td>
+            <td class="cb-gray" style="width: 35%;"><span class="cb-pink">Type of offensiveness B</span></br> offensive generalization</td>
+            <td>similar, should be similar</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="collapse show extra-exs">
+  <div class="d-flex flex-column" style="margin-top: 20px; margin-bottom: 20px; border-radius: 3px; box-shadow: 1.5px 1.5px 3px 3px rgba(0, 0, 1, 0.2);">
     <table class="table table-striped" id="inputTable">
       <tbody>
         <tr>
-          <td colspan="2"> <em class="context">Statement</em>: living in new jersey means living amongst the most despicably narcissistic, arrogant, and prejudiced people in america &nbsp;</td>
+          <td colspan="2"> <em class="context">Statement</em>: any time a trans person asks me to address them by a gendered pronoun i sneer at them and call them male &nbsp;</td>
         </tr>
         <tr>
           <td>
             <em class="context">Scenario A</em></br>
-            <em class="context_small">Situational context</em>: Conversation between two friends about their home state</br>
-            <em class="context_small">Speaker identity</em>: native New Jerseyan</br>
-            <em class="context_small">Listener identity</em>: native New Jerseyan
+            <em class="context_small">Situational context</em>: overheard in a cafe</br>
+            <em class="context_small">Speaker identity</em>: younger cisgender male</br>
+            <em class="context_small">Listener identity</em>: nobody, just muttered to himself
           </td>
           <td>
             <em class="context">Scenario B</em></br>
-            <em class="context_small">Situational context</em>: group chat discussing different states</br>
-            <em class="context_small">Speaker identity</em>: out-of-state person</br>
-            <em class="context_small">Listener identity</em>: other out-of-state people or New Jersey residents
+            <em class="context_small">Situational context</em>: heated argument between two people on an online platform</br>
+            <em class="context_small">Speaker identity</em>: transphobic person</br>
+            <em class="context_small">Listener identity</em>: transgender person
           </td>
           <td><em class="context">Answer</em></td>
         </tr>
         <tr>
-          <td class="cb-gray" style="width: 35%;"><span class="cb-teal">Speaker intent A</span></br> The speaker is trying to express their dislike for their home state</td>
-          <td class="cb-gray" style="width: 35%;"><span class="cb-teal">Speaker intent B</span></br> The speaker is trying to express their dislike for New Jersey</td>
-          <td>different, due to contexts (the change of the intent here is aligned with my expection because the speaker identity changes from in-group to out-group)</td>
+          <td class="cb-gray" style="width: 35%;"><span class="cb-teal">Speaker intent A</span></br> The speaker is trying to express his opinion about trans people</td>
+          <td class="cb-gray" style="width: 35%;"><span class="cb-teal">Speaker intent B</span></br> The speaker is trying to express their disdain for transgender people and their identities</td>
+          <td>different, due to contexts (the intents here are aligned with the speaker identity and the situational contexts)</td>
         </tr>
         <tr>
-          <td class="cb-gray" style="width: 35%;"><span class="cb-purple">Target (group) A</span></br> people of New Jersey&nbsp;</td>
-          <td class="cb-gray" style="width: 35%;"><span class="cb-purple">Target (group) B</span></br> out of state residents&nbsp;</td>
-          <td>different, not due to contexts (the contexts here should not change the target group)</td>
+          <td class="cb-gray" style="width: 35%;"><span class="cb-purple">Target (group) A</span></br> trans people&nbsp;</td>
+          <td class="cb-gray" style="width: 35%;"><span class="cb-purple">Target (group) B</span></br> transgender people&nbsp;</td>
+          <td>similar, should be similar (the contexts here should not change the target group)</td>
         </tr>
         <tr>
-          <td class="cb-gray" style="width: 35%;"><span class="cb-gold">Power dynamic A</span></br> none</td>
-          <td class="cb-gray" style="width: 35%;"><span class="cb-gold">Power dynamic B</span></br> regional power differential between speaker and targeted group</td>
-          <td>different, due to contexts (there's no obvious power dynamic in the first context since the speaker is from New Jersey)</td>
+          <td class="cb-gray" style="width: 35%;"><span class="cb-gold">Power dynamic A</span></br> power differential between cisgender speaker and transgender listener</td>
+          <td class="cb-gray" style="width: 35%;"><span class="cb-gold">Power dynamic B</span></br> gender power differential between speaker and listener, as well as transphobia power differential between the two</td>
+          <td>different, due to contexts</td>
         </tr>
         <tr>
-          <td class="cb-gray" style="width: 35%;"><span class="cb-orange">Implication A</span></br> It implies that all people from New Jersey are narcissistic, arrogant, and prejudiced&nbsp;</td>
-          <td class="cb-gray" style="width: 35%;"><span class="cb-orange">Implication B</span></br> implies that all people from New Jersey are narcissistic, arrogant, and prejudiced&nbsp;</td>
-          <td>similar, but should be different (the implication are the same here but the first implication should be something like "all people exclude the speaker")</td>
+          <td class="cb-gray" style="width: 35%;"><span class="cb-orange">Implication A</span></br> implies that trans people are not valid or worthy of respect, and that they should be addressed by the gender assigned at birth&nbsp;</td>
+          <td class="cb-gray" style="width: 35%;"><span class="cb-orange">Implication B</span></br> implies that transgender people are not valid, and that their chosen pronouns are not valid either&nbsp;</td>
+          <td>similar, should be similar (the implications are basically the same, which questions the validity of transgender people)</td>
         </tr>
         <tr>
-          <td class="cb-gray" style="width: 35%;"><span class="cb-green">Target emotional reaction A</span></br> People from New Jersey could feel angry or embarrassed at the generalization</td>
-          <td class="cb-gray" style="width: 35%;"><span class="cb-green">Target emotional reaction B</span></br> New Jersey residents could feel angry that their state is being stereotyped in such a negative way, feel like they don't belong in the conversation or in the chatroom</td>
-          <td>different, due to contexts (the change of the target emotional reaction here reflects the difference in the situational context)</td>
-        </tr>
-        <tr>
-          <td class="cb-gray" style="width: 35%;"><span class="cb-brown">Effect on target A</span></br> People from New Jersey might be more hesitant to talk about where they are from, and could start to believe the stereotype themselves.</td>
-          <td class="cb-gray" style="width: 35%;"><span class="cb-brown">Effect on target B</span></br> New Jersey residents could become defensive and try to prove the speaker wrong</td>
-          <td>different, due to contexts (it could be the case when the speech comes from in-group speakers, the target group is more likely to internalize it)</td>
-        </tr>
-        <tr>
-          <td class="cb-gray" style="width: 35%;"><span class="cb-pink">Type of offensiveness A</span></br> offensive generalization</td>
-          <td class="cb-gray" style="width: 35%;"><span class="cb-pink">Type of offensiveness B</span></br> offensive generalization</td>
+          <td class="cb-gray" style="width: 35%;"><span class="cb-green">Target emotional reaction A</span></br> trans people could feel angry, invalidated, and hurt by the statement</td>
+          <td class="cb-gray" style="width: 35%;"><span class="cb-green">Target emotional reaction B</span></br> anger, disappointment, frustration at the invalidation of their identity by the speaker</td>
           <td>similar, should be similar</td>
+        </tr>
+        <tr>
+          <td class="cb-gray" style="width: 35%;"><span class="cb-brown">Effect on target A</span></br> might lead them to avoid places like this cafe, be more cautious around cisgender people, or feel less safe in public spaces</td>
+          <td class="cb-gray" style="width: 35%;"><span class="cb-brown">Effect on target B</span></br> might want to avoid the online platform, might feel less safe coming out or using their preferred pronouns in public spaces</td>
+          <td>different, due to contexts (the effects are different since the situational contexts are different. )</td>
+        </tr>
+        <tr>
+          <td class="cb-gray" style="width: 35%;"><span class="cb-pink">Type of offensiveness A</span></br> offensive and hate speech</td>
+          <td class="cb-gray" style="width: 35%;"><span class="cb-pink">Type of offensiveness B</span></br> offensive</td>
+          <td>different, not due to contexts (The type of offensiveness A seems more severe than the type of offensivness B, however, it should be the other way around since the intention of the speaker B is directly attacking transgender people. )</td>
         </tr>
       </tbody>
     </table>
   </div>
-</div>
-</div>
+    </div>
 <a aria-controls="collapseExample" aria-expanded="false" class="collapsed" data-toggle="collapse" href=".extra-exs" onclick="expExamples();">[-] less examples </a></div>
 </div>
 </div>
