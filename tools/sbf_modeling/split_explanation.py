@@ -1,6 +1,6 @@
 import pandas as pd
 
-folder = "data/inference_data/toxigen_explanations"
+folder = "data/inference_data/toxigen_explanations_v2"
 
 df = pd.read_csv(f"{folder}/toxigen_explanations.csv")
 df = df.rename(columns={"speechContext": "situationalContext"})
