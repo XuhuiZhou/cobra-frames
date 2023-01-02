@@ -65,10 +65,13 @@ def prepare_mturk_data(df, num=200):
     """
     Prepare the mturk data.
     """
-    sampled_statements = np.random.choice(df["statement"].unique(), num)
-    df_mturk = df.groupby("statement").filter(
-        lambda x: x["statement"].values[0] in sampled_statements
-    )
+    if type(num) == int:
+        sampled_statements = np.random.choice(df["statement"].unique(), num)
+        df_mturk = df.groupby("statement").filter(
+            lambda x: x["statement"].values[0] in sampled_statements
+        )
+    else:
+        df_mturk = df
     num = df_mturk["statement"].nunique()
     print(f"There are {num} unique statements in the sampled dataframe")
     # df_mturk = df[-range_start:-range_end]
@@ -132,10 +135,10 @@ def main():
     anno_file = (
         sys.argv[1]
         if len(sys.argv) > 1
-        else "./data/inference_data/toxigen_explanations/toxigen_explanations_val.csv"
+        else "./data/inference_data/toxigen_explanations_v2/toxigen_explanations_val.csv"
     )
     df = pd.read_csv(anno_file)
-    df = prepare_mturk_data(df, num=100)
+    df = prepare_mturk_data(df, num="all")
     pair_list = df.groupby("statement", sort=False).apply(get_pairs)
     overall_signals = []
     for i in tqdm(pair_list):
@@ -149,7 +152,7 @@ def main():
     # df = merge_explanations_for_mturk(df)
     # save the data
     df.to_csv(
-        f"./data/mturk/explanations/{saved_file_name}",
+        f"./data/inference_data/toxigen_explanations_v2/{saved_file_name}",
         index=False,
     )
 
