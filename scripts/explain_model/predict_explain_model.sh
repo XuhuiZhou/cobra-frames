@@ -5,6 +5,6 @@
 
 python sbf_modeling/inference.py \
     --gin_file="scripts/explain_model/explain_model_inference.gin" \
-    --gin.MODEL_DIR="'.log/explain-model'" \
+    --gin.MODEL_DIR="'.log/explain-model-xl'" \
     --gin.MODE="'deployment'" \
     --gin.BATCH_SIZE=32
