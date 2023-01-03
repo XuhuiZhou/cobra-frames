@@ -6,8 +6,10 @@
 #INPUT='./data/mturk/Context-Pilots-2-Annotation.csv'
 # INPUT='./data/mturk/contexts/CSBF-contexts-2.csv'
 # OUTPUT='./data/mturk/contexts'
-INPUT='./data/mturk/explanations_v2/mturk_1.csv'
-OUTPUT='./data/mturk/explanations_v2'
+# INPUT='./data/mturk/explanations_v2/mturk_1.csv'
+# OUTPUT='./data/mturk/explanations_v2'
+INPUT='./data/mturk/t5xl/mturk_1.csv'
+OUTPUT='./data/mturk/t5xl'
 
 python tools/for_mturk/mturk_analysis.py \
     --input_file $INPUT \
@@ -16,7 +18,7 @@ python tools/for_mturk/mturk_analysis.py \
     --record_annotation_summary \
     --task 'explanation' \
     --number_of_annotators 3 \
-    --bar 2 \
+    --bar 2\
     --boundary 1 \
     --suggestion
 

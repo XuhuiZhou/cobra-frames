@@ -11,7 +11,7 @@ do
 
     python ./gpt3_generation/populateContextswithGPT3.py \
         --input_file $INPUT \
-        --example_file_context $EXAMPLE \
+        --example_file $EXAMPLE \
         --output_file $OUTPUT \
         --random_seed $SEED
 done

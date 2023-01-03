@@ -137,22 +137,22 @@ def main():
         if len(sys.argv) > 1
         else "./data/inference_data/toxigen_explanations_v2/toxigen_explanations_val.csv"
     )
-    df = pd.read_csv(anno_file)
-    df = prepare_mturk_data(df, num="all")
-    pair_list = df.groupby("statement", sort=False).apply(get_pairs)
-    overall_signals = []
-    for i in tqdm(pair_list):
-        print(produce_pair_signals(i))
-        overall_signals += produce_pair_signals(i)
-    df["signals"] = overall_signals
-    df = df[df["signals"] == 1]
-    df = df.drop(columns="signals")
+    # df = pd.read_csv(anno_file)
+    # df = prepare_mturk_data(df, num="all")
+    # pair_list = df.groupby("statement", sort=False).apply(get_pairs)
+    # overall_signals = []
+    # for i in tqdm(pair_list):
+    #     print(produce_pair_signals(i))
+    #     overall_signals += produce_pair_signals(i)
+    # df["signals"] = overall_signals
+    # df = df[df["signals"] == 1]
+    # df = df.drop(columns="signals")
 
-    # df = pd.read_csv(f"./data/mturk/explanations/{saved_file_name}")
-    # df = merge_explanations_for_mturk(df)
+    df = pd.read_csv(f"./data/inference_data/sensitivity/{saved_file_name}")
+    df = merge_explanations_for_mturk(df)
     # save the data
     df.to_csv(
-        f"./data/inference_data/toxigen_explanations_v2/{saved_file_name}",
+        f"./data/inference_data/sensitivity/{saved_file_name}",
         index=False,
     )
 
