@@ -1,0 +1,16 @@
+import transformers
+import sbf_modeling
+
+sbf_modeling.ExplainModel:
+    t5_model_name="google/flan-t5-xxl"
+
+transformers.Seq2SeqTrainingArguments:
+    eval_steps=200
+    logging_steps=20
+    per_device_train_batch_size=1
+    per_device_eval_batch_size=2
+    gradient_accumulation_steps=16
+    num_train_epochs=2
+    fp16=True
+    half_precision_backend="auto"
+    report_to=["wandb"]

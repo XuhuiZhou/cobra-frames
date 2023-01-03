@@ -14,7 +14,7 @@ data_utils.get_data:
     split = "validation"
 
 transformers.Seq2SeqTrainingArguments:
-    output_dir=".log/_explain_model"
+    output_dir= %MODEL_DIR
     per_device_eval_batch_size=%BATCH_SIZE
     generation_max_length=512
     generation_num_beams=4
@@ -31,4 +31,4 @@ sbf_modeling.ExplainModel.predict:
 
 inference_script.predict:
     model = @sbf_modeling.ExplainModel()
-    output_dir=".log/_explain_model"
+    output_dir= %MODEL_DIR
