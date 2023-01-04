@@ -19,8 +19,6 @@ def create_context_template(
         return "Please analyze the intent, target group, power dynamics, implication, the emotional and cognitive reaction of the target group and offensiveness of {statement}\n"
 
 
-CONTEXT_TEMPLATE = create_context_template()
-
 QUESTION_TEMPLATES = dict(
     intent="What is the intent of the speaker?",
     targetGroup="Who are the statement targeting at?",
@@ -37,7 +35,7 @@ def map_dataset_to_tokenized_prompt(
 ) -> Dict[str, np.ndarray]:
     element_cast: Dict[str, List[str]] = cast(Dict[str, List[str]], element)  # type: ignore
     context_input = map(
-        lambda instance: CONTEXT_TEMPLATE.format(**instance),
+        lambda instance: create_context_template().format(**instance),
         (dict(zip(element_cast, t)) for t in zip(*element_cast.values())),
     )
     target = map(
