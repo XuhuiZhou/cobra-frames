@@ -102,7 +102,7 @@ def main():
     df_ratings = None
     df_final = None
 
-    for i in [0, 1]:
+    for i in [0, 1, -1, -2]:
         df_info, df_final_cate = analyze_perCategory(df, relevant_col, i, args)
         if args.record_annotation_summary:
             df_info = record_annotation_summary(df_info, df, args)

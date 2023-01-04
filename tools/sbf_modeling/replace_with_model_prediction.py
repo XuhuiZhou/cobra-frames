@@ -1,9 +1,10 @@
 import pandas as pd
 
+model = "t5_xl_wo_context"
 datafile = "./data/inference_data/toxigen_explanations_v2/toxigen_explanations_val.csv"
-predictionfile = "./data/inference_data/t5_xl/answer.csv"
+predictionfile = f"./data/inference_data/{model}/answer.csv"
 
-savedfile = "./data/inference_data/t5_xl/val_with_model_predictions.csv"
+savedfile = f"./data/inference_data/{model}/toxigen_explanations_val.csv"
 
 df = pd.read_csv(datafile)
 df_prediction = pd.read_csv(predictionfile)

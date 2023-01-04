@@ -1,6 +1,6 @@
 # INPUT='./data/mturk/contexts/CSBF-contexts-2.csv'
 # OUTPUT='./data/mturk/contexts'
-INPUT='./data/mturk/explanations_v2_s/mturk_1.csv'
+INPUT='./data/mturk/explanations_v2_s/mturk_2.csv'
 OUTPUT='./data/mturk/explanations_v2_s'
 
 python tools/for_mturk/mturk_analysis_sen.py \
