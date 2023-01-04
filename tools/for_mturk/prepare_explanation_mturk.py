@@ -19,14 +19,16 @@ def tag_explanations(df):
 
 def main():
     ## Hyperparameters
-    file = "data/inference_data/t5_xl/toxigen_explanations_val.csv"
+    model = "t5_xl"
+    model = "t5_xl_wo_context"
+    file = f"data/inference_data/{model}/toxigen_explanations_val.csv"
     # # temporary info for the 002& 003 difference
     # df = tag_explanations(df)
     # df.to_csv("data/inference_data/toxigen_explanations/toxigen_explanations_tagged.csv", index=False)
     # previous_mturk_file = (
     #     "data/inference_data/toxigen_explanations_v2/toxigen_mturk.csv"
     # )
-    saved_mturk_file = "data/inference_data/t5_xl/mturk_1.csv"
+    saved_mturk_file = f"data/inference_data/{model}/mturk_1.csv"
     previous_mturk_file = None
     sample_num = 40
 
