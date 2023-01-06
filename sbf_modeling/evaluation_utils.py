@@ -6,10 +6,10 @@ from evaluate import load
 
 def generic_evaluate_function(
     metric_names: List[str], predictions: List[str], references: List[str]
-) -> Dict[str, Union[Dict[str, float], float]]:
+) -> Dict[str, float]:
     def evaluate_metric(
         metric_name: str, predictions: List[str], references: List[str]
-    ) -> Union[Dict[str, float], float]:
+    ) -> float:
         metric = load(metric_name)
         results = metric.compute(
             predictions=predictions,
@@ -18,19 +18,20 @@ def generic_evaluate_function(
         )
         if metric_name in ["bleu"]:
             assert isinstance(results, dict)
-            return results
-        if metric_name == "mauve":
+            return results["bleu"]
+        elif metric_name == "mauve":
             return getattr(results, "mauve")
-        if isinstance(results, dict):
-            for key in results:
-                if isinstance(results[key], list):
-                    results[key] = np.mean(results[key])
-            return results
-        elif isinstance(results, list):
-            return np.mean(results)
-        else:
-            assert isinstance(results, float)
-            return results
+        elif metric_name == "bertscore":
+            assert isinstance(results, dict)
+            return np.mean(results["f1"])
+        elif metric_name == "rouge":
+            assert isinstance(results, dict)
+            return np.mean(results["rougeL"])
+        elif metric_name == "meteor":
+            assert isinstance(results, dict)
+            return results["meteor"]
+        assert isinstance(results, float)
+        return results
 
     return {
         metric_name: evaluate_metric(metric_name, predictions, references)

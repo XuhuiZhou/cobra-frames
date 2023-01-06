@@ -1,5 +1,5 @@
 import os
-from typing import Callable, Sequence, cast
+from typing import Callable, List, Sequence, cast
 
 import gin
 import pandas as pd
@@ -21,39 +21,59 @@ import sys
 import traceback
 
 
-class Suppressor(object):
-    def __enter__(self):
-        self.stdout = sys.stdout
-        sys.stdout = self
-
-    def __exit__(self, type, value, traceback):
-        sys.stdout = self.stdout
-        if type is not None:
-            # Do normal exception handling
-            pass
-
-    def write(self, x):
-        pass
-
-
 @gin.configurable
 def evaluate(
     *,
     prediction_dict: dict,
-    reference_dict: dict,
+    reference_dict: dict = {},
+    result_dump_path: str = "",
+    metric_names: List[str] = ["bleu"],
 ):
+    logged_results = {}
     for key in prediction_dict:
         logging.info(f"Evaluating {key}")
-        with Suppressor():
-            prediction = prediction_dict[key]
-            reference = reference_dict[key]
-            assert len(prediction) == len(reference)
-            results = generic_evaluate_function(
-                ["bleu", "rouge", "meteor", "bertscore", "mauve"],
-                prediction,
-                reference,
-            )
+        prediction = prediction_dict[key]
+        reference = reference_dict[key]
+        assert len(prediction) == len(reference)
+        results = generic_evaluate_function(
+            metric_names,
+            prediction,
+            reference,
+        )
+        logged_results[key] = results
         logging.info(f"Results for {key}: {results}")
+    if result_dump_path:
+        with open(result_dump_path, "w") as f:
+            f.write("," + ",".join(metric_names) + "\n")
+            for key in logged_results:
+                f.write(
+                    f"{key},"
+                    + ",".join(
+                        [
+                            str(logged_results[key][metric])
+                            for metric in metric_names
+                        ]
+                    )
+                    + "\n"
+                )
+            f.write(
+                "average,"
+                + ",".join(
+                    [
+                        str(
+                            sum(
+                                [
+                                    logged_results[key][metric]
+                                    for key in logged_results
+                                ]
+                            )
+                            / len(logged_results)
+                        )
+                        for metric in metric_names
+                    ]
+                )
+                + "\n"
+            )
 
 
 def predict(
@@ -69,7 +89,7 @@ def predict(
     answer_df = pd.DataFrame.from_dict(answer_dict)
     answer_df.to_csv(os.path.join(output_dir, "answer.csv"), index=False)
     logging.info("Evaluating predictions")
-    evaluate(prediction_dict=answer_dict)  # type: ignore
+    evaluate(prediction_dict=answer_dict)
 
 
 def main(_):
