@@ -31,6 +31,9 @@ sbf_modeling.ExplainModel.predict:
     args = @transformers.Seq2SeqTrainingArguments()
     gen_kwargs = %GEN_KWARGS
 
+inference_script.evaluate:
+    reference_dict = @data_utils.get_data()
+
 inference_script.predict:
     model = @sbf_modeling.ExplainModel()
     output_dir= %MODEL_DIR

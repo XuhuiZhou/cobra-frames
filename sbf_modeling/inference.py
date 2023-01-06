@@ -9,12 +9,51 @@ from datasets.arrow_dataset import Dataset
 from transformers import Seq2SeqTrainingArguments
 
 from sbf_modeling import BaseSBFModel, ExplainModel, gin_utils
+from sbf_modeling.evaluation_utils import generic_evaluate_function
 
 _DEFAULT_GIN_SEARCH_PATHS = [
     os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ]
 
 FLAGS = flags.FLAGS
+
+import sys
+import traceback
+
+
+class Suppressor(object):
+    def __enter__(self):
+        self.stdout = sys.stdout
+        sys.stdout = self
+
+    def __exit__(self, type, value, traceback):
+        sys.stdout = self.stdout
+        if type is not None:
+            # Do normal exception handling
+            pass
+
+    def write(self, x):
+        pass
+
+
+@gin.configurable
+def evaluate(
+    *,
+    prediction_dict: dict,
+    reference_dict: dict,
+):
+    for key in prediction_dict:
+        logging.info(f"Evaluating {key}")
+        with Suppressor():
+            prediction = prediction_dict[key]
+            reference = reference_dict[key]
+            assert len(prediction) == len(reference)
+            results = generic_evaluate_function(
+                ["bleu", "rouge", "meteor", "bertscore", "mauve"],
+                prediction,
+                reference,
+            )
+        logging.info(f"Results for {key}: {results}")
 
 
 def predict(
@@ -29,6 +68,8 @@ def predict(
     logging.info("Model inference done")
     answer_df = pd.DataFrame.from_dict(answer_dict)
     answer_df.to_csv(os.path.join(output_dir, "answer.csv"), index=False)
+    logging.info("Evaluating predictions")
+    evaluate(prediction_dict=answer_dict)  # type: ignore
 
 
 def main(_):
