@@ -28,6 +28,9 @@ sbf_modeling.ExplainModel:
 sbf_modeling.ExplainModel.predict:
     dataset = @data_utils.get_data()
     args = @transformers.Seq2SeqTrainingArguments()
+    gen_kwargs = {
+        "do_sample": True,
+    }
 
 inference_script.predict:
     model = @sbf_modeling.ExplainModel()

@@ -3,7 +3,7 @@ from __future__ import annotations
 import os
 import re
 from functools import partial
-from typing import Dict, List, Tuple, cast
+from typing import Any, Dict, List, Tuple, cast
 
 import numpy as np
 import numpy.typing as npt
@@ -159,6 +159,7 @@ class ExplainModel(BaseSBFModel):
             predict_with_generate=True,  # generation in evaluation
             prediction_loss_only=False,  # generation in evaluation
         ),
+        gen_kwargs: Dict[str, Any] = {},
     ) -> Dict[str, List[str]]:
         """
         Predict the reward for the given dataset.
@@ -193,6 +194,7 @@ class ExplainModel(BaseSBFModel):
         predict_results = trainer.predict(
             prompt_dataset,
             metric_key_prefix="predict",
+            **gen_kwargs,
         )
         predictions = predict_results.predictions
         predictions = self.tokenizer.batch_decode(
