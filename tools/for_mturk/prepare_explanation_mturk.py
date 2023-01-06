@@ -28,7 +28,7 @@ def main():
     # previous_mturk_file = (
     #     "data/inference_data/toxigen_explanations_v2/toxigen_mturk.csv"
     # )
-    saved_mturk_file = f"data/inference_data/{model}/mturk_1.csv"
+    saved_mturk_file = f"data/inference_data/{model}/mturk_2.csv"
     previous_mturk_file = None
     sample_num = 40
 
