@@ -16,6 +16,13 @@ if [[ $EXP == "xxl" ]]; then
         --gin.MODEL_DIR="'.log/explain-model-xxl'" \
         --gin.MODE="'deployment'" \
         --gin.BATCH_SIZE=4
+elif [[ $EXP == "xl_greedy" ]]; then
+    python sbf_modeling/inference.py \
+        --gin_file="scripts/explain_model/explain_model_inference.gin" \
+        --gin_file="exp/configs/greedy.gin" \
+        --gin.MODEL_DIR="'.log/explain-model-xl'" \
+        --gin.MODE="'deployment'" \
+        --gin.BATCH_SIZE=4
 elif [[ $EXP == "xl_w_o_context" ]]; then
     python sbf_modeling/inference.py \
     --gin_file="scripts/explain_model/explain_model_inference.gin" \
