@@ -96,21 +96,19 @@
                     When you interpret the message, make sure you take into account the speaker and listener's
                     identities as well as the situation.--></p>
 
-    <p style="margin-bottom: .5rem;"><span class="numbering">3)</span> <strong>Rate</strong> the contexts and <strong>answer</strong> how the contexts may influence the <strong>offensiveness</strong> of the statement.
-      <!-- <ul>
-        <li><em class="context">rate the contexts</em>: rate whether the contexts are plausible given the statement.</li>
-        <li><em class="context">which context makes the statement more offensive/less harmless</em>: </li>
-        <li><em class="context">the statement is offensive under which context</em>: </li>
-        <li><em class="context">the statement is harmless under which context</em>: </li>
-      </ul> -->
-
-    <br><br>
+    <p style="margin-bottom: .5rem;"><span class="numbering">3)</span> <strong>Rate</strong> the contexts and <strong>answer</strong> how the contexts may influence the <strong>offensiveness</strong> of the statement. Below are the instructions for each question.</p>
+      <ul>
+        <li>Does the <span class="cb-blue">scenario A/B</span> seem plausible/realistic? (rate whether the contexts are plausible given the statement)</li>
+        <li>Which <em class="context">scenario</em> makes the statement potentially <span class="cb-purple">more problematic/offensive/biased/toxic</span>? (Here we ask for a comparison, while the scenario itself does not have to make the statement actually offensive, which is what the last question ask)</li>
+        <li>Which <em class="context">scenario</em> makes the statement <span class="cb-green">harmless</span>? (confirm whether the statement is harmless under the scenario)</li>
+        <li>Which <em class="context">scenario</em> makes the statement <span class="cb-brown">problematic/offensive/biased/toxic</span>? (confirm whether the statement is problematic/offensive/biased/toxic under the scenario) </li>
+      </ul>
     <b>❗Notes</b> <a aria-controls="instructions" aria-expanded="false" data-toggle="collapse" href="#notes" role="button" style="color:#0080ff;"> (Expand/Collapse) </a>:
 
     <div class="collapse show" id="notes">
     <ul>
         <li>
-            <strong>Rare situational context</strong>: Sometimes some situational context may seem to rarely happen in real life. For example, a statement "all jews are money grabbing, hook-nosed monsters" has the situational context "a discussion about the Holocaust in a world history classroom". Though it is rarely the case someone would say things like this in a history classroom, it could happen and makes the statement extremely hateful. Since we would like to include these scenarios in our dataset, we consider these rare situational context as somewhat plausible.
+          <strong>Rare situational context</strong>: Sometimes some situational context may seem to rarely happen in real life. For example, a statement "all jews are money grabbing, hook-nosed monsters" has the situational context "a discussion about the Holocaust in a world history classroom". Though it is rarely the case someone would say things like this in a history classroom, it could happen and makes the statement extremely hateful. Since we would like to include these scenarios in our dataset, we consider these rare situational context as somewhat plausible.
         </li>
     </ul>
     </div>
@@ -157,15 +155,15 @@
             <td>plausible (since the statement often happens when someone ignores other's pain)</td>
           </tr>
           <tr>
-            <td class="cb-gray" style="width: 70%;" colspan="2">Which <em class="context">scenario</em> makes the statment seem more <span class="cb-purple">problematic</span>?</td>
-            <td>Scenario B (the male co-worker downplays the harm of sexual harassment; microaggression)</td>
+            <td class="cb-gray" style="width: 70%;" colspan="2">Which <em class="context">scenario</em> makes the statement potentially <span class="cb-purple">more problematic/offensive/biased/toxic</span>?</td>
+            <td>Scenario B (Scenario B is more problematic because the scenario A is about comforting while the scenario B ignores others' pain)</td>
           </tr>
           <tr>
             <td class="cb-gray" style="width: 70%;" colspan="2">Which <em class="context">scenario</em> makes the statement <span class="cb-green">harmless</span>?&nbsp;</td>
             <td>Scenario A (the statement serves to comfort the listener)</td>
           </tr>
           <tr>
-            <td class="cb-gray" style="width: 70%;" colspan="2">Which <em class="context">scenario</em> makes the statement <span class="cb-brown">offensive</span>?</td>
+            <td class="cb-gray" style="width: 70%;" colspan="2">Which <em class="context">scenario</em> makes the statement <span class="cb-brown">problematic/offensive/biased/toxic</span>?</td>
             <td>Scenario B (the statement implies that sexual harassment to women is tolerable)</td>
           </tr>
         </tbody>
@@ -296,13 +294,13 @@
       </table>
 
       <div class="col-12 mt-3 mb-2">
-        <h4 style="font-style: italic;">2. Which <span class="cb-blue">scenario</span> makes the statement seem more <span class="cb-purple">problematic</span>?</h4>
+        <h4 style="font-style: italic;">2. Which <span class="cb-blue">scenario</span> makes the statement potentially <span class="cb-purple">more problematic/offensive/biased/toxic</span>?</h4>
       </div>
       <table class="table table-striped" id="inputTable">
         <tr>
           <td style="width: 65%;">
-            <label><input class="likelihood" for="moreOff" name="moreOff" type="radio" value="0" /> Scenario A</label><br />
-            <label><input class="likelihood" for="moreOff" name="moreOff" type="radio" value="1" /> Scenario B</label><br/>
+            <label><input class="agreement" for="moreOff" name="moreOff" type="radio" value="0" required/> Scenario A</label><br />
+            <label><input class="agreement" for="moreOff" name="moreOff" type="radio" value="1" /> Scenario B</label><br/>
           </td>
         </tr>
       </table>
@@ -313,24 +311,24 @@
       <table class="table table-striped" id="inputTable">
         <tr>
             <td style="width: 65%;">
-                <label><input class="likelihood" for="harmlessOne" name="harmlessOne" type="radio" value="0" /> Scenario A</label><br />
-                <label><input class="likelihood" for="harmlessOne" name="harmlessOne" type="radio" value="1" /> Scenario B</label><br/>
-                <label><input class="likelihood" for="harmlessOne" name="harmlessOne" type="radio" value="-1" /> None, the statment is offensive under the two scenarios</label><br/>
-                <label><input class="likelihood" for="harmlessOne" name="harmlessOne" type="radio" value="-1" /> Both, the statment is harmless under the two scenarios</label><br/>
+                <label><input class="agreement" for="harmlessOne" name="harmlessOne" type="radio" value="0" required/> Scenario A</label><br />
+                <label><input class="agreement" for="harmlessOne" name="harmlessOne" type="radio" value="1" /> Scenario B</label><br/>
+                <label><input class="agreement" for="harmlessOne" name="harmlessOne" type="radio" value="-1" /> None, the statement is offensive under the two scenarios</label><br/>
+                <label><input class="agreement" for="harmlessOne" name="harmlessOne" type="radio" value="-1" /> Both, the statement is harmless under the two scenarios</label><br/>
             </td>
         </tr>
       </table>
 
       <div class="col-12 mt-3 mb-2">
-        <h4 style="font-style: italic;">4. Which <span class="cb-blue">scenario</span> makes the statement <span class="cb-brown">offensive</span> ?</h4>
+        <h4 style="font-style: italic;">4. Which <span class="cb-blue">scenario</span> makes the statement <span class="cb-brown">problematic/offensive/biased/toxic</span> ?</h4>
       </div>
       <table class="table table-striped" id="inputTable">
         <tr>
             <td style="width: 65%;">
-                <label><input class="likelihood" for="offensiveOne" name="offensiveOne" type="radio" value="0" /> Scenario A</label><br />
-                <label><input class="likelihood" for="offensiveOne" name="offensiveOne" type="radio" value="1" /> Scenario B</label><br/>
-                <label><input class="likelihood" for="offensiveOne" name="offensiveOne" type="radio" value="-1" /> None, the statment is harmless under the two scenarios</label><br/>
-                <label><input class="likelihood" for="offensiveOne" name="offensiveOne" type="radio" value="-1" /> Both, the statment is offensive under the two scenarios</label><br/>
+                <label><input class="agreement" for="offensiveOne" name="offensiveOne" type="radio" value="0" required/> Scenario A</label><br />
+                <label><input class="agreement" for="offensiveOne" name="offensiveOne" type="radio" value="1" /> Scenario B</label><br/>
+                <label><input class="agreement" for="offensiveOne" name="offensiveOne" type="radio" value="-1" /> None, the statement is harmless under the two scenarios</label><br/>
+                <label><input class="agreement" for="offensiveOne" name="offensiveOne" type="radio" value="-1" /> Both, the statement is offensive under the two scenarios</label><br/>
             </td>
         </tr>
       </table>
@@ -514,8 +512,8 @@
       }
 
       function validate(){
-
         valid = $("input:invalid").length == 0;
+        console.log($("input:invalid"))
         console.log("########## VALIDATING #########\nvalid? "+valid);
         $("input:invalid").each(function (i,e){
           console.log(e);
