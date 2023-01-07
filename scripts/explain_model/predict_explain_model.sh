@@ -52,9 +52,9 @@ elif [[ $EXP == "xl" ]]; then
 elif [[ $EXP == "large" ]]; then
     python sbf_modeling/inference.py \
         --gin_file="scripts/explain_model/explain_model_inference.gin" \
-        --gin.MODEL_DIR="'.log/explain-model-l'" \
+        --gin.MODEL_DIR="'.log/explain-model-large'" \
         --gin.EVALUATE_METRICS="['bleu', 'bertscore']" \
-        --gin.RESULT_FILE="'.log/explain-model-l/results.csv'" \
+        --gin.RESULT_FILE="'.log/explain-model-large/results.csv'" \
         --gin.MODE="'deployment'" \
         --gin.BATCH_SIZE=4
 else
