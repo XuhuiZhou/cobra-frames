@@ -1,0 +1,1 @@
+GEN_KWARGS = {'num_beams': 1, 'do_sample': False}
