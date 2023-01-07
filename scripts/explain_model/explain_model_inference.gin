@@ -9,6 +9,7 @@ MODE="tests"
 MODEL_DIR = %gin.required
 BATCH_SIZE = %gin.required
 RESULT_FILE = ""
+EVALUATE_METRICS = ["bleu"]
 GEN_KWARGS = {'do_sample': False}  # For a full range of generation kwargs, see transformers.generation_utils.GenerationMixin.generate
 
 data_utils.get_data:
@@ -34,7 +35,7 @@ sbf_modeling.ExplainModel.predict:
 
 inference_script.evaluate:
     reference_dict = @data_utils.get_data()
-    metric_names = ["bleu", "bertscore"]
+    metric_names = %EVALUATE_METRICS
     result_dump_path = %RESULT_FILE
 
 inference_script.predict:

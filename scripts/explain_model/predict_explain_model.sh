@@ -22,6 +22,7 @@ elif [[ $EXP == "xl_greedy" ]]; then
         --gin_file="exp/configs/greedy.gin" \
         --gin.MODEL_DIR="'.log/explain-model-xl'" \
         --gin.RESULT_FILE="'.log/explain-model-xl/greedy-results.csv'" \
+        --gin.EVLUATE_METRICS="['bleu', 'bertscore']" \
         --gin.MODE="'deployment'" \
         --gin.BATCH_SIZE=4
 elif [[ $EXP == "xl_topp" ]]; then
@@ -30,6 +31,7 @@ elif [[ $EXP == "xl_topp" ]]; then
         --gin_file="exp/configs/topp.gin" \
         --gin.MODEL_DIR="'.log/explain-model-xl'" \
         --gin.RESULT_FILE="'.log/explain-model-xl/topp-results.csv'" \
+        --gin.EVLUATE_METRICS="['bleu', 'bertscore']" \
         --gin.MODE="'deployment'" \
         --gin.BATCH_SIZE=4
 elif [[ $EXP == "xl_w_o_context" ]]; then
