@@ -1,6 +1,7 @@
 from typing import Dict, List, Union
 
 import numpy as np
+from absl import logging
 from evaluate import load
 
 
@@ -11,11 +12,15 @@ def generic_evaluate_function(
         metric_name: str, predictions: List[str], references: List[str]
     ) -> float:
         metric = load(metric_name)
-        results = metric.compute(
-            predictions=predictions,
-            references=references,
-            **({} if metric_name != "bertscore" else {"lang": "en"})
-        )
+        try:
+            results = metric.compute(
+                predictions=predictions,
+                references=references,
+                **({} if metric_name != "bertscore" else {"lang": "en"}),
+            )
+        except Exception as e:
+            logging.error(f"Error while computing {metric_name}: {e}")
+            return 0.0
         if metric_name in ["bleu"]:
             assert isinstance(results, dict)
             return results["bleu"]
