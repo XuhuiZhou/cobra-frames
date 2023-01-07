@@ -21,7 +21,7 @@ SEED=1
 
 python populateSBFwithGPT3.v5.py \
     --input_file $INPUT \
-    --example_file_context $EXAMPLE \
+    --example_file $EXAMPLE \
     --output_file $OUTPUT \
     --random_seed $SEED \
     --sample 20 \

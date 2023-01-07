@@ -1,5 +1,6 @@
 from typing import Dict, List, cast
 
+import gin
 import numpy as np
 from datasets.arrow_dataset import Dataset
 from transformers import PreTrainedTokenizer
@@ -7,7 +8,16 @@ from transformers import PreTrainedTokenizer
 CONTEXT_LENGTH = 512
 TARGET_LENGTH = 512
 
-CONTEXT_TEMPLATE = "This is {situationalContext}, {speakerIdentity} speaking to {listenerIdentity}: {statement}\n"
+
+@gin.configurable
+def create_context_template(
+    with_context: bool = True,
+):
+    if with_context:
+        return "This is {situationalContext}, {speakerIdentity} speaking to {listenerIdentity}: {statement}\n"
+    else:
+        return "Please analyze the intent, target group, power dynamics, implication, the emotional and cognitive reaction of the target group and offensiveness of {statement}\n"
+
 
 QUESTION_TEMPLATES = dict(
     intent="What is the intent of the speaker?",
@@ -25,7 +35,7 @@ def map_dataset_to_tokenized_prompt(
 ) -> Dict[str, np.ndarray]:
     element_cast: Dict[str, List[str]] = cast(Dict[str, List[str]], element)  # type: ignore
     context_input = map(
-        lambda instance: CONTEXT_TEMPLATE.format(**instance),
+        lambda instance: create_context_template().format(**instance),
         (dict(zip(element_cast, t)) for t in zip(*element_cast.values())),
     )
     target = map(

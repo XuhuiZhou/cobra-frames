@@ -8,13 +8,16 @@ import transformers
 MODE="tests"
 MODEL_DIR = %gin.required
 BATCH_SIZE = %gin.required
+RESULT_FILE = ""
+EVALUATE_METRICS = ["bleu"]
+GEN_KWARGS = {'do_sample': False}  # For a full range of generation kwargs, see transformers.generation_utils.GenerationMixin.generate
 
 data_utils.get_data:
     mode = %MODE
     split = "validation"
 
 transformers.Seq2SeqTrainingArguments:
-    output_dir=".log/_explain_model"
+    output_dir= %MODEL_DIR
     per_device_eval_batch_size=%BATCH_SIZE
     generation_max_length=512
     generation_num_beams=4
@@ -28,7 +31,13 @@ sbf_modeling.ExplainModel:
 sbf_modeling.ExplainModel.predict:
     dataset = @data_utils.get_data()
     args = @transformers.Seq2SeqTrainingArguments()
+    gen_kwargs = %GEN_KWARGS
+
+inference_script.evaluate:
+    reference_dict = @data_utils.get_data()
+    metric_names = %EVALUATE_METRICS
+    result_dump_path = %RESULT_FILE
 
 inference_script.predict:
     model = @sbf_modeling.ExplainModel()
-    output_dir=".log/_explain_model"
+    output_dir= %MODEL_DIR

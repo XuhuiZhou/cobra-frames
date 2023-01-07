@@ -1,0 +1,4 @@
+import sbf_modeling
+
+sbf_modeling.prompt_templates.create_context_template:
+    with_context=False
