@@ -1,8 +1,7 @@
 # /bin/bash
 # This script should be excuted in the root directory of the project
-# chmod +x scripts/explain_model/train_explain_model.sh
-# ./scripts/explain_model/train_explain_model.sh
-# MODEL_DIR='.log/explain-model-xl-w-o-context'
+# chmod +x scripts/explain_model/predict_explain_model.sh
+# ./scripts/explain_model/predict_explain_model.sh [experiment_name]
 ## Default evaluate metric is BLEU only
 
 EXP="$1"
@@ -41,12 +40,16 @@ elif [[ $EXP == "xl_w_o_context" ]]; then
         --gin_file="scripts/explain_model/explain_model_inference.gin" \
         --gin_file="exp/configs/without_context.gin" \
         --gin.MODEL_DIR="'.log/explain-model-xl-w-o-cotext'" \
+        --gin.EVALUATE_METRICS="['bleu', 'bertscore']" \
+        --gin.RESULT_FILE="'.log/explain-model-xl-w-o-cotext/results.csv'" \
         --gin.MODE="'deployment'" \
         --gin.BATCH_SIZE=4
 elif [[ $EXP == "xl" ]]; then
     python sbf_modeling/inference.py \
         --gin_file="scripts/explain_model/explain_model_inference.gin" \
         --gin.MODEL_DIR="'.log/explain-model-xl'" \
+        --gin.EVALUATE_METRICS="['bleu', 'bertscore']" \
+        --gin.RESULT_FILE="'.log/explain-model-xl/results.csv'" \
         --gin.MODE="'deployment'" \
         --gin.BATCH_SIZE=4
 elif [[ $EXP == "large" ]]; then
