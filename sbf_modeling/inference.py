@@ -81,13 +81,19 @@ def predict(
     model: BaseSBFModel,
     output_dir: str,
 ):
-    logging.info("Model predicting")
-    if torch.cuda.is_available():
-        model.model = model.model.cuda()  # type: ignore
-    answer_dict = model.predict()
-    logging.info("Model inference done")
-    answer_df = pd.DataFrame.from_dict(answer_dict)
-    answer_df.to_csv(os.path.join(output_dir, "answer.csv"), index=False)
+    # Check if the output file already exists
+    if os.path.exists(os.path.join(output_dir, "answer.csv")):
+        logging.info("Output file already exists, skipping inference")
+        answer_df = pd.read_csv(os.path.join(output_dir, "answer.csv"))
+        answer_dict = answer_df.to_dict(orient="list")
+    else:
+        logging.info("Model predicting")
+        if torch.cuda.is_available():
+            model.model = model.model.cuda()  # type: ignore
+        answer_dict = model.predict()
+        logging.info("Model inference done")
+        answer_df = pd.DataFrame.from_dict(answer_dict)
+        answer_df.to_csv(os.path.join(output_dir, "answer.csv"), index=False)
     logging.info("Evaluating predictions")
     evaluate(prediction_dict=answer_dict)
 
