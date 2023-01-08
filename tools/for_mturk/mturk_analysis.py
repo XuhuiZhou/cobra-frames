@@ -69,6 +69,10 @@ Task_cols = {
             "Answer.speakerIdenSuggestion",
         ],
     ),
+    "adv": (
+        ["Answer.harmlessOne", "Answer.moreOff", "Answer.offensiveOne"],
+        ["Answer.scenarioARating", "Answer.scenarioBRating"],
+    ),
 }
 
 
@@ -224,6 +228,40 @@ def record_annotation_summary(df_info, df, args):
         ]
         df_info = df_info[relevant_cols]
 
+    elif args.task == "adv":
+        df = df[
+            [
+                "HITId",
+                "Input.statement",
+                "Input.situationalContext",
+                "Input.speaker",
+                "Input.listener",
+                "Input.situationalContext2",
+                "Input.offensive_position",
+                "Input.speaker2",
+                "Input.listener2",
+            ]
+        ]
+        df_info = df.merge(df_info, on="HITId")
+        relevant_cols = [
+            "HITId",
+            "Input.statement",
+            "Input.situationalContext",
+            "Input.speaker",
+            "Input.listener",
+            "Input.situationalContext2",
+            "Input.speaker2",
+            "Input.listener2",
+            "Input.offensive_position_x",
+            "Answer.harmlessOne",
+            "Answer.moreOff",
+            "Answer.offensiveOne",
+            "Answer.scenarioARating",
+            "Answer.scenarioBRating",
+        ]
+        df_info = df_info[relevant_cols]
+        # rename columns
+
     elif args.task == "explanation":
         df = df[
             [
@@ -296,6 +334,8 @@ def record_annotation_summary(df_info, df, args):
     for i in df_info.keys():
         if "Rating" in i:
             df_info[i] = df_info[i].astype(int)
+        if "harmlessOne" in i or "offensiveOne" in i or "moreOff" in i:
+            df_info[i] = df_info[i].astype(int)
     return df_info
 
 
@@ -332,7 +372,7 @@ def render_offensiveness_labels(offensiveness):
 
 def output_aggregation(df, col, args):
     df_info = df.copy()
-    if not args.binary:
+    if not args.binary and args.task == "explanation":
         # Special treatment for the offensiveness rating
         df["Answer.offensivenessRating"] = [
             args.boundary + 1 if j == "not offensive" and i == -1 else i
