@@ -175,7 +175,6 @@ class ExplainModel(BaseSBFModel):
             partial(
                 map_dataset_to_tokenized_prompt,
                 self.tokenizer,
-                with_labels=False,
             ),
             batched=True,
             load_from_cache_file=False,

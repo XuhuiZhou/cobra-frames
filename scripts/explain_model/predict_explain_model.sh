@@ -66,8 +66,18 @@ elif [[ $EXP == "xl_adv" ]]; then
         --gin_file="exp/configs/adv_context.gin" \
         --gin.MODEL_DIR="'.log/explain-model-xl'" \
         --gin.OUTPUT_DIR="'.log/explain-model-xl/adv'" \
-        --gin.EVALUATE_METRICS="['BLEU']" \
+        --gin.EVALUATE_METRICS="['bleu']" \
         --gin.RESULT_FILE="'.log/explain-model-xl/results_adv.csv'" \
+        --gin.MODE="'deployment'" \
+        --gin.BATCH_SIZE=4
+elif [[ $EXP == "xl_wo_context_adv" ]]; then
+    python sbf_modeling/inference.py \
+        --gin_file="scripts/explain_model/explain_model_inference.gin" \
+        --gin_file="exp/configs/adv_context.gin" \
+        --gin.MODEL_DIR="'.log/explain-model-xl-w-o-cotext'" \
+        --gin.OUTPUT_DIR="'.log/explain-model-xl-w-o-cotext/adv'" \
+        --gin.EVALUATE_METRICS="['bleu']" \
+        --gin.RESULT_FILE="'.log/explain-model-xl-w-o-cotext/results_adv.csv'" \
         --gin.MODE="'deployment'" \
         --gin.BATCH_SIZE=4
 else

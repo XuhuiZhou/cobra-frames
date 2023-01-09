@@ -103,7 +103,7 @@ def get_train_data(split: str = "") -> DatasetDict:
     if split == "":
         return datasets.load.load_dataset("context-sbf/context-sbf")  # type: ignore # we know this is a Dataset
     elif split == "adv":
-        data_files = {"advtest": "mAgr_contexts_single.csv"}
+        data_files = {"advtest": "mAgr_contexts_explanations.csv"}
         return datasets.load.load_dataset("context-sbf/context-sbf", split="advtest", data_files=data_files)  # type: ignore
     else:
         return datasets.load.load_dataset("context-sbf/context-sbf", split=split)  # type: ignore
