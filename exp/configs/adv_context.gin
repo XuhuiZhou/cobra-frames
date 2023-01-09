@@ -1,0 +1,20 @@
+from __gin__ import dynamic_registration
+import __main__ as inference_script
+import sbf_modeling
+import sbf_modeling.utils.data as data_utils
+import transformers
+
+OUTPUT_DIR = %gin.required
+
+data_utils.get_data:
+    mode = %MODE
+    split = "adv"
+
+sbf_modeling.ExplainModel.predict:
+    dataset = @data_utils.get_data()
+    args = @transformers.Seq2SeqTrainingArguments()
+    gen_kwargs = %GEN_KWARGS
+
+inference_script.predict:
+    model = @sbf_modeling.ExplainModel()
+    output_dir= %OUTPUT_DIR

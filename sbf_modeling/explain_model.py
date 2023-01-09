@@ -58,8 +58,8 @@ class ExplainModel(BaseSBFModel):
         self.model: T5ForConditionalGeneration = cast(  # type: ignore
             T5ForConditionalGeneration, self.model
         )
-        if t5_model_name in ["google/flan-t5-xxl", "google/flan-t5-xl"]:
-            self.model.parallelize()
+        # if t5_model_name in ["google/flan-t5-xxl", "google/flan-t5-xl"]:
+        #     self.model.parallelize()
         self.tokenizer: T5Tokenizer = T5Tokenizer.from_pretrained(
             t5_model_name
         )
@@ -172,7 +172,11 @@ class ExplainModel(BaseSBFModel):
                 -
         """
         prompt_dataset = dataset.map(
-            partial(map_dataset_to_tokenized_prompt, self.tokenizer),
+            partial(
+                map_dataset_to_tokenized_prompt,
+                self.tokenizer,
+                with_labels=False,
+            ),
             batched=True,
             load_from_cache_file=False,
             remove_columns=dataset.column_names,

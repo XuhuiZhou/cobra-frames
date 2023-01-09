@@ -60,6 +60,16 @@ elif [[ $EXP == "large" ]]; then
         --gin.RESULT_FILE="'.log/explain-model-large/results.csv'" \
         --gin.MODE="'deployment'" \
         --gin.BATCH_SIZE=4
+elif [[ $EXP == "xl_adv" ]]; then
+    python sbf_modeling/inference.py \
+        --gin_file="scripts/explain_model/explain_model_inference.gin" \
+        --gin_file="exp/configs/adv_context.gin" \
+        --gin.MODEL_DIR="'.log/explain-model-xl'" \
+        --gin.OUTPUT_DIR="'.log/explain-model-xl/adv'" \
+        --gin.EVALUATE_METRICS="['BLEU']" \
+        --gin.RESULT_FILE="'.log/explain-model-xl/results_adv.csv'" \
+        --gin.MODE="'deployment'" \
+        --gin.BATCH_SIZE=4
 else
     echo "Experiment name not found"
     exit 1
