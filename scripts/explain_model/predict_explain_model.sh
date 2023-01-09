@@ -40,7 +40,7 @@ elif [[ $EXP == "xl_w_o_context" ]]; then
         --gin_file="scripts/explain_model/explain_model_inference.gin" \
         --gin_file="exp/configs/without_context.gin" \
         --gin.MODEL_DIR="'.log/explain-model-xl-w-o-cotext'" \
-        --gin.EVALUATE_METRICS="['bleu', 'bertscore']" \
+        --gin.EVALUATE_METRICS="['bleu', 'bertscore' , 'rouge']" \
         --gin.RESULT_FILE="'.log/explain-model-xl-w-o-cotext/results.csv'" \
         --gin.MODE="'deployment'" \
         --gin.BATCH_SIZE=4
@@ -48,7 +48,7 @@ elif [[ $EXP == "xl" ]]; then
     python sbf_modeling/inference.py \
         --gin_file="scripts/explain_model/explain_model_inference.gin" \
         --gin.MODEL_DIR="'.log/explain-model-xl'" \
-        --gin.EVALUATE_METRICS="['bleu', 'bertscore']" \
+        --gin.EVALUATE_METRICS="['bleu', 'bertscore', 'rouge']" \
         --gin.RESULT_FILE="'.log/explain-model-xl/results.csv'" \
         --gin.MODE="'deployment'" \
         --gin.BATCH_SIZE=4
@@ -56,7 +56,7 @@ elif [[ $EXP == "large" ]]; then
     python sbf_modeling/inference.py \
         --gin_file="scripts/explain_model/explain_model_inference.gin" \
         --gin.MODEL_DIR="'.log/explain-model-large'" \
-        --gin.EVALUATE_METRICS="['bleu', 'bertscore']" \
+        --gin.EVALUATE_METRICS="['bleu', 'bertscore', 'rouge']" \
         --gin.RESULT_FILE="'.log/explain-model-large/results.csv'" \
         --gin.MODE="'deployment'" \
         --gin.BATCH_SIZE=4
