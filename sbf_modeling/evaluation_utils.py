@@ -4,6 +4,13 @@ import numpy as np
 from absl import logging
 from evaluate import load
 
+metric_params = {
+    "bleu": {"max_order": 2, "smooth": False},
+    "bertscore": {"lang": "en"},
+    "meteor": {},
+    "rouge": {},
+}
+
 
 def generic_evaluate_function(
     metric_names: List[str], predictions: List[str], references: List[str]
@@ -16,7 +23,7 @@ def generic_evaluate_function(
             results = metric.compute(
                 predictions=predictions,
                 references=references,
-                **({} if metric_name != "bertscore" else {"lang": "en"}),
+                **(metric_params.get(metric_name, {})),
             )
         except Exception as e:
             logging.error(f"Error while computing {metric_name}: {e}")
