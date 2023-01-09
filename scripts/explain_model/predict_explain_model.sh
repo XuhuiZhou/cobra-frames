@@ -74,6 +74,7 @@ elif [[ $EXP == "xl_wo_context_adv" ]]; then
     python sbf_modeling/inference.py \
         --gin_file="scripts/explain_model/explain_model_inference.gin" \
         --gin_file="exp/configs/adv_context.gin" \
+        --gin_file="exp/configs/without_context.gin" \
         --gin.MODEL_DIR="'.log/explain-model-xl-w-o-cotext'" \
         --gin.OUTPUT_DIR="'.log/explain-model-xl-w-o-cotext/adv'" \
         --gin.EVALUATE_METRICS="['bleu']" \
