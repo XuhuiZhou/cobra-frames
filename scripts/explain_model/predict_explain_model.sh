@@ -70,6 +70,10 @@ elif [[ $EXP == "xl_adv" ]]; then
         --gin.RESULT_FILE="'.log/explain-model-xl/results_adv.csv'" \
         --gin.MODE="'deployment'" \
         --gin.BATCH_SIZE=4
+
+    python tools/sbf_modeling/evaluate_advContext.py \
+        --prediction_file ".log/explain-model-xl/adv/answer.csv"
+
 elif [[ $EXP == "xl_wo_context_adv" ]]; then
     python sbf_modeling/inference.py \
         --gin_file="scripts/explain_model/explain_model_inference.gin" \
@@ -81,6 +85,9 @@ elif [[ $EXP == "xl_wo_context_adv" ]]; then
         --gin.RESULT_FILE="'.log/explain-model-xl-w-o-cotext/results_adv.csv'" \
         --gin.MODE="'deployment'" \
         --gin.BATCH_SIZE=4
+
+    python tools/sbf_modeling/evaluate_advContext.py \
+        --prediction_file ".log/explain-model-xl-w-o-cotext/adv/answer.csv"
 else
     echo "Experiment name not found"
     exit 1
