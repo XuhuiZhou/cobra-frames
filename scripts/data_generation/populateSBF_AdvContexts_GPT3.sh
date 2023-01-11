@@ -11,7 +11,7 @@ EXAMPLE='./data/prompts/examples.v2.context_statementAdv.csv'
 
 echo "Generate the adversarial contexts and related statements"
 INPUT="./data/source_data/mAgr.onlyQuotes.csv"
-OUTPUT_FILE="mAgr_contexts.csv"
+OUTPUT_FILE="selfGen_contexts.csv"
 OUTPUT_FOLDER="./data/inference_data/adversarial_contexts_statements/"
 
 # Given the input file, dataset_size equals to 0 means that we will use all the examples in the input file
@@ -19,7 +19,7 @@ python ./gpt3_generation/populateAdvContextswithGPT3.py \
     --example_file $EXAMPLE \
     --output_dir $OUTPUT_FOLDER \
     --post 'This is the placeholder' \
-    --dataset_size 0 \
+    --dataset_size 2000 \
     --n_examples 5 \
     --output_file $OUTPUT_FILE \
-    --input_file $INPUT
+    #--input_file $INPUT
