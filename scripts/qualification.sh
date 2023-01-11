@@ -1,6 +1,6 @@
 #!/bin/sh
 
-python ./tools/qualification.py \
-    --qual_score_files "./data/mturk/qual4_results_humanscored.csv" \
-    --qual_id "3P25XSUF8Y5EKM5ZXT3ZZKUBY5J2QF" \
+python ./tools/for_qualification/qualification.py \
+    --qual_score_files "./data/mturk/qualification/qual3_results_humanscored.csv" \
+    --qual_id "33CI7FQ9690ILBPPOSSQ66GJUKPO7B" \
     --qual_score_col "Keep?" \
