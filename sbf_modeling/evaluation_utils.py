@@ -12,6 +12,7 @@ def generic_evaluate_function(
         metric_name: str, predictions: List[str], references: List[str]
     ) -> float:
         metric = load(metric_name)
+        breakpoint()
         try:
             results = metric.compute(
                 predictions=predictions,
