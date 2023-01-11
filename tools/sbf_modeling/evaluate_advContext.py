@@ -6,7 +6,15 @@ import pandas as pd
 
 
 def calculate_accuracy(predictions, labels):
-    return (predictions == labels).astype(int).mean()
+    acc = []
+    for prediction, label in zip(predictions, labels):
+        if label == -1:
+            continue
+        else:
+            print(prediction)
+            acc.append(prediction == label)
+    acc = np.mean(acc)
+    return acc
 
 
 def binarize_offensiveness(offensive):
@@ -27,6 +35,7 @@ def binarize_offensiveness(offensive):
             or "not necessarily offensive" in off
             or "n/a" in off
             or "not applicable" in off
+            or "harmless" in off
         ):
             offensive[i] = "not offensive"
         if "ableis" in off:
@@ -38,6 +47,17 @@ def binarize_offensiveness(offensive):
 
     off_binary = (np.array(offensive) != "not offensive").astype(int)
     return off_binary
+
+
+def output_offensiveness_accuracy(
+    df_prediction, reference_data, variable="offensiveness"
+):
+    offensiveness_prediction = df_prediction["offensiveness"].tolist()
+    offensiveness_reference = reference_data[variable]  # type: ignore
+    prediction_binary = binarize_offensiveness(offensiveness_prediction)
+    reference_binary = offensiveness_reference
+
+    print(calculate_accuracy(prediction_binary, reference_binary))
 
 
 def main():
@@ -56,18 +76,12 @@ def main():
     reference_data = datasets.load.load_dataset(
         "context-sbf/context-sbf", split="advtest", data_files=data_files
     )
-    offensiveness_prediction = df_prediction[args.variable].tolist()
-    offensiveness_reference = reference_data[args.variable]  # type: ignore
-    preset_offensiveness = reference_data["moreOff"]  # type: ignore
-    prediction_binary = binarize_offensiveness(offensiveness_prediction)
-    reference_binary = binarize_offensiveness(offensiveness_reference)
-    preset_binary = np.array(
-        [0 if x == -1 else 1 for x in preset_offensiveness]
+    output_offensiveness_accuracy(
+        df_prediction, reference_data, "offensive_majority"
     )
-
-    print(calculate_accuracy(prediction_binary, reference_binary))
-    print(calculate_accuracy(prediction_binary, preset_binary))
-    print(calculate_accuracy(reference_binary, preset_binary))
+    output_offensiveness_accuracy(
+        df_prediction, reference_data, "offensive_allapp"
+    )
 
 
 if __name__ == "__main__":
