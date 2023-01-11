@@ -60,6 +60,14 @@ elif [[ $EXP == "large" ]]; then
         --gin.RESULT_FILE="'.log/explain-model-large/results.csv'" \
         --gin.MODE="'deployment'" \
         --gin.BATCH_SIZE=4
+elif [[ $EXP == "small" ]]; then
+    python sbf_modeling/inference.py \
+        --gin_file="scripts/explain_model/explain_model_inference.gin" \
+        --gin.MODEL_DIR="'.log/explain-model-small'" \
+        --gin.EVALUATE_METRICS="['bleu', 'bertscore', 'rouge']" \
+        --gin.RESULT_FILE="'.log/explain-model-small/results.csv'" \
+        --gin.MODE="'deployment'" \
+        --gin.BATCH_SIZE=16
 else
     echo "Experiment name not found"
     exit 1
