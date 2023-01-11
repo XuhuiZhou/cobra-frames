@@ -49,22 +49,26 @@ def transform_advContexts(df):
 def main():
     ## Hyperparameters
     file = "data/inference_data/adversarial_contexts_statements/mAgr_contexts_cleaned.csv"
+    # file = "data/inference_data/adversarial_contexts_statements/selfGen_contexts.csv"
     # # temporary info for the 002& 003 difference
     # df = tag_explanations(df)
     # df.to_csv("data/inference_data/toxigen_explanations/toxigen_explanations_tagged.csv", index=False)
     # previous_mturk_file = (
     #     "data/inference_data/toxigen_explanations_v2/toxigen_mturk.csv"
     # )
-    saved_mturk_file = (
-        "data/inference_data/adversarial_contexts_statements/mturk_1.csv"
-    )
-    previous_mturk_file = None
-    sample_num = 75
+    saved_mturk_file = "data/inference_data/adversarial_contexts_statements/mturk_formal_1.csv"
+    previous_mturk_file = [
+        "data/inference_data/adversarial_contexts_statements/mturk_1.csv",
+        "data/inference_data/adversarial_contexts_statements/mturk_3.csv",
+    ]
+    sample_num = 500
 
     df = pd.read_csv(file)
     if previous_mturk_file != None:
-        df_mturk_previous = pd.read_csv(previous_mturk_file)
-        df = df[~df["statement"].isin(df_mturk_previous["statement"])]
+        # read all previous mturk samples
+        for file in previous_mturk_file:
+            df_mturk_previous = pd.read_csv(file)
+            df = df[~df["statement"].isin(df_mturk_previous["statement"])]
 
     if sample_num:
         df_mturk = df.sample(n=sample_num, random_state=1, replace=False)
@@ -78,6 +82,7 @@ def main():
     df_mturk.fillna("none", inplace=True)
     df_mturk = clean_for_mturk(df_mturk)
     df_mturk = transform_advContexts(df_mturk)
+    df_mturk = df_mturk.drop(columns=["examples"])
 
     print("the number of rows in the dataframe is {}".format(len(df_mturk)))
     df_mturk.to_csv(

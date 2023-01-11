@@ -4,7 +4,8 @@ from tools.for_mturk.mturk_analysis_sen import analyze_perCategory
 category_map = {
     1: "Scenario B",
     0: "Scenario A",
-    -1: "Both/neither",
+    -2: "Both",
+    -1: "Neither",
 }
 
 
@@ -74,10 +75,15 @@ def main():
 
     relevant_col, relevant_col2 = Task_cols[args.task]
     df = df.rename(columns={i: i.replace("1", "") for i in df.columns})
+    # Bad workers removal
+    bad_workers = ["A2T11H7YI7QPGD"]
+    print(len(df))
+    df = df[~df["WorkerId"].isin(bad_workers)]
+    print(len(df))
     df_ratings = None
     df_final = None
 
-    for i in [0, 1]:
+    for i in [0, 1, -2, -1]:
         df_info, df_final_cate = analyze_perCategory(df, relevant_col, i, args)
         if args.record_annotation_summary:
             df_info = record_annotation_summary(df_info, df, args)

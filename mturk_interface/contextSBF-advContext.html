@@ -57,6 +57,7 @@
 
     <div class="col-12">
     <div class="alert alert-info" role="alert">Note: More HITs would be available in the future. Meanwhile, we would love to hear your feedback on how to make the task easier to understand!</div>
+    <div class="alert alert-danger" role="alert">Please read the instruction and do the task carefully. We will sample some of the responses and manually review them, if we find evidence to show that annotators are not giving proper efforts to this task, we will exclude them from future tasks.</div>
 
     <hr />
     <h6>Consent to the task to participate:</h6>
@@ -169,67 +170,52 @@
         </tbody>
       </table>
     </div>
-    <!-- <div class="collapse show extra-exs">
+    <div class="collapse show extra-exs">
   <div class="d-flex flex-column" style="margin-top: 20px; margin-bottom: 20px; border-radius: 3px; box-shadow: 1.5px 1.5px 3px 3px rgba(0, 0, 1, 0.2);">
-    <table class="table table-striped" id="inputTable">
-      <tbody>
-        <tr>
-          <td colspan="2"> <em class="context">Statement</em>: any time a trans person asks me to address them by a gendered pronoun i sneer at them and call them male &nbsp;</td>
-        </tr>
-        <tr>
-          <td>
-            <em class="context">Scenario A</em></br>
-            <em class="context_small">Situational context</em>: overheard in a cafe</br>
-            <em class="context_small">Speaker identity</em>: younger cisgender male</br>
-            <em class="context_small">Listener identity</em>: nobody, just muttered to himself
-          </td>
-          <td>
-            <em class="context">Scenario B</em></br>
-            <em class="context_small">Situational context</em>: heated argument between two people on an online platform</br>
-            <em class="context_small">Speaker identity</em>: transphobic person</br>
-            <em class="context_small">Listener identity</em>: transgender person
-          </td>
-          <td><em class="context">Answer</em></td>
-        </tr>
-        <tr>
-          <td class="cb-gray" style="width: 35%;"><span class="cb-teal">Speaker intent A</span></br> The speaker is trying to express his opinion about trans people</td>
-          <td class="cb-gray" style="width: 35%;"><span class="cb-teal">Speaker intent B</span></br> The speaker is trying to express their disdain for transgender people and their identities</td>
-          <td>different, due to contexts (the intents here are aligned with the speaker identity and the situational contexts)</td>
-        </tr>
-        <tr>
-          <td class="cb-gray" style="width: 35%;"><span class="cb-purple">Target (group) A</span></br> trans people&nbsp;</td>
-          <td class="cb-gray" style="width: 35%;"><span class="cb-purple">Target (group) B</span></br> transgender people&nbsp;</td>
-          <td>similar, should be similar (the contexts here should not change the target group)</td>
-        </tr>
-        <tr>
-          <td class="cb-gray" style="width: 35%;"><span class="cb-gold">Power dynamic A</span></br> power differential between cisgender speaker and transgender listener</td>
-          <td class="cb-gray" style="width: 35%;"><span class="cb-gold">Power dynamic B</span></br> gender power differential between speaker and listener, as well as transphobia power differential between the two</td>
-          <td>different, due to contexts</td>
-        </tr>
-        <tr>
-          <td class="cb-gray" style="width: 35%;"><span class="cb-orange">Implication A</span></br> implies that trans people are not valid or worthy of respect, and that they should be addressed by the gender assigned at birth&nbsp;</td>
-          <td class="cb-gray" style="width: 35%;"><span class="cb-orange">Implication B</span></br> implies that transgender people are not valid, and that their chosen pronouns are not valid either&nbsp;</td>
-          <td>similar, should be similar (the implications are basically the same, which questions the validity of transgender people)</td>
-        </tr>
-        <tr>
-          <td class="cb-gray" style="width: 35%;"><span class="cb-green">Target emotional reaction A</span></br> trans people could feel angry, invalidated, and hurt by the statement</td>
-          <td class="cb-gray" style="width: 35%;"><span class="cb-green">Target emotional reaction B</span></br> anger, disappointment, frustration at the invalidation of their identity by the speaker</td>
-          <td>similar, should be similar</td>
-        </tr>
-        <tr>
-          <td class="cb-gray" style="width: 35%;"><span class="cb-brown">Effect on target A</span></br> might lead them to avoid places like this cafe, be more cautious around cisgender people, or feel less safe in public spaces</td>
-          <td class="cb-gray" style="width: 35%;"><span class="cb-brown">Effect on target B</span></br> might want to avoid the online platform, might feel less safe coming out or using their preferred pronouns in public spaces</td>
-          <td>different, due to contexts (the effects are different since the situational contexts are different. )</td>
-        </tr>
-        <tr>
-          <td class="cb-gray" style="width: 35%;"><span class="cb-pink">Type of offensiveness A</span></br> offensive and hate speech</td>
-          <td class="cb-gray" style="width: 35%;"><span class="cb-pink">Type of offensiveness B</span></br> offensive</td>
-          <td>different, not due to contexts (The type of offensiveness A seems more severe than the type of offensivness B, however, it should be the other way around since the intention of the speaker B is directly attacking transgender people. )</td>
-        </tr>
-      </tbody>
-    </table>
+      <table class="table table-striped" id="inputTable">
+        <tbody>
+          <tr>
+            <td colspan="2"> <em class="context">Statement</em>: You’re cute for a dark-skinned girl. &nbsp;</td>
+          </tr>
+          <tr>
+            <td style="width: 35%;">
+              <em class="context">Scenario A</em></br>
+              <em class="context_small">Situational context</em>: two friends are chatting in a bar</br>
+              <em class="context_small">Speaker identity</em>: black male friend </br>
+              <em class="context_small">Listener identity</em>: black female friend
+            </td>
+            <td style="width: 35%;">
+              <em class="context">Scenario B</em></br>
+              <em class="context_small">Situational context</em>: in the middle of a class in the classroom</br>
+              <em class="context_small">Speaker identity</em>: white male teacher</br>
+              <em class="context_small">Listener identity</em>: black female student
+            </td>
+            <td><em class="context">Answer</em></td>
+          </tr>
+          <tr>
+            <td class="cb-gray" style="width: 70%;" colspan="2">Does the <em class="context">scenario A</em> seem plausible/realistic?</td>
+            <td>plausible</td>
+          </tr>
+          <tr>
+            <td class="cb-gray" style="width: 70%;" colspan="2">Does the <em class="context">scenario B</em> seem plausible/realistic?&nbsp;</td>
+            <td>plausible</td>
+          </tr>
+          <tr>
+            <td class="cb-gray" style="width: 70%;" colspan="2">Which <em class="context">scenario</em> makes the statement potentially <span class="cb-purple">more problematic/offensive/biased/toxic</span>?</td>
+            <td>Scenario B (Scenario B is more problematic because the situational context is public and formal)</td>
+          </tr>
+          <tr>
+            <td class="cb-gray" style="width: 70%;" colspan="2">Which <em class="context">scenario</em> makes the statement <span class="cb-green">harmless</span>?&nbsp;</td>
+            <td>None, the statement is offensive under the two scenarios</td>
+          </tr>
+          <tr>
+            <td class="cb-gray" style="width: 70%;" colspan="2">Which <em class="context">scenario</em> makes the statement <span class="cb-brown">problematic/offensive/biased/toxic</span>?</td>
+            <td>Both, the statement is offensive under the two scenarios</td>
+          </tr>
+        </tbody>
+      </table>
   </div>
-    </div> -->
+    </div>
 <a aria-controls="collapseExample" aria-expanded="false" class="collapsed" data-toggle="collapse" href=".extra-exs" onclick="expExamples();">[-] less examples </a></div>
 </div>
 </div>

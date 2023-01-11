@@ -16,6 +16,8 @@ if [[ $EXP == "xxl" ]]; then
     python sbf_modeling/inference.py \
         --gin_file="scripts/explain_model/explain_model_inference.gin" \
         --gin.MODEL_DIR="'.log/explain-model-xxl'" \
+        --gin.EVALUATE_METRICS="['bleu', 'bertscore', 'rouge']" \
+        --gin.RESULT_FILE="'.log/explain-model-xl/results.csv'" \
         --gin.MODE="'deployment'" \
         --gin.BATCH_SIZE=4
 elif [[ $EXP == "xl_greedy" ]]; then
@@ -95,9 +97,6 @@ elif [[ $EXP == "xl_wo_context_adv" ]]; then
         --gin.EVALUATE_METRICS="$EVALUATE_METRICS" \
         --gin.MODE="'deployment'" \
         --gin.BATCH_SIZE=4
-
-    python tools/sbf_modeling/evaluate_advContext.py \
-        --prediction_file ".log/explain-model-xl-w-o-cotext/adv/answer.csv"
 else
     echo "Experiment name not found"
     exit 1
