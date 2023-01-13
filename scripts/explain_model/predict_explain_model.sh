@@ -34,6 +34,7 @@ elif [[ $EXP == "xl_topp" ]]; then
         --gin_file="scripts/explain_model/explain_model_inference.gin" \
         --gin_file="exp/configs/topp.gin" \
         --gin.MODEL_DIR="'.log/explain-model-xl'" \
+        --gin.OUTPUT_DIR="'.log/explain-model-xl/topp'" \
         --gin.RESULT_FILE="'.log/explain-model-xl/topp-results.csv'" \
         --gin.EVALUATE_METRICS="$EVALUATE_METRICS" \
         --gin.MODE="'deployment'" \
@@ -43,7 +44,7 @@ elif [[ $EXP == "xl_topk" ]]; then
         --gin_file="scripts/explain_model/explain_model_inference.gin" \
         --gin_file="exp/configs/topp.gin" \
         --gin.MODEL_DIR="'.log/explain-model-xl'" \
-        --gin.RESULT_FILE="'.log/explain-model-xl/topp-results.csv'" \
+        --gin.RESULT_FILE="'.log/explain-model-xl/topk-results.csv'" \
         --gin.EVALUATE_METRICS="$EVALUATE_METRICS" \
         --gin.MODE="'deployment'" \
         --gin.BATCH_SIZE=4
