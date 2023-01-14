@@ -10,9 +10,9 @@ EXAMPLE='./data/prompts/examples_explanations_expand.v2.csv'
 
 
 echo "Populate the 1 mAgr file with explanations"
-INPUT="./data/inference_data/adversarial_contexts_statements/mAgr_contexts_single.csv"
-SUB_FOLDER="explanations/mAgr_contexts"
-OUTPUT_FOLDER="./data/inference_data/adversarial_contexts_statements/explanations_v2/"
+INPUT="./data/mturk/advContexts/advContexts_final.csv"
+SUB_FOLDER="explanations/"
+OUTPUT_FOLDER="./data/inference_data/adversarial_contexts_statements/explanations_v3/"
 
 python ./gpt3_generation/populateExplanationswithGPT3.py \
     --input_file $INPUT \
