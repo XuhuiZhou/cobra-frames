@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import os
 import re
 from functools import partial
@@ -20,6 +21,7 @@ from transformers import (
     Seq2SeqTrainingArguments,
     T5ForConditionalGeneration,
     T5Tokenizer,
+    Trainer,
 )
 from transformers.integrations import WandbCallback
 
@@ -35,6 +37,40 @@ from sbf_modeling.prompt_templates import (
 )
 
 os.environ["WANDB_PROJECT"] = "context-sbf"
+
+
+def log(self: Trainer, logs: Dict[str, float]) -> None:
+    """
+    override the log method of the Trainer class to
+    remove any non-serializable objects from the logs
+
+    Args:
+        logs (`Dict[str, float]`):
+            The values to log.
+    """
+    if self.state.epoch is not None:
+        logs["epoch"] = round(self.state.epoch, 2)
+
+    output = {**logs, **{"step": self.state.global_step}}
+
+    # edit starts here
+    keys_to_remove = []
+    for key, value in output.items():
+        try:
+            _ = json.dumps(value)
+        except TypeError:
+            keys_to_remove.append(key)
+    for key in keys_to_remove:
+        del output[key]
+    # edit ends here
+
+    self.state.log_history.append(output)
+    self.control = self.callback_handler.on_log(
+        self.args, self.state, self.control, logs
+    )
+
+
+Seq2SeqTrainer.log = log
 
 
 class ExplainModel(BaseSBFModel):

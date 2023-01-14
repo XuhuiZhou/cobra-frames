@@ -12,15 +12,14 @@ transformers.Seq2SeqTrainingArguments:
     output_dir=".log/_explain_model"
     per_device_train_batch_size=2
     per_device_eval_batch_size=2
-    evaluation_strategy="steps"
-    eval_steps=100
+    evaluation_strategy="epoch"
     logging_steps=100
     gradient_accumulation_steps=8
     num_train_epochs=1
     weight_decay=0.1
     lr_scheduler_type="cosine"
     learning_rate=1e-4
-    save_steps=5_000
+    save_strategy="epoch"
     generation_max_length=512
     predict_with_generate=True  # generation in evaluation
     prediction_loss_only=False  # generation in evaluation
