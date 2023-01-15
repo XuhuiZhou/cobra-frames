@@ -93,6 +93,9 @@ def predict(
         answer_dict = model.predict()
         logging.info("Model inference done")
         answer_df = pd.DataFrame.from_dict(answer_dict)
+        # check whether output dir exists, if not make it
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)
         answer_df.to_csv(os.path.join(output_dir, "answer.csv"), index=False)
     logging.info("Evaluating predictions")
     evaluate(prediction_dict=answer_dict)

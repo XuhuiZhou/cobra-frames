@@ -1,0 +1,6 @@
+from __gin__ import dynamic_registration
+import sbf_modeling.utils.data as data_utils
+
+data_utils.get_data:
+    mode = %MODE
+    split = "adv"

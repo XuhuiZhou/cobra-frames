@@ -210,7 +210,10 @@ class ExplainModel(BaseSBFModel):
                 -
         """
         prompt_dataset = dataset.map(
-            partial(map_dataset_to_tokenized_prompt, self.tokenizer),
+            partial(
+                map_dataset_to_tokenized_prompt,
+                self.tokenizer,
+            ),
             batched=True,
             load_from_cache_file=False,
             remove_columns=dataset.column_names,

@@ -7,6 +7,7 @@ import transformers
 # MODE is either "tests" or "deployment"
 MODE="tests"
 MODEL_DIR = %gin.required
+OUTPUT_DIR = %MODEL_DIR
 BATCH_SIZE = %gin.required
 RESULT_FILE = ""
 EVALUATE_METRICS = ["bleu"]
@@ -40,4 +41,4 @@ inference_script.evaluate:
 
 inference_script.predict:
     model = @sbf_modeling.ExplainModel()
-    output_dir= %MODEL_DIR
+    output_dir= %OUTPUT_DIR

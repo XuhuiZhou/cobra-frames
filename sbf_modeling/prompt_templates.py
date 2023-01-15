@@ -31,26 +31,11 @@ QUESTION_TEMPLATES = dict(
 
 
 def map_dataset_to_tokenized_prompt(
-    tokenizer: PreTrainedTokenizer, element: Dataset
+    tokenizer: PreTrainedTokenizer, element: Dataset, with_labels: bool = True
 ) -> Dict[str, np.ndarray]:
     element_cast: Dict[str, List[str]] = cast(Dict[str, List[str]], element)  # type: ignore
     context_input = map(
         lambda instance: create_context_template().format(**instance),
-        (dict(zip(element_cast, t)) for t in zip(*element_cast.values())),
-    )
-    target = map(
-        lambda instance: "\n".join(
-            f"Q: {QUESTION_TEMPLATES[key]} A: {instance[key]}"
-            for key in [
-                "intent",
-                "targetGroup",
-                "relevantPowerDynamics",
-                "implication",
-                "targetGroupEmotionalReaction",
-                "targetGroupCognitiveReaction",
-                "offensiveness",
-            ]
-        ),
         (dict(zip(element_cast, t)) for t in zip(*element_cast.values())),
     )
     tokenized_context_input = tokenizer(
@@ -60,12 +45,31 @@ def map_dataset_to_tokenized_prompt(
         return_overflowing_tokens=True,
         return_length=True,
     )
-    tokenized_target = tokenizer(
-        list(target),
-        truncation=True,
-        max_length=TARGET_LENGTH,
-        return_overflowing_tokens=True,
-        return_length=True,
-    )
-    tokenized_context_input.update({"labels": tokenized_target["input_ids"]})
+    if with_labels:
+        target = map(
+            lambda instance: "\n".join(
+                f"Q: {QUESTION_TEMPLATES[key]} A: {instance[key]}"
+                for key in [
+                    "intent",
+                    "targetGroup",
+                    "relevantPowerDynamics",
+                    "implication",
+                    "targetGroupEmotionalReaction",
+                    "targetGroupCognitiveReaction",
+                    "offensiveness",
+                ]
+            ),
+            (dict(zip(element_cast, t)) for t in zip(*element_cast.values())),
+        )
+        tokenized_target = tokenizer(
+            list(target),
+            truncation=True,
+            max_length=TARGET_LENGTH,
+            return_overflowing_tokens=True,
+            return_length=True,
+        )
+        tokenized_context_input.update(
+            {"labels": tokenized_target["input_ids"]}
+        )
+
     return tokenized_context_input  # type: ignore
