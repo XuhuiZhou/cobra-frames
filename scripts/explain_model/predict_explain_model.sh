@@ -16,7 +16,7 @@ if [[ $EXP == "xxl" ]]; then
         --gin_file="scripts/explain_model/explain_model_inference.gin" \
         --gin.MODEL_DIR="'.log/explain-model-xxl'" \
         --gin.EVALUATE_METRICS="['bleu', 'bertscore', 'rouge']" \
-        --gin.RESULT_FILE="'.log/explain-model-xl/results.csv'" \
+        --gin.RESULT_FILE="'.log/explain-model-xxl/results.csv'" \
         --gin.MODE="'deployment'" \
         --gin.BATCH_SIZE=4
 elif [[ $EXP == "xl_greedy" ]]; then

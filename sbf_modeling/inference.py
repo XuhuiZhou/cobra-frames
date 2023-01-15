@@ -88,7 +88,7 @@ def predict(
         answer_dict = answer_df.to_dict(orient="list")
     else:
         logging.info("Model predicting")
-        if torch.cuda.is_available():
+        if torch.cuda.is_available() and not model.model.model_parallel:  # type: ignore
             model.model = model.model.cuda()  # type: ignore
         answer_dict = model.predict()
         logging.info("Model inference done")

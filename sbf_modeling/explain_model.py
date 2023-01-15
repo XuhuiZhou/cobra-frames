@@ -58,7 +58,9 @@ class ExplainModel(BaseSBFModel):
         self.model: T5ForConditionalGeneration = cast(  # type: ignore
             T5ForConditionalGeneration, self.model
         )
-        if t5_model_name in ["google/flan-t5-xxl", "google/flan-t5-xl"]:
+        if t5_model_name in ["google/flan-t5-xxl", "google/flan-t5-xl"] or (
+            from_local and "xl" in t5_model_name
+        ):
             self.model.parallelize()
         self.tokenizer: T5Tokenizer = T5Tokenizer.from_pretrained(
             t5_model_name
