@@ -88,11 +88,14 @@ def predict(
         answer_dict = answer_df.to_dict(orient="list")
     else:
         logging.info("Model predicting")
-        if torch.cuda.is_available():
+        if torch.cuda.is_available() and not model.model.model_parallel:  # type: ignore
             model.model = model.model.cuda()  # type: ignore
         answer_dict = model.predict()
         logging.info("Model inference done")
         answer_df = pd.DataFrame.from_dict(answer_dict)
+        # check whether output dir exists, if not make it
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)
         answer_df.to_csv(os.path.join(output_dir, "answer.csv"), index=False)
     logging.info("Evaluating predictions")
     evaluate(prediction_dict=answer_dict)
