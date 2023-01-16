@@ -42,7 +42,7 @@ elif [[ $EXP == "xl_topp" ]]; then
 elif [[ $EXP == "xl_topk" ]]; then
     python sbf_modeling/inference.py \
         --gin_file="scripts/explain_model/explain_model_inference.gin" \
-        --gin_file="exp/configs/topp.gin" \
+        --gin_file="exp/configs/topk.gin" \
         --gin.MODEL_DIR="'.log/explain-model-xl'" \
         --gin.RESULT_FILE="'.log/explain-model-xl/topk-results.csv'" \
         --gin.EVALUATE_METRICS="$EVALUATE_METRICS" \
