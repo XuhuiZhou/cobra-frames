@@ -11,7 +11,7 @@ def calculate_accuracy(predictions, labels):
         if label == -1:
             continue
         else:
-            print(prediction)
+            # print(prediction)
             acc.append(prediction == label)
     acc = np.mean(acc)
     return acc
@@ -65,7 +65,7 @@ def main():
     parser.add_argument(
         "--prediction_file",
         type=str,
-        default=".log/explain-model-xl/adv/answer.csv",
+        default="./data/inference_data/adversarial_contexts_statements/explanations_v3/mAgr_contexts_explanations.csv",
     )
     parser.add_argument("--reference_file", type=str, default="")
     parser.add_argument("--variable", type=str, default="offensiveness")
