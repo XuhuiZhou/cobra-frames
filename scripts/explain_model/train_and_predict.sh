@@ -5,7 +5,7 @@
 
 EXP="$1"
 
-if [ "$EXP" != "large" ] && [ "$EXP" != "xl" ] && [ "$EXP" != "xxl" ] && [ "$EXP" != "xl_w_o_context" ] && [ "$EXP" != "small" ]; then
+if [ "$EXP" != "small" ] && [ "$EXP" != "base" ] && [ "$EXP" != "large" ] && [ "$EXP" != "xl" ] && [ "$EXP" != "xxl" ] && [ "$EXP" != "xl_w_o_context" ] ; then
     echo "Experiment name not found"
     exit 1
 fi
