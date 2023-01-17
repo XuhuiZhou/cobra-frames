@@ -3,18 +3,12 @@ import argparse
 import datasets
 import numpy as np
 import pandas as pd
-
-
-def calculate_accuracy(predictions, labels):
-    acc = []
-    for prediction, label in zip(predictions, labels):
-        if label == -1:
-            continue
-        else:
-            # print(prediction)
-            acc.append(prediction == label)
-    acc = np.mean(acc)
-    return acc
+from sklearn.metrics import (
+    accuracy_score,
+    f1_score,
+    precision_score,
+    recall_score,
+)
 
 
 def binarize_offensiveness(offensive):
@@ -56,8 +50,21 @@ def output_offensiveness_accuracy(
     offensiveness_reference = reference_data[variable]  # type: ignore
     prediction_binary = binarize_offensiveness(offensiveness_prediction)
     reference_binary = offensiveness_reference
-
-    print(calculate_accuracy(prediction_binary, reference_binary))
+    prediction_filtered = []
+    reference_filtered = []
+    for prediction, label in zip(prediction_binary, reference_binary):
+        if label == -1:
+            continue
+        else:
+            prediction_filtered.append(prediction)
+            reference_filtered.append(label)
+    print(
+        f"The total number is {len(prediction_filtered)}, the following is accuracy, recall, precision, f1"
+    )
+    print(accuracy_score(reference_filtered, prediction_filtered))
+    print(recall_score(reference_filtered, prediction_filtered))
+    print(precision_score(reference_filtered, prediction_filtered))
+    print(f1_score(reference_filtered, prediction_filtered))
 
 
 def main():
@@ -68,11 +75,11 @@ def main():
         default="./data/inference_data/adversarial_contexts_statements/explanations_v3/mAgr_contexts_explanations.csv",
     )
     parser.add_argument("--reference_file", type=str, default="")
-    parser.add_argument("--variable", type=str, default="offensiveness")
+    # parser.add_argument("--variable", type=str, default="offensiveness")
     args = parser.parse_args()
 
     df_prediction = pd.read_csv(args.prediction_file)
-    data_files = {"advtest": "mAgr_contexts_explanations.csv"}
+    data_files = {"advtest": "adv_contexts_explanations.csv"}
     reference_data = datasets.load.load_dataset(
         "context-sbf/context-sbf", split="advtest", data_files=data_files
     )
