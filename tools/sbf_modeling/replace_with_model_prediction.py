@@ -1,6 +1,6 @@
 import pandas as pd
 
-model = "t5_xl_wo_context"
+model = "t5_xxl"
 datafile = "./data/inference_data/toxigen_explanations_v2/toxigen_explanations_val.csv"
 predictionfile = f"./data/inference_data/{model}/answer.csv"
 

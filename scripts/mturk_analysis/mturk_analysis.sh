@@ -10,8 +10,8 @@
 # OUTPUT='./data/mturk/explanations_v2'
 # INPUT='./data/mturk/t5_xl/mturk_1.csv'
 # OUTPUT='./data/mturk/t5_xl'
-# INPUT='./data/mturk/t5_xl_wo_context/mturk_2.csv'
-# OUTPUT='./data/mturk/t5_xl_wo_context'
+INPUT='./data/mturk/t5_xl_wo_context/mturk_final.csv'
+OUTPUT='./data/mturk/t5_xl_wo_context'
 # INPUT='./data/mturk/advContexts/mturk_formal_1.csv'
 # OUTPUT='./data/mturk/advContexts/'
 
@@ -20,9 +20,9 @@ python tools/for_mturk/mturk_analysis.py \
     --output_folder $OUTPUT \
     --binary \
     --record_annotation_summary \
-    --task 'contexts' \
+    --task 'explanation' \
     --number_of_annotators 3 \
-    --bar 1\
+    --bar 2\
     --boundary 1 \
     --suggestion
 

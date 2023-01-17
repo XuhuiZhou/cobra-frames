@@ -58,12 +58,12 @@ def main():
     parser.add_argument(
         "--input_file",
         type=str,
-        default="./data/mturk/advContexts/annotation_summary.csv",
+        default="./data/mturk/advContexts/annotation_ex.csv",
     )
     parser.add_argument(
         "--output_file",
         type=str,
-        default="./data/mturk/advContexts/advContexts.csv",
+        default="./data/mturk/advContexts/advContexts_ex.csv",
     )
     parser.add_argument("--pre_output_file", type=str, default=None)
     parser.add_argument("--mode", type=str, default="majority")
