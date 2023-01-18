@@ -15,4 +15,5 @@ nltk
 evaluate
 rouge-score
 mauve-text
+accelerate
 git+https://github.com/huggingface/transformers
