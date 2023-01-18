@@ -72,14 +72,14 @@ def main():
     parser.add_argument(
         "--prediction_file",
         type=str,
-        default="./data/inference_data/adversarial_contexts_statements/explanations_v3/mAgr_contexts_explanations.csv",
+        default="./data/inference_data/adversarial_contexts_statements/explanations_v3_original_prompt/mAgr_contexts_explanations.csv",
     )
     parser.add_argument("--reference_file", type=str, default="")
     # parser.add_argument("--variable", type=str, default="offensiveness")
     args = parser.parse_args()
 
     df_prediction = pd.read_csv(args.prediction_file)
-    data_files = {"advtest": "adv_contexts_explanations.csv"}
+    data_files = {"advtest": "mAgr_contexts_explanations.csv"}
     reference_data = datasets.load.load_dataset(
         "context-sbf/context-sbf", split="advtest", data_files=data_files
     )
