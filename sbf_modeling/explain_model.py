@@ -78,6 +78,8 @@ class ExplainModel(BaseSBFModel):
         self,
         t5_model_name: str = "google/flan-t5-small",
         from_local: bool = False,
+        torch_dtype: torch.dtype = torch.float32,
+        model_parallelize_for_larger_models: bool = True,
     ):
         assert (
             "t5" in t5_model_name or from_local
@@ -85,7 +87,9 @@ class ExplainModel(BaseSBFModel):
         try:
             self.model: T5ForConditionalGeneration = cast(
                 T5ForConditionalGeneration,
-                T5ForConditionalGeneration.from_pretrained(t5_model_name),
+                T5ForConditionalGeneration.from_pretrained(
+                    t5_model_name, torch_dtype=torch_dtype
+                ),
             )
         except Exception as e:
             print(f"Error loading model {t5_model_name}: {e}")
@@ -94,8 +98,9 @@ class ExplainModel(BaseSBFModel):
         self.model: T5ForConditionalGeneration = cast(  # type: ignore
             T5ForConditionalGeneration, self.model
         )
-        if t5_model_name in ["google/flan-t5-xxl", "google/flan-t5-xl"] or (
-            from_local and "xl" in t5_model_name
+        if model_parallelize_for_larger_models and (
+            t5_model_name in ["google/flan-t5-xxl", "google/flan-t5-xl"]
+            or (from_local and "xl" in t5_model_name)
         ):
             self.model.parallelize()
         self.tokenizer: T5Tokenizer = T5Tokenizer.from_pretrained(
