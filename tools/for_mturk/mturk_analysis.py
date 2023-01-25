@@ -593,13 +593,14 @@ def main():
     # Assign special NaN value
     if args.binary:
         # Special treatment for the offensiveness rating
-        df["Answer.offensivenessRating"] = [
-            args.boundary + 1 if j == "not offensive" and i == -1 else i
-            for i, j in zip(
-                df["Answer.offensivenessRating"],
-                render_offensiveness_labels(df["Input.offensiveness"]),
-            )
-        ]
+        if args.task != "context":
+            df["Answer.offensivenessRating"] = [
+                args.boundary + 1 if j == "not offensive" and i == -1 else i
+                for i, j in zip(
+                    df["Answer.offensivenessRating"],
+                    render_offensiveness_labels(df["Input.offensiveness"]),
+                )
+            ]
         df[relevant_col] = df[relevant_col].replace(-1, np.nan)
         df[relevant_col] = (df[relevant_col] > args.boundary).astype(int)
     else:

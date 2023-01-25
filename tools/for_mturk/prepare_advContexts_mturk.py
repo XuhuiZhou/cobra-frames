@@ -48,7 +48,10 @@ def transform_advContexts(df):
 
 def main():
     ## Hyperparameters
-    file = "data/inference_data/adversarial_contexts_statements/mAgr_contexts_cleaned.csv"
+    # file = "data/inference_data/adversarial_contexts_statements/mAgr_contexts_cleaned.csv"
+    file = (
+        "data/inference_data/adversarial_contexts_statements/adv_contexts.csv"
+    )
     # file = "data/inference_data/adversarial_contexts_statements/selfGen_contexts.csv"
     # # temporary info for the 002& 003 difference
     # df = tag_explanations(df)
