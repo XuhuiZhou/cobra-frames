@@ -26,6 +26,7 @@ def transform_advContexts(df):
         inplace=True,
     )
     df_normal["offensive_position"] = [2] * len(df_normal)
+    # Warning: repetitive statements will be dropped for the reversed data
     df_reversed = df[~df["statement"].isin(df_normal["statement"])]
     df_reversed = df_reversed.reset_index(drop=True)
     df_reversed.rename(
@@ -48,10 +49,10 @@ def transform_advContexts(df):
 
 def main():
     ## Hyperparameters
-    # file = "data/inference_data/adversarial_contexts_statements/mAgr_contexts_cleaned.csv"
-    file = (
-        "data/inference_data/adversarial_contexts_statements/adv_contexts.csv"
-    )
+    file = "data/inference_data/adversarial_contexts_statements/mAgr_contexts_cleaned.csv"
+    # file = (
+    #     "data/inference_data/adversarial_contexts_statements/adv_contexts.csv"
+    # )
     # file = "data/inference_data/adversarial_contexts_statements/selfGen_contexts.csv"
     # # temporary info for the 002& 003 difference
     # df = tag_explanations(df)
@@ -59,10 +60,11 @@ def main():
     # previous_mturk_file = (
     #     "data/inference_data/toxigen_explanations_v2/toxigen_mturk.csv"
     # )
-    saved_mturk_file = "data/inference_data/adversarial_contexts_statements/mturk_formal_1.csv"
+    saved_mturk_file = "data/inference_data/adversarial_contexts_statements/mturk_formal_2.csv"
     previous_mturk_file = [
         "data/inference_data/adversarial_contexts_statements/mturk_1.csv",
         "data/inference_data/adversarial_contexts_statements/mturk_3.csv",
+        "data/inference_data/adversarial_contexts_statements/mturk_formal_1.csv",
     ]
     sample_num = 500
 
@@ -84,6 +86,8 @@ def main():
     # df_mturk = df.sample(n=500, random_state=1)
     df_mturk.fillna("none", inplace=True)
     df_mturk = clean_for_mturk(df_mturk)
+    # Warning: repetitive statements will be dropped for the reversed data
+    # After the transform_advContexts, don't expect the same number of the sample_num
     df_mturk = transform_advContexts(df_mturk)
     df_mturk = df_mturk.drop(columns=["examples"])
 
