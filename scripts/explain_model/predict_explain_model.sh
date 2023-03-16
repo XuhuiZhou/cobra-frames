@@ -157,6 +157,32 @@ elif [[ $EXP == "small_adv" ]]; then
 
     python tools/sbf_modeling/evaluate_advContext.py \
         --prediction_file ".log/explain-model-small/adv/answer.csv"
+elif [[ $EXP == "large_adv" ]]; then
+    python sbf_modeling/inference.py \
+        --gin_file="scripts/explain_model/explain_model_inference.gin" \
+        --gin_file="exp/configs/adv_context.gin" \
+        --gin.MODEL_DIR="'.log/explain-model-large'" \
+        --gin.OUTPUT_DIR="'.log/explain-model-large/adv'" \
+        --gin.RESULT_FILE="'.log/explain-model-large/results_adv.csv'" \
+        --gin.EVALUATE_METRICS="$EVALUATE_METRICS" \
+        --gin.MODE="'deployment'" \
+        --gin.BATCH_SIZE=16
+
+    python tools/sbf_modeling/evaluate_advContext.py \
+        --prediction_file ".log/explain-model-large/adv/answer.csv"
+elif [[ $EXP == "base_adv" ]]; then
+    python sbf_modeling/inference.py \
+        --gin_file="scripts/explain_model/explain_model_inference.gin" \
+        --gin_file="exp/configs/adv_context.gin" \
+        --gin.MODEL_DIR="'.log/explain-model-base'" \
+        --gin.OUTPUT_DIR="'.log/explain-model-base/adv'" \
+        --gin.RESULT_FILE="'.log/explain-model-base/results_adv.csv'" \
+        --gin.EVALUATE_METRICS="$EVALUATE_METRICS" \
+        --gin.MODE="'deployment'" \
+        --gin.BATCH_SIZE=16
+
+    python tools/sbf_modeling/evaluate_advContext.py \
+        --prediction_file ".log/explain-model-base/adv/answer.csv"
 else
     echo "Experiment name not found"
     exit 1
