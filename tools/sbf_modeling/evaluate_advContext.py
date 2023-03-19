@@ -79,7 +79,7 @@ def main():
     args = parser.parse_args()
 
     df_prediction = pd.read_csv(args.prediction_file)
-    data_files = {"advtest": "mAgr_contexts_explanations.csv"}
+    data_files = {"advtest": "mAgr_contexts_explanations_2.csv"}
     reference_data = datasets.load.load_dataset(
         "context-sbf/context-sbf", split="advtest", data_files=data_files
     )
