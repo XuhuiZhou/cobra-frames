@@ -6,7 +6,7 @@ if [ -z " $BAR " ] ; then
     echo "does not specify the number of annotator approve bar, defaults to 1"
     BAR=1
 fi
-INPUT='./data/mturk/advContexts/mturk_formal_1.csv'
+INPUT='./data/mturk/advContexts/mturk_formal_2.csv'
 OUTPUT='./data/mturk/advContexts/'
 
 python tools/for_mturk/mturk_analysis_adv.py \

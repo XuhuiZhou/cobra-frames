@@ -19,19 +19,23 @@ def tag_explanations(df):
 
 def main():
     ## Hyperparameters
-    model = "t5_xl"
+    model = "toxigen_explanations_v3"
     # model = "t5_xl_wo_context"
     # model = "t5_xxl"
-    file = f"data/inference_data/{model}/toxigen_explanations_val.csv"
-    saved_mturk_file = f"data/inference_data/{model}/mturk_2.csv"
-    previous_mturk_file = f"data/inference_data/{model}/mturk_1.csv"
-    # previous_mturk_file = None
-    sample_num = 40
+    file = f"data/inference_data/{model}/toxigen_explanations.csv"
+    saved_mturk_file = f"data/inference_data/{model}/mturk_3.csv"
+    # previous_mturk_file = [f"data/inference_data/{model}/mturk_1.csv",
+    #                        f"data/inference_data/{model}/mturk_2.csv"
+    #                        ]
+    previous_mturk_file = None
+    sample_num = 200
 
     df = pd.read_csv(file)
     if previous_mturk_file != None:
-        df_mturk_previous = pd.read_csv(previous_mturk_file)
-        df = df[~df["id"].isin(df_mturk_previous["id"])]
+        # read all previous mturk samples
+        for file in previous_mturk_file:
+            df_mturk_previous = pd.read_csv(file)
+            df = df[~df["id"].isin(df_mturk_previous["id"])]
 
     if sample_num:
         sampled_statements = np.random.choice(
