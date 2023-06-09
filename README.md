@@ -5,7 +5,6 @@
 [![Checked with mypy](https://www.mypy-lang.org/static/mypy_badge.svg)](https://mypy-lang.org/)
 
 ## Getting started
-* All the dataset for this repo is located in `/home/xuhuiz/projects/xuhuiz/context-sbf/data` now.
 * The source code is built aroud PyTorch, and has the following main dependencies:
 
     - Python 3.8
@@ -18,6 +17,24 @@
         pip install -e .
 
 * We use `pre-commit` hooks to unify the code style, please refer to https://pre-commit.com/ for installation and usage.
+
+## Training and Evaluation
+Please refer to `scripts/explain_model/train_explain_model.sh` and `scripts/predict_explain_model.sh` for training and evaluation scripts.
+
+## Citation
+
+If you find this repository useful in your research, please cite the following paper:
+
+```
+@inproceedings{zhou2023cobraframes,
+  title={COBRA Frames: Contextual Reasoning about Effects and Harms of Offensive Statements},
+  author={Zhou, Xuhui and Zhu, Hao and Yerukola, Akhila and Davidson, Thomas and Hwang, Jena D. and Swayamdipta, Swabha and Sap, Maarten},
+  year={2023},
+  booktitle={Findings of ACL},
+  url={http://arxiv.org/abs/2306.01985}
+}
+```
+
 
 
 
