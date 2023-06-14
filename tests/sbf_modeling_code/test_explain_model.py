@@ -9,7 +9,7 @@ from sbf_modeling import ExplainModel
 from sbf_modeling.utils.data import get_dummy_data
 
 os.environ["WANDB_MODE"] = "offline"
-SMALL_MODEL_REVISION = "efa3468d5e7fa1f66d97e0387e87c21285a32578"
+SMALL_MODEL_REVISION = "46fbd468ee4fa19713ca2012df03b6bc3fba46b4"
 
 
 def test_create_explain_model():
