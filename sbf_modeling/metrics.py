@@ -85,5 +85,5 @@ def bleu_metrics(preds: List[str], labels: List[str]) -> Dict[str, float]:
         bleu.compute(predictions=preds, references=labels),
     )
     prediction_lens = [len(pred.split()) for pred in preds]
-    result["gen_len"] = np.mean(prediction_lens)
+    result["gen_len"] = np.mean(prediction_lens) # type: ignore
     return result

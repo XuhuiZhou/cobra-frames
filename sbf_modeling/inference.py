@@ -92,7 +92,7 @@ def predict(
             model.model = model.model.cuda()  # type: ignore
         answer_dict = model.predict()
         logging.info("Model inference done")
-        answer_df = pd.DataFrame.from_dict(answer_dict)
+        answer_df = pd.DataFrame.from_dict(answer_dict) # type: ignore
         # check whether output dir exists, if not make it
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)

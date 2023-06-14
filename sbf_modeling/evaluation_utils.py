@@ -35,10 +35,10 @@ def generic_evaluate_function(
             return getattr(results, "mauve")
         elif metric_name == "bertscore":
             assert isinstance(results, dict)
-            return np.mean(results["f1"])
+            return np.mean(results["f1"]) # type: ignore
         elif metric_name == "rouge":
             assert isinstance(results, dict)
-            return np.mean(results["rougeL"])
+            return np.mean(results["rougeL"]) # type: ignore
         elif metric_name == "meteor":
             assert isinstance(results, dict)
             return results["meteor"]
