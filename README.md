@@ -12,9 +12,14 @@
     - transformers 4.22.2
 
     For more extensive dependencies, see `requirements.txt`.
-
-        pip install -r requirements.txt
-        pip install -e .
+    A recommended way to install the dependencies is via [Anaconda](https://www.anaconda.com/download/):
+    ```bash
+    conda create -n cobra python=3.8
+    conda activate cobra
+    conda install -c conda-forge pip # make sure pip is installed
+    python -m pip install -r requirements.txt # make sure the packages are installed in the specific conda environment
+    python -m pip install -e .
+    ```
 
 * We use `pre-commit` hooks to unify the code style, please refer to https://pre-commit.com/ for installation and usage.
 
