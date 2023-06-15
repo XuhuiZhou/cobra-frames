@@ -16,4 +16,4 @@ evaluate
 rouge-score
 mauve-text
 accelerate
-git+https://github.com/huggingface/transformers
+transformers==4.28.0
