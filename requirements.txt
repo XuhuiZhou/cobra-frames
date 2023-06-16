@@ -7,13 +7,13 @@ bert-score==0.3.11
 torch==1.12.1
 pytorch-lightning==1.8.1
 scikit-learn==1.1.3
-datasets
-sentencepiece
+datasets==2.10.1
+sentencepiece==0.1.97
 gin-config
 wandb
 nltk
 evaluate
 rouge-score
 mauve-text
-accelerate
+accelerate==0.17.1
 transformers==4.28.0
